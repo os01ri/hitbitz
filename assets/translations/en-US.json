@@ -1,0 +1,18 @@
+{
+    "error": "Something went wrong",
+    "tryAgain": "Try again",
+    "Success": "Operation done successfully",
+    "OutNumberOfDevice": "Your account is existing on another device",
+    "WrongApplicationID": "Wrong application ID",
+    "WrongKey": "Code is incorrect",
+    "ServerDisconnect": "Can't reach out to server",
+    "InternalServerError": "Internal server error, try again later",
+    "DataBaseConnectionFailed": "Database connection failed",
+    "WrongUserNameOrPassword": "Username or password is incorrect!",
+    "DuplicatedCartItemException": "Cart can't have duplicated items, you check the already existent item and edit or delete it",
+    "DuplicateInvoiceException": "Sorry, you can't create more than one invoice for each invoice type",
+    "EmptyCartException": "your cart is empty!",
+    "NoVisitEventException": "You can't complete the visit without finishing at least one event, if you couldn't do anything, please click \"cancel visit\"",
+    "NoInternetFailure": "No internet connection",
+    "": ""
+}

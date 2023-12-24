@@ -1,0 +1,18 @@
+{
+    "error": "حدث خطأ!",
+    "tryAgain": "أعد المحاولة",
+    "Success": "تمت العملية بنجاح",
+    "OutNumberOfDevice": "لقد تجاوز حسابك عدد اﻷجهزة المسموح به",
+    "WrongApplicationID": "معرف التطبيق غير صحيح",
+    "WrongKey": "الكود غير صحيح",
+    "ServerDisconnect": "لايمكن الوصول للخوادم",
+    "InternalServerError": "حدث خطأ، أعد المحاولة لاحقا",
+    "DataBaseConnectionFailed": "فشل الاتصال مع قاعدة البيانات",
+    "WrongUserNameOrPassword": "اسم المستخدم أو كلمة المرور غير صحيحة!",
+    "DuplicatedCartItemException": "لايمكن تكرار العنصر في السلة، يمكنك تفقد العنصر الموجود وتعديله أو إزالته",
+    "DuplicateInvoiceException": "عذراّ، لايمكنك إنشاء أكثر من فاتورة لنفس النوع",
+    "EmptyCartException": "السلة فارغة!",
+    "NoVisitEventException": "لايمكنك إتمام الزيارة بدون إنهاء حدث واحد على اﻷقل، إذا لم تتمكن من القيام بحدث أنقر \"إلغاء الزيارة\"",
+    "NoInternetFailure": "تعذر الاتصال بالانترنت",
+    "": ""
+}
