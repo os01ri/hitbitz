@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hitbitz/core/components/button_widget.dart';
+import 'package:hitbitz/router/app_routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -150,15 +153,13 @@ class _LoginPageState extends State<LoginPage> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(50.0),
-        child: MaterialButton(
-          onPressed: () {},
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-          textColor: Colors.white,
-          color: const Color(0xff6949FF),
-          child: const Text(
-            "Sign up",
-            style: TextStyle(fontSize: 20),
-          ),
+        child: ButtonWidget(
+          onPressed: () {
+            context.goNamed(AppRoutes.main);
+          },
+          foregroundColor: Colors.white,
+          backgroundColor: const Color(0xff6949FF),
+          text: "Sign up",
         ),
       ),
     );
