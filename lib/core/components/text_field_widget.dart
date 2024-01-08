@@ -105,6 +105,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> with WidgetsBindingOb
         onFieldSubmitted: widget.onSubmitted,
         textInputAction: widget.textInputAction,
         cursorColor: Theme.of(context).primaryColor,
+        
         enabled: widget.enabled,
         inputFormatters: (widget.inputFormatters != null)
             ? widget.inputFormatters

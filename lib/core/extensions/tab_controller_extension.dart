@@ -15,7 +15,7 @@ extension PageControllerExtension on PageController {
   goTo(int index) {
     animateToPage(
       index,
-      duration: AppConstants.animationDurationX3,
+      duration: AppConstants.animationDurationX2,
       curve: Curves.linear,
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hitbitz/core/components/text_widget.dart';
 
 class RaneemsButton extends StatelessWidget {
   const RaneemsButton({
@@ -12,7 +13,7 @@ class RaneemsButton extends StatelessWidget {
   final String text;
   final Color color;
   final Color textColor;
-  final void Function() onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class RaneemsButton extends StatelessWidget {
         textColor: textColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         elevation: 4.0,
-        child: Text(
+        child: TextWidget(
           text,
           style: const TextStyle(fontSize: 16),
         ),

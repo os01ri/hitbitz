@@ -22,7 +22,6 @@ class AppPages {
     debugLogDiagnostics: true,
     routes: [
       _welcomingRoutes,
-      _authRoutes,
       _homeRoutes,
     ],
   );
@@ -37,14 +36,11 @@ class AppPages {
         path: AppRoutes.onBoarding,
         builder: (context, state) => const OnboardingPage(),
       ),
-    ],
-  );
-
-  static final GoRoute _authRoutes = GoRoute(
-    path: AppRoutes.signup,
-    name: AppRoutes.signup,
-    builder: (context, state) => const SignUpPage(),
-    routes: [
+      GoRoute(
+        path: AppRoutes.signup,
+        name: AppRoutes.signup,
+        builder: (context, state) => const SignUpPage(),
+      ),
       GoRoute(
         name: AppRoutes.login,
         path: AppRoutes.login,
