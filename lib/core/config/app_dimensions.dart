@@ -1,5 +1,6 @@
 abstract class AppDimensions {
   static const double buttonHeight = 48.0;
+  static const double smallButtonHeight = 40.0;
   static const double mediumButtonHeight = 56.0;
   static const double largeButtonHeight = 62.0;
   static const double btnRad = 24.0;

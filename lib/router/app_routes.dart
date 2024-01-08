@@ -8,4 +8,5 @@ class AppRoutes {
   static const login = "login";
   //////!main!//////
   static const main = "/main";
+  static const roadmapDetails = "road-map-details";
 }

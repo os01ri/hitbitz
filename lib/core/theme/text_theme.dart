@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 const textTheme = TextTheme(
-  displayLarge: TextStyle(fontSize: 56, fontWeight: FontWeight.w400, overflow: TextOverflow.ellipsis),
-  displayMedium: TextStyle(fontSize: 46, fontWeight: FontWeight.w400, overflow: TextOverflow.ellipsis),
+  displayLarge: TextStyle(fontSize: 56, fontWeight: FontWeight.w700, overflow: TextOverflow.ellipsis),
+  displayMedium: TextStyle(fontSize: 46, fontWeight: FontWeight.w500, overflow: TextOverflow.ellipsis),
   displaySmall: TextStyle(fontSize: 36, fontWeight: FontWeight.w400, overflow: TextOverflow.ellipsis),
   headlineLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.w700, overflow: TextOverflow.ellipsis),
   headlineMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, overflow: TextOverflow.ellipsis),

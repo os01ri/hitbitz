@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/features/auth/presentation/pages/login_page.dart';
 import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
-import 'package:hitbitz/features/home/presentation/pages/home_page.dart';
+import 'package:hitbitz/features/main/presentation/pages/main_page.dart';
 import 'package:hitbitz/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_details_page.dart';
 import 'package:hitbitz/features/splash/presentation/pages/splash_page.dart';
 
 import 'app_routes.dart';
@@ -22,7 +23,7 @@ class AppPages {
     debugLogDiagnostics: true,
     routes: [
       _welcomingRoutes,
-      _homeRoutes,
+      _mainRoutes,
     ],
   );
 
@@ -49,9 +50,16 @@ class AppPages {
     ],
   );
 
-  static final GoRoute _homeRoutes = GoRoute(
+  static final GoRoute _mainRoutes = GoRoute(
     path: AppRoutes.main,
     name: AppRoutes.main,
-    builder: (context, state) => const HomePage(),
+    builder: (context, state) => const MainPage(),
+    routes: [
+      GoRoute(
+        name: AppRoutes.roadmapDetails,
+        path: AppRoutes.roadmapDetails,
+        builder: (context, state) => const RoadmapDetailsPage(),
+      ),
+    ],
   );
 }

@@ -10,7 +10,7 @@ import 'text_widget.dart';
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     Key? key,
-    required this.onPressed,
+    this.onPressed,
     this.backgroundColor,
     this.foregroundColor,
     this.text,
@@ -30,7 +30,7 @@ class ButtonWidget extends StatelessWidget {
   })  : assert(prefixIcon != null || text != null),
         super(key: key);
 
-  final Function() onPressed;
+  final VoidCallback? onPressed;
   final Color? backgroundColor;
   final Color? foregroundColor;
   final Color? borderColor;
@@ -53,7 +53,7 @@ class ButtonWidget extends StatelessWidget {
     return AnimatedContainer(
       duration: AppConstants.animationDurationX2,
       padding: padding ?? EdgeInsets.zero,
-      height: AppDimensions.buttonHeight,
+      height: height ?? AppDimensions.buttonHeight,
       width: getFixedSize?.width,
       decoration: ShapeDecoration(
         color:

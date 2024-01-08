@@ -2,11 +2,13 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitbitz/core/config/app_assets.dart';
 import 'package:hitbitz/core/services/shared_preferences_service.dart';
 import 'package:hitbitz/core/theme/light/light_theme.dart';
 import 'package:hitbitz/core/utilities/app_localization.dart';
+import 'package:hitbitz/features/main/presentation/cubit/navigation_cubit.dart'; 
 import 'package:hitbitz/router/app_pages.dart';
 
 void main() async {
@@ -48,17 +50,22 @@ class HitBitzApp extends StatelessWidget {
         builder: (context, child) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(accessibleNavigation: false),
-            child: MaterialApp.router(
-              title: 'HitBitz',
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              theme: lightTheme,
-              // darkTheme: darkTheme,
-              themeMode: ThemeMode.light,
-              routerConfig: AppPages.router,
-              builder: BotToastInit(),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (_) => NavigationCubit()),
+              ],
+              child: MaterialApp.router(
+                title: 'HitBitz',
+                debugShowCheckedModeBanner: false,
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
+                theme: lightTheme,
+                // darkTheme: darkTheme,
+                themeMode: ThemeMode.light,
+                routerConfig: AppPages.router,
+                builder: BotToastInit(),
+              ),
             ),
           );
         },
