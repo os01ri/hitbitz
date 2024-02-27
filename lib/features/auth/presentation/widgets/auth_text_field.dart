@@ -9,12 +9,14 @@ class AuthTextField extends StatelessWidget {
     this.controller,
     this.prefixIcon,
     this.enabled = true,
+    this.validator,
   });
 
   final String label;
   final TextEditingController? controller;
   final Widget? prefixIcon;
   final bool enabled;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class AuthTextField extends StatelessWidget {
         controller: controller ?? TextEditingController(),
         enabled: enabled,
         label: label,
+        validator: validator,
       ),
     );
   }

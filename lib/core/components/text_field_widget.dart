@@ -105,7 +105,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> with WidgetsBindingOb
         onFieldSubmitted: widget.onSubmitted,
         textInputAction: widget.textInputAction,
         cursorColor: Theme.of(context).primaryColor,
-        
+        obscureText: widget.hideText,
+        obscuringCharacter: '#',
         enabled: widget.enabled,
         inputFormatters: (widget.inputFormatters != null)
             ? widget.inputFormatters
@@ -116,7 +117,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> with WidgetsBindingOb
         maxLines: widget.maxLines,
         onChanged: widget.onChanged,
         autofocus: widget.autoFocus,
-        obscureText: widget.hideText,
         enableSuggestions: !widget.hideText,
         autocorrect: !widget.hideText,
         autovalidateMode: widget.autovalidateMode,

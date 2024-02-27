@@ -27,6 +27,7 @@ class ButtonWidget extends StatelessWidget {
     this.spaceBetween,
     this.textDirection,
     this.textStyle,
+    this.borderThickness = 1,
   })  : assert(prefixIcon != null || text != null),
         super(key: key);
 
@@ -47,6 +48,7 @@ class ButtonWidget extends StatelessWidget {
   final bool isElevated;
   final TextDirection? textDirection;
   final TextStyle? textStyle;
+  final double borderThickness;
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +58,12 @@ class ButtonWidget extends StatelessWidget {
       height: height ?? AppDimensions.buttonHeight,
       width: getFixedSize?.width,
       decoration: ShapeDecoration(
-        color:
-            isOutlined ? (backgroundColor ?? Colors.transparent) : (backgroundColor ?? AppColors.surfaceContainer(context)),
+        color: isOutlined ? (backgroundColor ?? Colors.transparent) : (backgroundColor ?? AppColors.surfaceContainer(context)),
         shape: ContinuousRectangleBorder(
           borderRadius: BorderRadius.circular(AppDimensions.cardRad),
           side: BorderSide(
             color: isOutlined ? (borderColor ?? Theme.of(context).colorScheme.outline) : Colors.transparent,
-            width: 1,
+            width: borderThickness,
           ),
         ),
       ),

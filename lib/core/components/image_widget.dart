@@ -45,8 +45,8 @@ class ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget? child;
-    if (path.contains("http")) {
-      if (path.split(".").last == "svg") {
+    if (path.contains('http')) {
+      if (path.split('.').last == 'svg') {
         child = SvgPicture.network(path, color: color, width: width, height: height, fit: fit, alignment: alignment);
       } else {
         child = CachedNetworkImage(
@@ -64,14 +64,14 @@ class ImageWidget extends StatelessWidget {
           errorWidget: (_, __, ___) => const SizedBox.shrink(),
         );
       }
-    } else if (path.startsWith("/data")) {
-      if (path.split(".").last == "svg") {
+    } else if (path.startsWith('/data')) {
+      if (path.split('.').last == 'svg') {
         child = SvgPicture.file(File(path), color: color, width: width, height: height, fit: fit, alignment: alignment);
       } else {
         child = Image.file(File(path), color: color, width: width, height: height, fit: fit, alignment: alignment);
       }
     } else {
-      if (path.split(".").last == "svg") {
+      if (path.split('.').last == 'svg') {
         child = SvgPicture.asset(path, color: color, width: width, height: height, fit: fit, alignment: alignment);
       } else {
         child = Image.asset(path, color: color, width: width, height: height, fit: fit, alignment: alignment);

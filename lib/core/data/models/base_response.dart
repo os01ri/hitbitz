@@ -1,13 +1,13 @@
 import 'package:hitbitz/core/config/type_defs.dart';
 
 class BaseResponse<T> {
-  final T result;
-  final String errorMessage;
-  final int errorCode;
+  final bool errorCode;
+  final String message;
+  final T data;
 
-  BaseResponse({
-    required this.result,
-    required this.errorMessage,
+  const BaseResponse({
+    required this.data,
+    required this.message,
     required this.errorCode,
   });
 
@@ -16,8 +16,8 @@ class BaseResponse<T> {
     required DataConverter dataConverter,
   }) =>
       BaseResponse(
-        result: dataConverter(json["result"]),
-        errorMessage: json["errorMessage"],
-        errorCode: json["errorCode"],
+        errorCode: json['status'],
+        message: json['message'],
+        data: dataConverter(json['data']),
       );
 }

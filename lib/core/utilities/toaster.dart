@@ -10,10 +10,12 @@ class Toaster {
   Toaster._();
 
   static void showToast(String text) {
+    closeLoading();
     BotToast.showText(text: text.tr());
   }
 
   static void showLoading() {
+    closeLoading();
     BotToast.showLoading(backButtonBehavior: BackButtonBehavior.close);
   }
 
@@ -23,8 +25,9 @@ class Toaster {
 
   static void showError({
     required BuildContext context,
-    required String errorMessage,
+    required String? errorMessage,
   }) async {
+    closeLoading();
     _showNotification(
       title: const TextWidget('خطأ!'),
       subtitle: TextWidget(errorMessage, maxLines: 3),
@@ -39,6 +42,7 @@ class Toaster {
     required BuildContext context,
     required String warningMessage,
   }) async {
+    closeLoading();
     _showNotification(
       title: const TextWidget('تنبيه!'),
       subtitle: TextWidget(warningMessage, maxLines: 3),
@@ -53,13 +57,14 @@ class Toaster {
     required BuildContext context,
     required String message,
   }) async {
+    closeLoading();
     _showNotification(
       title: TextWidget(
         message,
         maxLines: 3,
         style: TextStyle(color: context.colorScheme.onPrimaryContainer),
       ),
-      leading: Icon(Icons.check_circle_outline_rounded, color: context.colorScheme.onPrimary, size: 35),
+      leading: Icon(Icons.check_circle_outline_rounded, color: context.colorScheme.onPrimaryContainer, size: 35),
       backgroundColor: context.colorScheme.primaryContainer,
     );
   }

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/tab_controller_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/features/home/presentation/pages/home_page.dart';
 import 'package:hitbitz/features/main/presentation/cubit/navigation_cubit.dart';
-import 'package:hitbitz/router/app_routes.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -55,7 +53,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const TextWidget("HitBitz"),
+        title: const TextWidget('HitBitz'),
         actions: [
           IconButton(onPressed: () {}, icon: const FaIcon(FontAwesomeIcons.magnifyingGlass)),
           IconButton(onPressed: () {}, icon: const FaIcon(FontAwesomeIcons.bell)),
@@ -95,7 +93,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             color: Colors.white,
           ).paddingAll(12.0),
           onPressed: () {
-            context.goNamed(AppRoutes.login);
+            // context.goNamed(AppRoutes.login);
           },
         ),
       ),
@@ -129,9 +127,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                             children: [
                               IconButton(
                                 icon: e.icon,
-                                color: state.index == e.index
-                                    ? context.colorScheme.primary
-                                    : context.colorScheme.outlineVariant,
+                                color: state.index == e.index ? context.colorScheme.primary : context.colorScheme.outlineVariant,
                                 onPressed: () {
                                   if (state.index != e.index) {
                                     context.read<NavigationCubit>().updateNavBarItem(e.index);
@@ -141,9 +137,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                               ),
                               TextWidget(
                                 e.label,
-                                textColor: state.index == e.index
-                                    ? context.colorScheme.primary
-                                    : context.colorScheme.outlineVariant,
+                                textColor: state.index == e.index ? context.colorScheme.primary : context.colorScheme.outlineVariant,
                               ),
                             ],
                           ).fit(),

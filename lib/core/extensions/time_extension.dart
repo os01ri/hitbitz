@@ -3,7 +3,7 @@ import 'package:hitbitz/core/config/app_strings.dart';
 
 extension DateTimeSince on DateTime {
   String formatDate() {
-    return DateFormat('dd/MM/yyyy').format(this);
+    return DateFormat('yyyy-MM-dd').format(this);
   }
 
   String since() {

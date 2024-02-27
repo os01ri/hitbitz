@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/features/auth/presentation/pages/login_page.dart';
 import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 import 'package:hitbitz/features/main/presentation/pages/main_page.dart';
 import 'package:hitbitz/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_details_page.dart';
@@ -58,7 +59,7 @@ class AppPages {
       GoRoute(
         name: AppRoutes.roadmapDetails,
         path: AppRoutes.roadmapDetails,
-        builder: (context, state) => const RoadmapDetailsPage(),
+        builder: (context, state) => RoadmapDetailsPage(roadMap: state.extra as RoadMapModel),
       ),
     ],
   );

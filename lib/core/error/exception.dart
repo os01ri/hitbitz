@@ -3,7 +3,7 @@ class ServerException implements Exception {
   final int? statusCode;
 
   const ServerException({
-    this.message = "ServerException",
+    this.message = 'ServerException',
     this.statusCode,
   });
 
@@ -16,7 +16,7 @@ class OperationFailedException implements Exception {
   final int? statusCode;
 
   const OperationFailedException({
-    this.message = "OperationFailedException",
+    this.message = 'OperationFailedException',
     this.statusCode,
   });
 
@@ -29,7 +29,7 @@ class DuplicatedCartItemException implements Exception {
   final int? statusCode;
 
   const DuplicatedCartItemException({
-    this.message = "DuplicatedCartItemException",
+    this.message = 'DuplicatedCartItemException',
     this.statusCode,
   });
 
@@ -42,7 +42,7 @@ class EmptyCartException implements Exception {
   final int? statusCode;
 
   const EmptyCartException({
-    this.message = "EmptyCartException",
+    this.message = 'EmptyCartException',
     this.statusCode,
   });
 
@@ -55,7 +55,7 @@ class DuplicateInvoiceException implements Exception {
   final int? statusCode;
 
   const DuplicateInvoiceException({
-    this.message = "DuplicateInvoiceException",
+    this.message = 'DuplicateInvoiceException',
     this.statusCode,
   });
 
@@ -68,7 +68,7 @@ class NoVisitEventException implements Exception {
   final int? statusCode;
 
   const NoVisitEventException({
-    this.message = "NoVisitEventException",
+    this.message = 'NoVisitEventException',
     this.statusCode,
   });
 
@@ -81,7 +81,7 @@ class NoInternetException implements Exception {
   final int? statusCode;
 
   const NoInternetException({
-    this.message = "NoInternetException",
+    this.message = 'NoInternetException',
     this.statusCode,
   });
 

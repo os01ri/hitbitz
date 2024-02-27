@@ -27,14 +27,14 @@ class NoResponse {
       );
 
   factory NoResponse.fromJson(Map<String, dynamic> json) => NoResponse(
-        success: json["success"],
-        message: json["message"],
-        data: json["data"],
+        success: json['success'],
+        message: json['message'],
+        data: json['data'],
       );
 
   Map<String, dynamic> toJson() => {
-        if (success != null) "success": success,
-        if (message != null) "message": message,
-        if (data != null) "data": data,
+        if (success != null) 'success': success,
+        if (message != null) 'message': message,
+        if (data != null) 'data': data,
       };
 }

@@ -1,135 +1,108 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
+import 'package:hitbitz/core/components/error_widget.dart';
+import 'package:hitbitz/core/components/loading_widget.dart';
 import 'package:hitbitz/core/components/text_field_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_dimensions.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
-import 'package:hitbitz/router/app_routes.dart';
+import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/core/services/shared_preferences_service.dart';
+import 'package:hitbitz/features/home/domain/usecases/get_categories_usecase.dart';
+import 'package:hitbitz/features/home/domain/usecases/get_roadmaps_usecase.dart';
+import 'package:hitbitz/features/home/presentation/cubit/home_cubit.dart';
+import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
+import 'package:hitbitz/features/home/presentation/widgets/recent_road_maps.dart';
+import 'package:hitbitz/features/home/presentation/widgets/road_map_card.dart';
 
-class HomePage extends StatelessWidget {
+part '../widgets/home_search_card.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late final HomeCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = di<HomeCubit>()
+      ..getCategories(const GetCategoriesParams())
+      ..getRoadMaps(const GetRoadMapsParams());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.only(bottom: 40),
-        children: [
-          const _SearchCard().wrapPadding(AppPadding.pagePaddingHorizontal),
-          const Gap(10),
-          const _SectionTitle(text: 'Where You Left').wrapPadding(AppPadding.pagePaddingHorizontal),
-          const Gap(10),
-          const _RecentRoadmapCard().wrapPadding(AppPadding.pagePaddingHorizontal),
-          const Gap(10),
-          const _SectionTitle(text: 'Categories').wrapPadding(AppPadding.pagePaddingHorizontal),
-          const Gap(10),
-          SizedBox(
-            height: 120,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: AppPadding.pagePaddingHorizontal,
-              children: [
-                for (int i = 0; i < 10; i++) ...[const CategoryCard(), const Gap(10)],
-              ],
-            ),
-          ),
-          const _SectionTitle(text: 'Roadmaps').wrapPadding(AppPadding.pagePaddingHorizontal),
-          const Gap(10),
-          SizedBox(
-            height: 240,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: AppPadding.pagePaddingHorizontal,
-              children: [
-                for (int i = 0; i < 10; i++) ...[
-                  CardWidget(
-                    width: context.width * .4,
-                    borderRadius: AppDimensions.mediumBorderRadius,
-                    borderColor: context.colorScheme.outline,
-                    isOutlined: true,
-                    color: context.colorScheme.surface,
-                    padding: AppPadding.innerCardPadding,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const FaIcon(
-                          FontAwesomeIcons.figma,
-                          color: Colors.red,
-                          size: 50,
-                        ),
-                        const Gap(5),
-                        TextWidget(
-                          'Mastering UI/UX Design',
-                          textColor: context.colorScheme.onSurface,
-                          maxLines: 4,
-                        ),
-                        const Gap(8),
-                        Row(
-                          children: [
-                            CardWidget(
-                              height: AppDimensions.smallButtonHeight,
-                              color: context.colorScheme.surfaceVariant,
-                              foregroundColor: context.colorScheme.onSurfaceVariant,
-                              child: const TextWidget('12 Levels'),
-                            ).expand(),
-                            const Gap(8),
-                            CardWidget(
-                              height: AppDimensions.smallButtonHeight,
-                              color: context.colorScheme.surfaceVariant,
-                              foregroundColor: context.colorScheme.onSurfaceVariant,
-                              child: const TextWidget('37 Steps'),
-                            ).expand(),
-                          ],
-                        ),
-                        const Gap(8),
-                        ButtonWidget(
-                          onPressed: () => context.pushNamed(AppRoutes.roadmapDetails),
-                          text: 'Start Journey',
-                          backgroundColor: context.colorScheme.primary,
-                          foregroundColor: context.colorScheme.onPrimary,
-                          width: context.width,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Gap(10),
-                ],
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CategoryCard extends StatelessWidget {
-  const CategoryCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CardWidget(
-          color: context.colorScheme.primaryContainer,
-          width: 80,
-          height: 80,
-          child: FaIcon(
-            FontAwesomeIcons.penNib,
-            color: context.colorScheme.primary,
+      body: BlocProvider.value(
+        value: _cubit,
+        child: RefreshIndicator.adaptive(
+          onRefresh: () async {
+            _cubit.getCategories(const GetCategoriesParams());
+            _cubit.getRoadMaps(const GetRoadMapsParams());
+            return;
+          },
+          child: ListView(
+            padding: const EdgeInsets.only(bottom: 40),
+            children: [
+              const _SearchCard().wrapPadding(AppPadding.pagePaddingHorizontal),
+              const Gap(10),
+              const _SectionTitle(text: 'Where You Left').wrapPadding(AppPadding.pagePaddingHorizontal),
+              const Gap(10),
+              const RecentRoadmapCard().wrapPadding(AppPadding.pagePaddingHorizontal),
+              const Gap(10),
+              const _SectionTitle(text: 'Categories').wrapPadding(AppPadding.pagePaddingHorizontal),
+              const Gap(10),
+              SizedBox(
+                height: 120,
+                child: BlocBuilder<HomeCubit, HomeState>(
+                  builder: (context, state) => switch (state.categoriesStatus) {
+                    CubitStatus.initial => const SizedBox.shrink(),
+                    CubitStatus.loading => const LoadingWidget().center(),
+                    CubitStatus.failure => ErrorButtonWidget(onTap: () => _cubit.getCategories(const GetCategoriesParams())),
+                    CubitStatus.success => ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: AppPadding.pagePaddingHorizontal,
+                        itemCount: state.categories.length,
+                        separatorBuilder: (_, __) => const Gap(10),
+                        itemBuilder: (context, index) => CategoryCard(category: state.categories[index]),
+                      ),
+                  },
+                ),
+              ),
+              const _SectionTitle(text: 'Roadmaps').wrapPadding(AppPadding.pagePaddingHorizontal),
+              const Gap(10),
+              SizedBox(
+                height: 240,
+                child: BlocBuilder<HomeCubit, HomeState>(
+                  builder: (context, state) => switch (state.categoriesStatus) {
+                    CubitStatus.initial => const SizedBox.shrink(),
+                    CubitStatus.loading => const LoadingWidget().center(),
+                    CubitStatus.failure => ErrorButtonWidget(onTap: () => _cubit.getCategories(const GetCategoriesParams())),
+                    CubitStatus.success => ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: AppPadding.pagePaddingHorizontal,
+                        itemCount: state.roadMaps.length,
+                        separatorBuilder: (_, __) => const Gap(10),
+                        itemBuilder: (context, index) => RoadMapCard(roadMap: state.roadMaps[index]),
+                      ),
+                  },
+                ),
+              ),
+            ],
           ),
         ),
-        const Gap(5),
-        const TextWidget('Design'),
-      ],
+      ),
     );
   }
 }
@@ -145,110 +118,6 @@ class _SectionTitle extends StatelessWidget {
       text,
       style: context.textTheme.titleMedium?.copyWith(
         color: context.colorScheme.onBackground,
-      ),
-    );
-  }
-}
-
-class _RecentRoadmapCard extends StatelessWidget {
-  const _RecentRoadmapCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      shape: ContinuousRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          AppDimensions.mediumBorderRadius,
-        ),
-      ),
-      tileColor: Colors.blueAccent,
-      contentPadding: AppPadding.def,
-      leading: const CardWidget(
-        borderRadius: AppDimensions.mediumBorderRadius,
-        child: Icon(
-          Icons.flutter_dash_outlined,
-          size: 40,
-          color: Colors.blueAccent,
-        ),
-      ),
-      title: TextWidget(
-        "Flutter - Mobile App Development",
-        style: context.textTheme.titleMedium?.copyWith(
-          color: context.colorScheme.onPrimary,
-        ),
-      ),
-      trailing: Stack(
-        alignment: Alignment.center,
-        children: [
-          TextWidget(
-            '60%',
-            style: context.textTheme.bodySmall?.copyWith(
-              color: context.colorScheme.onPrimary,
-            ),
-          ),
-          CircularProgressIndicator(
-            backgroundColor: context.colorScheme.onPrimary,
-            color: context.colorScheme.primary,
-            value: .6,
-            strokeWidth: 7,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SearchCard extends StatelessWidget {
-  const _SearchCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return CardWidget(
-      borderRadius: AppDimensions.mediumBorderRadius,
-      padding: AppPadding.innerCardPadding,
-      color: context.colorScheme.primary,
-      width: context.width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              FaIcon(
-                FontAwesomeIcons.book,
-                color: context.colorScheme.onPrimary,
-              ),
-              const Gap(10),
-              TextWidget(
-                'HitBitz',
-                style: context.textTheme.titleLarge?.copyWith(
-                  color: context.colorScheme.onPrimary,
-                ),
-              ),
-            ],
-          ),
-          const Gap(20),
-          TextWidget(
-            'Hello, Osama!',
-            style: context.textTheme.titleMedium?.copyWith(
-              color: context.colorScheme.onPrimary,
-            ),
-          ),
-          const Gap(2),
-          TextWidget(
-            'Find the roadmap or field you like here',
-            style: context.textTheme.bodyMedium?.copyWith(
-              color: context.colorScheme.onPrimary,
-            ),
-          ),
-          const Gap(20),
-          TextFieldWidget(
-            controller: TextEditingController(),
-            borderColor: context.colorScheme.onPrimary,
-            prefixIcon: const FaIcon(FontAwesomeIcons.magnifyingGlass).paddingAll(12),
-            hint: 'search',
-          ),
-          const Gap(20),
-        ],
       ),
     );
   }

@@ -5,7 +5,7 @@ class UrlService {
 
   static Future<bool> launchWeb(String url) => launchUrl(Uri.parse(url), mode: LaunchMode.externalNonBrowserApplication);
 
-  static Future<bool> launchPhoneNumber(String phoneNumber) => launchUrl(Uri.parse("tel:$phoneNumber"));
+  static Future<bool> launchPhoneNumber(String phoneNumber) => launchUrl(Uri.parse('tel:$phoneNumber'));
 
   // static launchLocation({required String? longitude, required String? latitude}) {
   //   if (latitude == null || longitude == null) return;

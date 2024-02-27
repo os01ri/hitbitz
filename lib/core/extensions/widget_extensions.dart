@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 extension PaddingApp on Widget {
   Widget onTap(VoidCallback? onPressed) => GestureDetector(onTap: onPressed, child: this);
 
-  Widget scrollable({Axis scrollDirection = Axis.vertical}) =>
-      SingleChildScrollView(scrollDirection: scrollDirection, child: this);
+  Widget scrollable({Axis scrollDirection = Axis.vertical}) => SingleChildScrollView(scrollDirection: scrollDirection, child: this);
 
   Widget wrapPadding([EdgeInsetsGeometry value = const EdgeInsets.all(16)]) => Padding(padding: value, child: this);
 
@@ -45,8 +44,11 @@ extension PaddingApp on Widget {
   Widget center() => Center(child: this);
 
   Widget expand({int flex = 1}) => Expanded(flex: flex, child: this);
-  
-  Widget fit() => FittedBox(child: this);
+
+  Widget fit([BoxFit? fit]) => FittedBox(
+        fit: fit ?? BoxFit.contain,
+        child: this,
+      );
 
   Widget hero(String tag) => Hero(
         tag: tag,

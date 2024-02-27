@@ -44,11 +44,11 @@ class TextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text.rich(
       TextSpan(
-          text: (text ?? "").tr(),
+          text: (text ?? '').tr(),
           mouseCursor: cursor ?? (onTap == null ? SystemMouseCursors.basic : null),
           children: (children ?? [])
               .map((e) => TextSpan(
-                  text: (e.text ?? "").tr(),
+                  text: (e.text ?? '').tr(),
                   mouseCursor: e.cursor ?? (e.onTap == null ? SystemMouseCursors.basic : null),
                   style: e.style ??
                       TextStyle(

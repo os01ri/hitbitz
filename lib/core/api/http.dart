@@ -92,13 +92,13 @@ class Http with RequestExceptionsHandler {
 
           log('=====================================  API  ====================================='.logBlue, name: '');
           log(uri.toString().logMagenta, name: 'api');
-          log('POST form-data'.logWhite, name: "method");
-          log(body.toString().logGreen, name: "request body");
+          log('POST form-data'.logWhite, name: 'method');
+          log(body.toString().logGreen, name: 'request body');
 
           http.StreamedResponse streamedResponse = await request.send().timeout(const Duration(seconds: 60));
           http.Response response = await http.Response.fromStream(streamedResponse);
-          log(response.body.logGreen, name: "response body");
-          log(response.statusCode.toString().logGreen, name: "status code");
+          log(response.body.logGreen, name: 'response body');
+          log(response.statusCode.toString().logGreen, name: 'status code');
           log('=====================================  END  ====================================='.logBlue, name: '');
 
           if (response.statusCode == 200) {

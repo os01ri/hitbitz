@@ -8,15 +8,25 @@ import 'package:hitbitz/core/config/app_dimensions.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
+import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 
-class RoadmapDetailsPage extends StatelessWidget {
-  const RoadmapDetailsPage({super.key});
+class RoadmapDetailsPage extends StatefulWidget {
+  const RoadmapDetailsPage({super.key, required this.roadMap});
 
+  final RoadMapModel roadMap;
+
+  @override
+  State<RoadmapDetailsPage> createState() => _RoadmapDetailsPageState();
+}
+
+class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // forceMaterialTransparency: true,
         backgroundColor: Colors.blueAccent.withOpacity(.2),
+        notificationPredicate: (notification) => false,
         title: const TextWidget('Roadmap Details'),
         actions: [
           IconButton(
@@ -53,22 +63,22 @@ class RoadmapDetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextWidget(
-                  'Flutter - Mobile App Development',
+                  widget.roadMap.name, // 'Flutter - Mobile App Development',
                   maxLines: 3,
                   style: context.textTheme.headlineSmall,
                 ),
                 const Gap(10),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         FaIcon(FontAwesomeIcons.userGroup, size: 16),
                         Gap(3),
                         TextWidget('1.2 K'),
                       ],
                     ),
-                    Row(
+                    const Row(
                       children: [
                         FaIcon(FontAwesomeIcons.clock, size: 16),
                         Gap(3),
@@ -77,16 +87,17 @@ class RoadmapDetailsPage extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        FaIcon(FontAwesomeIcons.star, size: 16),
-                        Gap(3),
-                        TextWidget('4.7'),
+                        const FaIcon(FontAwesomeIcons.star, size: 16),
+                        const Gap(3),
+                        TextWidget(widget.roadMap.rate.toString()),
                       ],
                     ),
                   ],
                 ),
                 const Gap(10),
-                const TextWidget(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+                TextWidget(
+                  widget.roadMap.description,
+                  //"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
                   maxLines: 50,
                 ),
                 const Gap(20),
@@ -200,9 +211,7 @@ class RoadmapDetailsPage extends StatelessWidget {
                             'Knowledge of programming fundamentals',
                             maxLines: 10,
                           ),
-                          trailing: i == 0
-                              ? const Icon(Icons.check, color: Colors.green)
-                              : const Icon(Icons.close, color: Colors.red),
+                          trailing: i == 0 ? const Icon(Icons.check, color: Colors.green) : const Icon(Icons.close, color: Colors.red),
                         ),
                     ],
                   ),
@@ -253,9 +262,7 @@ class RoadmapDetailsPage extends StatelessWidget {
                             'Knowledge of programming fundamentals',
                             maxLines: 10,
                           ),
-                          trailing: i == 0
-                              ? const Icon(Icons.check, color: Colors.green)
-                              : const Icon(Icons.close, color: Colors.red),
+                          trailing: i == 0 ? const Icon(Icons.check, color: Colors.green) : const Icon(Icons.close, color: Colors.red),
                         ),
                     ],
                   ),
