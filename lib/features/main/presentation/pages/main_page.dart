@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hitbitz/core/components/card_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
+import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
-import 'package:hitbitz/core/extensions/tab_controller_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/features/home/presentation/pages/home_page.dart';
 import 'package:hitbitz/features/main/presentation/cubit/navigation_cubit.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -16,37 +18,20 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
-  late final TabController _controller;
-
-  static const _tabs = [
-    MainNavigationBarItemWidget(
-      icon: FaIcon(FontAwesomeIcons.houseChimney, size: 20),
-      label: 'Home',
-      index: 0,
-    ),
-    MainNavigationBarItemWidget(
-      icon: FaIcon(FontAwesomeIcons.bookmark, size: 20),
-      label: 'library',
-      padding: EdgeInsets.only(right: 40),
-      index: 1,
-    ),
-    MainNavigationBarItemWidget(
-      icon: FaIcon(FontAwesomeIcons.bell, size: 20),
-      label: 'Notifications',
-      padding: EdgeInsets.only(left: 40),
-      index: 2,
-    ),
-    MainNavigationBarItemWidget(
-      icon: FaIcon(FontAwesomeIcons.user, size: 20),
-      label: 'Profile',
-      index: 3,
-    ),
-  ];
+  late final PageController _controller;
+  late final ValueNotifier<int> _index;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: _tabs.length, vsync: this);
+    _index = ValueNotifier(0);
+    _controller = PageController();
+  }
+
+  @override
+  void dispose() {
+    _index.dispose();
+    super.dispose();
   }
 
   @override
@@ -59,109 +44,124 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           IconButton(onPressed: () {}, icon: const FaIcon(FontAwesomeIcons.bell)),
         ],
       ),
-      body: TabBarView(
+      body: PageView(
         controller: _controller,
-        children: const [
-          HomePage(),
-          SizedBox.shrink(),
-          SizedBox.shrink(),
-          SizedBox.shrink(),
+        onPageChanged: (value) => _index.value = value,
+        children: [
+          const HomePage(),
+          const TextWidget('Library').center(),
+          const TextWidget('Notifications').center(),
+          const TextWidget('Profile').center(),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigation(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: LinearGradient(
-            colors: [
-              context.colorScheme.primary,
-              context.colorScheme.secondary,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            tileMode: TileMode.clamp,
-          ),
-        ),
-        child: FloatingActionButton(
-          elevation: .0,
-          highlightElevation: .0,
-          splashColor: Colors.transparent,
-          backgroundColor: Colors.transparent,
-          child: const FaIcon(
-            FontAwesomeIcons.qrcode,
-            color: Colors.white,
-          ).paddingAll(12.0),
-          onPressed: () {
-            // context.goNamed(AppRoutes.login);
-          },
-        ),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: Container(
+      //   decoration: BoxDecoration(
+      //     shape: BoxShape.circle,
+      //     gradient: LinearGradient(
+      //       colors: [
+      //         context.colorScheme.primary,
+      //         context.colorScheme.secondary,
+      //       ],
+      //       begin: Alignment.topCenter,
+      //       end: Alignment.bottomCenter,
+      //       tileMode: TileMode.clamp,
+      //     ),
+      //   ),
+      //   child: FloatingActionButton(
+      //     elevation: .0,
+      //     highlightElevation: .0,
+      //     splashColor: Colors.transparent,
+      //     backgroundColor: Colors.transparent,
+      //     child: const FaIcon(
+      //       FontAwesomeIcons.qrcode,
+      //       color: Colors.white,
+      //     ).paddingAll(12.0),
+      //     onPressed: () {
+      //       // context.goNamed(AppRoutes.login);
+      //     },
+      //   ),
+      // ),
     );
   }
 
   BlocBuilder<NavigationCubit, NavigationState> _buildBottomNavigation() => BlocBuilder<NavigationCubit, NavigationState>(
         buildWhen: (previous, current) => previous.index != current.index,
         builder: (context, state) {
-          return SizedBox(
-            height: 90.0,
-            // color: Colors.transparent,
-            child: BottomAppBar(
-              surfaceTintColor: context.colorScheme.background,
-              // shadowColor: Colors.black,
-              // elevation: 50,
-              // color: Colors.white,
+          return ValueListenableBuilder<int>(
+            valueListenable: _index,
+            builder: (context, index, _) => CardWidget(
+              isShadowed: true,
+              color: Colors.white,
+              padding: AppPadding.zero,
+              margin: const EdgeInsets.only(
+                left: 8,
+                right: 8,
+                bottom: 8,
+              ),
+              child: SalomonBottomBar(
+                currentIndex: index,
+                backgroundColor: context.colorScheme.surface,
+                itemShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                selectedItemColor: context.colorScheme.primary,
+                unselectedItemColor: context.colorScheme.outline,
+                onTap: (i) {
+                  _controller.jumpToPage(i);
+                  _index.value = i;
+                },
+                items: [
+                  /// Home
+                  SalomonBottomBarItem(
+                    icon: const FaIcon(FontAwesomeIcons.house, size: 18),
+                    title: TextWidget(
+                      'Home',
+                      style: context.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: context.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
 
-              notchMargin: 10,
-              shape: const CircularNotchedRectangle(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: _tabs
-                      .map(
-                        (e) => Padding(
-                          padding: e.padding,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: e.icon,
-                                color: state.index == e.index ? context.colorScheme.primary : context.colorScheme.outlineVariant,
-                                onPressed: () {
-                                  if (state.index != e.index) {
-                                    context.read<NavigationCubit>().updateNavBarItem(e.index);
-                                    _controller.goTo(e.index);
-                                  }
-                                },
-                              ),
-                              TextWidget(
-                                e.label,
-                                textColor: state.index == e.index ? context.colorScheme.primary : context.colorScheme.outlineVariant,
-                              ),
-                            ],
-                          ).fit(),
-                        ),
-                      )
-                      .toList(),
-                ),
+                  /// Likes
+                  SalomonBottomBarItem(
+                    icon: const FaIcon(FontAwesomeIcons.solidBookmark, size: 18),
+                    title: TextWidget(
+                      'Library',
+                      style: context.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: context.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
+
+                  /// Search
+                  SalomonBottomBarItem(
+                    icon: const FaIcon(FontAwesomeIcons.solidBell, size: 18),
+                    title: TextWidget(
+                      'Notifications',
+                      style: context.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: context.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
+
+                  /// Profile
+                  SalomonBottomBarItem(
+                    icon: const FaIcon(FontAwesomeIcons.solidUser, size: 18),
+                    title: TextWidget(
+                      'Profile',
+                      style: context.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: context.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           );
         },
       );
-}
-
-class MainNavigationBarItemWidget {
-  final Widget icon;
-  final String? label;
-  final int index;
-  final EdgeInsetsGeometry padding;
-
-  const MainNavigationBarItemWidget({
-    required this.icon,
-    required this.index,
-    this.padding = EdgeInsets.zero,
-    this.label,
-  });
 }

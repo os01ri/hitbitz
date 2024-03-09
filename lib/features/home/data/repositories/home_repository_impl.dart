@@ -23,9 +23,9 @@ class HomeRepositoryImpl with RepositoryExceptionHandler implements HomeReposito
   }
 
   @override
-  Future<Either<Failure, List<RoadMapModel>>> getRoadMaps({required BodyMap body}) {
+  Future<Either<Failure, List<RoadMapModel>>> getRoadMaps({required ParamsMap params, required BodyMap body}) {
     return exceptionHandler<List<RoadMapModel>>(tryCall: () async {
-      final result = await remoteDataSource.getRoadMaps(body: body);
+      final result = await remoteDataSource.getRoadMaps(params: params, body: body);
       return Right(result.data);
     });
   }

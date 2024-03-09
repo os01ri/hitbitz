@@ -16,15 +16,15 @@ class RemoteHomeDataSource {
     final rowData = await Http.get(uri: EndPoints.getCategories(), body: body);
     return BaseResponse.fromJson(
       json: json.decode(rowData),
-      dataConverter: (body) => categoryModelFromJson(body),
+      dataConverter: (body) => categoriesListFromJson(body),
     );
   }
 
-  Future<BaseResponse<List<RoadMapModel>>> getRoadMaps({required BodyMap body}) async {
-    final rowData = await Http.get(uri: EndPoints.getRoadMaps(), body: body);
+  Future<BaseResponse<List<RoadMapModel>>> getRoadMaps({required ParamsMap params, required BodyMap body}) async {
+    final rowData = await Http.get(uri: EndPoints.getRoadMaps(params: params), body: body);
     return BaseResponse.fromJson(
       json: json.decode(rowData),
-      dataConverter: (body) => roadMapModelFromJson(body),
+      dataConverter: (body) => roadMapsListFromJson(body),
     );
   }
 }

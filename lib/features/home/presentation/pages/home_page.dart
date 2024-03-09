@@ -50,7 +50,6 @@ class _HomePageState extends State<HomePage> {
           onRefresh: () async {
             _cubit.getCategories(const GetCategoriesParams());
             _cubit.getRoadMaps(const GetRoadMapsParams());
-            return;
           },
           child: ListView(
             padding: const EdgeInsets.only(bottom: 40),

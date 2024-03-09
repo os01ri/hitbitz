@@ -13,16 +13,20 @@ class GetRoadMapsUsecase implements UseCase<List<RoadMapModel>, GetRoadMapsParam
   GetRoadMapsUsecase({required this.repository});
   @override
   Future<Either<Failure, List<RoadMapModel>>> call(GetRoadMapsParams params) async {
-    return repository.getRoadMaps(body: params.getBody());
+    return repository.getRoadMaps(params: params.getParams(), body: params.getBody());
   }
 }
 
 class GetRoadMapsParams implements UseCaseParams {
-  const GetRoadMapsParams();
+  final int? categoryId;
+
+  const GetRoadMapsParams({this.categoryId});
 
   @override
   BodyMap getBody() => {};
 
   @override
-  ParamsMap? getParams() => {};
+  ParamsMap? getParams() => {
+        if (categoryId != null) 'category': categoryId.toString(),
+      };
 }

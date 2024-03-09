@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-List<RoadMapModel> roadMapModelFromJson(dynamic decodedJson) => List<RoadMapModel>.from(decodedJson.map((x) => RoadMapModel.fromJson(x)));
+List<RoadMapModel> roadMapsListFromJson(dynamic decodedJson) => List<RoadMapModel>.from(decodedJson.map((x) => RoadMapModel.fromJson(x)));
 
 String roadMapModelToJson(List<RoadMapModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 

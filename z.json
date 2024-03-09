@@ -1,0 +1,54 @@
+{
+    "status": true,
+    "message": "Here Is All Levels",
+    "data": [
+        {
+            "id": 5,
+            "roadmap_id": 4,
+            "name": "Advanced",
+            "created_at": "2024-03-09T13:08:23.000000Z",
+            "updated_at": "2024-03-09T13:08:23.000000Z",
+            "roadmap": {
+                "id": 4,
+                "name": "Flutter",
+                "subcategory_id": 1,
+                "rate": 0,
+                "created_at": "2024-03-09T13:05:28.000000Z",
+                "updated_at": "2024-03-09T13:05:28.000000Z",
+                "description": "The Flutter Roadmap provides a structured path for developers to learn and master Flutter, a popular framework for building cross-platform mobile applications."
+            }
+        },
+        {
+            "id": 4,
+            "roadmap_id": 4,
+            "name": "Med",
+            "created_at": "2024-03-09T13:08:15.000000Z",
+            "updated_at": "2024-03-09T13:08:15.000000Z",
+            "roadmap": {
+                "id": 4,
+                "name": "Flutter",
+                "subcategory_id": 1,
+                "rate": 0,
+                "created_at": "2024-03-09T13:05:28.000000Z",
+                "updated_at": "2024-03-09T13:05:28.000000Z",
+                "description": "The Flutter Roadmap provides a structured path for developers to learn and master Flutter, a popular framework for building cross-platform mobile applications."
+            }
+        },
+        {
+            "id": 3,
+            "roadmap_id": 4,
+            "name": "Beginner",
+            "created_at": "2024-03-09T13:08:05.000000Z",
+            "updated_at": "2024-03-09T13:08:05.000000Z",
+            "roadmap": {
+                "id": 4,
+                "name": "Flutter",
+                "subcategory_id": 1,
+                "rate": 0,
+                "created_at": "2024-03-09T13:05:28.000000Z",
+                "updated_at": "2024-03-09T13:05:28.000000Z",
+                "description": "The Flutter Roadmap provides a structured path for developers to learn and master Flutter, a popular framework for building cross-platform mobile applications."
+            }
+        }
+    ]
+}

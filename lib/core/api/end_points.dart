@@ -5,7 +5,7 @@ class EndPoints {
 
   ////////////!      General      !////////////
   static const _scheme = 'http';
-  static const _host = '10.0.3.2';
+  static const _host = '10.0.2.2';
   static const _port = 8000;
 
   static String imageUrl(String path) => '$_scheme://$_host:$_port/${path.replaceAll('\\', '/')}';
@@ -31,4 +31,5 @@ class EndPoints {
 
   static Uri getCategories({ParamsMap params}) => _user(path: 'categories', params: params);
   static Uri getRoadMaps({ParamsMap params}) => _user(path: 'roadmaps', params: params);
+  static Uri getLevels({ParamsMap params}) => _user(path: 'levels', params: params);
 }
