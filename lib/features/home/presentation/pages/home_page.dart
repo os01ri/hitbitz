@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
 import 'package:hitbitz/core/components/error_widget.dart';
 import 'package:hitbitz/core/components/loading_widget.dart';
@@ -20,6 +21,7 @@ import 'package:hitbitz/features/home/presentation/cubit/home_cubit.dart';
 import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
 import 'package:hitbitz/features/home/presentation/widgets/recent_road_maps.dart';
 import 'package:hitbitz/features/home/presentation/widgets/road_map_card.dart';
+import 'package:hitbitz/router/app_routes.dart';
 
 part '../widgets/home_search_card.dart';
 

@@ -5,7 +5,8 @@ class EndPoints {
 
   ////////////!      General      !////////////
   static const _scheme = 'http';
-  static const _host = '10.0.2.2';
+  static const _host = '192.168.43.127';
+  // static const _host = '10.0.2.2';
   static const _port = 8000;
 
   static String imageUrl(String path) => '$_scheme://$_host:$_port/${path.replaceAll('\\', '/')}';

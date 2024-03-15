@@ -8,6 +8,9 @@ import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/features/home/presentation/pages/home_page.dart';
 import 'package:hitbitz/features/main/presentation/cubit/navigation_cubit.dart';
+import 'package:hitbitz/features/notification/presentation/pages/notifications_page.dart';
+import 'package:hitbitz/features/roadmap/presentation/pages/saved_roadmaps_page.dart';
+import 'package:hitbitz/features/search/presentation/widgets/search_delegate.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MainPage extends StatefulWidget {
@@ -38,10 +41,13 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const TextWidget('HitBitz'),
+        title: const TextWidget('HitBitz').wrapPadding(AppPadding.appBarLeadingPadding),
         actions: [
-          IconButton(onPressed: () {}, icon: const FaIcon(FontAwesomeIcons.magnifyingGlass)),
-          IconButton(onPressed: () {}, icon: const FaIcon(FontAwesomeIcons.bell)),
+          IconButton(
+            onPressed: () => showSearch(context: context, delegate: CustomSearchDelegate()),
+            icon: const FaIcon(FontAwesomeIcons.magnifyingGlass),
+          ).wrapPadding(AppPadding.appBarActionsPadding),
+          // IconButton(onPressed: () {}, icon: const FaIcon(FontAwesomeIcons.bell)),
         ],
       ),
       body: PageView(
@@ -49,40 +55,12 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         onPageChanged: (value) => _index.value = value,
         children: [
           const HomePage(),
-          const TextWidget('Library').center(),
-          const TextWidget('Notifications').center(),
+          const SavedRoadmapsPage(),
+          const NotificationsPage(),
           const TextWidget('Profile').center(),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigation(),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // floatingActionButton: Container(
-      //   decoration: BoxDecoration(
-      //     shape: BoxShape.circle,
-      //     gradient: LinearGradient(
-      //       colors: [
-      //         context.colorScheme.primary,
-      //         context.colorScheme.secondary,
-      //       ],
-      //       begin: Alignment.topCenter,
-      //       end: Alignment.bottomCenter,
-      //       tileMode: TileMode.clamp,
-      //     ),
-      //   ),
-      //   child: FloatingActionButton(
-      //     elevation: .0,
-      //     highlightElevation: .0,
-      //     splashColor: Colors.transparent,
-      //     backgroundColor: Colors.transparent,
-      //     child: const FaIcon(
-      //       FontAwesomeIcons.qrcode,
-      //       color: Colors.white,
-      //     ).paddingAll(12.0),
-      //     onPressed: () {
-      //       // context.goNamed(AppRoutes.login);
-      //     },
-      //   ),
-      // ),
     );
   }
 
@@ -111,7 +89,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                   _index.value = i;
                 },
                 items: [
-                  /// Home
                   SalomonBottomBarItem(
                     icon: const FaIcon(FontAwesomeIcons.house, size: 18),
                     title: TextWidget(
@@ -122,8 +99,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                       ),
                     ),
                   ),
-
-                  /// Likes
                   SalomonBottomBarItem(
                     icon: const FaIcon(FontAwesomeIcons.solidBookmark, size: 18),
                     title: TextWidget(
@@ -134,8 +109,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                       ),
                     ),
                   ),
-
-                  /// Search
                   SalomonBottomBarItem(
                     icon: const FaIcon(FontAwesomeIcons.solidBell, size: 18),
                     title: TextWidget(
@@ -146,8 +119,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                       ),
                     ),
                   ),
-
-                  /// Profile
                   SalomonBottomBarItem(
                     icon: const FaIcon(FontAwesomeIcons.solidUser, size: 18),
                     title: TextWidget(

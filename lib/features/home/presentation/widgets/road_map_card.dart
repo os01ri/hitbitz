@@ -40,10 +40,13 @@ class RoadMapCard extends StatelessWidget {
           const Gap(5),
           TextWidget(
             roadMap.name, // 'Mastering UI/UX Design',
-            textColor: context.colorScheme.onSurface,
-            maxLines: 4,
+            style: context.textTheme.titleSmall?.copyWith(
+              color: context.colorScheme.onSurface,
+            ),
+            maxLines: 2,
           ),
           const Spacer(),
+          const Gap(5),
           Row(
             children: [
               CardWidget(

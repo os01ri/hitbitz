@@ -9,4 +9,8 @@ class AppRoutes {
   //////!main!//////
   static const main = '/main';
   static const roadmapDetails = 'road-map-details';
+  static const levelDetails = 'level-details';
+  static const quiz = 'quiz';
+  static const roadmapSearchResults = 'roadmap-search-results';
+  static const search = 'search';
 }

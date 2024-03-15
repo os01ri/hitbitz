@@ -48,6 +48,8 @@ class _SearchCard extends StatelessWidget {
             borderColor: context.colorScheme.onPrimary,
             prefixIcon: const FaIcon(FontAwesomeIcons.magnifyingGlass).paddingAll(12),
             hint: 'search',
+            textInputAction: TextInputAction.search,
+            onSubmitted: (_) => context.pushNamed(AppRoutes.roadmapSearchResults),
           ),
           const Gap(20),
         ],

@@ -5,7 +5,11 @@ import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 import 'package:hitbitz/features/main/presentation/pages/main_page.dart';
 import 'package:hitbitz/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
+import 'package:hitbitz/features/roadmap/presentation/pages/level_details_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_details_page.dart';
+import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_search_results_page.dart';
+import 'package:hitbitz/features/search/presentation/pages/search_page.dart';
 import 'package:hitbitz/features/splash/presentation/pages/splash_page.dart';
 
 import 'app_routes.dart';
@@ -57,9 +61,36 @@ class AppPages {
     builder: (context, state) => const MainPage(),
     routes: [
       GoRoute(
+        name: AppRoutes.search,
+        path: AppRoutes.search,
+        builder: (context, state) => const SearchPage(),
+        routes: const [],
+      ),
+      GoRoute(
+        name: AppRoutes.roadmapSearchResults,
+        path: AppRoutes.roadmapSearchResults,
+        builder: (context, state) => const RoadmapSearchResultsPage(),
+        routes: const [],
+      ),
+      GoRoute(
         name: AppRoutes.roadmapDetails,
         path: AppRoutes.roadmapDetails,
         builder: (context, state) => RoadmapDetailsPage(roadMap: state.extra as RoadMapModel),
+        routes: [
+          GoRoute(
+            name: AppRoutes.levelDetails,
+            path: AppRoutes.levelDetails,
+            builder: (context, state) => const LevelDetailsPage(),
+            routes: [
+              GoRoute(
+                name: AppRoutes.quiz,
+                path: AppRoutes.quiz,
+                builder: (context, state) => const QuizPage(),
+                routes: const [],
+              ),
+            ],
+          ),
+        ],
       ),
     ],
   );
