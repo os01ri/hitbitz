@@ -80,7 +80,7 @@ class AppPages {
           GoRoute(
             name: AppRoutes.levelDetails,
             path: AppRoutes.levelDetails,
-            builder: (context, state) => const LevelDetailsPage(),
+            builder: (context, state) => LevelDetailsPage(levelId: state.extra as int),
             routes: [
               GoRoute(
                 name: AppRoutes.quiz,

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/features/home/data/models/category_model.dart';
+import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
+import 'package:hitbitz/features/roadmap/presentation/pages/saved_roadmaps_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -34,9 +38,14 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const [
-          SizedBox.shrink(),
-          SizedBox.shrink(),
+        children: [
+          GridView.builder(
+            padding: AppPadding.gridViewPadding,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemCount: 30,
+            itemBuilder: (context, index) => const CategoryCard(category: CategoryModel(id: 0, name: 'Test')),
+          ),
+          const SavedRoadmapsPage(),
         ],
       ),
     );

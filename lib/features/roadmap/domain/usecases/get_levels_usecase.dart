@@ -13,7 +13,7 @@ class GetLevelsUsecase implements UseCase<List<LevelModel>, GetLevelsParams> {
   GetLevelsUsecase({required this.repository});
   @override
   Future<Either<Failure, List<LevelModel>>> call(GetLevelsParams params) async {
-    return repository.getLevels(body: params.getBody());
+    return repository.getLevels(params: params.getParams());
   }
 }
 

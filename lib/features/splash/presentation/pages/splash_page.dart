@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hitbitz/core/extensions/colorful_logging_extension.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/services/shared_preferences_service.dart';
 import 'package:hitbitz/router/app_routes.dart';
@@ -16,6 +19,8 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2)).whenComplete(() {
+      final x = SharedPreferencesService.getToken().toString();
+      log(x.logMagenta);
       if (SharedPreferencesService.isAuth()) {
         context.goNamed(AppRoutes.main);
       } else {

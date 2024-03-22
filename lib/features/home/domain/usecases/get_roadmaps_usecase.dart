@@ -27,6 +27,6 @@ class GetRoadMapsParams implements UseCaseParams {
 
   @override
   ParamsMap? getParams() => {
-        if (categoryId != null) 'category': categoryId.toString(),
+        if (categoryId != null) 'categoryId': categoryId.toString(),
       };
 }

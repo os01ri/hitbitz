@@ -4,6 +4,7 @@ import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/error/repository_exception_handler.dart';
 import 'package:hitbitz/features/roadmap/data/datasources/remote_roadmap_datasource.dart';
 import 'package:hitbitz/features/roadmap/data/models/level_model.dart';
+import 'package:hitbitz/features/roadmap/data/models/step_model.dart';
 import 'package:hitbitz/features/roadmap/domain/repositories/roadmap_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,9 +15,17 @@ class RoadMapRepositoryImpl with RepositoryExceptionHandler implements RoadMapRe
   const RoadMapRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, List<LevelModel>>> getLevels({required BodyMap body}) {
+  Future<Either<Failure, List<LevelModel>>> getLevels({required ParamsMap params}) {
     return exceptionHandler<List<LevelModel>>(tryCall: () async {
-      final result = await remoteDataSource.getLevels(body: body);
+      final result = await remoteDataSource.getLevels(params: params);
+      return Right(result.data);
+    });
+  }
+
+  @override
+  Future<Either<Failure, List<StepModel>>> getSteps({required ParamsMap? params}) {
+    return exceptionHandler<List<StepModel>>(tryCall: () async {
+      final result = await remoteDataSource.getSteps(params: params);
       return Right(result.data);
     });
   }

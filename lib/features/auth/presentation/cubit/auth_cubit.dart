@@ -43,7 +43,11 @@ class AuthCubit extends Cubit<AuthState> {
 
     result.fold(
       (l) => emit(state.copyWith(status: CubitStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(status: CubitStatus.success, user: r)),
+      (r) {
+        if (r.accessToken != null) SharedPreferencesService.setToken(r.accessToken!);
+        if (r.fullName != null) SharedPreferencesService.setFullName(r.fullName!);
+        emit(state.copyWith(status: CubitStatus.success, user: r));
+      },
     );
   }
 }

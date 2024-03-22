@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
 import 'package:hitbitz/core/components/error_widget.dart';
@@ -16,6 +17,7 @@ import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_levels_usecase.dart';
 import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
+import 'package:hitbitz/router/app_routes.dart';
 
 class RoadmapDetailsPage extends StatefulWidget {
   const RoadmapDetailsPage({super.key, required this.roadMap});
@@ -147,7 +149,7 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
                           itemBuilder: (context, index) => CardWidget(
                             isOutlined: true,
                             child: ExpansionTile(
-                              initiallyExpanded: true,
+                              initiallyExpanded: false,
                               childrenPadding: AppPadding.innerCardPadding,
                               expandedCrossAxisAlignment: CrossAxisAlignment.start,
                               leading: (index == 0)
@@ -196,7 +198,7 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
                                   ),
                                 const Gap(10),
                                 ButtonWidget(
-                                  onPressed: () {},
+                                  onPressed: () => context.pushNamed(AppRoutes.levelDetails, extra: state.levels[index].id),
                                   width: context.width,
                                   backgroundColor: context.colorScheme.primary,
                                   foregroundColor: context.colorScheme.onPrimary,

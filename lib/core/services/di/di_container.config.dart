@@ -16,20 +16,20 @@ import '../../../features/auth/data/datasources/remote_auth_datasource.dart'
 import '../../../features/auth/data/repositories/auth_repository_impl.dart'
     as _i9;
 import '../../../features/auth/domain/repositories/auth_repository.dart' as _i8;
-import '../../../features/auth/domain/usecases/login_usecase.dart' as _i13;
-import '../../../features/auth/domain/usecases/sign_in_usecase.dart' as _i15;
-import '../../../features/auth/presentation/cubit/auth_cubit.dart' as _i16;
+import '../../../features/auth/domain/usecases/login_usecase.dart' as _i14;
+import '../../../features/auth/domain/usecases/sign_in_usecase.dart' as _i16;
+import '../../../features/auth/presentation/cubit/auth_cubit.dart' as _i17;
 import '../../../features/home/data/datasources/remote_home_datasource.dart'
     as _i4;
 import '../../../features/home/data/repositories/home_repository_impl.dart'
-    as _i12;
+    as _i13;
 import '../../../features/home/domain/repositories/home_repository.dart'
-    as _i11;
+    as _i12;
 import '../../../features/home/domain/usecases/get_categories_usecase.dart'
-    as _i17;
-import '../../../features/home/domain/usecases/get_roadmaps_usecase.dart'
     as _i18;
-import '../../../features/home/presentation/cubit/home_cubit.dart' as _i19;
+import '../../../features/home/domain/usecases/get_roadmaps_usecase.dart'
+    as _i19;
+import '../../../features/home/presentation/cubit/home_cubit.dart' as _i20;
 import '../../../features/roadmap/data/datasources/remote_roadmap_datasource.dart'
     as _i5;
 import '../../../features/roadmap/data/repositories/roadmap_repository_impl.dart'
@@ -38,8 +38,10 @@ import '../../../features/roadmap/domain/repositories/roadmap_repository.dart'
     as _i6;
 import '../../../features/roadmap/domain/usecases/get_levels_usecase.dart'
     as _i10;
+import '../../../features/roadmap/domain/usecases/get_steps_usecase.dart'
+    as _i11;
 import '../../../features/roadmap/presentation/cubit/roadmap_cubit.dart'
-    as _i14;
+    as _i15;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i1.GetIt $initGetIt(
@@ -62,25 +64,29 @@ _i1.GetIt $initGetIt(
       _i9.AuthRepositoryImpl(remoteDataSource: gh<_i3.RemoteAuthDataSource>()));
   gh.factory<_i10.GetLevelsUsecase>(
       () => _i10.GetLevelsUsecase(repository: gh<_i6.RoadMapRepository>()));
-  gh.lazySingleton<_i11.HomeRepository>(() => _i12.HomeRepositoryImpl(
+  gh.factory<_i11.GetStepsUsecase>(
+      () => _i11.GetStepsUsecase(repository: gh<_i6.RoadMapRepository>()));
+  gh.lazySingleton<_i12.HomeRepository>(() => _i13.HomeRepositoryImpl(
       remoteDataSource: gh<_i4.RemoteHomeDataSource>()));
-  gh.factory<_i13.LoginUsecase>(
-      () => _i13.LoginUsecase(repository: gh<_i8.AuthRepository>()));
-  gh.factory<_i14.RoadmapCubit>(
-      () => _i14.RoadmapCubit(getLevelsUsecase: gh<_i10.GetLevelsUsecase>()));
-  gh.factory<_i15.SignInUsecase>(
-      () => _i15.SignInUsecase(repository: gh<_i8.AuthRepository>()));
-  gh.lazySingleton<_i16.AuthCubit>(() => _i16.AuthCubit(
-        loginUsecase: gh<_i13.LoginUsecase>(),
-        signInUsecase: gh<_i15.SignInUsecase>(),
+  gh.factory<_i14.LoginUsecase>(
+      () => _i14.LoginUsecase(repository: gh<_i8.AuthRepository>()));
+  gh.factory<_i15.RoadmapCubit>(() => _i15.RoadmapCubit(
+        getLevelsUsecase: gh<_i10.GetLevelsUsecase>(),
+        getStepsUsecase: gh<_i11.GetStepsUsecase>(),
       ));
-  gh.factory<_i17.GetCategoriesUsecase>(
-      () => _i17.GetCategoriesUsecase(repository: gh<_i11.HomeRepository>()));
-  gh.factory<_i18.GetRoadMapsUsecase>(
-      () => _i18.GetRoadMapsUsecase(repository: gh<_i11.HomeRepository>()));
-  gh.lazySingleton<_i19.HomeCubit>(() => _i19.HomeCubit(
-        getCategoriesUsecase: gh<_i17.GetCategoriesUsecase>(),
-        getRoadMapsUsecase: gh<_i18.GetRoadMapsUsecase>(),
+  gh.factory<_i16.SignInUsecase>(
+      () => _i16.SignInUsecase(repository: gh<_i8.AuthRepository>()));
+  gh.lazySingleton<_i17.AuthCubit>(() => _i17.AuthCubit(
+        loginUsecase: gh<_i14.LoginUsecase>(),
+        signInUsecase: gh<_i16.SignInUsecase>(),
+      ));
+  gh.factory<_i18.GetCategoriesUsecase>(
+      () => _i18.GetCategoriesUsecase(repository: gh<_i12.HomeRepository>()));
+  gh.factory<_i19.GetRoadMapsUsecase>(
+      () => _i19.GetRoadMapsUsecase(repository: gh<_i12.HomeRepository>()));
+  gh.lazySingleton<_i20.HomeCubit>(() => _i20.HomeCubit(
+        getCategoriesUsecase: gh<_i18.GetCategoriesUsecase>(),
+        getRoadMapsUsecase: gh<_i19.GetRoadMapsUsecase>(),
       ));
   return getIt;
 }
