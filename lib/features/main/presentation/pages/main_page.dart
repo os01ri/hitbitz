@@ -9,6 +9,7 @@ import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/features/home/presentation/pages/home_page.dart';
 import 'package:hitbitz/features/main/presentation/cubit/navigation_cubit.dart';
 import 'package:hitbitz/features/notification/presentation/pages/notifications_page.dart';
+import 'package:hitbitz/features/profile/presentation/pages/profile_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/saved_roadmaps_page.dart';
 import 'package:hitbitz/features/search/presentation/widgets/search_delegate.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -53,11 +54,11 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
       body: PageView(
         controller: _controller,
         onPageChanged: (value) => _index.value = value,
-        children: [
-          const HomePage(),
-          const SavedRoadmapsPage(),
-          const NotificationsPage(),
-          const TextWidget('Profile').center(),
+        children: const [
+          HomePage(),
+          SavedRoadmapsPage(),
+          NotificationsPage(),
+          ProfilePage(),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigation(),
