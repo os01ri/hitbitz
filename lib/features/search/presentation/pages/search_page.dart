@@ -11,7 +11,8 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateMixin {
+class _SearchPageState extends State<SearchPage>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
   @override
@@ -41,9 +42,11 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
         children: [
           GridView.builder(
             padding: AppPadding.gridViewPadding,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3),
             itemCount: 30,
-            itemBuilder: (context, index) => const CategoryCard(category: CategoryModel(id: 0, name: 'Test')),
+            itemBuilder: (context, index) =>
+                CategoryCard(category: CategoryModel(id: 0, name: 'Test')),
           ),
           const SavedRoadmapsPage(),
         ],

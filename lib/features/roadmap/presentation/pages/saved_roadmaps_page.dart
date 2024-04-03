@@ -25,9 +25,6 @@ class SavedRoadmapsPage extends StatelessWidget {
             description:
                 'This is a test roadmap, This is a test roadmap, This is a test roadmap, This is a test roadmap, This is a test roadmap, This is a test roadmap, This is a test roadmap, ',
             rate: 3,
-            createdAt: DateTime.now(),
-            updatedAt: DateTime.now(),
-            subcategoryId: 1,
           ),
         ),
       ),

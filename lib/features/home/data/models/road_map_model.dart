@@ -1,64 +1,75 @@
 import 'dart:convert';
 
-List<RoadMapModel> roadMapsListFromJson(dynamic decodedJson) => List<RoadMapModel>.from(decodedJson.map((x) => RoadMapModel.fromJson(x)));
+import 'package:hitbitz/features/home/data/models/category_model.dart';
 
-String roadMapModelToJson(List<RoadMapModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+List<RoadMapModel> roadMapsListFromJson(dynamic decodedJson) =>
+    List<RoadMapModel>.from(decodedJson.map((x) => RoadMapModel.fromJson(x)));
+
+String roadMapModelToJson(List<RoadMapModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class RoadMapModel {
-  final int id;
+  final int? id;
+  final Media? media;
   final String? name;
-  final int? subcategoryId;
-  final int? rate;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
   final String? description;
+  final CategoryModel? category;
+  final int? rate;
 
-  const RoadMapModel({
-    required this.id,
+  RoadMapModel({
+    this.id,
+    this.media,
     this.name,
-    this.subcategoryId,
-    this.rate,
-    this.createdAt,
-    this.updatedAt,
     this.description,
+    this.category,
+    this.rate,
   });
-
-  RoadMapModel copyWith({
-    int? id,
-    String? name,
-    int? subcategoryId,
-    int? rate,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    String? description,
-  }) =>
-      RoadMapModel(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        subcategoryId: subcategoryId ?? this.subcategoryId,
-        rate: rate ?? this.rate,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-        description: description ?? this.description,
-      );
 
   factory RoadMapModel.fromJson(Map<String, dynamic> json) => RoadMapModel(
         id: json['id'],
+        media: json['media'] == null ? null : Media.fromJson(json['media']),
         name: json['name'],
-        subcategoryId: json['subcategory_id'],
-        rate: json['rate'],
-        createdAt: json['created_at'] == null ? null : DateTime.parse(json['created_at']),
-        updatedAt: json['updated_at'] == null ? null : DateTime.parse(json['updated_at']),
         description: json['description'],
+        category: json['category'] == null
+            ? null
+            : CategoryModel.fromJson(json['category']),
+        rate: json['rate'],
       );
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'media': media?.toJson(),
         'name': name,
-        'subcategory_id': subcategoryId,
-        'rate': rate,
-        'created_at': createdAt?.toIso8601String(),
-        'updated_at': updatedAt?.toIso8601String(),
         'description': description,
+        'category': category?.toJson(),
+        'rate': rate,
+      };
+}
+
+class Media {
+  final int? id;
+  final String? mediaUrl;
+  final String? hash;
+  final int? order;
+
+  Media({
+    this.id,
+    this.mediaUrl,
+    this.hash,
+    this.order,
+  });
+
+  factory Media.fromJson(Map<String, dynamic> json) => Media(
+        id: json['id'],
+        mediaUrl: json['media_url'],
+        hash: json['hash'],
+        order: json['order'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'media_url': mediaUrl,
+        'hash': hash,
+        'order': order,
       };
 }

@@ -36,7 +36,7 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
     super.initState();
     _cubit = di<RoadmapCubit>()
       ..getLevels(
-        GetLevelsParams(roadmapId: widget.roadMap.id),
+        GetLevelsParams(roadmapId: widget.roadMap.id!),
       );
   }
 
@@ -56,7 +56,8 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.bookmark_add_outlined, color: context.colorScheme.onBackground),
+            icon: Icon(Icons.bookmark_add_outlined,
+                color: context.colorScheme.onBackground),
           ),
         ],
       ),
@@ -140,7 +141,7 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
                       CubitStatus.failure => ErrorButtonWidget(
                           onTap: () => _cubit.getLevels(
                                 GetLevelsParams(
-                                  roadmapId: widget.roadMap.id,
+                                  roadmapId: widget.roadMap.id!,
                                 ),
                               )).center(),
                       CubitStatus.success => ListView.separated(
@@ -151,17 +152,21 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
                             child: ExpansionTile(
                               initiallyExpanded: false,
                               childrenPadding: AppPadding.innerCardPadding,
-                              expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                              expandedCrossAxisAlignment:
+                                  CrossAxisAlignment.start,
                               leading: (index == 0)
-                                  ? const FaIcon(FontAwesomeIcons.lockOpen, color: Colors.green)
-                                  : const FaIcon(FontAwesomeIcons.lock, color: Colors.red),
+                                  ? const FaIcon(FontAwesomeIcons.lockOpen,
+                                      color: Colors.green)
+                                  : const FaIcon(FontAwesomeIcons.lock,
+                                      color: Colors.red),
                               title: TextWidget(state.levels[index].name),
                               subtitle: const Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Row(
                                     children: [
-                                      FaIcon(FontAwesomeIcons.userGroup, size: 16),
+                                      FaIcon(FontAwesomeIcons.userGroup,
+                                          size: 16),
                                       Gap(3),
                                       TextWidget('1.2 K'),
                                     ],
@@ -194,14 +199,18 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
                                       'Knowledge of programming fundamentals',
                                       maxLines: 10,
                                     ),
-                                    trailing: Icon(Icons.check, color: Colors.green),
+                                    trailing:
+                                        Icon(Icons.check, color: Colors.green),
                                   ),
                                 const Gap(10),
                                 ButtonWidget(
-                                  onPressed: () => context.pushNamed(AppRoutes.levelDetails, extra: state.levels[index].id),
+                                  onPressed: () => context.pushNamed(
+                                      AppRoutes.levelDetails,
+                                      extra: state.levels[index].id),
                                   width: context.width,
                                   backgroundColor: context.colorScheme.primary,
-                                  foregroundColor: context.colorScheme.onPrimary,
+                                  foregroundColor:
+                                      context.colorScheme.onPrimary,
                                   text: 'Start',
                                 ),
                               ],
