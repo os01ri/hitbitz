@@ -1,14 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
+import 'package:hitbitz/core/components/card_widget.dart';
+import 'package:hitbitz/core/components/error_widget.dart';
+import 'package:hitbitz/core/components/loading_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
+import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/cubit_status.dart';
+import 'package:hitbitz/core/extensions/context_extension.dart';
+import 'package:hitbitz/core/extensions/widget_extensions.dart';
+import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
 
 class QuizPage extends StatelessWidget {
   const QuizPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const TextWidget('Quiz'),
+    return BlocProvider.value(
+      value: di<QuizCubit>()..getQuizzes(),
+      child: Scaffold(
+        appBar: AppBar(title: const TextWidget('Quizzes')),
+        body: BlocBuilder<QuizCubit, QuizState>(
+          builder: (context, state) => switch (state.getStatus) {
+            CubitStatus.initial => const SizedBox.shrink(),
+            CubitStatus.loading => const LoadingWidget().center(),
+            CubitStatus.failure => ErrorButtonWidget(onTap: () => di<QuizCubit>().getQuizzes()).center(),
+            CubitStatus.success => ListView.separated(
+                itemCount: state.quizzes.length,
+                separatorBuilder: (context, index) => const Gap(10),
+                itemBuilder: (context, index) => CardWidget(
+                  // onTap: () => context.pushNamed(AppRoutes.quiz),
+                  color: index < 6
+                      ? Colors.green
+                      : index > 6
+                          ? context.colorScheme.primary.withOpacity(.3)
+                          : context.colorScheme.primary,
+                  child: ListTile(
+                    leading: CardWidget(
+                      isCircle: true,
+                      color: context.colorScheme.onPrimary,
+                      width: 22,
+                      height: 22,
+                      borderColor: context.colorScheme.primary,
+                      child: Icon(
+                        index == 6 ? FontAwesomeIcons.play : FontAwesomeIcons.check,
+                        color: context.colorScheme.primary,
+                        size: 14,
+                      ),
+                    ),
+                    title: TextWidget(
+                      state.quizzes[index].name,
+                      style: context.textTheme.titleMedium?.copyWith(
+                        color: context.colorScheme.onPrimary,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          },
+        ).wrapPadding(AppPadding.pagePadding),
       ),
     );
   }

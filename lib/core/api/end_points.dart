@@ -44,4 +44,7 @@ class EndPoints {
 
   static Uri getLevels({ParamsMap params}) => _user(path: 'levels', params: params);
   static Uri getSteps({ParamsMap params}) => _user(path: 'levelStep', params: params);
+
+  static Uri getQuizzes({ParamsMap params}) => _user(path: 'quizzes', params: params);
+  static Uri showQuiz({required int id}) => _user(path: 'quizzes/$id');
 }
