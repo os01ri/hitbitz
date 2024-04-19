@@ -11,6 +11,19 @@ class ServerException implements Exception {
   String toString() => 'ServerException(message: $message, statusCode: $statusCode)';
 }
 
+class UnauthenticatedException implements Exception {
+  final String? message;
+  final int? statusCode;
+
+  const UnauthenticatedException({
+    this.message = 'UnauthenticatedException',
+    this.statusCode,
+  });
+
+  @override
+  String toString() => 'UnauthenticatedException(message: $message, statusCode: $statusCode)';
+}
+
 class OperationFailedException implements Exception {
   final String? message;
   final int? statusCode;

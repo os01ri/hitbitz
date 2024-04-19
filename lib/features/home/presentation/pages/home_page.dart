@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
 import 'package:hitbitz/core/components/error_widget.dart';
 import 'package:hitbitz/core/components/loading_widget.dart';
-import 'package:hitbitz/core/components/text_field_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_dimensions.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
@@ -21,7 +19,7 @@ import 'package:hitbitz/features/home/presentation/cubit/home_cubit.dart';
 import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
 import 'package:hitbitz/features/home/presentation/widgets/recent_road_maps.dart';
 import 'package:hitbitz/features/home/presentation/widgets/road_map_card.dart';
-import 'package:hitbitz/router/app_routes.dart';
+import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
 
 part '../widgets/home_search_card.dart';
 
@@ -33,25 +31,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final HomeCubit _cubit;
+  late final HomeCubit _homeCubit;
 
   @override
   void initState() {
     super.initState();
-    _cubit = di<HomeCubit>()
-      ..getCategories(const GetCategoriesParams())
-      ..getRoadMaps(const GetRoadMapsParams());
+    _homeCubit = di<HomeCubit>()..getCategories(const GetCategoriesParams());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider.value(
-        value: _cubit,
+        value: _homeCubit,
         child: RefreshIndicator.adaptive(
           onRefresh: () async {
-            _cubit.getCategories(const GetCategoriesParams());
-            _cubit.getRoadMaps(const GetRoadMapsParams());
+            _homeCubit.getCategories(const GetCategoriesParams());
+            di<RoadmapCubit>().getRoadMaps(const GetRoadMapsParams());
           },
           child: ListView(
             padding: const EdgeInsets.only(bottom: 40),
@@ -70,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, state) => switch (state.categoriesStatus) {
                     CubitStatus.initial => const SizedBox.shrink(),
                     CubitStatus.loading => const LoadingWidget().center(),
-                    CubitStatus.failure => ErrorButtonWidget(onTap: () => _cubit.getCategories(const GetCategoriesParams())),
+                    CubitStatus.failure => ErrorButtonWidget(onTap: () => _homeCubit.getCategories(const GetCategoriesParams())),
                     CubitStatus.success => ListView.separated(
                         scrollDirection: Axis.horizontal,
                         padding: AppPadding.pagePaddingHorizontal,
@@ -83,21 +79,24 @@ class _HomePageState extends State<HomePage> {
               ),
               const _SectionTitle(text: 'Roadmaps').wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),
-              SizedBox(
-                height: 240,
-                child: BlocBuilder<HomeCubit, HomeState>(
-                  builder: (context, state) => switch (state.categoriesStatus) {
-                    CubitStatus.initial => const SizedBox.shrink(),
-                    CubitStatus.loading => const LoadingWidget().center(),
-                    CubitStatus.failure => ErrorButtonWidget(onTap: () => _cubit.getCategories(const GetCategoriesParams())),
-                    CubitStatus.success => ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        padding: AppPadding.pagePaddingHorizontal,
-                        itemCount: state.roadMaps.length,
-                        separatorBuilder: (_, __) => const Gap(10),
-                        itemBuilder: (context, index) => RoadMapCard(roadMap: state.roadMaps[index]),
-                      ),
-                  },
+              BlocProvider.value(
+                value: di<RoadmapCubit>()..getRoadMaps(const GetRoadMapsParams()),
+                child: SizedBox(
+                  height: 260,
+                  child: BlocBuilder<RoadmapCubit, RoadmapState>(
+                    builder: (context, state) => switch (state.roadMapsStatus) {
+                      CubitStatus.initial => const SizedBox.shrink(),
+                      CubitStatus.loading => const LoadingWidget().center(),
+                      CubitStatus.failure => ErrorButtonWidget(onTap: () => di<RoadmapCubit>().getRoadMaps(const GetRoadMapsParams())),
+                      CubitStatus.success => ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          padding: AppPadding.pagePaddingHorizontal,
+                          itemCount: state.roadMaps.length,
+                          separatorBuilder: (_, __) => const Gap(10),
+                          itemBuilder: (context, index) => RoadMapCard(roadMap: state.roadMaps[index]),
+                        ),
+                    },
+                  ),
                 ),
               ),
             ],

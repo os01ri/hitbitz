@@ -11,6 +11,6 @@ class AppRoutes {
   static const roadmapDetails = 'road-map-details';
   static const levelDetails = 'level-details';
   static const quiz = 'quiz';
-  static const roadmapSearchResults = 'roadmap-search-results';
+  // static const roadmapSearchResults = 'roadmap-search-results';
   static const search = 'search';
 }

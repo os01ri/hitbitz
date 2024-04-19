@@ -27,7 +27,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     // Implement your search result widget here based on the query
-    return const SearchPage();
+    return SearchPage(query: query);
   }
 
   @override

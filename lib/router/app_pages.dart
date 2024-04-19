@@ -8,7 +8,6 @@ import 'package:hitbitz/features/onboarding/presentation/pages/onboarding_page.d
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/level_details_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_details_page.dart';
-import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_search_results_page.dart';
 import 'package:hitbitz/features/search/presentation/pages/search_page.dart';
 import 'package:hitbitz/features/splash/presentation/pages/splash_page.dart';
 
@@ -63,15 +62,15 @@ class AppPages {
       GoRoute(
         name: AppRoutes.search,
         path: AppRoutes.search,
-        builder: (context, state) => const SearchPage(),
+        builder: (context, state) => SearchPage(query: state.extra as String),
         routes: const [],
       ),
-      GoRoute(
-        name: AppRoutes.roadmapSearchResults,
-        path: AppRoutes.roadmapSearchResults,
-        builder: (context, state) => const RoadmapSearchResultsPage(),
-        routes: const [],
-      ),
+      // GoRoute(
+      //   name: AppRoutes.roadmapSearchResults,
+      //   path: AppRoutes.roadmapSearchResults,
+      //   builder: (context, state) => const RoadmapSearchResultsPage(),
+      //   routes: const [],
+      // ),
       GoRoute(
         name: AppRoutes.roadmapDetails,
         path: AppRoutes.roadmapDetails,

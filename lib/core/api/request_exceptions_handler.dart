@@ -94,9 +94,9 @@ mixin RequestExceptionsHandler {
   }
 
   static Exception getException({required http.Response response}) {
-    final String message = json.decode(response.body)['errorMessage'] ?? json.decode(response.body)['title'];
+    final String message = json.decode(response.body)['message'] ?? json.decode(response.body)['title'];
 
-    // if (response.statusCode == 401) return UnauthenticatedException(message);
+    if (response.statusCode == 401) return UnauthenticatedException(message: message, statusCode: 401);
     // else if (response.statusCode == 422) return ValidationException(message);
     // else if (response.statusCode == 413) return EmailUsedException();
     // else if (response.statusCode == 200) return PasswordOrUsernameWrongException();

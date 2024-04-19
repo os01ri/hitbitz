@@ -5,12 +5,17 @@ class EndPoints {
 
   ////////////!      General      !////////////
   static const _scheme = 'http';
-  static const _host = '192.168.43.127';
-  // static const _host = '10.0.2.2';
+  // static const _host = '192.168.43.127';
+  static const _host = '10.0.2.2';
   static const _port = 8000;
 
-  static String imageUrl(String path) =>
-      '$_scheme://$_host:$_port/${path.replaceAll('\\', '/')}';
+  // static String imageUrl(String path) {
+  //   const base = '~/osama-rida/Documents/projects/hitbitz_backend/public/images/temp/1/';
+  //   final fileName = '${path.getFileName()}.${path.getFileType()}';
+  //   log(base + fileName);
+  //   return base + fileName;
+  //   // return '$_scheme://$_host:$_port/ ${path.replaceAll('\\', '/')}';
+  // }
 
   static Uri _mainUri({
     required String path,
@@ -27,18 +32,16 @@ class EndPoints {
   }
 
   ////////////!        User        !////////////
-  static Uri _user({required String path, ParamsMap params}) =>
-      _mainUri(path: 'user/$path', params: params);
-  static Uri signUp({ParamsMap params}) =>
-      _user(path: 'register', params: params);
+  static Uri _user({required String path, ParamsMap params}) => _mainUri(path: 'user/$path', params: params);
+  static Uri signUp({ParamsMap params}) => _user(path: 'register', params: params);
   static Uri logIn({ParamsMap params}) => _user(path: 'login', params: params);
 
-  static Uri getCategories({ParamsMap params}) =>
-      _user(path: 'categories', params: params);
-  static Uri getRoadMaps({ParamsMap params}) =>
-      _user(path: 'roadmaps', params: params);
-  static Uri getLevels({ParamsMap params}) =>
-      _user(path: 'levels', params: params);
-  static Uri getSteps({ParamsMap params}) =>
-      _user(path: 'levelStep', params: params);
+  static Uri getCategories({ParamsMap params}) => _user(path: 'categories', params: params);
+
+  static Uri getRoadMaps({ParamsMap params}) => _user(path: 'roadmaps', params: params);
+  static Uri roadMapToggleBookmark({required int id}) => _user(path: 'roadmaps/$id/toggleFavorite');
+  static Uri getSavedRoadmaps({ParamsMap params}) => _user(path: 'roadmaps/favorites/index');
+
+  static Uri getLevels({ParamsMap params}) => _user(path: 'levels', params: params);
+  static Uri getSteps({ParamsMap params}) => _user(path: 'levelStep', params: params);
 }

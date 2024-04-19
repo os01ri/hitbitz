@@ -15,9 +15,9 @@ class HomeRepositoryImpl with RepositoryExceptionHandler implements HomeReposito
   const HomeRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, List<CategoryModel>>> getCategories({required BodyMap body}) {
+  Future<Either<Failure, List<CategoryModel>>> getCategories({required ParamsMap params}) {
     return exceptionHandler<List<CategoryModel>>(tryCall: () async {
-      final result = await remoteDataSource.getCategories(body: body);
+      final result = await remoteDataSource.getCategories(params:params);
       return Right(result.data);
     });
   }

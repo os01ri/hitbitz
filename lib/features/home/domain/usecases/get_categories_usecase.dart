@@ -13,16 +13,19 @@ class GetCategoriesUsecase implements UseCase<List<CategoryModel>, GetCategories
   GetCategoriesUsecase({required this.repository});
   @override
   Future<Either<Failure, List<CategoryModel>>> call(GetCategoriesParams params) async {
-    return repository.getCategories(body: params.getBody());
+    return repository.getCategories(params: params.getParams());
   }
 }
 
 class GetCategoriesParams implements UseCaseParams {
-  const GetCategoriesParams();
+  final String? name;
+  const GetCategoriesParams({this.name});
 
   @override
   BodyMap getBody() => {};
 
   @override
-  ParamsMap? getParams() => {};
+  ParamsMap? getParams() => {
+    if (name != null) 'filter[name]':name,
+  };
 }

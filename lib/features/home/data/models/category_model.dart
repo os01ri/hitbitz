@@ -1,18 +1,17 @@
 import 'dart:convert';
 
-import 'road_map_model.dart';
+import 'package:hitbitz/core/data/models/media_model.dart';
 
 List<CategoryModel> categoriesListFromJson(dynamic decodedJson) =>
     List<CategoryModel>.from(decodedJson.map((x) => CategoryModel.fromJson(x)));
 
-String categoryModelToJson(List<CategoryModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String categoryModelToJson(List<CategoryModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CategoryModel {
   final int? id;
   final String? name;
-  final Media? image;
-  final CategoryModel? parentId;
+  final MediaModel? image;
+  final int? parentId;
   final String? type;
 
   CategoryModel({
@@ -26,10 +25,8 @@ class CategoryModel {
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
         id: json['id'],
         name: json['name'],
-        image: json['image'] == null ? null : Media.fromJson(json['image']),
-        parentId: json['parent_id'] == null
-            ? null
-            : CategoryModel.fromJson(json['parent_id']),
+        image: json['image'] == null ? null : MediaModel.fromJson(json['image']),
+        parentId: json['parent_id'],
         type: json['type'],
       );
 
@@ -37,7 +34,7 @@ class CategoryModel {
         'id': id,
         'name': name,
         'image': image?.toJson(),
-        'parent_id': parentId?.toJson(),
+        'parent_id': parentId,
         'type': type,
       };
 }

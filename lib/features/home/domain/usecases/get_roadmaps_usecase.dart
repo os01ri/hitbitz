@@ -19,8 +19,12 @@ class GetRoadMapsUsecase implements UseCase<List<RoadMapModel>, GetRoadMapsParam
 
 class GetRoadMapsParams implements UseCaseParams {
   final int? categoryId;
+  final String? name;
 
-  const GetRoadMapsParams({this.categoryId});
+  const GetRoadMapsParams({
+    this.categoryId,
+    this.name,
+  });
 
   @override
   BodyMap getBody() => {};
@@ -28,5 +32,6 @@ class GetRoadMapsParams implements UseCaseParams {
   @override
   ParamsMap? getParams() => {
         if (categoryId != null) 'categoryId': categoryId.toString(),
+        if (name != null) 'filter[name]': name,
       };
 }

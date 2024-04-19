@@ -12,8 +12,8 @@ import 'package:injectable/injectable.dart';
 class RemoteHomeDataSource {
   const RemoteHomeDataSource();
 
-  Future<BaseResponse<List<CategoryModel>>> getCategories({required BodyMap body}) async {
-    final rowData = await Http.get(uri: EndPoints.getCategories(), body: body);
+  Future<BaseResponse<List<CategoryModel>>> getCategories({required ParamsMap params}) async {
+    final rowData = await Http.get(uri: EndPoints.getCategories(params: params));
     return BaseResponse.fromJson(
       json: json.decode(rowData),
       dataConverter: (body) => categoriesListFromJson(body),

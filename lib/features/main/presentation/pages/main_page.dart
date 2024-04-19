@@ -52,6 +52,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         ],
       ),
       body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: _controller,
         onPageChanged: (value) => _index.value = value,
         children: const [

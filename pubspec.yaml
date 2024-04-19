@@ -38,6 +38,7 @@ dependencies:
   injectable: ^2.3.2
   path_provider: ^2.1.1
   permission_handler: ^11.0.1
+  restart_app: ^1.2.1
   salomon_bottom_bar: ^3.3.2
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0

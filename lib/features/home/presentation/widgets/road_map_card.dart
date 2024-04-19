@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
+import 'package:hitbitz/core/components/cached_network_image.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_dimensions.dart';
@@ -32,11 +32,15 @@ class RoadMapCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const FaIcon(
-            FontAwesomeIcons.figma,
-            color: Colors.red,
-            size: 50,
-          ),
+          if (roadMap.media?.mediaUrl != null)
+            NetworkImageWidget(
+              url: roadMap.media!.mediaUrl!,
+              hash: roadMap.media!.hash,
+              height: 80,
+              width: 80,
+            )
+          else
+            const SizedBox(height: 80),
           const Gap(5),
           TextWidget(
             roadMap.name, // 'Mastering UI/UX Design',
@@ -66,8 +70,7 @@ class RoadMapCard extends StatelessWidget {
           ),
           const Gap(8),
           ButtonWidget(
-            onPressed: () =>
-                context.pushNamed(AppRoutes.roadmapDetails, extra: roadMap),
+            onPressed: () => context.pushNamed(AppRoutes.roadmapDetails, extra: roadMap),
             text: 'Start Journey',
             backgroundColor: context.colorScheme.primary,
             foregroundColor: context.colorScheme.onPrimary,
