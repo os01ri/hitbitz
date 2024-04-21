@@ -18,4 +18,12 @@ class RemoteQuizDataSource {
       dataConverter: (body) => quizModelFromJson(body),
     );
   }
+
+  Future<BaseResponse<QuizModel>> showQuiz({required int id}) async {
+    final rowData = await Http.get(uri: EndPoints.showQuiz(id: id));
+    return BaseResponse.fromJson(
+      json: json.decode(rowData),
+      dataConverter: (body) => QuizModel.fromJson(body),
+    );
+  }
 }

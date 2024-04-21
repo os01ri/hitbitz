@@ -12,41 +12,35 @@ import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
-import 'package:hitbitz/features/roadmap/domain/usecases/get_steps_usecase.dart';
-import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
+import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
-class LevelDetailsPage extends StatelessWidget {
-  final int levelId;
-
-  const LevelDetailsPage({super.key, required this.levelId});
+class QuizzesPage extends StatelessWidget {
+  const QuizzesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: di<RoadmapCubit>()..getSteps(GetStepsParams(levelId: levelId)),
+      value: di<QuizCubit>()..getQuizzes(),
       child: Scaffold(
-        appBar: AppBar(
-          // backgroundColor: Colors.blueAccent.withOpacity(.2),
-          notificationPredicate: (notification) => false,
-          title: const TextWidget('Fluter - Level 1'),
-        ),
-        body: BlocBuilder<RoadmapCubit, RoadmapState>(
-          builder: (context, state) => switch (state.stepsStatus) {
+        appBar: AppBar(title: const TextWidget('Quizzes')),
+        body: BlocBuilder<QuizCubit, QuizState>(
+          builder: (context, state) => switch (state.getStatus) {
             CubitStatus.initial => const SizedBox.shrink(),
             CubitStatus.loading => const LoadingWidget().center(),
-            CubitStatus.failure => ErrorButtonWidget(onTap: () => di<RoadmapCubit>().getSteps(GetStepsParams(levelId: levelId))).center(),
+            CubitStatus.failure => ErrorButtonWidget(onTap: () => di<QuizCubit>().getQuizzes()).center(),
             CubitStatus.success => ListView.separated(
-                itemCount: state.steps.length,
+                itemCount: state.quizzes.length,
                 separatorBuilder: (context, index) => const Gap(10),
                 itemBuilder: (context, index) => CardWidget(
-                  onTap: () => context.pushNamed(AppRoutes.quizzes),
-                  color: index < 6
+                  // onTap: () => context.pushNamed(AppRoutes.quiz),
+                  color: index < 2
                       ? Colors.green
-                      : index > 6
+                      : index > 1
                           ? context.colorScheme.primary.withOpacity(.3)
                           : context.colorScheme.primary,
                   child: ListTile(
+                    onTap: () => context.pushNamed(AppRoutes.quiz, extra: state.quizzes[index].id),
                     leading: CardWidget(
                       isCircle: true,
                       color: context.colorScheme.onPrimary,
@@ -60,7 +54,7 @@ class LevelDetailsPage extends StatelessWidget {
                       ),
                     ),
                     title: TextWidget(
-                      state.steps[index].name,
+                      state.quizzes[index].name,
                       style: context.textTheme.titleMedium?.copyWith(
                         color: context.colorScheme.onPrimary,
                       ),

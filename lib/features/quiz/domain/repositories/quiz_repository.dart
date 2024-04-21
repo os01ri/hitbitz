@@ -5,4 +5,5 @@ import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 
 abstract class QuizRepository {
   Future<Either<Failure, List<QuizModel>>> getQuizzes({required ParamsMap params});
+  Future<Either<Failure, QuizModel>> showQuiz({required int id});
 }

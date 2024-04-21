@@ -20,4 +20,12 @@ class QuizRepositoryImpl with RepositoryExceptionHandler implements QuizReposito
       return Right(result.data);
     });
   }
+
+  @override
+  Future<Either<Failure, QuizModel>> showQuiz({required int id}) {
+    return exceptionHandler<QuizModel>(tryCall: () async {
+      final result = await remoteDataSource.showQuiz(id: id);
+      return Right(result.data);
+    });
+  }
 }
