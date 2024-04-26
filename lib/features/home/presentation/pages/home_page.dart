@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _homeCubit = di<HomeCubit>()..getCategories(const GetCategoriesParams());
+    di<RoadmapCubit>().getRoadMaps(const GetRoadMapsParams());
   }
 
   @override
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               const _SectionTitle(text: 'Roadmaps').wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),
               BlocProvider.value(
-                value: di<RoadmapCubit>()..getRoadMaps(const GetRoadMapsParams()),
+                value: di<RoadmapCubit>(),
                 child: SizedBox(
                   height: 260,
                   child: BlocBuilder<RoadmapCubit, RoadmapState>(

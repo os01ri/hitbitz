@@ -15,13 +15,24 @@ import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
-class QuizzesPage extends StatelessWidget {
+class QuizzesPage extends StatefulWidget {
   const QuizzesPage({super.key});
+
+  @override
+  State<QuizzesPage> createState() => _QuizzesPageState();
+}
+
+class _QuizzesPageState extends State<QuizzesPage> {
+  @override
+  void initState() {
+    super.initState();
+    di<QuizCubit>().getQuizzes();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: di<QuizCubit>()..getQuizzes(),
+      value: di<QuizCubit>(),
       child: Scaffold(
         appBar: AppBar(title: const TextWidget('Quizzes')),
         body: BlocBuilder<QuizCubit, QuizState>(
@@ -40,7 +51,7 @@ class QuizzesPage extends StatelessWidget {
                           ? context.colorScheme.primary.withOpacity(.3)
                           : context.colorScheme.primary,
                   child: ListTile(
-                    onTap: () => context.pushNamed(AppRoutes.quiz, extra: state.quizzes[index].id),
+                    onTap: () => context.pushNamed(AppRoutes.quizIntro, extra: state.quizzes[index].id),
                     leading: CardWidget(
                       isCircle: true,
                       color: context.colorScheme.onPrimary,

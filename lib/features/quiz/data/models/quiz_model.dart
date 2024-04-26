@@ -3,20 +3,20 @@ import 'package:hitbitz/features/quiz/data/models/question_model.dart';
 List<QuizModel> quizModelFromJson(dynamic decodedJson) => List<QuizModel>.from(decodedJson.map((x) => QuizModel.fromJson(x)));
 
 class QuizModel {
-  final int? id;
+  final int id;
   final int? stepId;
   final String? name;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final List<QuestionModel>? questions;
+  final List<QuestionModel> questions;
 
   const QuizModel({
-    this.id,
+    required this.id,
     this.stepId,
     this.name,
     this.createdAt,
     this.updatedAt,
-    this.questions,
+    this.questions = const [],
   });
 
   factory QuizModel.fromJson(Map<String, dynamic> json) => QuizModel(
@@ -34,6 +34,6 @@ class QuizModel {
         'name': name,
         'created_at': createdAt?.toIso8601String(),
         'updated_at': updatedAt?.toIso8601String(),
-        'questions': questions == null ? [] : List<dynamic>.from(questions!.map((x) => x.toJson())),
+        'questions': List<dynamic>.from(questions.map((x) => x.toJson())),
       };
 }

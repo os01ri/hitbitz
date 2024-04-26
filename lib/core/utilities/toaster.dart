@@ -25,12 +25,12 @@ class Toaster {
 
   static void showError({
     required BuildContext context,
-    required String? errorMessage,
+    required String? message,
   }) async {
     closeLoading();
     _showNotification(
-      title: const TextWidget('خطأ!'),
-      subtitle: TextWidget(errorMessage, maxLines: 3),
+      title: const TextWidget('Error!'),
+      subtitle: TextWidget(message, textColor: context.colorScheme.onError, maxLines: 3),
       leading: Icon(Icons.error_outline_rounded, color: context.colorScheme.error, size: 35),
       backgroundColor: context.colorScheme.errorContainer,
     );

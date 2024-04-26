@@ -223,7 +223,7 @@ class _SignUpPageState extends State<SignUpPage> {
     if (state.status == CubitStatus.loading) {
       Toaster.showLoading();
     } else if (state.status == CubitStatus.failure) {
-      Toaster.showError(context: context, errorMessage: state.failure?.message);
+      Toaster.showError(context: context, message: state.failure?.message);
     } else if (state.status == CubitStatus.success) {
       Toaster.showSuccess(context: context, message: 'Signed in successfully');
       Future.delayed(const Duration(milliseconds: 300)).whenComplete(() => context.goNamed(AppRoutes.main));

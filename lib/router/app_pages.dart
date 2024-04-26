@@ -5,6 +5,8 @@ import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 import 'package:hitbitz/features/main/presentation/pages/main_page.dart';
 import 'package:hitbitz/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/quiz_intro_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quizzes_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_details_page.dart';
@@ -86,13 +88,18 @@ class AppPages {
                 name: AppRoutes.quizzes,
                 path: AppRoutes.quizzes,
                 builder: (context, state) => const QuizzesPage(),
-                routes:   [
+                routes: [
                   GoRoute(
-                    name: AppRoutes.quiz,
-                    path: AppRoutes.quiz,
-                    builder: (context, state) => QuizPage(id: state.extra as int),
-                    
-                    
+                    name: AppRoutes.quizIntro,
+                    path: AppRoutes.quizIntro,
+                    builder: (context, state) => QuizIntroPage(id: state.extra as int),
+                    routes: [
+                      GoRoute(
+                        name: AppRoutes.quiz,
+                        path: AppRoutes.quiz,
+                        builder: (context, state) => QuizPage(quiz: state.extra as QuizModel),
+                      ),
+                    ],
                   ),
                 ],
               ),

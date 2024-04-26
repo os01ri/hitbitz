@@ -19,4 +19,18 @@ extension PageControllerExtension on PageController {
       curve: Curves.linear,
     );
   }
+
+  goToNextPage() {
+    nextPage(
+      duration: AppConstants.animationDurationX2,
+      curve: Curves.linear,
+    );
+  }
+
+  goToPreviousPage() {
+    previousPage(
+      duration: AppConstants.animationDurationX2,
+      curve: Curves.linear,
+    );
+  }
 }

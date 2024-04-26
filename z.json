@@ -1,101 +1,189 @@
 {
     "status": true,
-    "message": "This Is All Roadmaps",
-    "data": [
-        {
-            "id": 1,
-            "media": {
-                "media_url": "http:\/\/localhost:8000\/storage\/default.jpg",
-                "hash": "KGGc.IRk1k?]fP%MC9t6-U"
+    "message": "Success",
+    "data": {
+        "id": 5,
+        "name": "Iure dicta quia laborum ut consequatur recusandae labore voluptate. Quia rerum aut consequatur.",
+        "step_id": 6,
+        "questions": [
+            {
+                "id": 2,
+                "title": "Reyna Stamm",
+                "type": 3,
+                "answers": [
+                    {
+                        "id": 5,
+                        "title": "Ms.",
+                        "order": 0,
+                        "correct": 1
+                    },
+                    {
+                        "id": 6,
+                        "title": "Prof.",
+                        "order": 6,
+                        "correct": 0
+                    },
+                    {
+                        "id": 7,
+                        "title": "Miss",
+                        "order": 9,
+                        "correct": 0
+                    },
+                    {
+                        "id": 8,
+                        "title": "Mrs.",
+                        "order": 1,
+                        "correct": 1
+                    }
+                ],
+                "media": []
             },
-            "name": "Mollitia.",
-            "description": "Similique aliquid reiciendis eos eum esse voluptatibus omnis eligendi. Quisquam odio beatae et mollitia qui consequatur accusantium.",
-            "category": {
+            {
                 "id": 6,
-                "name": "doloremque",
-                "image": {
-                    "media_url": "http:\/\/localhost:8000\/storage\/default.jpg",
-                    "hash": "KGGc.IRk1k?]fP%MC9t6-U"
-                },
-                "parent_id": 5
+                "title": "Lavinia Mitchell",
+                "type": 5,
+                "answers": [
+                    {
+                        "id": 21,
+                        "title": "Mrs.",
+                        "order": 6,
+                        "correct": 1
+                    },
+                    {
+                        "id": 22,
+                        "title": "Dr.",
+                        "order": 0,
+                        "correct": 1
+                    },
+                    {
+                        "id": 23,
+                        "title": "Ms.",
+                        "order": 5,
+                        "correct": 1
+                    },
+                    {
+                        "id": 24,
+                        "title": "Prof.",
+                        "order": 4,
+                        "correct": 0
+                    }
+                ],
+                "media": []
             },
-            "rate": 2
-        },
-        {
-            "id": 2,
-            "media": {
-                "media_url": "http:\/\/localhost:8000\/storage\/default.jpg",
-                "hash": "KGGc.IRk1k?]fP%MC9t6-U"
-            },
-            "name": "Molestiae.",
-            "description": "Ratione dolore labore odit iusto qui repudiandae accusamus. Exercitationem quas amet quis consequuntur minus.",
-            "category": {
+            {
                 "id": 10,
-                "name": "et",
-                "image": {
-                    "media_url": "http:\/\/localhost:8000\/storage\/default.jpg",
-                    "hash": "KGGc.IRk1k?]fP%MC9t6-U"
-                },
-                "parent_id": 2
+                "title": "Skyla Goldner",
+                "type": 4,
+                "answers": [
+                    {
+                        "id": 37,
+                        "title": "Dr.",
+                        "order": 1,
+                        "correct": 1
+                    },
+                    {
+                        "id": 38,
+                        "title": "Prof.",
+                        "order": 6,
+                        "correct": 0
+                    },
+                    {
+                        "id": 39,
+                        "title": "Miss",
+                        "order": 0,
+                        "correct": 1
+                    },
+                    {
+                        "id": 40,
+                        "title": "Miss",
+                        "order": 9,
+                        "correct": 0
+                    }
+                ],
+                "media": []
             },
-            "rate": 3
-        },
-        {
-            "id": 3,
-            "media": {
-                "media_url": "http:\/\/localhost:8000\/storage\/default.jpg",
-                "hash": "KGGc.IRk1k?]fP%MC9t6-U"
+            {
+                "id": 19,
+                "title": "Joshua Johnson MD",
+                "type": 1,
+                "correctAnswer": [
+                    0
+                ],
+                "media": []
             },
-            "name": "Eius.",
-            "description": "Corrupti ut minima consequatur assumenda consectetur quam temporibus. Omnis inventore enim eos delectus. Et exercitationem ipsa ratione aliquam voluptatibus.",
-            "category": {
-                "id": 9,
-                "name": "voluptatum",
-                "image": {
-                    "media_url": "http:\/\/localhost:8000\/storage\/default.jpg",
-                    "hash": "KGGc.IRk1k?]fP%MC9t6-U"
-                },
-                "parent_id": 2
+            {
+                "id": 32,
+                "title": "Dr. Damaris Reynolds V",
+                "type": 1,
+                "correctAnswer": [
+                    0
+                ],
+                "media": []
             },
-            "rate": 1
-        },
-        {
-            "id": 4,
-            "media": {
-                "media_url": "http:\/\/localhost:8000\/storage\/default.jpg",
-                "hash": "KGGc.IRk1k?]fP%MC9t6-U"
+            {
+                "id": 47,
+                "title": "Orland Johns",
+                "type": 2,
+                "answers": [
+                    {
+                        "id": 185,
+                        "title": "Dr.",
+                        "order": 4,
+                        "correct": 0
+                    },
+                    {
+                        "id": 186,
+                        "title": "Prof.",
+                        "order": 8,
+                        "correct": 0
+                    },
+                    {
+                        "id": 187,
+                        "title": "Ms.",
+                        "order": 1,
+                        "correct": 0
+                    },
+                    {
+                        "id": 188,
+                        "title": "Mr.",
+                        "order": 2,
+                        "correct": 1
+                    }
+                ],
+                "media": []
             },
-            "name": "Alias.",
-            "description": "Dolor et quia commodi cumque. Ullam et perspiciatis repudiandae et. Magni ut ipsum tempora officiis nihil non enim.",
-            "category": {
-                "id": 9,
-                "name": "voluptatum",
-                "image": {
-                    "media_url": "http:\/\/localhost:8000\/storage\/default.jpg",
-                    "hash": "KGGc.IRk1k?]fP%MC9t6-U"
-                },
-                "parent_id": 2
-            },
-            "rate": 4
-        },
-        {
-            "id": 5,
-            "media": {
-                "media_url": "http:\/\/localhost:8000\/storage\/default.jpg",
-                "hash": "KGGc.IRk1k?]fP%MC9t6-U"
-            },
-            "name": "Vel id.",
-            "description": "Veritatis ex ab voluptates error consequuntur et recusandae. Dignissimos harum ullam sint vel et voluptas sed.",
-            "category": {
-                "id": 9,
-                "name": "voluptatum",
-                "image": {
-                    "media_url": "http:\/\/localhost:8000\/storage\/default.jpg",
-                    "hash": "KGGc.IRk1k?]fP%MC9t6-U"
-                },
-                "parent_id": 2
-            },
-            "rate": 4
-        }
-    ]
+            {
+                "id": 49,
+                "title": "Santos Hermiston",
+                "type": 3,
+                "answers": [
+                    {
+                        "id": 193,
+                        "title": "Prof.",
+                        "order": 3,
+                        "correct": 0
+                    },
+                    {
+                        "id": 194,
+                        "title": "Mr.",
+                        "order": 0,
+                        "correct": 1
+                    },
+                    {
+                        "id": 195,
+                        "title": "Dr.",
+                        "order": 1,
+                        "correct": 1
+                    },
+                    {
+                        "id": 196,
+                        "title": "Prof.",
+                        "order": 8,
+                        "correct": 0
+                    }
+                ],
+                "media": []
+            }
+        ]
+    }
 }

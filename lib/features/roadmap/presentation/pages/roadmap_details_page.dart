@@ -235,7 +235,7 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
       Toaster.showLoading();
     } else if (state.saveStatus == CubitStatus.failure) {
       Toaster.closeLoading();
-      Toaster.showError(context: context, errorMessage: 'error');
+      Toaster.showError(context: context, message: 'error');
     } else if (state.saveStatus == CubitStatus.success) {
       Toaster.closeLoading();
       Toaster.showSuccess(context: context, message: 'success');

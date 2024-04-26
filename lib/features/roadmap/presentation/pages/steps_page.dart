@@ -16,15 +16,26 @@ import 'package:hitbitz/features/roadmap/domain/usecases/get_steps_usecase.dart'
 import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
-class LevelDetailsPage extends StatelessWidget {
+class LevelDetailsPage extends StatefulWidget {
   final int levelId;
 
   const LevelDetailsPage({super.key, required this.levelId});
 
   @override
+  State<LevelDetailsPage> createState() => _LevelDetailsPageState();
+}
+
+class _LevelDetailsPageState extends State<LevelDetailsPage> {
+  @override
+  void initState() {
+    super.initState();
+    di<RoadmapCubit>().getSteps(GetStepsParams(levelId: widget.levelId));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: di<RoadmapCubit>()..getSteps(GetStepsParams(levelId: levelId)),
+      value: di<RoadmapCubit>(),
       child: Scaffold(
         appBar: AppBar(
           // backgroundColor: Colors.blueAccent.withOpacity(.2),
@@ -35,7 +46,8 @@ class LevelDetailsPage extends StatelessWidget {
           builder: (context, state) => switch (state.stepsStatus) {
             CubitStatus.initial => const SizedBox.shrink(),
             CubitStatus.loading => const LoadingWidget().center(),
-            CubitStatus.failure => ErrorButtonWidget(onTap: () => di<RoadmapCubit>().getSteps(GetStepsParams(levelId: levelId))).center(),
+            CubitStatus.failure =>
+              ErrorButtonWidget(onTap: () => di<RoadmapCubit>().getSteps(GetStepsParams(levelId: widget.levelId))).center(),
             CubitStatus.success => ListView.separated(
                 itemCount: state.steps.length,
                 separatorBuilder: (context, index) => const Gap(10),
