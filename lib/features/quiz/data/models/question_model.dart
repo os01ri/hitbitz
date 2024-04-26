@@ -5,24 +5,25 @@ class QuestionModel {
   final int id;
   final QuestionType type;
   final String? title;
-  final List<int>? correctAnswer;
-  final List<dynamic>? media;
-  final List<AnswerModel>? answers;
+  final List<int> correctAnswers;
+  final List<dynamic> media;
+  final List<AnswerModel> answers;
+  final List<int> userAnswersIds = [];
 
-  const QuestionModel({
+  QuestionModel({
     required this.id,
     required this.type,
     this.title,
-    this.correctAnswer,
-    this.media,
-    this.answers,
+    this.correctAnswers = const [],
+    this.media = const [],
+    this.answers = const [],
   });
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(
         id: json['id'],
         type: QuestionType.getByIndex(json['type']),
         title: json['title'],
-        correctAnswer: json['correctAnswer'] == null ? [] : List<int>.from(json['correctAnswer']!.map((x) => x)),
+        correctAnswers: json['correctAnswer'] == null ? [] : List<int>.from(json['correctAnswer']!.map((x) => x)),
         media: json['media'] == null ? [] : List<dynamic>.from(json['media']!.map((x) => x)),
         answers: json['answers'] == null ? [] : List<AnswerModel>.from(json['answers']!.map((x) => AnswerModel.fromJson(x))),
       );
@@ -31,8 +32,8 @@ class QuestionModel {
         'id': id,
         'type': type.index,
         'title': title,
-        'correctAnswer': correctAnswer == null ? [] : List<dynamic>.from(correctAnswer!.map((x) => x)),
-        'media': media == null ? [] : List<dynamic>.from(media!.map((x) => x)),
-        'answers': answers == null ? [] : List<dynamic>.from(answers!.map((x) => x.toJson())),
+        'correctAnswer': List<dynamic>.from(correctAnswers.map((x) => x)),
+        'media': List<dynamic>.from(media.map((x) => x)),
+        'answers': List<dynamic>.from(answers.map((x) => x.toJson())),
       };
 }

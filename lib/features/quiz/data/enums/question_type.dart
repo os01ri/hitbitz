@@ -1,17 +1,17 @@
 enum QuestionType {
   none,
   trueFalse,
-  multiSelect,
-  match,
-  fillGap,
-  sort;
+  multipleSelect,
+  matching,
+  gapFilling,
+  sorting;
 
   static QuestionType getByIndex(int? index) => switch (index) {
         1 => trueFalse,
-        2 => multiSelect,
-        3 => match,
-        4 => fillGap,
-        5 => sort,
+        2 => multipleSelect,
+        3 => matching,
+        4 => gapFilling,
+        5 => sorting,
         _ => none,
       };
 }

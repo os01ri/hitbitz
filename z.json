@@ -2,185 +2,121 @@
     "status": true,
     "message": "Success",
     "data": {
-        "id": 5,
-        "name": "Iure dicta quia laborum ut consequatur recusandae labore voluptate. Quia rerum aut consequatur.",
-        "step_id": 6,
+        "id": 1,
+        "name": "Fuga voluptatem sit vitae. Enim maiores consectetur expedita saepe.",
+        "step_id": 9,
         "questions": [
             {
-                "id": 2,
-                "title": "Reyna Stamm",
-                "type": 3,
-                "answers": [
-                    {
-                        "id": 5,
-                        "title": "Ms.",
-                        "order": 0,
-                        "correct": 1
-                    },
-                    {
-                        "id": 6,
-                        "title": "Prof.",
-                        "order": 6,
-                        "correct": 0
-                    },
-                    {
-                        "id": 7,
-                        "title": "Miss",
-                        "order": 9,
-                        "correct": 0
-                    },
-                    {
-                        "id": 8,
-                        "title": "Mrs.",
-                        "order": 1,
-                        "correct": 1
-                    }
-                ],
-                "media": []
-            },
-            {
-                "id": 6,
-                "title": "Lavinia Mitchell",
-                "type": 5,
-                "answers": [
-                    {
-                        "id": 21,
-                        "title": "Mrs.",
-                        "order": 6,
-                        "correct": 1
-                    },
-                    {
-                        "id": 22,
-                        "title": "Dr.",
-                        "order": 0,
-                        "correct": 1
-                    },
-                    {
-                        "id": 23,
-                        "title": "Ms.",
-                        "order": 5,
-                        "correct": 1
-                    },
-                    {
-                        "id": 24,
-                        "title": "Prof.",
-                        "order": 4,
-                        "correct": 0
-                    }
-                ],
-                "media": []
-            },
-            {
-                "id": 10,
-                "title": "Skyla Goldner",
+                "id": 12,
+                "title": "Mr. Vaughn Morar II",
                 "type": 4,
                 "answers": [
                     {
-                        "id": 37,
+                        "id": 45,
                         "title": "Dr.",
-                        "order": 1,
-                        "correct": 1
-                    },
-                    {
-                        "id": 38,
-                        "title": "Prof.",
                         "order": 6,
                         "correct": 0
                     },
                     {
-                        "id": 39,
-                        "title": "Miss",
-                        "order": 0,
+                        "id": 46,
+                        "title": "Prof.",
+                        "order": 5,
+                        "correct": 0
+                    },
+                    {
+                        "id": 47,
+                        "title": "Dr.",
+                        "order": 9,
                         "correct": 1
                     },
                     {
-                        "id": 40,
-                        "title": "Miss",
-                        "order": 9,
-                        "correct": 0
+                        "id": 48,
+                        "title": "Prof.",
+                        "order": 1,
+                        "correct": 1
                     }
                 ],
                 "media": []
             },
             {
-                "id": 19,
-                "title": "Joshua Johnson MD",
+                "id": 15,
+                "title": "Norval Olson",
                 "type": 1,
                 "correctAnswer": [
-                    0
+                    1
                 ],
                 "media": []
             },
             {
-                "id": 32,
-                "title": "Dr. Damaris Reynolds V",
-                "type": 1,
-                "correctAnswer": [
-                    0
-                ],
-                "media": []
-            },
-            {
-                "id": 47,
-                "title": "Orland Johns",
+                "id": 20,
+                "title": "Mr. Paxton Collins",
                 "type": 2,
                 "answers": [
                     {
-                        "id": 185,
+                        "id": 77,
                         "title": "Dr.",
-                        "order": 4,
-                        "correct": 0
-                    },
-                    {
-                        "id": 186,
-                        "title": "Prof.",
                         "order": 8,
-                        "correct": 0
-                    },
-                    {
-                        "id": 187,
-                        "title": "Ms.",
-                        "order": 1,
-                        "correct": 0
-                    },
-                    {
-                        "id": 188,
-                        "title": "Mr.",
-                        "order": 2,
                         "correct": 1
-                    }
-                ],
-                "media": []
-            },
-            {
-                "id": 49,
-                "title": "Santos Hermiston",
-                "type": 3,
-                "answers": [
+                    },
                     {
-                        "id": 193,
+                        "id": 78,
                         "title": "Prof.",
+                        "order": 4,
+                        "correct": 1
+                    },
+                    {
+                        "id": 79,
+                        "title": "Miss",
                         "order": 3,
                         "correct": 0
                     },
                     {
-                        "id": 194,
-                        "title": "Mr.",
-                        "order": 0,
+                        "id": 80,
+                        "title": "Miss",
+                        "order": 7,
                         "correct": 1
-                    },
+                    }
+                ],
+                "media": []
+            },
+            {
+                "id": 35,
+                "title": "Larue Doyle",
+                "type": 4,
+                "answers": [
                     {
-                        "id": 195,
+                        "id": 137,
                         "title": "Dr.",
-                        "order": 1,
+                        "order": 6,
+                        "correct": 0
+                    },
+                    {
+                        "id": 138,
+                        "title": "Prof.",
+                        "order": 4,
+                        "correct": 0
+                    },
+                    {
+                        "id": 139,
+                        "title": "Prof.",
+                        "order": 5,
                         "correct": 1
                     },
                     {
-                        "id": 196,
+                        "id": 140,
                         "title": "Prof.",
-                        "order": 8,
+                        "order": 1,
                         "correct": 0
                     }
+                ],
+                "media": []
+            },
+            {
+                "id": 39,
+                "title": "Vilma Lebsack",
+                "type": 1,
+                "correctAnswer": [
+                    1
                 ],
                 "media": []
             }

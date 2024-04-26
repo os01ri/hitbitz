@@ -1,11 +1,11 @@
 class AnswerModel {
-  final int? id;
+  final int id;
   final String? title;
   final int? order;
   final bool? isCorrect;
 
   const AnswerModel({
-    this.id,
+    required this.id,
     this.title,
     this.order,
     this.isCorrect,
