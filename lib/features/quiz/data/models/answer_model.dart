@@ -2,13 +2,13 @@ class AnswerModel {
   final int id;
   final String? title;
   final int? order;
-  final bool? isCorrect;
+  final bool isCorrect;
 
   const AnswerModel({
     required this.id,
+    required this.isCorrect,
     this.title,
     this.order,
-    this.isCorrect,
   });
 
   factory AnswerModel.fromJson(Map<String, dynamic> json) => AnswerModel(

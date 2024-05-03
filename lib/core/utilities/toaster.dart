@@ -99,4 +99,17 @@ class Toaster {
       margin: AppPadding.notificationPadding,
     );
   }
+
+  static showIsCorrect(bool isCorrect) {
+    closeLoading();
+    _showNotification(
+      title: TextWidget(
+        isCorrect ? 'Correct!' : 'Wrong!',
+        maxLines: 1,
+        style: const TextStyle(color: Colors.white),
+      ),
+      leading: const Icon(Icons.check_circle_outline_rounded, color: Colors.white, size: 35),
+      backgroundColor: isCorrect ? Colors.green : Colors.red,
+    );
+  }
 }

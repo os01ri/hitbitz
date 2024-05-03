@@ -17,13 +17,7 @@ class TrueFalseQuestion extends StatelessWidget {
     return Row(
       children: [
         CardWidget(
-          onTap: () {
-            if (question.correctAnswers.single == 1) {
-              Toaster.showSuccess(context: context, message: 'Correct!');
-            } else {
-              Toaster.showError(context: context, message: '');
-            }
-          },
+          onTap: () => Toaster.showIsCorrect(question.correctAnswers.single == 0),
           height: context.height * .3,
           color: AppColors.green,
           child: TextWidget(
@@ -35,13 +29,7 @@ class TrueFalseQuestion extends StatelessWidget {
         ).expand(),
         const Gap(24),
         CardWidget(
-          onTap: () {
-            if (question.correctAnswers.single == 0) {
-              Toaster.showSuccess(context: context, message: 'Correct!');
-            } else {
-              Toaster.showError(context: context, message: '');
-            }
-          },
+          onTap: () => Toaster.showIsCorrect(question.correctAnswers.single == 1),
           height: context.height * .3,
           color: AppColors.red,
           child: TextWidget(

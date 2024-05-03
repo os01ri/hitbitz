@@ -9,8 +9,8 @@ import 'package:hitbitz/features/quiz/data/models/question_model.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/gap_filling_question.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/matching_question.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/multiple_select_question.dart';
-import 'package:hitbitz/features/quiz/presentation/widgets/sorting_question.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/true_false_question.dart';
+import 'package:hitbitz/features/quiz/presentation/widgets/vertical_sorting_question.dart';
 
 class QuestionPage extends StatelessWidget {
   const QuestionPage({super.key, required this.question});
@@ -55,7 +55,8 @@ class QuestionPage extends StatelessWidget {
             QuestionType.multipleSelect => const MultipleSelectQuestion(),
             QuestionType.matching => const MatchingQuestion(),
             QuestionType.gapFilling => const GapFillingQuestion(),
-            QuestionType.sorting => const SortingQuestion(),
+            QuestionType.verticalSorting => const VerticalSortingQuestion(),
+            QuestionType.horizontalSorting => const VerticalSortingQuestion(),
             _ => const SizedBox.shrink(),
           },
           const Gap(30),
