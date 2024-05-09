@@ -7,6 +7,7 @@ import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/question_page.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 
 class MultipleSelectQuestion extends StatelessWidget {
   const MultipleSelectQuestion({super.key});
@@ -55,6 +56,7 @@ class MultipleSelectQuestion extends StatelessWidget {
           width: context.width * .3,
           isOutlined: true,
           onPressed: () {
+            if (question.isCorrect != null) return;
             if (question.userAnswersIds.isEmpty) return;
 
             bool isCorrect = true;
@@ -63,7 +65,9 @@ class MultipleSelectQuestion extends StatelessWidget {
               isCorrect &= answer.isCorrect;
             }
 
+            question.isCorrect = isCorrect;
             Toaster.showIsCorrect(isCorrect);
+            if (isCorrect) QuizProvider.of(context)!.score.value++;
           },
         ),
         const Gap(5),

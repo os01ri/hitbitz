@@ -10,6 +10,7 @@ import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/quiz/data/models/answer_model.dart';
 import 'package:hitbitz/features/quiz/data/models/question_model.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/question_page.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 
 class VerticalSortingQuestion extends StatefulWidget {
   const VerticalSortingQuestion({super.key});
@@ -59,12 +60,17 @@ class _VerticalSortingQuestionState extends State<VerticalSortingQuestion> {
           width: context.width * .3,
           isOutlined: true,
           onPressed: () {
+            if (question.isCorrect != null) return;
+
             bool isCorrect = true;
-            for (int i = 1; i < _items.length; i++) {
-              final isCorrectOrder = _items[i].answer.order == i;
+            for (int i = 0; i < _items.length; i++) {
+              final isCorrectOrder = _items[i].answer.order == i + 1;
               isCorrect &= isCorrectOrder;
             }
+
+            question.isCorrect = isCorrect;
             Toaster.showIsCorrect(isCorrect);
+            if (isCorrect) QuizProvider.of(context)!.score.value++;
           },
         ),
         const Gap(5),

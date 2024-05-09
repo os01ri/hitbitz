@@ -6,6 +6,7 @@ import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/features/quiz/data/enums/question_type.dart';
 import 'package:hitbitz/features/quiz/data/models/question_model.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/gap_filling_question.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/matching_question.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/multiple_select_question.dart';
@@ -13,12 +14,13 @@ import 'package:hitbitz/features/quiz/presentation/widgets/true_false_question.d
 import 'package:hitbitz/features/quiz/presentation/widgets/vertical_sorting_question.dart';
 
 class QuestionPage extends StatelessWidget {
-  const QuestionPage({super.key, required this.question});
+  const QuestionPage({super.key, required this.index});
 
-  final QuestionModel question;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
+    final question = QuizProvider.of(context)!.quiz.questions[index];
     return QuestionProvider(
       question: question,
       child: Column(
@@ -38,7 +40,7 @@ class QuestionPage extends StatelessWidget {
               child: ListView(
                 children: [
                   TextWidget(
-                    '${question.title!}\n',
+                    ' ${question.title!}\n',
                     maxLines: 100,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.fade,
