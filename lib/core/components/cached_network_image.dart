@@ -53,13 +53,17 @@ class NetworkImageWidget extends StatefulWidget {
   State<NetworkImageWidget> createState() => _NetworkImageWidgetState();
 }
 
-class _NetworkImageWidgetState extends State<NetworkImageWidget> with TickerProviderStateMixin {
+class _NetworkImageWidgetState extends State<NetworkImageWidget>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (widget.url == null) return const SizedBox.shrink();
     return ExtendedImage.network(
       widget.url!,
       fit: widget.fit,
+      headers: const {
+        'Connection': 'Keep-Alive',
+      },
       cache: true,
       border: Border.all(color: context.colorScheme.outline),
       borderRadius: BorderRadius.circular(AppDimensions.imgRad),
@@ -68,7 +72,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> with TickerProv
       timeLimit: const Duration(seconds: 10),
       cacheKey: widget.cacheKey,
       timeRetry: const Duration(seconds: 10),
-      loadStateChanged: (ExtendedImageState state) => switch (state.extendedImageLoadState) {
+      loadStateChanged: (ExtendedImageState state) =>
+          switch (state.extendedImageLoadState) {
         LoadState.loading => Container(
             width: widget.width,
             height: widget.height,
@@ -79,7 +84,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> with TickerProv
             ),
             child: ClipRRect(
               borderRadius: (widget.borderRadius != null)
-                  ? widget.borderRadius!.resolve(Directionality.of(context)) - BorderRadius.circular(2)
+                  ? widget.borderRadius!.resolve(Directionality.of(context)) -
+                      BorderRadius.circular(2)
                   : widget.shape == BoxShape.circle
                       ? BorderRadius.circular(100)
                       : BorderRadius.circular(15 - 2),
@@ -88,7 +94,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> with TickerProv
                   : Shimmer.fromColors(
                       baseColor: context.colorScheme.primary,
                       highlightColor: AppColors.highlightColorShimmer,
-                      child: SizedBox(width: widget.width, height: widget.height),
+                      child:
+                          SizedBox(width: widget.width, height: widget.height),
                     ),
             ),
           ),
@@ -106,7 +113,9 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> with TickerProv
                 children: [
                   ClipRRect(
                     borderRadius: (widget.borderRadius != null)
-                        ? widget.borderRadius!.resolve(Directionality.of(context)) - BorderRadius.circular(2)
+                        ? widget.borderRadius!
+                                .resolve(Directionality.of(context)) -
+                            BorderRadius.circular(2)
                         : widget.shape == BoxShape.circle
                             ? BorderRadius.circular(100)
                             : BorderRadius.circular(15 - 2),
@@ -115,7 +124,8 @@ class _NetworkImageWidgetState extends State<NetworkImageWidget> with TickerProv
                         : Shimmer.fromColors(
                             baseColor: context.colorScheme.primary,
                             highlightColor: AppColors.highlightColorShimmer,
-                            child: SizedBox(width: widget.width, height: widget.height),
+                            child: SizedBox(
+                                width: widget.width, height: widget.height),
                           ),
                   ),
                   const Center(

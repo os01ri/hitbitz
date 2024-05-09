@@ -25,7 +25,8 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateMixin {
+class _SearchPageState extends State<SearchPage>
+    with SingleTickerProviderStateMixin {
   late final TabController _tabController;
   late final RoadmapCubit _roadmapsCubit;
   late final HomeCubit _categoriesCubit;
@@ -41,7 +42,8 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
       getRoadMapsUsecase: di<GetRoadMapsUsecase>(),
     )..getRoadMaps(GetRoadMapsParams(name: widget.query));
 
-    _categoriesCubit = di<HomeCubit>()..getCategories(GetCategoriesParams(name: widget.query));
+    _categoriesCubit = di<HomeCubit>()
+      ..getCategories(GetCategoriesParams(name: widget.query));
 
     _tabController = TabController(length: 2, vsync: this);
   }
@@ -74,8 +76,10 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
                 return GridView.builder(
                   padding: AppPadding.gridViewPadding,
                   itemCount: state.categories.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-                  itemBuilder: (context, index) => CategoryCard(category: state.categories[index]),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3),
+                  itemBuilder: (context, index) =>
+                      CategoryCard(category: state.categories[index]),
                 );
               },
             ),
@@ -93,7 +97,8 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemBuilder: (context, index) => RoadMapCard(roadMap: state.roadMaps[index]),
+                  itemBuilder: (context, index) =>
+                      RoadMapCard(roadMap: state.roadMaps[index]),
                 );
               },
             ),

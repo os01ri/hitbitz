@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:hitbitz/core/components/cached_network_image.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
@@ -26,14 +26,16 @@ class CategoryCard extends StatelessWidget {
           color: context.colorScheme.primaryContainer,
           width: 80,
           height: 80,
-          child: FaIcon(
-            FontAwesomeIcons.penNib,
-            color: context.colorScheme.primary,
+          padding: const EdgeInsets.all(15),
+          child: NetworkImageWidget(
+            url: category.image!.mediaUrl,
+            hash: category.image!.hash,
           ),
         ),
         const Gap(5),
         TextWidget(category.name),
       ],
-    ).onTap(() => di<RoadmapCubit>().getRoadMaps(GetRoadMapsParams(categoryId: category.id)));
+    ).onTap(() => di<RoadmapCubit>()
+        .getRoadMaps(GetRoadMapsParams(categoryId: category.id)));
   }
 }
