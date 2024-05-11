@@ -12,6 +12,7 @@ import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/config/box_shadow.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
+import 'package:hitbitz/core/extensions/num_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
@@ -67,6 +68,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        const Gap(0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -78,26 +80,19 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                         const Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            TextWidget('10'),
-                            TextWidget('Questions'),
+                            TextWidget('100'),
+                            TextWidget('Max Grade'),
                           ],
                         ),
                         const VerticalDivider(),
-                        const Column(
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            TextWidget('10'),
-                            TextWidget('Questions'),
+                            TextWidget(state.quiz!.requiredDegree.numberFormat()),
+                            const TextWidget('Pass Grade'),
                           ],
                         ),
-                        const VerticalDivider(),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            TextWidget('10'),
-                            TextWidget('Questions'),
-                          ],
-                        ),
+                        const Gap(0),
                       ],
                     ),
                   ),
@@ -125,7 +120,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                   ),
                   const Gap(10),
                   TextWidget('Description', style: context.textTheme.titleMedium),
-                  TextWidget('text ' * 50, maxLines: 500),
+                  TextWidget((state.quiz!.description ?? ('text ' * 50)), maxLines: 500),
                 ],
               ).wrapPadding(AppPadding.pagePadding).scrollable(),
           },

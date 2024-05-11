@@ -10,9 +10,10 @@ import 'package:hitbitz/core/config/box_shadow.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/tab_controller_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
-import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/question_page.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/result_page.dart';
+import 'package:hitbitz/router/app_routes.dart';
 
 class QuizProvider extends InheritedWidget {
   const QuizProvider({
@@ -118,10 +119,18 @@ class _QuizPageState extends State<QuizPage> {
               const Gap(AppDimensions.smallSizedBox),
               ButtonWidget(
                 onPressed: () {
+                  if (widget.quiz.questions[index - 1].isCorrect == null) return;
                   if (index >= widget.quiz.questions.length) {
-                    final result = '${score.value}/${widget.quiz.questions.length}';
-                    Toaster.showToast(result);
+                    final result = score.value / widget.quiz.questions.length * 100;
                     context.pop();
+                    context.pop();
+                    context.pushNamed(
+                      AppRoutes.quizResult,
+                      extra: ResultPageArgs(
+                        score: result,
+                        hasPassed: result >= widget.quiz.requiredDegree!,
+                      ),
+                    );
                     return;
                   }
 
