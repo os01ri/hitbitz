@@ -53,11 +53,7 @@ class _LevelDetailsPageState extends State<LevelDetailsPage> {
                 separatorBuilder: (context, index) => const Gap(10),
                 itemBuilder: (context, index) => CardWidget(
                   onTap: () => context.pushNamed(AppRoutes.quizzes),
-                  color: index < 6
-                      ? Colors.green
-                      : index > 6
-                          ? context.colorScheme.primary.withOpacity(.3)
-                          : context.colorScheme.primary,
+                  color: index == 0 ? context.colorScheme.primary : context.colorScheme.primary.withOpacity(.3),
                   child: ListTile(
                     leading: CardWidget(
                       isCircle: true,
@@ -66,7 +62,7 @@ class _LevelDetailsPageState extends State<LevelDetailsPage> {
                       height: 22,
                       borderColor: context.colorScheme.primary,
                       child: Icon(
-                        index == 6 ? FontAwesomeIcons.play : FontAwesomeIcons.check,
+                        index == 0 ? FontAwesomeIcons.play : FontAwesomeIcons.lock,
                         color: context.colorScheme.primary,
                         size: 14,
                       ),

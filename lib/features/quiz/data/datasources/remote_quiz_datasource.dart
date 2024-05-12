@@ -4,7 +4,9 @@ import 'package:hitbitz/core/api/end_points.dart';
 import 'package:hitbitz/core/api/http.dart';
 import 'package:hitbitz/core/config/type_defs.dart';
 import 'package:hitbitz/core/data/models/base_response.dart';
+import 'package:hitbitz/core/data/models/no_response_model.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
+import 'package:hitbitz/features/quiz/domain/usecases/complete_quiz_usecase.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -25,5 +27,10 @@ class RemoteQuizDataSource {
       json: json.decode(rowData),
       dataConverter: (body) => QuizModel.fromJson(body),
     );
+  }
+
+  Future<NoResponse> completeQuiz({required CompleteQuizParams params}) async {
+    await Http.post(uri: EndPoints.completeQuiz(id: params.id), body: params.getBody());
+    return NoResponse();
   }
 }

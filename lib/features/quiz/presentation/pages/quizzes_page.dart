@@ -64,7 +64,7 @@ class _QuizzesPageState extends State<QuizzesPage> {
                             : index > 1
                                 ? FontAwesomeIcons.lock
                                 : FontAwesomeIcons.check,
-                        color: context.colorScheme.primary,
+                        color: index == 0 ? Colors.green : context.colorScheme.primary,
                         size: 14,
                       ),
                     ),

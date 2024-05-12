@@ -32,28 +32,20 @@ class EndPoints {
   }
 
   ////////////!        User        !////////////
-  static Uri _user({required String path, ParamsMap params}) =>
-      _mainUri(path: 'user/$path', params: params);
-  static Uri signUp({ParamsMap params}) =>
-      _user(path: 'register', params: params);
+  static Uri _user({required String path, ParamsMap params}) => _mainUri(path: 'user/$path', params: params);
+  static Uri signUp({ParamsMap params}) => _user(path: 'register', params: params);
   static Uri logIn({ParamsMap params}) => _user(path: 'login', params: params);
 
-  static Uri getCategories({ParamsMap params}) =>
-      _user(path: 'categories', params: params);
+  static Uri getCategories({ParamsMap params}) => _user(path: 'categories', params: params);
 
-  static Uri getRoadMaps({ParamsMap params}) =>
-      _user(path: 'roadmaps', params: params);
-  static Uri roadMapToggleBookmark({required int id}) =>
-      _user(path: 'roadmaps/$id/toggleFavorite');
-  static Uri getSavedRoadmaps({ParamsMap params}) =>
-      _user(path: 'roadmaps/favorites/index');
+  static Uri getRoadMaps({ParamsMap params}) => _user(path: 'roadmaps', params: params);
+  static Uri roadMapToggleBookmark({required int id}) => _user(path: 'roadmaps/$id/toggleFavorite');
+  static Uri getSavedRoadmaps({ParamsMap params}) => _user(path: 'roadmaps/favorites/index');
 
-  static Uri getLevels({ParamsMap params}) =>
-      _user(path: 'levels', params: params);
-  static Uri getSteps({ParamsMap params}) =>
-      _user(path: 'levelStep', params: params);
+  static Uri getLevels({ParamsMap params}) => _user(path: 'levels', params: params);
+  static Uri getSteps({ParamsMap params}) => _user(path: 'levelStep', params: params);
 
-  static Uri getQuizzes({ParamsMap params}) =>
-      _user(path: 'quizzes', params: params);
+  static Uri getQuizzes({ParamsMap params}) => _user(path: 'quizzes', params: params);
   static Uri showQuiz({required int id}) => _user(path: 'quizzes/$id');
+  static Uri completeQuiz({required int id}) => _user(path: 'quizzes/$id/complete');
 }
