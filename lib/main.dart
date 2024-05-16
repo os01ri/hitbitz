@@ -12,6 +12,8 @@ import 'package:hitbitz/core/utilities/app_localization.dart';
 import 'package:hitbitz/features/main/presentation/cubit/navigation_cubit.dart';
 import 'package:hitbitz/router/app_pages.dart';
 
+import 'core/services/notification_service.dart';
+
 void main() async {
   await _initializations();
   runApp(const HitBitzApp());
@@ -21,6 +23,7 @@ Future _initializations() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Future.wait([
+    NotificationService.init(),
     EasyLocalization.ensureInitialized(),
     SharedPreferencesService.init(),
     configureDependencies(),

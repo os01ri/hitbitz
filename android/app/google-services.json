@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "919955493032",
+    "project_id": "hitbitz",
+    "storage_bucket": "hitbitz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919955493032:android:f5b74c09ebbbb5a660f29d",
+        "android_client_info": {
+          "package_name": "com.example.hitbitz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCOIO_ZZfOiaBhRTElB9fX9VGdT0GppXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
