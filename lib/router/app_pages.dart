@@ -9,6 +9,7 @@ import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_intro_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quizzes_page.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/result_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_details_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/steps_page.dart';
 import 'package:hitbitz/features/search/presentation/pages/search_page.dart';
@@ -98,6 +99,12 @@ class AppPages {
                         name: AppRoutes.quiz,
                         path: AppRoutes.quiz,
                         builder: (context, state) => QuizPage(quiz: state.extra as QuizModel),
+                        routes: const [],
+                      ),
+                      GoRoute(
+                        name: AppRoutes.quizResult,
+                        path: AppRoutes.quizResult,
+                        builder: (context, state) => ResultPage(args: state.extra as ResultPageArgs),
                       ),
                     ],
                   ),

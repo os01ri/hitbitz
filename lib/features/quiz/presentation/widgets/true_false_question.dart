@@ -7,6 +7,7 @@ import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/question_page.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 
 class TrueFalseQuestion extends StatelessWidget {
   const TrueFalseQuestion({super.key});
@@ -17,7 +18,13 @@ class TrueFalseQuestion extends StatelessWidget {
     return Row(
       children: [
         CardWidget(
-          onTap: () => Toaster.showIsCorrect(question.correctAnswers.single == 0),
+          onTap: () {
+            if (question.isCorrect != null) return;
+            final isCorrect = question.correctAnswers.single == 0;
+            question.isCorrect = isCorrect;
+            Toaster.showIsCorrect(isCorrect);
+            if (isCorrect) QuizProvider.of(context)!.score.value++;
+          },
           height: context.height * .3,
           color: AppColors.green,
           child: TextWidget(
@@ -29,7 +36,13 @@ class TrueFalseQuestion extends StatelessWidget {
         ).expand(),
         const Gap(24),
         CardWidget(
-          onTap: () => Toaster.showIsCorrect(question.correctAnswers.single == 1),
+          onTap: () {
+            if (question.isCorrect != null) return;
+            final isCorrect = question.correctAnswers.single == 1;
+            question.isCorrect = isCorrect;
+            Toaster.showIsCorrect(isCorrect);
+            if (isCorrect) QuizProvider.of(context)!.score.value++;
+          },
           height: context.height * .3,
           color: AppColors.red,
           child: TextWidget(

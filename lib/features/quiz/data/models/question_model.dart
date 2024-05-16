@@ -9,6 +9,7 @@ class QuestionModel {
   final List<dynamic> media;
   final List<AnswerModel> answers;
   final List<int> userAnswersIds = [];
+  bool? isCorrect;
 
   QuestionModel({
     required this.id,

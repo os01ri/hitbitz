@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'quiz_cubit.dart';
 
 class QuizState {
@@ -6,6 +5,7 @@ class QuizState {
   final List<QuizModel> quizzes;
   final CubitStatus showStatus;
   final QuizModel? quiz;
+  final CubitStatus completeStatus;
   final Failure? failure;
 
   const QuizState({
@@ -13,6 +13,7 @@ class QuizState {
     this.quizzes = const [],
     this.showStatus = CubitStatus.initial,
     this.quiz,
+    this.completeStatus = CubitStatus.initial,
     this.failure,
   });
 
@@ -21,6 +22,7 @@ class QuizState {
     List<QuizModel>? quizzes,
     CubitStatus? showStatus,
     QuizModel? quiz,
+    CubitStatus? completeStatus,
     Failure? failure,
   }) {
     return QuizState(
@@ -28,6 +30,7 @@ class QuizState {
       quizzes: quizzes ?? this.quizzes,
       showStatus: showStatus ?? this.showStatus,
       quiz: quiz ?? this.quiz,
+      completeStatus: completeStatus ?? this.completeStatus,
       failure: failure ?? this.failure,
     );
   }

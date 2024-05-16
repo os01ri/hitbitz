@@ -45,7 +45,7 @@ class _QuizzesPageState extends State<QuizzesPage> {
                 separatorBuilder: (context, index) => const Gap(10),
                 itemBuilder: (context, index) => CardWidget(
                   // onTap: () => context.pushNamed(AppRoutes.quiz),
-                  color: index < 2
+                  color: index < 1
                       ? Colors.green
                       : index > 1
                           ? context.colorScheme.primary.withOpacity(.3)
@@ -59,8 +59,12 @@ class _QuizzesPageState extends State<QuizzesPage> {
                       height: 22,
                       borderColor: context.colorScheme.primary,
                       child: Icon(
-                        index == 6 ? FontAwesomeIcons.play : FontAwesomeIcons.check,
-                        color: context.colorScheme.primary,
+                        index == 1
+                            ? FontAwesomeIcons.play
+                            : index > 1
+                                ? FontAwesomeIcons.lock
+                                : FontAwesomeIcons.check,
+                        color: index == 0 ? Colors.green : context.colorScheme.primary,
                         size: 14,
                       ),
                     ),
