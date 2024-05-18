@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
+import 'package:hitbitz/core/components/bottom_sheet_widget.dart';
+import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
+import 'package:hitbitz/core/components/drop_down_widget.dart';
+import 'package:hitbitz/core/components/text_field_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
+import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/home/presentation/pages/home_page.dart';
-import 'package:hitbitz/features/main/presentation/cubit/navigation_cubit.dart';
+import 'package:hitbitz/features/main/data/enums/feedback_type.dart';
+import 'package:hitbitz/features/main/domain/usecases/make_suggestion_usecase.dart';
+import 'package:hitbitz/features/main/presentation/cubit/main_cubit/main_cubit.dart';
+import 'package:hitbitz/features/main/presentation/cubit/nav_cubit/navigation_cubit.dart';
 import 'package:hitbitz/features/notification/presentation/pages/notifications_page.dart';
 import 'package:hitbitz/features/profile/presentation/pages/profile_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/saved_roadmaps_page.dart';
 import 'package:hitbitz/features/search/presentation/widgets/search_delegate.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+part '../widgets/feedback_sheet.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -44,6 +57,14 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
       appBar: AppBar(
         title: const TextWidget('HitBitz').wrapPadding(AppPadding.appBarLeadingPadding),
         actions: [
+          IconButton(
+            tooltip: 'Report',
+            onPressed: () => Toaster.showSheet(
+              context: context,
+              sheet: const _FeedbackSheet(),
+            ),
+            icon: const FaIcon(FontAwesomeIcons.commentDots),
+          ).wrapPadding(AppPadding.appBarActionsPadding),
           IconButton(
             onPressed: () => showSearch(context: context, delegate: CustomSearchDelegate()),
             icon: const FaIcon(FontAwesomeIcons.magnifyingGlass),

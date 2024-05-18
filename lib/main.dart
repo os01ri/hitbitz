@@ -9,7 +9,7 @@ import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/services/shared_preferences_service.dart';
 import 'package:hitbitz/core/theme/light/light_theme.dart';
 import 'package:hitbitz/core/utilities/app_localization.dart';
-import 'package:hitbitz/features/main/presentation/cubit/navigation_cubit.dart';
+import 'package:hitbitz/features/main/presentation/cubit/nav_cubit/navigation_cubit.dart';
 import 'package:hitbitz/router/app_pages.dart';
 
 import 'core/services/notification_service.dart';
