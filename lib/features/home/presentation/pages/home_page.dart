@@ -18,7 +18,7 @@ import 'package:hitbitz/features/home/domain/usecases/get_roadmaps_usecase.dart'
 import 'package:hitbitz/features/home/presentation/cubit/home_cubit.dart';
 import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
 import 'package:hitbitz/features/home/presentation/widgets/recent_road_maps.dart';
-import 'package:hitbitz/features/home/presentation/widgets/road_map_card.dart';
+import 'package:hitbitz/features/roadmap/presentation/widgets/road_map_card.dart';
 import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
 
 part '../widgets/home_search_card.dart';

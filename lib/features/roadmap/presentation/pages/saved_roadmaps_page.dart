@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
-import 'package:hitbitz/features/home/presentation/widgets/road_map_card.dart';
+import 'package:hitbitz/features/roadmap/presentation/widgets/road_map_card.dart';
 import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
 
 class SavedRoadmapsPage extends StatefulWidget {

@@ -23,6 +23,7 @@ class RoadMapCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardWidget(
+      onTap: () => context.pushNamed(AppRoutes.roadmapDetails, extra: roadMap),
       width: context.width * .4,
       borderRadius: AppDimensions.mediumBorderRadius,
       borderColor: context.colorScheme.outline,
@@ -43,7 +44,7 @@ class RoadMapCard extends StatelessWidget {
             const SizedBox(height: 80),
           const Gap(5),
           TextWidget(
-            roadMap.name, // 'Mastering UI/UX Design',
+            roadMap.name,
             style: context.textTheme.titleSmall?.copyWith(
               color: context.colorScheme.onSurface,
             ),
@@ -55,14 +56,14 @@ class RoadMapCard extends StatelessWidget {
             children: [
               CardWidget(
                 height: AppDimensions.smallButtonHeight,
-                color: context.colorScheme.surfaceVariant,
+                color: context.colorScheme.surfaceContainerHighest,
                 foregroundColor: context.colorScheme.onSurfaceVariant,
                 child: const TextWidget('12 Levels').fit(BoxFit.scaleDown),
               ).expand(),
               const Gap(8),
               CardWidget(
                 height: AppDimensions.smallButtonHeight,
-                color: context.colorScheme.surfaceVariant,
+                color: context.colorScheme.surfaceContainerHighest,
                 foregroundColor: context.colorScheme.onSurfaceVariant,
                 child: const TextWidget('37 Steps').fit(BoxFit.scaleDown),
               ).expand(),
@@ -70,8 +71,7 @@ class RoadMapCard extends StatelessWidget {
           ),
           const Gap(8),
           ButtonWidget(
-            onPressed: () =>
-                context.pushNamed(AppRoutes.roadmapDetails, extra: roadMap),
+            // onPressed:
             text: 'Start Journey',
             backgroundColor: context.colorScheme.primary,
             foregroundColor: context.colorScheme.onPrimary,
