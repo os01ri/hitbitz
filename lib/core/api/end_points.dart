@@ -50,4 +50,6 @@ class EndPoints {
   static Uri completeQuiz({required int id}) => _user(path: 'quizzes/$id/complete');
   
   static Uri makeSuggestion({ParamsMap params}) => _user(path: 'makeSuggestion', params: params);
+  
+  static Uri getNotifications({ParamsMap params}) => _user(path: 'notifications', params: params);
 }
