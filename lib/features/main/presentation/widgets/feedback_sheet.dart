@@ -36,13 +36,13 @@ class _FeedbackSheetState extends State<_FeedbackSheet> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextWidget(
-                'Send Feedback',
+                AppStrings.sendFeedback,
                 style: context.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
               DropDownWidget<FeedbackType>(
                 listenableValue: _listenableValue,
-                label: 'Type',
+                label: AppStrings.type,
                 items: FeedbackType.validValues
                     .map((e) => DropdownMenuItem<FeedbackType>(
                           value: e,
@@ -58,7 +58,7 @@ class _FeedbackSheetState extends State<_FeedbackSheet> {
               ),
               const Gap(10),
               TextWidget(
-                'Description',
+                AppStrings.description,
                 style: context.textTheme.bodyLarge?.copyWith(
                   color: context.colorScheme.onSurface,
                   fontWeight: FontWeight.w600,
@@ -67,7 +67,7 @@ class _FeedbackSheetState extends State<_FeedbackSheet> {
               const Gap(5),
               TextFieldWidget(
                 controller: _description,
-                hint: 'type something...',
+                hint: AppStrings.typeSomething,
                 maxLines: 6,
               ),
               const Gap(10),
@@ -75,7 +75,7 @@ class _FeedbackSheetState extends State<_FeedbackSheet> {
                 backgroundColor: context.colorScheme.primary,
                 foregroundColor: context.colorScheme.onPrimary,
                 width: context.width,
-                text: 'Send',
+                text: AppStrings.send,
                 onPressed: () => di<MainCubit>().makeSuggestion(SuggestionParams(
                   type: _listenableValue.value,
                   description: _description.text,
@@ -94,12 +94,14 @@ class _FeedbackSheetState extends State<_FeedbackSheet> {
       Toaster.showLoading();
     } else if (state.suggestionStatus == CubitStatus.failure) {
       Toaster.closeLoading();
-      Toaster.showError(context: context, message: 'error!');
+      Toaster.showError(context: context, message: AppStrings.error);
     } else if (state.suggestionStatus == CubitStatus.success) {
       Toaster.closeLoading();
       context.popDialog();
       Toaster.showSuccess(
-          context: context, message: 'Your feedback sent  successfully, thanks for sharing it with us!, we will be checking it very soon');
+        context: context,
+        message: AppStrings.feedbackSentSuccessfully,
+      );
     }
   }
 }

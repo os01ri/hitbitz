@@ -7,6 +7,7 @@ import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_dimensions.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/box_shadow.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
@@ -111,20 +112,21 @@ class _QuizPageState extends State<QuizPage> {
                 children: [
                   ButtonWidget(
                     onPressed: () {
-                      if (index <= 1) {
-                        context.pop();
-                        return;
-                      }
+                      context.pop();
+                      // if (index <= 1) {
+                      //   context.pop();
+                      //   return;
+                      // }
 
-                      index--;
-                      setState(() => _pageController.goToPreviousPage());
+                      // index--;
+                      // setState(() => _pageController.goToPreviousPage());
                     },
                     isOutlined: true,
                     borderColor: context.colorScheme.error,
                     backgroundColor: context.colorScheme.surface,
                     foregroundColor: context.colorScheme.error,
                     height: 50,
-                    text: 'Back',
+                    text: AppStrings.back,
                   ).expand(),
                   const Gap(AppDimensions.smallSizedBox),
                   ButtonWidget(
@@ -142,7 +144,7 @@ class _QuizPageState extends State<QuizPage> {
                     backgroundColor: context.colorScheme.primary,
                     foregroundColor: context.colorScheme.onPrimary,
                     height: 50,
-                    text: 'Next',
+                    text: AppStrings.next,
                   ).expand(),
                 ],
               ),

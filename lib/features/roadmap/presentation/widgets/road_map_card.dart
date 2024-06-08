@@ -7,6 +7,7 @@ import 'package:hitbitz/core/components/card_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_dimensions.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/features/home/data/models/road_map_model.dart';
@@ -58,21 +59,27 @@ class RoadMapCard extends StatelessWidget {
                 height: AppDimensions.smallButtonHeight,
                 color: context.colorScheme.surfaceContainerHighest,
                 foregroundColor: context.colorScheme.onSurfaceVariant,
-                child: const TextWidget('12 Levels').fit(BoxFit.scaleDown),
+                child: const TextWidget(
+                  '12 ',
+                  children: [TextWidget(AppStrings.levels)],
+                ).fit(BoxFit.scaleDown),
               ).expand(),
               const Gap(8),
               CardWidget(
                 height: AppDimensions.smallButtonHeight,
                 color: context.colorScheme.surfaceContainerHighest,
                 foregroundColor: context.colorScheme.onSurfaceVariant,
-                child: const TextWidget('37 Steps').fit(BoxFit.scaleDown),
+                child: const TextWidget(
+                  '37 ',
+                  children: [TextWidget(AppStrings.steps)],
+                ).fit(BoxFit.scaleDown),
               ).expand(),
             ],
           ),
           const Gap(8),
           ButtonWidget(
             // onPressed:
-            text: 'Start Journey',
+            text: AppStrings.startJourney,
             backgroundColor: context.colorScheme.primary,
             foregroundColor: context.colorScheme.onPrimary,
             width: context.width,

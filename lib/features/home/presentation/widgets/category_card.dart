@@ -35,7 +35,6 @@ class CategoryCard extends StatelessWidget {
         const Gap(5),
         TextWidget(category.name),
       ],
-    ).onTap(() => di<RoadmapCubit>()
-        .getRoadMaps(GetRoadMapsParams(categoryId: category.id)));
+    ).onTap(() => di<RoadmapCubit>().getRoadMaps(GetRoadMapsParams(categoryId: category.id)));
   }
 }

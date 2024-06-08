@@ -9,6 +9,7 @@ import 'package:hitbitz/core/components/drop_down_widget.dart';
 import 'package:hitbitz/core/components/text_field_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
@@ -58,7 +59,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         title: const TextWidget('HitBitz').wrapPadding(AppPadding.appBarLeadingPadding),
         actions: [
           IconButton(
-            tooltip: 'Report',
+            tooltip: AppStrings.report,
             onPressed: () => Toaster.showSheet(
               context: context,
               sheet: const _FeedbackSheet(),
@@ -115,7 +116,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                   SalomonBottomBarItem(
                     icon: const FaIcon(FontAwesomeIcons.house, size: 18),
                     title: TextWidget(
-                      'Home',
+                      AppStrings.home,
                       style: context.textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: context.colorScheme.onSurfaceVariant,
@@ -125,7 +126,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                   SalomonBottomBarItem(
                     icon: const FaIcon(FontAwesomeIcons.solidBookmark, size: 18),
                     title: TextWidget(
-                      'Library',
+                      AppStrings.library,
                       style: context.textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: context.colorScheme.onSurfaceVariant,
@@ -135,7 +136,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                   SalomonBottomBarItem(
                     icon: const FaIcon(FontAwesomeIcons.solidBell, size: 18),
                     title: TextWidget(
-                      'Notifications',
+                      AppStrings.notifications,
                       style: context.textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: context.colorScheme.onSurfaceVariant,
@@ -145,7 +146,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                   SalomonBottomBarItem(
                     icon: const FaIcon(FontAwesomeIcons.solidUser, size: 18),
                     title: TextWidget(
-                      'Profile',
+                      AppStrings.profile,
                       style: context.textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: context.colorScheme.onSurfaceVariant,

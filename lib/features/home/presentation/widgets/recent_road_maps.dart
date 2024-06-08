@@ -9,19 +9,16 @@ import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class RecentRoadmapCard extends StatelessWidget {
-  const RecentRoadmapCard({super.key});
+  const RecentRoadmapCard({super.key, required this.roadMap});
+
+  final RoadMapModel roadMap;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => context.pushNamed(
-        AppRoutes.roadmapDetails,
-        extra: RoadMapModel(id: 1, name: 'Flutter Roadmap', description: 'test ' * 40, rate: 3),
-      ),
+      onTap: () => context.pushNamed(AppRoutes.roadmapDetails, extra: roadMap),
       shape: ContinuousRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          AppDimensions.mediumBorderRadius,
-        ),
+        borderRadius: BorderRadius.circular(AppDimensions.mediumBorderRadius),
       ),
       tileColor: Colors.blueAccent,
       contentPadding: AppPadding.def,
@@ -34,7 +31,7 @@ class RecentRoadmapCard extends StatelessWidget {
         ),
       ),
       title: TextWidget(
-        'Flutter - Mobile App Development',
+        roadMap.name,
         style: context.textTheme.titleMedium?.copyWith(
           color: context.colorScheme.onPrimary,
         ),

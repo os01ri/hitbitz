@@ -30,14 +30,19 @@ class _SearchCard extends StatelessWidget {
           ),
           const Gap(20),
           TextWidget(
-            'Hello, ${SharedPreferencesService.getFullName() ?? 'Guest'}!',
+            AppStrings.hello,
             style: context.textTheme.titleMedium?.copyWith(
               color: context.colorScheme.onPrimary,
             ),
+            children: [
+              const TextWidget(', '),
+              TextWidget(SharedPreferencesService.getFullName() ?? AppStrings.guest),
+              const TextWidget('!'),
+            ],
           ),
           const Gap(2),
           TextWidget(
-            'Find the roadmap or field you like here',
+            AppStrings.findRoadmapHere,
             style: context.textTheme.bodyMedium?.copyWith(
               color: context.colorScheme.onPrimary,
             ),

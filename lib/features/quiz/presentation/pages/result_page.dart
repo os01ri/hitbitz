@@ -5,6 +5,7 @@ import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/num_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
@@ -38,7 +39,7 @@ class ResultPage extends StatelessWidget {
           children: [
             const Spacer(),
             TextWidget(
-              'Your Score Is:',
+              AppStrings.yourScoreIs,
               style: context.textTheme.titleLarge?.copyWith(
                 color: context.colorScheme.onPrimary,
               ),
@@ -55,7 +56,7 @@ class ResultPage extends StatelessWidget {
             ),
             const Gap(10),
             TextWidget(
-              (args.hasPassed) ? 'Congratulations! You Passed The Quiz' : 'Unfortunately! You Didn\'t Pass The Quiz',
+              (args.hasPassed) ? AppStrings.passedQuiz : AppStrings.failedQuiz,
               textAlign: TextAlign.center,
               maxLines: 4,
               style: context.textTheme.titleLarge?.copyWith(
@@ -64,7 +65,7 @@ class ResultPage extends StatelessWidget {
             ),
             const Spacer(),
             ButtonWidget(
-              text: 'Close',
+              text: AppStrings.close,
               width: context.width,
               backgroundColor: context.colorScheme.onPrimary,
               onPressed: context.pop,

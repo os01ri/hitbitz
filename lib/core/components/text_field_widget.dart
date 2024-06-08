@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
@@ -145,7 +146,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> with WidgetsBindingOb
           filled: true,
           fillColor: widget.fillColor ?? context.colorScheme.surface,
           focusColor: context.colorScheme.primary,
-          hintText: widget.hint,
+          hintText: widget.hint?.tr(),
           hintStyle: textTheme.bodyMedium,
           //
           enabledBorder: outlineInputBorder,

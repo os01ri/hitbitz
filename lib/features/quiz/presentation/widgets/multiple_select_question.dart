@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_colors.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
@@ -52,7 +53,7 @@ class MultipleSelectQuestion extends StatelessWidget {
         ).expand(),
         const Gap(5),
         ButtonWidget(
-          text: 'Done!',
+          text: AppStrings.done,
           width: context.width * .3,
           isOutlined: true,
           onPressed: () {

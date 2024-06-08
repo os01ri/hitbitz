@@ -8,18 +8,20 @@ import 'package:hitbitz/core/components/loading_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_dimensions.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/services/shared_preferences_service.dart';
+import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 import 'package:hitbitz/features/home/domain/usecases/get_categories_usecase.dart';
 import 'package:hitbitz/features/home/domain/usecases/get_roadmaps_usecase.dart';
 import 'package:hitbitz/features/home/presentation/cubit/home_cubit.dart';
 import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
 import 'package:hitbitz/features/home/presentation/widgets/recent_road_maps.dart';
-import 'package:hitbitz/features/roadmap/presentation/widgets/road_map_card.dart';
 import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
+import 'package:hitbitz/features/roadmap/presentation/widgets/road_map_card.dart';
 
 part '../widgets/home_search_card.dart';
 
@@ -55,11 +57,17 @@ class _HomePageState extends State<HomePage> {
             children: [
               const _SearchCard().wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),
-              const _SectionTitle(text: 'Where You Left').wrapPadding(AppPadding.pagePaddingHorizontal),
+              const _SectionTitle(text: AppStrings.whereYouLeft).wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),
-              const RecentRoadmapCard().wrapPadding(AppPadding.pagePaddingHorizontal),
+              RecentRoadmapCard(
+                roadMap: RoadMapModel(
+                  name: 'Flutter',
+                  description: 'Flutter - Mobile Apps Development',
+                  rate: 5,
+                ),
+              ).wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),
-              const _SectionTitle(text: 'Categories').wrapPadding(AppPadding.pagePaddingHorizontal),
+              const _SectionTitle(text: AppStrings.categories).wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),
               SizedBox(
                 height: 120,
@@ -78,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              const _SectionTitle(text: 'Roadmaps').wrapPadding(AppPadding.pagePaddingHorizontal),
+              const _SectionTitle(text: AppStrings.roadmaps).wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),
               BlocProvider.value(
                 value: di<RoadmapCubit>(),
@@ -118,7 +126,7 @@ class _SectionTitle extends StatelessWidget {
     return TextWidget(
       text,
       style: context.textTheme.titleMedium?.copyWith(
-        color: context.colorScheme.onBackground,
+        color: context.colorScheme.onSurface,
       ),
     );
   }

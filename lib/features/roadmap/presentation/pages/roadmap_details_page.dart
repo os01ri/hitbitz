@@ -11,6 +11,7 @@ import 'package:hitbitz/core/components/loading_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_dimensions.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
@@ -58,7 +59,7 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
           appBar: AppBar(
             backgroundColor: Colors.blueAccent.withOpacity(.2),
             notificationPredicate: (notification) => false,
-            title: const TextWidget('Roadmap Details'),
+            title: const TextWidget(AppStrings.roadmapDetails),
             actions: [
               IconButton(
                 onPressed: () => _cubit.roadMapToggleBookmark(RoadMapToggleBookmarkParams(roadmapId: widget.roadMap.id!)),
@@ -139,7 +140,7 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
                     ),
                     const Gap(20),
                     TextWidget(
-                      'Levels',
+                      AppStrings.levels,
                       style: context.textTheme.titleLarge,
                     ),
                     const Gap(10),
@@ -194,7 +195,7 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
                                   ),
                                   const Gap(10),
                                   TextWidget(
-                                    'Requirements',
+                                    AppStrings.requirements,
                                     style: context.textTheme.titleMedium,
                                   ),
                                   const Gap(10),
@@ -212,7 +213,7 @@ class _RoadmapDetailsPageState extends State<RoadmapDetailsPage> {
                                     width: context.width,
                                     backgroundColor: context.colorScheme.primary,
                                     foregroundColor: context.colorScheme.onPrimary,
-                                    text: 'Start',
+                                    text: AppStrings.start,
                                   ),
                                 ],
                               ),

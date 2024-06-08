@@ -8,6 +8,7 @@ import 'package:hitbitz/core/components/error_widget.dart';
 import 'package:hitbitz/core/components/loading_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
@@ -34,7 +35,7 @@ class _QuizzesPageState extends State<QuizzesPage> {
     return BlocProvider.value(
       value: di<QuizCubit>(),
       child: Scaffold(
-        appBar: AppBar(title: const TextWidget('Quizzes')),
+        appBar: AppBar(title: const TextWidget(AppStrings.quizzes)),
         body: BlocBuilder<QuizCubit, QuizState>(
           builder: (context, state) => switch (state.getStatus) {
             CubitStatus.initial => const SizedBox.shrink(),

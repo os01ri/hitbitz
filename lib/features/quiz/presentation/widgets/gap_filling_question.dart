@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/text_field_widget.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/question_page.dart';
@@ -37,13 +38,13 @@ class _GapFillingQuestionState extends State<GapFillingQuestion> {
       children: [
         Center(
           child: TextFieldWidget(
-            label: 'Fill The Gap',
+            label: AppStrings.fillTheGap,
             controller: _controller,
           ),
         ),
         const Gap(30),
         ButtonWidget(
-          text: 'Done!',
+          text: AppStrings.done,
           width: context.width * .3,
           isOutlined: true,
           onPressed: () {

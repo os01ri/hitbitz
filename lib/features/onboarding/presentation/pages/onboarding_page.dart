@@ -6,6 +6,7 @@ import 'package:hitbitz/core/components/image_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_assets.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/tab_controller_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
@@ -30,21 +31,19 @@ class _OnboardingPageState extends State<OnboardingPage> {
     _pageController = PageController();
 
     _onboardings = [
-      OnboardingItem(
-        title: 'Find a field that you like',
-        description: 'There are many fields that you can find here, and you can learn all of them ' * 2,
+      const OnboardingItem(
+        title: AppStrings.onBoarding1Title,
+        description: AppStrings.onBoarding1Body,
         imagePath: AppAssets.onboarding1,
       ),
       const OnboardingItem(
-        title: 'Start your journey',
-        description:
-            'You can start your journey in the field you love, no need to be afraid of getting lost, we will help you reach the finish line',
+        title: AppStrings.onBoarding2Title,
+        description: AppStrings.onBoarding2Body,
         imagePath: AppAssets.onboarding2,
       ),
       const OnboardingItem(
-        title: 'You can be anything, the world is in your hands',
-        description:
-            'By learning & increasing knowledge you will become a wise person and can change things around you and even the world',
+        title: AppStrings.onBoarding3Title,
+        description: AppStrings.onBoarding3Body,
         imagePath: AppAssets.onboarding3,
       ),
     ];
@@ -77,7 +76,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 children: [
                   ButtonWidget(
                     onPressed: () => context.goNamed(AppRoutes.login),
-                    text: 'Skip',
+                    text: AppStrings.skip,
                     isOutlined: false,
                     foregroundColor: context.colorScheme.onSurfaceVariant,
                   ).expand(),
@@ -92,7 +91,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
                       _pageController.goTo(index + 1);
                     },
-                    text: 'Next',
+                    text: AppStrings.next,
                     isOutlined: false,
                     foregroundColor: context.colorScheme.onPrimary,
                     backgroundColor: context.colorScheme.primary,
@@ -145,7 +144,7 @@ class OnboardingItem extends StatelessWidget {
           maxLines: 20,
           textAlign: TextAlign.center,
           style: context.textTheme.bodyLarge?.copyWith(
-            color: context.colorScheme.onBackground,
+            color: context.colorScheme.onSurface,
           ),
         ),
       ],

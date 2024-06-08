@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/features/home/domain/usecases/get_categories_usecase.dart';
 import 'package:hitbitz/features/home/domain/usecases/get_roadmaps_usecase.dart';
 import 'package:hitbitz/features/home/presentation/cubit/home_cubit.dart';
 import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
-import 'package:hitbitz/features/roadmap/presentation/widgets/road_map_card.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_levels_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_saved_roadmaps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_steps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/roadmap_toggle_bookmark_usecase.dart';
 import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
+import 'package:hitbitz/features/roadmap/presentation/widgets/road_map_card.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({
@@ -25,8 +26,7 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage>
-    with SingleTickerProviderStateMixin {
+class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateMixin {
   late final TabController _tabController;
   late final RoadmapCubit _roadmapsCubit;
   late final HomeCubit _categoriesCubit;
@@ -42,8 +42,7 @@ class _SearchPageState extends State<SearchPage>
       getRoadMapsUsecase: di<GetRoadMapsUsecase>(),
     )..getRoadMaps(GetRoadMapsParams(name: widget.query));
 
-    _categoriesCubit = di<HomeCubit>()
-      ..getCategories(GetCategoriesParams(name: widget.query));
+    _categoriesCubit = di<HomeCubit>()..getCategories(GetCategoriesParams(name: widget.query));
 
     _tabController = TabController(length: 2, vsync: this);
   }
@@ -62,8 +61,8 @@ class _SearchPageState extends State<SearchPage>
       appBar: TabBar(
         controller: _tabController,
         tabs: const [
-          Tab(text: 'Categories'),
-          Tab(text: 'Roadmaps'),
+          Tab(text: AppStrings.categories),
+          Tab(text: AppStrings.roadmaps),
         ],
       ),
       body: TabBarView(
@@ -76,10 +75,8 @@ class _SearchPageState extends State<SearchPage>
                 return GridView.builder(
                   padding: AppPadding.gridViewPadding,
                   itemCount: state.categories.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3),
-                  itemBuilder: (context, index) =>
-                      CategoryCard(category: state.categories[index]),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                  itemBuilder: (context, index) => CategoryCard(category: state.categories[index]),
                 );
               },
             ),
@@ -97,8 +94,7 @@ class _SearchPageState extends State<SearchPage>
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemBuilder: (context, index) =>
-                      RoadMapCard(roadMap: state.roadMaps[index]),
+                  itemBuilder: (context, index) => RoadMapCard(roadMap: state.roadMaps[index]),
                 );
               },
             ),

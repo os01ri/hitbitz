@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
@@ -66,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
               TextButton(
                 onPressed: () => context.goNamed(AppRoutes.signup),
                 child: TextWidget(
-                  'Sign up',
+                  AppStrings.signUp,
                   style: context.textTheme.titleMedium?.copyWith(
                     color: context.colorScheme.primary,
                   ),
@@ -80,25 +81,25 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   const Gap(50),
                   TextWidget(
-                    'Welcome back!',
+                    AppStrings.welcomeBack,
                     style: context.textTheme.headlineLarge?.copyWith(
                       color: context.colorScheme.primary,
                     ),
                   ),
                   const Gap(15),
                   TextWidget(
-                    'Nice to see you back, you can log in and continue your learning progress',
+                    AppStrings.welcomingPhrase,
                     textAlign: TextAlign.center,
                     maxLines: 5,
                     style: context.textTheme.bodyLarge?.copyWith(
-                      color: context.colorScheme.onBackground,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                   const Gap(40),
                   Column(
                     children: [
                       AuthTextField(
-                        label: 'Username',
+                        label: AppStrings.username,
                         prefixIcon: const FaIcon(FontAwesomeIcons.user),
                         controller: _usernameController,
                         validator: AppValidator.required,
@@ -129,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      const TextWidget('Remember me'),
+                      const TextWidget(AppStrings.rememberMe),
                     ],
                   ).onTap(() => _rememberMeListenable.value = !_rememberMeListenable.value),
                   const Gap(10),
@@ -147,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       foregroundColor: context.colorScheme.onPrimary,
                       backgroundColor: context.colorScheme.primary,
-                      text: 'Log in',
+                      text: AppStrings.logIn,
                     ).hero('auth-button'),
                   ),
                   const Gap(10),
@@ -157,9 +158,9 @@ class _LoginPageState extends State<LoginPage> {
                     isOutlined: true,
                     borderThickness: 1.5,
                     borderColor: context.colorScheme.primary,
-                    foregroundColor: context.colorScheme.onBackground,
-                    backgroundColor: context.colorScheme.background,
-                    text: 'Continue As Guest',
+                    foregroundColor: context.colorScheme.onSurface,
+                    backgroundColor: context.colorScheme.surface,
+                    text: AppStrings.continueAsGuest,
                   )
                 ],
               ).wrapPadding(AppPadding.pagePadding),
@@ -167,13 +168,13 @@ class _LoginPageState extends State<LoginPage> {
           ),
           bottomNavigationBar: Material(
             child: TextWidget(
-              'By creating an account, you agree to ',
+              AppStrings.agreeingTo,
               textAlign: TextAlign.center,
               maxLines: 5,
               children: [
-                TextWidget("HitBitz's Terms & Conditions", textColor: context.colorScheme.primary),
-                const TextWidget(' and '),
-                TextWidget('Privacy Policy', textColor: context.colorScheme.primary),
+                TextWidget(AppStrings.termsAnConditions, textColor: context.colorScheme.primary),
+                const TextWidget(AppStrings.and),
+                TextWidget(AppStrings.privacyPolicy, textColor: context.colorScheme.primary),
               ],
             ).hero('term-and-Conditions'),
           ).paddingAll(50),
@@ -188,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
     } else if (state.status == CubitStatus.failure) {
       Toaster.showError(context: context, message: state.failure?.message);
     } else if (state.status == CubitStatus.success) {
-      Toaster.showSuccess(context: context, message: 'Logged  in successfully');
+      Toaster.showSuccess(context: context, message: AppStrings.loggedInSuccessfully);
       Future.delayed(const Duration(milliseconds: 500)).whenComplete(() => context.goNamed(AppRoutes.main));
     }
   }
