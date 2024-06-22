@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hitbitz/core/error/exception.dart';
 import 'package:hitbitz/core/services/device_info_service.dart';
 import 'package:http/http.dart' as http;
@@ -22,12 +23,14 @@ mixin RequestExceptionsHandler {
         function: () async {
           String? token = SharedPreferencesService.getToken();
           bool isAuth = SharedPreferencesService.isAuth();
+          String? fcmToken = await FirebaseMessaging.instance.getToken();
 
           log(token.toString().logWhite);
 
           final Map<String, String> headers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
+            if (fcmToken != null) 'fcm_token': fcmToken,
             if (isAuth) 'Authorization': 'Bearer $token',
           };
 
