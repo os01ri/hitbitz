@@ -1,44 +1,47 @@
-import 'dart:convert';
-
 import 'package:hitbitz/core/data/models/media_model.dart';
 import 'package:hitbitz/features/home/data/models/category_model.dart';
+import 'package:hitbitz/features/roadmap/data/models/level_model.dart';
 
 List<RoadMapModel> roadMapsListFromJson(dynamic decodedJson) => List<RoadMapModel>.from(decodedJson.map((x) => RoadMapModel.fromJson(x)));
 
-String roadMapModelToJson(List<RoadMapModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class RoadMapModel {
   final int? id;
+  final MediaModel? media;
   final String? name;
   final String? description;
-  final MediaModel? media;
   final int? rate;
+  final int? duration;
+  final List<LevelModel>? levels;
   final CategoryModel? category;
+  final int? currentLevel;
+  final int? currentStep;
+  final int? completed;
 
-  RoadMapModel({
+  const RoadMapModel({
     this.id,
+    this.media,
     this.name,
     this.description,
     this.rate,
-    this.media,
+    this.duration,
+    this.levels,
     this.category,
+    this.currentLevel,
+    this.currentStep,
+    this.completed,
   });
 
   factory RoadMapModel.fromJson(Map<String, dynamic> json) => RoadMapModel(
         id: json['id'],
+        media: json['media'] == null ? null : MediaModel.fromJson(json['media']),
         name: json['name'],
         description: json['description'],
         rate: json['rate'],
-        media: json['media'] == null ? null : MediaModel.fromJson(json['media']),
+        duration: json['duration'],
+        levels: json['levels'] == null ? [] : List<LevelModel>.from(json['levels']!.map((x) => LevelModel.fromJson(x))),
         category: json['category'] == null ? null : CategoryModel.fromJson(json['category']),
+        currentLevel: json['current_level'],
+        currentStep: json['current_step'],
+        completed: json['completed'],
       );
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'description': description,
-        'rate': rate,
-        'media': media?.toJson(),
-        'category': category?.toJson(),
-      };
 }

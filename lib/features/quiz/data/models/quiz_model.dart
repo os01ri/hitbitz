@@ -7,9 +7,9 @@ class QuizModel {
   final int? stepId;
   final String? name;
   final double? requiredDegree;
-  final String ? description;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  final double? degree;
+  final String? description;
+  final bool? isCompleted;
   final List<QuestionModel> questions;
 
   const QuizModel({
@@ -17,9 +17,9 @@ class QuizModel {
     this.stepId,
     this.name,
     this.requiredDegree,
+    this.degree,
     this.description,
-    this.createdAt,
-    this.updatedAt,
+    this.isCompleted,
     this.questions = const [],
   });
 
@@ -29,8 +29,8 @@ class QuizModel {
         name: json['name'],
         description: json['description'],
         requiredDegree: json['required_degree'] == null ? null : (json['required_degree'] as num).toDouble(),
-        createdAt: json['created_at'] == null ? null : DateTime.parse(json['created_at']),
-        updatedAt: json['updated_at'] == null ? null : DateTime.parse(json['updated_at']),
+        degree: json['degree'] == null ? null : (json['degree'] as num).toDouble(),
+        isCompleted: json['completed'] == null ? false : json['completed'] == 1,
         questions: json['questions'] == null ? [] : List<QuestionModel>.from(json['questions']!.map((x) => QuestionModel.fromJson(x))),
       );
 }
