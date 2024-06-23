@@ -5,20 +5,20 @@ class StepModel {
   final String? name;
   final String? description;
   final int? order;
-  final int? durationInDays;
+  final int? durationInHours;
 
   StepModel({
     this.id,
     this.name,
     this.description,
     this.order,
-    this.durationInDays,
+    this.durationInHours,
   }); 
   factory StepModel.fromJson(Map<String, dynamic> json) => StepModel(
         id: json['id'],
         name: json['name'],
         description: json['description'],
         order: json['order'],
-        durationInDays: json['duration'],
+        durationInHours: json['duration'],
       );
 }
