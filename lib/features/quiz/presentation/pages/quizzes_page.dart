@@ -13,11 +13,14 @@ import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/features/quiz/domain/usecases/get_quizzes_usecase.dart';
 import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class QuizzesPage extends StatefulWidget {
-  const QuizzesPage({super.key});
+  const QuizzesPage({super.key, required this.stepId});
+
+  final int stepId;
 
   @override
   State<QuizzesPage> createState() => _QuizzesPageState();
@@ -27,7 +30,7 @@ class _QuizzesPageState extends State<QuizzesPage> {
   @override
   void initState() {
     super.initState();
-    di<QuizCubit>().getQuizzes();
+    di<QuizCubit>().getQuizzes(GetQuizzedParams(stepId: widget.stepId));
   }
 
   @override
@@ -40,7 +43,8 @@ class _QuizzesPageState extends State<QuizzesPage> {
           builder: (context, state) => switch (state.getStatus) {
             CubitStatus.initial => const SizedBox.shrink(),
             CubitStatus.loading => const LoadingWidget().center(),
-            CubitStatus.failure => ErrorButtonWidget(onTap: () => di<QuizCubit>().getQuizzes()).center(),
+            CubitStatus.failure =>
+              ErrorButtonWidget(onTap: () => di<QuizCubit>().getQuizzes(GetQuizzedParams(stepId: widget.stepId))).center(),
             CubitStatus.success => ListView.separated(
                 itemCount: state.quizzes.length,
                 separatorBuilder: (context, index) => const Gap(10),

@@ -52,7 +52,7 @@ class _LevelDetailsPageState extends State<LevelDetailsPage> {
                 itemCount: state.steps.length,
                 separatorBuilder: (context, index) => const Gap(10),
                 itemBuilder: (context, index) => CardWidget(
-                  onTap: () => context.pushNamed(AppRoutes.quizzes),
+                  onTap: () => context.pushNamed(AppRoutes.quizzes, extra: state.steps[index].id),
                   color: index == 0 ? context.colorScheme.primary : context.colorScheme.primary.withOpacity(.3),
                   child: ListTile(
                     leading: CardWidget(
