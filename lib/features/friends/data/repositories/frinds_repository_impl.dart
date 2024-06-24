@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:hitbitz/core/config/type_defs.dart';
+import 'package:hitbitz/core/data/models/no_response_model.dart';
 import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/error/repository_exception_handler.dart';
 import 'package:hitbitz/features/friends/data/datasources/remote_friends_datasource.dart';
@@ -26,6 +27,14 @@ class FriendsRepositoryImpl with RepositoryExceptionHandler implements FriendsRe
     return exceptionHandler<UserModel>(tryCall: () async {
       final result = await remoteDataSource.showUser(id: id, params: params);
       return Right(result.data);
+    });
+  }
+
+  @override
+  Future<Either<Failure, NoResponse>> sendFriendRequest({required BodyMap body}) {
+    return exceptionHandler<NoResponse>(tryCall: () async {
+      final result = await remoteDataSource.sendFriendRequest(body: body);
+      return Right(result);
     });
   }
 }

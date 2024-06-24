@@ -37,6 +37,7 @@ class EndPoints {
   static Uri logIn({ParamsMap params}) => _user(path: 'login', params: params);
   static Uri getUsers({ParamsMap params}) => _user(path: 'users', params: params);
   static Uri showUser({required int id, ParamsMap params}) => _user(path: 'users/$id', params: params);
+  static Uri sendFriendRequest({ParamsMap params}) => _user(path: 'friendRequests', params: params);
 
   static Uri getCategories({ParamsMap params}) => _user(path: 'categories', params: params);
 

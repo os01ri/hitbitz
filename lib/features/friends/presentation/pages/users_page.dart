@@ -8,10 +8,13 @@ import 'package:hitbitz/core/components/image_widget.dart';
 import 'package:hitbitz/core/components/loading_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/core/utilities/toaster.dart';
+import 'package:hitbitz/features/friends/domain/usecases/send_friend_requests_usecase.dart';
 import 'package:hitbitz/features/friends/presentation/cubit/friends_cubit.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
@@ -33,7 +36,8 @@ class _UsersPageState extends State<UsersPage> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: di<FriendsCubit>(),
-      child: BlocBuilder<FriendsCubit, FriendsState>(
+      child: BlocConsumer<FriendsCubit, FriendsState>(
+        listener: _listener,
         builder: (context, state) {
           return switch (state.getUsersStatus) {
             CubitStatus.initial => const SizedBox.shrink(),
@@ -53,7 +57,7 @@ class _UsersPageState extends State<UsersPage> {
                       title: TextWidget(state.users[index].fullName),
                       subtitle: TextWidget(state.users[index].userName),
                       trailing: CardWidget(
-                        onTap: () {},
+                        onTap: () => di<FriendsCubit>().sendRequest(SendFriendRequestParams(id: state.users[index].id)),
                         height: 30,
                         width: 30,
                         borderRadius: 20,
@@ -68,5 +72,17 @@ class _UsersPageState extends State<UsersPage> {
         },
       ),
     );
+  }
+
+  _listener(BuildContext context, FriendsState state) {
+    if (state.sendRequestStatus == CubitStatus.loading) {
+      Toaster.showLoading();
+    } else if (state.sendRequestStatus == CubitStatus.failure) {
+      Toaster.closeLoading();
+      Toaster.showError(context: context, message: AppStrings.error);
+    } else if (state.sendRequestStatus == CubitStatus.success) {
+      Toaster.closeLoading();
+      Toaster.showSuccess(context: context, message: AppStrings.success);
+    }
   }
 }
