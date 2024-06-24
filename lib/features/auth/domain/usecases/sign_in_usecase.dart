@@ -8,12 +8,12 @@ import 'package:hitbitz/features/auth/domain/repositories/auth_repository.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class SignInUsecase implements UseCase<UserModel, SignInParams> {
+class SignInUsecase implements UseCase<UserDataModel, SignInParams> {
   final AuthRepository repository;
 
   SignInUsecase({required this.repository});
   @override
-  Future<Either<Failure, UserModel>> call(SignInParams params) async {
+  Future<Either<Failure, UserDataModel>> call(SignInParams params) async {
     return repository.signIn(body: params.getBody());
   }
 }

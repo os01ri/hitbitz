@@ -2,7 +2,7 @@ part of 'auth_cubit.dart';
 
 class AuthState {
   final CubitStatus status;
-  final UserModel? user;
+  final UserDataModel? user;
   final Failure? failure;
 
   const AuthState({
@@ -13,7 +13,7 @@ class AuthState {
 
   AuthState copyWith({
     CubitStatus? status,
-    UserModel? user,
+    UserDataModel? user,
     Failure? failure,
   }) {
     return AuthState(

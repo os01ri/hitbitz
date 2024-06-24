@@ -14,16 +14,16 @@ class AuthRepositoryImpl with RepositoryExceptionHandler implements AuthReposito
   const AuthRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, UserModel>> login({required BodyMap body}) {
-    return exceptionHandler<UserModel>(tryCall: () async {
+  Future<Either<Failure, UserDataModel>> login({required BodyMap body}) {
+    return exceptionHandler<UserDataModel>(tryCall: () async {
       final result = await remoteDataSource.logIn(body: body);
       return Right(result.data);
     });
   }
 
   @override
-  Future<Either<Failure, UserModel>> signIn({required BodyMap body}) {
-    return exceptionHandler<UserModel>(tryCall: () async {
+  Future<Either<Failure, UserDataModel>> signIn({required BodyMap body}) {
+    return exceptionHandler<UserDataModel>(tryCall: () async {
       final result = await remoteDataSource.signIn(body: body);
       return Right(result.data);
     });

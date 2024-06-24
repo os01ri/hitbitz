@@ -11,19 +11,19 @@ import 'package:injectable/injectable.dart';
 class RemoteAuthDataSource {
   const RemoteAuthDataSource();
 
-  Future<BaseResponse<UserModel>> signIn({required BodyMap body}) async {
+  Future<BaseResponse<UserDataModel>> signIn({required BodyMap body}) async {
     final rowData = await Http.post(uri: EndPoints.signUp(), body: body);
     return BaseResponse.fromJson(
       json: json.decode(rowData),
-      dataConverter: (body) => UserModel.fromJson(body),
+      dataConverter: (body) => UserDataModel.fromJson(body),
     );
   }
 
-  Future<BaseResponse<UserModel>> logIn({required BodyMap body}) async {
+  Future<BaseResponse<UserDataModel>> logIn({required BodyMap body}) async {
     final rowData = await Http.post(uri: EndPoints.logIn(), body: body);
     return BaseResponse.fromJson(
       json: json.decode(rowData),
-      dataConverter: (body) => UserModel.fromJson(body),
+      dataConverter: (body) => UserDataModel.fromJson(body),
     );
   }
 }
