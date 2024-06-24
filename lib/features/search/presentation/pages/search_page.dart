@@ -7,10 +7,11 @@ import 'package:hitbitz/features/home/domain/usecases/get_categories_usecase.dar
 import 'package:hitbitz/features/home/domain/usecases/get_roadmaps_usecase.dart';
 import 'package:hitbitz/features/home/presentation/cubit/home_cubit.dart';
 import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
-import 'package:hitbitz/features/roadmap/domain/usecases/get_levels_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_saved_roadmaps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_steps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/roadmap_toggle_bookmark_usecase.dart';
+import 'package:hitbitz/features/roadmap/domain/usecases/show_roadmap_usecase.dart';
+import 'package:hitbitz/features/roadmap/domain/usecases/start_roadmap_usecase.dart';
 import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
 import 'package:hitbitz/features/roadmap/presentation/widgets/road_map_card.dart';
 
@@ -35,7 +36,9 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
   void initState() {
     super.initState();
     _roadmapsCubit = RoadmapCubit(
-      getLevelsUsecase: di<GetLevelsUsecase>(),
+      // getLevelsUsecase: di<GetLevelsUsecase>(),
+      showRoadMapUsecase: di<ShowRoadMapUsecase>(),
+      startRoadMapUsecase: di<StartRoadMapUsecase>(),
       getStepsUsecase: di<GetStepsUsecase>(),
       roadMapToggleBookmarkUsecase: di<RoadMapToggleBookmarkUsecase>(),
       getSavedRoadmapsUsecase: di<GetSavedRoadmapsUsecase>(),

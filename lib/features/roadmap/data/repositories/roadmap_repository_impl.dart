@@ -3,9 +3,8 @@ import 'package:hitbitz/core/config/type_defs.dart';
 import 'package:hitbitz/core/data/models/no_response_model.dart';
 import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/error/repository_exception_handler.dart';
-import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/data/datasources/remote_roadmap_datasource.dart';
-import 'package:hitbitz/features/roadmap/data/models/level_model.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/data/models/step_model.dart';
 import 'package:hitbitz/features/roadmap/domain/repositories/roadmap_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -17,9 +16,17 @@ class RoadMapRepositoryImpl with RepositoryExceptionHandler implements RoadMapRe
   const RoadMapRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, List<LevelModel>>> getLevels({required ParamsMap params}) {
-    return exceptionHandler<List<LevelModel>>(tryCall: () async {
-      final result = await remoteDataSource.getLevels(params: params);
+  Future<Either<Failure, RoadMapModel>> showRoadMap({required int id, required ParamsMap params}) {
+    return exceptionHandler<RoadMapModel>(tryCall: () async {
+      final result = await remoteDataSource.showRoadMap(id: id, params: params);
+      return Right(result.data);
+    });
+  }
+
+  @override
+  Future<Either<Failure, RoadMapModel>> startRoadMap({required int id, required ParamsMap params}) {
+    return exceptionHandler<RoadMapModel>(tryCall: () async {
+      final result = await remoteDataSource.startRoadMap(id: id, params: params);
       return Right(result.data);
     });
   }

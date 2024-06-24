@@ -2,47 +2,61 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/usecases/usecase.dart';
-import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 import 'package:hitbitz/features/home/domain/usecases/get_roadmaps_usecase.dart';
-import 'package:hitbitz/features/roadmap/data/models/level_model.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/data/models/step_model.dart';
-import 'package:hitbitz/features/roadmap/domain/usecases/get_levels_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_saved_roadmaps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_steps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/roadmap_toggle_bookmark_usecase.dart';
+import 'package:hitbitz/features/roadmap/domain/usecases/show_roadmap_usecase.dart';
+import 'package:hitbitz/features/roadmap/domain/usecases/start_roadmap_usecase.dart';
 import 'package:injectable/injectable.dart';
 
 part 'roadmap_state.dart';
 
 @lazySingleton
 class RoadmapCubit extends Cubit<RoadmapState> {
-  final GetLevelsUsecase _getLevelsUsecase;
+  final ShowRoadMapUsecase _showRoadMapUsecase;
+  final StartRoadMapUsecase _startRoadMapUsecase;
   final GetStepsUsecase _getStepsUsecase;
   final RoadMapToggleBookmarkUsecase _roadMapToggleBookmarkUsecase;
   final GetSavedRoadmapsUsecase _getSavedRoadmapsUsecase;
   final GetRoadMapsUsecase _getRoadMapsUsecase;
 
   RoadmapCubit({
-    required GetLevelsUsecase getLevelsUsecase,
+    required ShowRoadMapUsecase showRoadMapUsecase,
+    required StartRoadMapUsecase startRoadMapUsecase,
     required GetStepsUsecase getStepsUsecase,
     required RoadMapToggleBookmarkUsecase roadMapToggleBookmarkUsecase,
     required GetSavedRoadmapsUsecase getSavedRoadmapsUsecase,
     required GetRoadMapsUsecase getRoadMapsUsecase,
-  })  : _getLevelsUsecase = getLevelsUsecase,
+  })  : _showRoadMapUsecase = showRoadMapUsecase,
+        _startRoadMapUsecase = startRoadMapUsecase,
         _getStepsUsecase = getStepsUsecase,
         _roadMapToggleBookmarkUsecase = roadMapToggleBookmarkUsecase,
         _getSavedRoadmapsUsecase = getSavedRoadmapsUsecase,
         _getRoadMapsUsecase = getRoadMapsUsecase,
         super(const RoadmapState());
 
-  getLevels(GetLevelsParams params) async {
-    emit(state.copyWith(levelsStatus: CubitStatus.loading));
+  showRoadMap(ShowRoadMapParams params) async {
+    emit(state.copyWith(roadmapStatus: CubitStatus.loading));
 
-    final result = await _getLevelsUsecase(params);
+    final result = await _showRoadMapUsecase(params);
 
     result.fold(
-      (l) => emit(state.copyWith(levelsStatus: CubitStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(levelsStatus: CubitStatus.success, levels: r)),
+      (l) => emit(state.copyWith(roadmapStatus: CubitStatus.failure, failure: l)),
+      (r) => emit(state.copyWith(roadmapStatus: CubitStatus.success, roadmap: r)),
+    );
+  }
+
+  startRoadMap(ShowRoadMapParams params) async {
+    emit(state.copyWith(roadmapStatus: CubitStatus.loading));
+
+    final result = await _startRoadMapUsecase(params);
+
+    result.fold(
+      (l) => emit(state.copyWith(roadmapStatus: CubitStatus.failure, failure: l)),
+      (r) => emit(state.copyWith(roadmapStatus: CubitStatus.success, roadmap: r)),
     );
   }
 

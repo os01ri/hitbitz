@@ -13,6 +13,7 @@ import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/features/quiz/domain/usecases/get_quizzes_usecase.dart';
 import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:hitbitz/router/app_routes.dart';
@@ -50,11 +51,7 @@ class _QuizzesPageState extends State<QuizzesPage> {
                 separatorBuilder: (context, index) => const Gap(10),
                 itemBuilder: (context, index) => CardWidget(
                   // onTap: () => context.pushNamed(AppRoutes.quiz),
-                  color: index < 1
-                      ? Colors.green
-                      : index > 1
-                          ? context.colorScheme.primary.withOpacity(.3)
-                          : context.colorScheme.primary,
+                  color: getColor(index: index, quizzes: state.quizzes),
                   child: ListTile(
                     onTap: () => context.pushNamed(AppRoutes.quizIntro, extra: state.quizzes[index].id),
                     leading: CardWidget(
@@ -64,12 +61,8 @@ class _QuizzesPageState extends State<QuizzesPage> {
                       height: 22,
                       borderColor: context.colorScheme.primary,
                       child: Icon(
-                        index == 1
-                            ? FontAwesomeIcons.play
-                            : index > 1
-                                ? FontAwesomeIcons.lock
-                                : FontAwesomeIcons.check,
-                        color: index == 0 ? Colors.green : context.colorScheme.primary,
+                        getIconData(index: index, quizzes: state.quizzes),
+                        color: getColor(index: index, quizzes: state.quizzes),
                         size: 14,
                       ),
                     ),
@@ -86,5 +79,21 @@ class _QuizzesPageState extends State<QuizzesPage> {
         ).wrapPadding(AppPadding.pagePadding),
       ),
     );
+  }
+
+  Color getColor({required int index, required List<QuizModel> quizzes}) {
+    return quizzes[index].isCompleted ?? false
+        ? Colors.green
+        : (index > 0 && (quizzes[index - 1].isCompleted ?? false) || index == 0)
+            ? context.colorScheme.primary
+            : context.colorScheme.primary.withOpacity(.3);
+  }
+
+  IconData getIconData({required int index, required List<QuizModel> quizzes}) {
+    return quizzes[index].isCompleted ?? false
+        ? FontAwesomeIcons.check
+        : (index > 0 && (quizzes[index - 1].isCompleted ?? false) || index == 0)
+            ? FontAwesomeIcons.play
+            : FontAwesomeIcons.lock;
   }
 }

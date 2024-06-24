@@ -39,17 +39,19 @@ class EndPoints {
   static Uri getCategories({ParamsMap params}) => _user(path: 'categories', params: params);
 
   static Uri getRoadMaps({ParamsMap params}) => _user(path: 'roadmaps', params: params);
+  static Uri showRoadMap({required int id, ParamsMap params}) => _user(path: 'roadmaps/$id', params: params);
+  static Uri startRoadMap({required int id, ParamsMap params}) => _user(path: 'roadmaps/$id/start', params: params);
   static Uri roadMapToggleBookmark({required int id}) => _user(path: 'roadmaps/$id/toggleFavorite');
   static Uri getSavedRoadmaps({ParamsMap params}) => _user(path: 'roadmaps/favorites/index');
 
-  static Uri getLevels({ParamsMap params}) => _user(path: 'levels', params: params);
+  // static Uri getLevels({ParamsMap params}) => _user(path: 'levels', params: params);
   static Uri getSteps({ParamsMap params}) => _user(path: 'levelStep', params: params);
 
   static Uri getQuizzes({ParamsMap params}) => _user(path: 'quizzes', params: params);
   static Uri showQuiz({required int id}) => _user(path: 'quizzes/$id');
   static Uri completeQuiz({required int id}) => _user(path: 'quizzes/$id/complete');
-  
+
   static Uri makeSuggestion({ParamsMap params}) => _user(path: 'makeSuggestion', params: params);
-  
+
   static Uri getNotifications({ParamsMap params}) => _user(path: 'notifications', params: params);
 }

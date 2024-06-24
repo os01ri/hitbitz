@@ -8,8 +8,8 @@ class AppRoutes {
   static const login = 'login';
   //////!main!//////
   static const main = '/main';
-  static const roadmapDetails = 'road-map-details';
-  static const levelDetails = 'level-details';
+  static const roadmap = 'road-map-details';
+  static const steps = 'level-details';
   static const quizzes = 'quizzes';
   static const quizIntro = 'quiz-intro';
   static const quiz = 'quiz';

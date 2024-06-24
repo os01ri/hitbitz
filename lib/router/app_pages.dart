@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/features/auth/presentation/pages/login_page.dart';
 import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
-import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 import 'package:hitbitz/features/main/presentation/pages/main_page.dart';
 import 'package:hitbitz/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
@@ -10,7 +9,7 @@ import 'package:hitbitz/features/quiz/presentation/pages/quiz_intro_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quizzes_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/result_page.dart';
-import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_details_page.dart';
+import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/steps_page.dart';
 import 'package:hitbitz/features/search/presentation/pages/search_page.dart';
 import 'package:hitbitz/features/splash/presentation/pages/splash_page.dart';
@@ -76,14 +75,14 @@ class AppPages {
       //   routes: const [],
       // ),
       GoRoute(
-        name: AppRoutes.roadmapDetails,
-        path: AppRoutes.roadmapDetails,
-        builder: (context, state) => RoadmapDetailsPage(roadMap: state.extra as RoadMapModel),
+        name: AppRoutes.roadmap,
+        path: AppRoutes.roadmap,
+        builder: (context, state) => RoadmapPage(args: state.extra as RoadMapPageArguments),
         routes: [
           GoRoute(
-            name: AppRoutes.levelDetails,
-            path: AppRoutes.levelDetails,
-            builder: (context, state) => LevelDetailsPage(levelId: state.extra as int),
+            name: AppRoutes.steps,
+            path: AppRoutes.steps,
+            builder: (context, state) => StepsPage(args: state.extra as StepsPageArguments),
             routes: [
               GoRoute(
                 name: AppRoutes.quizzes,

@@ -3,15 +3,16 @@ import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/usecases/usecase.dart';
 import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/domain/repositories/roadmap_repository.dart';
+import 'package:hitbitz/features/roadmap/domain/usecases/show_roadmap_usecase.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetSavedRoadmapsUsecase implements UseCase<List<RoadMapModel>, NoParams> {
+class StartRoadMapUsecase implements UseCase<RoadMapModel, ShowRoadMapParams> {
   final RoadMapRepository repository;
 
-  GetSavedRoadmapsUsecase({required this.repository});
+  StartRoadMapUsecase({required this.repository});
   @override
-  Future<Either<Failure, List<RoadMapModel>>> call(NoParams params) async {
-    return repository.getSavedRoadmaps(params: params.getParams());
+  Future<Either<Failure, RoadMapModel>> call(ShowRoadMapParams params) async {
+    return repository.startRoadMap(id: params.roadmapId, params: params.getParams());
   }
 }

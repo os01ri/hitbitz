@@ -5,8 +5,7 @@ import 'package:hitbitz/core/api/http.dart';
 import 'package:hitbitz/core/config/type_defs.dart';
 import 'package:hitbitz/core/data/models/base_response.dart';
 import 'package:hitbitz/core/data/models/no_response_model.dart';
-import 'package:hitbitz/features/home/data/models/road_map_model.dart';
-import 'package:hitbitz/features/roadmap/data/models/level_model.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/data/models/step_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,11 +13,19 @@ import 'package:injectable/injectable.dart';
 class RemoteRoadMapDataSource {
   const RemoteRoadMapDataSource();
 
-  Future<BaseResponse<List<LevelModel>>> getLevels({required ParamsMap params}) async {
-    final rowData = await Http.get(uri: EndPoints.getLevels(params: params));
+  Future<BaseResponse<RoadMapModel>> showRoadMap({required int id, required ParamsMap params}) async {
+    final rowData = await Http.get(uri: EndPoints.showRoadMap(id: id, params: params));
     return BaseResponse.fromJson(
       json: json.decode(rowData),
-      dataConverter: (body) => levelsListFromJson(body),
+      dataConverter: (body) => RoadMapModel.fromJson(body),
+    );
+  }
+
+  Future<BaseResponse<RoadMapModel>> startRoadMap({required int id, required ParamsMap params}) async {
+    final rowData = await Http.get(uri: EndPoints.startRoadMap(id: id, params: params));
+    return BaseResponse.fromJson(
+      json: json.decode(rowData),
+      dataConverter: (body) => RoadMapModel.fromJson(body),
     );
   }
 

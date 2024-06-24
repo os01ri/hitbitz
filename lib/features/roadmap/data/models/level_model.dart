@@ -1,4 +1,4 @@
-import 'package:hitbitz/features/home/data/models/road_map_model.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 
 List<LevelModel> levelsListFromJson(dynamic decodedJson) => List<LevelModel>.from(decodedJson.map((x) => LevelModel.fromJson(x)));
 

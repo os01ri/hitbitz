@@ -5,8 +5,8 @@ class RoadmapState {
   final List<RoadMapModel> roadMaps;
   final CubitStatus saveStatus;
   final List<RoadMapModel> savedRoadMaps;
-  final CubitStatus levelsStatus;
-  final List<LevelModel> levels;
+  final CubitStatus roadmapStatus;
+  final RoadMapModel? roadmap;
   final CubitStatus stepsStatus;
   final List<StepModel> steps;
   final Failure? failure;
@@ -16,8 +16,8 @@ class RoadmapState {
     this.roadMaps = const [],
     this.saveStatus = CubitStatus.initial,
     this.savedRoadMaps = const [],
-    this.levelsStatus = CubitStatus.initial,
-    this.levels = const [],
+    this.roadmapStatus = CubitStatus.initial,
+    this.roadmap,
     this.stepsStatus = CubitStatus.initial,
     this.steps = const [],
     this.failure,
@@ -28,8 +28,8 @@ class RoadmapState {
     List<RoadMapModel>? roadMaps,
     CubitStatus? saveStatus,
     List<RoadMapModel>? savedRoadMaps,
-    CubitStatus? levelsStatus,
-    List<LevelModel>? levels,
+    CubitStatus? roadmapStatus,
+    RoadMapModel? roadmap,
     CubitStatus? stepsStatus,
     List<StepModel>? steps,
     Failure? failure,
@@ -39,8 +39,8 @@ class RoadmapState {
       roadMaps: roadMaps ?? this.roadMaps,
       saveStatus: saveStatus ?? this.saveStatus,
       savedRoadMaps: savedRoadMaps ?? this.savedRoadMaps,
-      levelsStatus: levelsStatus ?? this.levelsStatus,
-      levels: levels ?? this.levels,
+      roadmapStatus: roadmapStatus ?? this.roadmapStatus,
+      roadmap: roadmap ?? this.roadmap,
       stepsStatus: stepsStatus ?? this.stepsStatus,
       steps: steps ?? this.steps,
       failure: failure ?? this.failure,

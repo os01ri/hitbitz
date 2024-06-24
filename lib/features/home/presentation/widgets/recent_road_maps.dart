@@ -5,7 +5,8 @@ import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_dimensions.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
-import 'package:hitbitz/features/home/data/models/road_map_model.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
+import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_page.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class RecentRoadmapCard extends StatelessWidget {
@@ -16,7 +17,7 @@ class RecentRoadmapCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => context.pushNamed(AppRoutes.roadmapDetails, extra: roadMap),
+      onTap: () => context.pushNamed(AppRoutes.roadmap, extra: RoadMapPageArguments(roadMap: roadMap, isStarting: false)),
       shape: ContinuousRectangleBorder(
         borderRadius: BorderRadius.circular(AppDimensions.mediumBorderRadius),
       ),

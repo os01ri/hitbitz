@@ -11,7 +11,7 @@ class RoadMapModel {
   final String? description;
   final int? rate;
   final int? duration;
-  final List<LevelModel>? levels;
+  final List<LevelModel> levels;
   final CategoryModel? category;
   final int? currentLevel;
   final int? currentStep;
@@ -24,7 +24,7 @@ class RoadMapModel {
     this.description,
     this.rate,
     this.duration,
-    this.levels,
+    this.levels = const [],
     this.category,
     this.currentLevel,
     this.currentStep,

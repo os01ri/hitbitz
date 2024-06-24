@@ -10,7 +10,8 @@ import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
-import 'package:hitbitz/features/home/data/models/road_map_model.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
+import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_page.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class RoadMapCard extends StatelessWidget {
@@ -24,7 +25,7 @@ class RoadMapCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardWidget(
-      onTap: () => context.pushNamed(AppRoutes.roadmapDetails, extra: roadMap),
+      onTap: () => context.pushNamed(AppRoutes.roadmap, extra: RoadMapPageArguments(roadMap: roadMap, isStarting: false)),
       width: context.width * .4,
       borderRadius: AppDimensions.mediumBorderRadius,
       borderColor: context.colorScheme.outline,
@@ -52,7 +53,6 @@ class RoadMapCard extends StatelessWidget {
             maxLines: 2,
           ),
           const Spacer(),
-          const Gap(5),
           Row(
             children: [
               CardWidget(
@@ -76,9 +76,8 @@ class RoadMapCard extends StatelessWidget {
               ).expand(),
             ],
           ),
-          const Gap(8),
           ButtonWidget(
-            // onPressed:
+            onPressed: () => context.pushNamed(AppRoutes.roadmap, extra: RoadMapPageArguments(roadMap: roadMap, isStarting: true)),
             text: AppStrings.startJourney,
             backgroundColor: context.colorScheme.primary,
             foregroundColor: context.colorScheme.onPrimary,

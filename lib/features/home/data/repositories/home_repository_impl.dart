@@ -4,7 +4,7 @@ import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/error/repository_exception_handler.dart';
 import 'package:hitbitz/features/home/data/datasources/remote_home_datasource.dart';
 import 'package:hitbitz/features/home/data/models/category_model.dart';
-import 'package:hitbitz/features/home/data/models/road_map_model.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/home/domain/repositories/home_repository.dart';
 import 'package:injectable/injectable.dart';
 

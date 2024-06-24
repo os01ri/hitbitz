@@ -21,7 +21,7 @@ class TrueFalseQuestion extends StatelessWidget {
         CardWidget(
           onTap: () {
             if (question.isCorrect != null) return;
-            final isCorrect = question.correctAnswers.single == 0;
+            final isCorrect = question.correctAnswers.single == 1;
             question.isCorrect = isCorrect;
             Toaster.showIsCorrect(isCorrect);
             if (isCorrect) QuizProvider.of(context)!.score.value++;
@@ -39,7 +39,7 @@ class TrueFalseQuestion extends StatelessWidget {
         CardWidget(
           onTap: () {
             if (question.isCorrect != null) return;
-            final isCorrect = question.correctAnswers.single == 1;
+            final isCorrect = question.correctAnswers.single == 0;
             question.isCorrect = isCorrect;
             Toaster.showIsCorrect(isCorrect);
             if (isCorrect) QuizProvider.of(context)!.score.value++;

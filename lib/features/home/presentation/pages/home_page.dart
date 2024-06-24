@@ -14,12 +14,12 @@ import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/services/shared_preferences_service.dart';
-import 'package:hitbitz/features/home/data/models/road_map_model.dart';
 import 'package:hitbitz/features/home/domain/usecases/get_categories_usecase.dart';
 import 'package:hitbitz/features/home/domain/usecases/get_roadmaps_usecase.dart';
 import 'package:hitbitz/features/home/presentation/cubit/home_cubit.dart';
 import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
 import 'package:hitbitz/features/home/presentation/widgets/recent_road_maps.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
 import 'package:hitbitz/features/roadmap/presentation/widgets/road_map_card.dart';
 
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               const Gap(10),
               const _SectionTitle(text: AppStrings.whereYouLeft).wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),
-              RecentRoadmapCard(
+              const RecentRoadmapCard(
                 roadMap: RoadMapModel(
                   name: 'Flutter',
                   description: 'Flutter - Mobile Apps Development',
@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
               BlocProvider.value(
                 value: di<RoadmapCubit>(),
                 child: SizedBox(
-                  height: 260,
+                  height: 250,
                   child: BlocBuilder<RoadmapCubit, RoadmapState>(
                     builder: (context, state) => switch (state.roadMapsStatus) {
                       CubitStatus.initial => const SizedBox.shrink(),
