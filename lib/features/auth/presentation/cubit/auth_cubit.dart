@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/services/shared_preferences_service.dart';
-import 'package:hitbitz/features/auth/data/models/user_model.dart';
+import 'package:hitbitz/features/auth/data/models/user_data_model.dart';
 import 'package:hitbitz/features/auth/domain/usecases/login_usecase.dart';
 import 'package:hitbitz/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:injectable/injectable.dart';

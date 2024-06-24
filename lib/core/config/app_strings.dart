@@ -69,6 +69,7 @@ class AppStrings {
   static const failedQuiz = 'failedQuiz';
   static const close = 'close';
   static const fillTheGap = 'fillTheGap';
+  static const users = 'users';
   static const done = 'done';
   static const trueWord = 'true';
   static const falseWord = 'false';

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hitbitz/features/auth/presentation/pages/login_page.dart';
 import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:hitbitz/features/main/presentation/pages/main_page.dart';
+import 'package:hitbitz/features/notification/presentation/pages/notifications_page.dart';
 import 'package:hitbitz/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_intro_page.dart';
@@ -62,6 +63,12 @@ class AppPages {
     name: AppRoutes.main,
     builder: (context, state) => const MainPage(),
     routes: [
+      GoRoute(
+        name: AppRoutes.notifications,
+        path: AppRoutes.notifications,
+        builder: (context, state) => const NotificationsPage(),
+        routes: const [],
+      ),
       GoRoute(
         name: AppRoutes.search,
         path: AppRoutes.search,

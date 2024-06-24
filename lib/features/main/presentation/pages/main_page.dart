@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/bottom_sheet_widget.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
@@ -15,15 +16,16 @@ import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
+import 'package:hitbitz/features/friends/presentation/pages/users_page.dart';
 import 'package:hitbitz/features/home/presentation/pages/home_page.dart';
 import 'package:hitbitz/features/main/data/enums/feedback_type.dart';
 import 'package:hitbitz/features/main/domain/usecases/make_suggestion_usecase.dart';
 import 'package:hitbitz/features/main/presentation/cubit/main_cubit/main_cubit.dart';
 import 'package:hitbitz/features/main/presentation/cubit/nav_cubit/navigation_cubit.dart';
-import 'package:hitbitz/features/notification/presentation/pages/notifications_page.dart';
 import 'package:hitbitz/features/profile/presentation/pages/profile_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/saved_roadmaps_page.dart';
 import 'package:hitbitz/features/search/presentation/widgets/search_delegate.dart';
+import 'package:hitbitz/router/app_routes.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 part '../widgets/feedback_sheet.dart';
@@ -59,13 +61,18 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         title: const TextWidget('HitBitz').wrapPadding(AppPadding.appBarLeadingPadding),
         actions: [
           IconButton(
+            tooltip: AppStrings.notifications,
+            onPressed: () => context.pushNamed(AppRoutes.notifications),
+            icon: const FaIcon(FontAwesomeIcons.solidBell),
+          ),
+          IconButton(
             tooltip: AppStrings.report,
             onPressed: () => Toaster.showSheet(
               context: context,
               sheet: const _FeedbackSheet(),
             ),
             icon: const FaIcon(FontAwesomeIcons.commentDots),
-          ).wrapPadding(AppPadding.appBarActionsPadding),
+          ),
           IconButton(
             onPressed: () => showSearch(context: context, delegate: CustomSearchDelegate()),
             icon: const FaIcon(FontAwesomeIcons.magnifyingGlass),
@@ -80,7 +87,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         children: const [
           HomePage(),
           SavedRoadmapsPage(),
-          NotificationsPage(),
+          UsersPage(),
           ProfilePage(),
         ],
       ),
@@ -134,9 +141,9 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
                     ),
                   ),
                   SalomonBottomBarItem(
-                    icon: const FaIcon(FontAwesomeIcons.solidBell, size: 18),
+                    icon: const FaIcon(FontAwesomeIcons.users, size: 18),
                     title: TextWidget(
-                      AppStrings.notifications,
+                      AppStrings.users,
                       style: context.textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: context.colorScheme.onSurfaceVariant,

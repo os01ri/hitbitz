@@ -4,7 +4,7 @@ import 'package:hitbitz/core/api/end_points.dart';
 import 'package:hitbitz/core/api/http.dart';
 import 'package:hitbitz/core/config/type_defs.dart';
 import 'package:hitbitz/core/data/models/base_response.dart';
-import 'package:hitbitz/features/auth/data/models/user_model.dart';
+import 'package:hitbitz/features/auth/data/models/user_data_model.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable

@@ -7,6 +7,7 @@ import 'package:hitbitz/core/components/error_widget.dart';
 import 'package:hitbitz/core/components/loading_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
@@ -29,35 +30,38 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: di<NotificationsCubit>(),
-      child: BlocBuilder<NotificationsCubit, NotificationsState>(
-        builder: (context, state) {
-          return switch (state.status) {
-            CubitStatus.initial => const SizedBox.shrink(),
-            CubitStatus.loading => const LoadingWidget().center(),
-            CubitStatus.failure => ErrorButtonWidget(onTap: di<NotificationsCubit>().getNotifications).center(),
-            CubitStatus.success => RefreshIndicator(
-                onRefresh: () async => di<NotificationsCubit>().getNotifications(),
-                child: ListView.separated(
-                  padding: AppPadding.listViewPadding,
-                  itemCount: state.notifications.length,
-                  separatorBuilder: (context, index) => const Gap(10),
-                  itemBuilder: (context, index) => CardWidget(
-                    isShadowed: true,
-                    child: ListTile(
-                      leading: Icon(
-                        FontAwesomeIcons.solidBell,
-                        color: index <= 1 ? context.colorScheme.primary : null,
+    return Scaffold(
+      appBar: AppBar(title: const TextWidget(AppStrings.notifications)),
+      body: BlocProvider.value(
+        value: di<NotificationsCubit>(),
+        child: BlocBuilder<NotificationsCubit, NotificationsState>(
+          builder: (context, state) {
+            return switch (state.status) {
+              CubitStatus.initial => const SizedBox.shrink(),
+              CubitStatus.loading => const LoadingWidget().center(),
+              CubitStatus.failure => ErrorButtonWidget(onTap: di<NotificationsCubit>().getNotifications).center(),
+              CubitStatus.success => RefreshIndicator(
+                  onRefresh: () async => di<NotificationsCubit>().getNotifications(),
+                  child: ListView.separated(
+                    padding: AppPadding.listViewPadding,
+                    itemCount: state.notifications.length,
+                    separatorBuilder: (context, index) => const Gap(10),
+                    itemBuilder: (context, index) => CardWidget(
+                      isShadowed: true,
+                      child: ListTile(
+                        leading: Icon(
+                          FontAwesomeIcons.solidBell,
+                          color: index <= 1 ? context.colorScheme.primary : null,
+                        ),
+                        title: TextWidget(state.notifications[index].title),
+                        subtitle: TextWidget(state.notifications[index].body),
                       ),
-                      title: TextWidget(state.notifications[index].title),
-                      subtitle: TextWidget(state.notifications[index].body),
                     ),
                   ),
                 ),
-              ),
-          };
-        },
+            };
+          },
+        ),
       ),
     );
   }
