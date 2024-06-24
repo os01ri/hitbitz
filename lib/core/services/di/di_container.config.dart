@@ -28,8 +28,10 @@ import '../../../features/friends/domain/repositories/friends_repository.dart'
     as _i12;
 import '../../../features/friends/domain/usecases/get_users_usecase.dart'
     as _i22;
+import '../../../features/friends/domain/usecases/show_user_usecase.dart'
+    as _i23;
 import '../../../features/friends/presentation/cubit/friends_cubit.dart'
-    as _i24;
+    as _i39;
 import '../../../features/home/data/datasources/remote_home_datasource.dart'
     as _i7;
 import '../../../features/home/data/repositories/home_repository_impl.dart'
@@ -40,7 +42,7 @@ import '../../../features/home/domain/usecases/get_categories_usecase.dart'
     as _i36;
 import '../../../features/home/domain/usecases/get_roadmaps_usecase.dart'
     as _i37;
-import '../../../features/home/presentation/cubit/home_cubit.dart' as _i39;
+import '../../../features/home/presentation/cubit/home_cubit.dart' as _i40;
 import '../../../features/main/data/datasources/remote_main_datasource.dart'
     as _i3;
 import '../../../features/main/data/repositories/main_repository_impl.dart'
@@ -50,7 +52,7 @@ import '../../../features/main/domain/repositories/main_repository.dart'
 import '../../../features/main/domain/usecases/make_suggestion_usecase.dart'
     as _i29;
 import '../../../features/main/presentation/cubit/main_cubit/main_cubit.dart'
-    as _i43;
+    as _i44;
 import '../../../features/notification/data/datasources/notifications_datasource.dart'
     as _i5;
 import '../../../features/notification/data/repositories/notifications_repository_impl.dart'
@@ -58,7 +60,7 @@ import '../../../features/notification/data/repositories/notifications_repositor
 import '../../../features/notification/domain/repositories/notification_repository.dart'
     as _i18;
 import '../../../features/notification/domain/usecases/get_notification_usecase.dart'
-    as _i23;
+    as _i24;
 import '../../../features/notification/presentation/cubit/notifications_cubit.dart'
     as _i30;
 import '../../../features/quiz/data/datasources/remote_quiz_datasource.dart'
@@ -68,11 +70,11 @@ import '../../../features/quiz/data/repositories/roadmap_repository_impl.dart'
 import '../../../features/quiz/domain/repositories/quiz_repository.dart'
     as _i27;
 import '../../../features/quiz/domain/usecases/complete_quiz_usecase.dart'
-    as _i40;
-import '../../../features/quiz/domain/usecases/get_quizzes_usecase.dart'
     as _i41;
-import '../../../features/quiz/domain/usecases/show_quiz_usecase.dart' as _i42;
-import '../../../features/quiz/presentation/cubit/quiz_cubit.dart' as _i45;
+import '../../../features/quiz/domain/usecases/get_quizzes_usecase.dart'
+    as _i42;
+import '../../../features/quiz/domain/usecases/show_quiz_usecase.dart' as _i43;
+import '../../../features/quiz/presentation/cubit/quiz_cubit.dart' as _i46;
 import '../../../features/roadmap/data/datasources/remote_roadmap_datasource.dart'
     as _i8;
 import '../../../features/roadmap/data/repositories/roadmap_repository_impl.dart'
@@ -90,7 +92,7 @@ import '../../../features/roadmap/domain/usecases/show_roadmap_usecase.dart'
 import '../../../features/roadmap/domain/usecases/start_roadmap_usecase.dart'
     as _i35;
 import '../../../features/roadmap/presentation/cubit/roadmap_cubit.dart'
-    as _i44;
+    as _i45;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i1.GetIt $initGetIt(
@@ -130,10 +132,10 @@ _i1.GetIt $initGetIt(
       remoteDataSource: gh<_i8.RemoteRoadMapDataSource>()));
   gh.factory<_i22.GetUsersUsecase>(
       () => _i22.GetUsersUsecase(repository: gh<_i12.FriendsRepository>()));
-  gh.factory<_i23.GetNotificationUsecase>(() => _i23.GetNotificationUsecase(
+  gh.factory<_i23.ShowUserUsecase>(
+      () => _i23.ShowUserUsecase(repository: gh<_i12.FriendsRepository>()));
+  gh.factory<_i24.GetNotificationUsecase>(() => _i24.GetNotificationUsecase(
       repository: gh<_i18.NotificationsRepository>()));
-  gh.lazySingleton<_i24.FriendsCubit>(
-      () => _i24.FriendsCubit(getUsersUsecase: gh<_i22.GetUsersUsecase>()));
   gh.lazySingleton<_i25.HomeRepository>(() => _i26.HomeRepositoryImpl(
       remoteDataSource: gh<_i7.RemoteHomeDataSource>()));
   gh.lazySingleton<_i27.QuizRepository>(() => _i28.QuizRepositoryImpl(
@@ -141,7 +143,7 @@ _i1.GetIt $initGetIt(
   gh.factory<_i29.MakeSuggestionUsecase>(
       () => _i29.MakeSuggestionUsecase(repository: gh<_i14.MainRepository>()));
   gh.lazySingleton<_i30.NotificationsCubit>(() => _i30.NotificationsCubit(
-      getNotificationUsecase: gh<_i23.GetNotificationUsecase>()));
+      getNotificationUsecase: gh<_i24.GetNotificationUsecase>()));
   gh.factory<_i31.ShowRoadMapUsecase>(
       () => _i31.ShowRoadMapUsecase(repository: gh<_i20.RoadMapRepository>()));
   gh.factory<_i32.RoadMapToggleBookmarkUsecase>(() =>
@@ -161,17 +163,21 @@ _i1.GetIt $initGetIt(
         loginUsecase: gh<_i17.LoginUsecase>(),
         signInUsecase: gh<_i16.SignInUsecase>(),
       ));
-  gh.factory<_i39.HomeCubit>(() =>
-      _i39.HomeCubit(getCategoriesUsecase: gh<_i36.GetCategoriesUsecase>()));
-  gh.factory<_i40.CompleteQuizUsecase>(
-      () => _i40.CompleteQuizUsecase(repository: gh<_i27.QuizRepository>()));
-  gh.factory<_i41.GetQuizzesUsecase>(
-      () => _i41.GetQuizzesUsecase(repository: gh<_i27.QuizRepository>()));
-  gh.factory<_i42.ShowQuizUsecase>(
-      () => _i42.ShowQuizUsecase(repository: gh<_i27.QuizRepository>()));
-  gh.lazySingleton<_i43.MainCubit>(() =>
-      _i43.MainCubit(makeSuggestionUsecase: gh<_i29.MakeSuggestionUsecase>()));
-  gh.lazySingleton<_i44.RoadmapCubit>(() => _i44.RoadmapCubit(
+  gh.lazySingleton<_i39.FriendsCubit>(() => _i39.FriendsCubit(
+        getUsersUsecase: gh<_i22.GetUsersUsecase>(),
+        showUserUsecase: gh<_i23.ShowUserUsecase>(),
+      ));
+  gh.factory<_i40.HomeCubit>(() =>
+      _i40.HomeCubit(getCategoriesUsecase: gh<_i36.GetCategoriesUsecase>()));
+  gh.factory<_i41.CompleteQuizUsecase>(
+      () => _i41.CompleteQuizUsecase(repository: gh<_i27.QuizRepository>()));
+  gh.factory<_i42.GetQuizzesUsecase>(
+      () => _i42.GetQuizzesUsecase(repository: gh<_i27.QuizRepository>()));
+  gh.factory<_i43.ShowQuizUsecase>(
+      () => _i43.ShowQuizUsecase(repository: gh<_i27.QuizRepository>()));
+  gh.lazySingleton<_i44.MainCubit>(() =>
+      _i44.MainCubit(makeSuggestionUsecase: gh<_i29.MakeSuggestionUsecase>()));
+  gh.lazySingleton<_i45.RoadmapCubit>(() => _i45.RoadmapCubit(
         showRoadMapUsecase: gh<_i31.ShowRoadMapUsecase>(),
         startRoadMapUsecase: gh<_i35.StartRoadMapUsecase>(),
         getStepsUsecase: gh<_i34.GetStepsUsecase>(),
@@ -179,10 +185,10 @@ _i1.GetIt $initGetIt(
         getSavedRoadmapsUsecase: gh<_i33.GetSavedRoadmapsUsecase>(),
         getRoadMapsUsecase: gh<_i37.GetRoadMapsUsecase>(),
       ));
-  gh.lazySingleton<_i45.QuizCubit>(() => _i45.QuizCubit(
-        getQuizzesUsecase: gh<_i41.GetQuizzesUsecase>(),
-        showQuizUsecase: gh<_i42.ShowQuizUsecase>(),
-        completeQuizUsecase: gh<_i40.CompleteQuizUsecase>(),
+  gh.lazySingleton<_i46.QuizCubit>(() => _i46.QuizCubit(
+        getQuizzesUsecase: gh<_i42.GetQuizzesUsecase>(),
+        showQuizUsecase: gh<_i43.ShowQuizUsecase>(),
+        completeQuizUsecase: gh<_i41.CompleteQuizUsecase>(),
       ));
   return getIt;
 }

@@ -17,4 +17,5 @@ class AppRoutes {
   // static const roadmapSearchResults = 'roadmap-search-results';
   static const search = 'search';
   static const notifications = 'notifications';
+  static const profile = 'profile';
 }

@@ -7,14 +7,14 @@ import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/utilities/app_localization.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class MyProfilePage extends StatefulWidget {
+  const MyProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<MyProfilePage> createState() => _MyProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _MyProfilePageState extends State<MyProfilePage> {
   late final ValueNotifier<Locale> _lang;
 
   @override

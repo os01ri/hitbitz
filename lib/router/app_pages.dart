@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/features/auth/presentation/pages/login_page.dart';
 import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:hitbitz/features/friends/presentation/pages/profile_page.dart';
 import 'package:hitbitz/features/main/presentation/pages/main_page.dart';
 import 'package:hitbitz/features/notification/presentation/pages/notifications_page.dart';
 import 'package:hitbitz/features/onboarding/presentation/pages/onboarding_page.dart';
@@ -73,6 +74,12 @@ class AppPages {
         name: AppRoutes.search,
         path: AppRoutes.search,
         builder: (context, state) => SearchPage(query: state.extra as String),
+        routes: const [],
+      ),
+      GoRoute(
+        name: AppRoutes.profile,
+        path: AppRoutes.profile,
+        builder: (context, state) => ProfilePage(id: state.extra as int),
         routes: const [],
       ),
       // GoRoute(

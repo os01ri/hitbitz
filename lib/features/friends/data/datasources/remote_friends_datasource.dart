@@ -18,4 +18,12 @@ class RemoteFriendsDataSource {
       dataConverter: (body) => usersListFromJson(body),
     );
   }
+
+  Future<BaseResponse<UserModel>> showUser({required int id, required ParamsMap params}) async {
+    final rowData = await Http.get(uri: EndPoints.showUser(id: id, params: params));
+    return BaseResponse.fromJson(
+      json: json.decode(rowData),
+      dataConverter: (body) => UserModel.fromJson(body),
+    );
+  }
 }

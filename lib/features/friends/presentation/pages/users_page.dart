@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
 import 'package:hitbitz/core/components/error_widget.dart';
 import 'package:hitbitz/core/components/image_widget.dart';
@@ -12,6 +13,7 @@ import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/features/friends/presentation/cubit/friends_cubit.dart';
+import 'package:hitbitz/router/app_routes.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({super.key});
@@ -46,6 +48,7 @@ class _UsersPageState extends State<UsersPage> {
                   itemBuilder: (context, index) => CardWidget(
                     isShadowed: true,
                     child: ListTile(
+                      onTap: () => context.pushNamed(AppRoutes.profile, extra: state.users[index].id),
                       leading: ImageWidget(width: 50, path: state.users[index].profileImage?.mediaUrl ?? ''),
                       title: TextWidget(state.users[index].fullName),
                       subtitle: TextWidget(state.users[index].userName),

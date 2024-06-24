@@ -20,4 +20,12 @@ class FriendsRepositoryImpl with RepositoryExceptionHandler implements FriendsRe
       return Right(result.data);
     });
   }
+
+  @override
+  Future<Either<Failure, UserModel>> showUser({required int id, required ParamsMap? params}) {
+    return exceptionHandler<UserModel>(tryCall: () async {
+      final result = await remoteDataSource.showUser(id: id, params: params);
+      return Right(result.data);
+    });
+  }
 }

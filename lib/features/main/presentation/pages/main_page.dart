@@ -88,7 +88,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           HomePage(),
           SavedRoadmapsPage(),
           UsersPage(),
-          ProfilePage(),
+          MyProfilePage(),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigation(),
