@@ -73,7 +73,13 @@ class ResultPage extends StatelessWidget {
                 text: AppStrings.close,
                 width: context.width,
                 backgroundColor: context.colorScheme.onPrimary,
-                onPressed: () => context.goNamed(AppRoutes.main),
+                onPressed: () {
+                  if (args.hasPassed) {
+                    context.goNamed(AppRoutes.main);
+                    return;
+                  }
+                  context.pop();
+                },
               ),
             ],
           ).center().wrapPadding(AppPadding.pagePadding),

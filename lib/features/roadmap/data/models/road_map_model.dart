@@ -10,6 +10,7 @@ class RoadMapModel {
   final String? name;
   final String? description;
   final int? rate;
+  final int? users;
   final int? duration;
   final List<LevelModel> levels;
   final CategoryModel? category;
@@ -29,6 +30,7 @@ class RoadMapModel {
     this.currentLevel,
     this.currentStep,
     this.completed,
+    this.users = 0,
   });
 
   factory RoadMapModel.fromJson(Map<String, dynamic> json) => RoadMapModel(
@@ -43,5 +45,6 @@ class RoadMapModel {
         currentLevel: json['current_level'],
         currentStep: json['current_step'],
         completed: json['completed'],
+        users: json['users'] ?? 0,
       );
 }

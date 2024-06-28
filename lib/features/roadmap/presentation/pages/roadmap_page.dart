@@ -132,11 +132,11 @@ class _RoadmapPageState extends State<RoadmapPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                const Row(
+                                Row(
                                   children: [
-                                    FaIcon(FontAwesomeIcons.userGroup, size: 16),
-                                    Gap(3),
-                                    TextWidget('1.2 K'),
+                                    const FaIcon(FontAwesomeIcons.userGroup, size: 16),
+                                    const Gap(3),
+                                    TextWidget(state.roadmap!.users.numberFormat()),
                                   ],
                                 ),
                                 Row(
@@ -188,14 +188,6 @@ class _RoadmapPageState extends State<RoadmapPage> {
                                 subtitle: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const Row(
-                                      children: [
-                                        FaIcon(FontAwesomeIcons.userGroup, size: 16),
-                                        Gap(3),
-                                        TextWidget('1.2 K'),
-                                      ],
-                                    ),
-                                    const Spacer(),
                                     Row(
                                       children: [
                                         const FaIcon(FontAwesomeIcons.clock, size: 16),
@@ -207,8 +199,8 @@ class _RoadmapPageState extends State<RoadmapPage> {
                                   ],
                                 ),
                                 children: [
-                                  const TextWidget(
-                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries",
+                                  TextWidget(
+                                    state.roadmap!.levels[index].description,
                                     maxLines: 50,
                                   ),
                                   const Gap(10),
@@ -217,14 +209,11 @@ class _RoadmapPageState extends State<RoadmapPage> {
                                     style: context.textTheme.titleMedium,
                                   ),
                                   const Gap(10),
-                                  for (int i = 0; i < 3; i++)
-                                    const ListTile(
-                                      title: TextWidget(
-                                        'Knowledge of programming fundamentals',
-                                        maxLines: 10,
-                                      ),
-                                      trailing: Icon(Icons.check, color: Colors.green),
-                                    ),
+                                  for (int i = 0; i < state.roadmap!.levels[index].requirements.length; i++)
+                                    TextWidget(
+                                      '#${i + 1} - ${state.roadmap!.levels[index].requirements[i]}',
+                                      maxLines: 10,
+                                    ).wrapPadding(const EdgeInsets.all(3)),
                                   if (state.roadmap!.currentStep != null && index <= state.roadmap!.currentLevel! - 1) ...[
                                     const Gap(10),
                                     ButtonWidget(
@@ -242,6 +231,7 @@ class _RoadmapPageState extends State<RoadmapPage> {
                                       text: AppStrings.start,
                                     ),
                                   ],
+                                  SizedBox(width: context.width),
                                 ],
                               ),
                             ),

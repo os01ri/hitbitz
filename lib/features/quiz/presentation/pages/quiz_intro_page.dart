@@ -9,12 +9,14 @@ import 'package:hitbitz/core/components/loading_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_assets.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/box_shadow.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/num_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
@@ -158,7 +160,16 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                         ).expand(),
                         const Gap(5),
                         ButtonWidget(
-                          onPressed: () => context.pushNamed(AppRoutes.quiz, extra: state.quiz),
+                          onPressed: () {
+                            if (state.quiz!.questions.isEmpty) {
+                              Toaster.showWarning(
+                                context: context,
+                                warningMessage: AppStrings.emptyQuizWarning,
+                              );
+                              return;
+                            }
+                            context.pushNamed(AppRoutes.quiz, extra: state.quiz);
+                          },
                           width: context.width,
                           height: 50,
                           text: 'Play Alone',
