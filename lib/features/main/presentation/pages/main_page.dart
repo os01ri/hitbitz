@@ -22,7 +22,7 @@ import 'package:hitbitz/features/main/data/enums/feedback_type.dart';
 import 'package:hitbitz/features/main/domain/usecases/make_suggestion_usecase.dart';
 import 'package:hitbitz/features/main/presentation/cubit/main_cubit/main_cubit.dart';
 import 'package:hitbitz/features/main/presentation/cubit/nav_cubit/navigation_cubit.dart';
-import 'package:hitbitz/features/profile/presentation/pages/profile_page.dart';
+import 'package:hitbitz/features/profile/presentation/pages/my_profile_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/saved_roadmaps_page.dart';
 import 'package:hitbitz/features/search/presentation/widgets/search_delegate.dart';
 import 'package:hitbitz/router/app_routes.dart';

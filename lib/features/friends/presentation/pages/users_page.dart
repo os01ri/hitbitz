@@ -55,7 +55,7 @@ class _UsersPageState extends State<UsersPage> {
                       onTap: () => context.pushNamed(AppRoutes.profile, extra: state.users[index].id),
                       leading: ImageWidget(width: 50, path: state.users[index].profileImage?.mediaUrl ?? ''),
                       title: TextWidget(state.users[index].fullName),
-                      subtitle: TextWidget(state.users[index].userName),
+                      subtitle: TextWidget('@${state.users[index].userName}'),
                       trailing: CardWidget(
                         onTap: () => di<FriendsCubit>().sendRequest(SendFriendRequestParams(id: state.users[index].id)),
                         height: 30,

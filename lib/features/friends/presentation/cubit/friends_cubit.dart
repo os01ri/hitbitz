@@ -55,5 +55,7 @@ class FriendsCubit extends Cubit<FriendsState> {
       (l) => emit(state.copyWith(sendRequestStatus: CubitStatus.failure)),
       (r) => emit(state.copyWith(sendRequestStatus: CubitStatus.success)),
     );
+
+    emit(state.copyWith(sendRequestStatus: CubitStatus.initial));
   }
 }

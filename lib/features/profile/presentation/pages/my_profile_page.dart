@@ -6,6 +6,7 @@ import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/utilities/app_localization.dart';
+import 'package:hitbitz/features/friends/presentation/pages/profile_page.dart';
 
 class MyProfilePage extends StatefulWidget {
   const MyProfilePage({super.key});
@@ -34,6 +35,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
     return Scaffold(
       body: Column(
         children: [
+          const ProfileWidget(id: 2).expand(),
           SizedBox(
             // height: AppDimensions.buttonHeight,
             width: context.width,
