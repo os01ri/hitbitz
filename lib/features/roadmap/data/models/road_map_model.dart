@@ -17,6 +17,7 @@ class RoadMapModel {
   final int? currentLevel;
   final int? currentStep;
   final int? completed;
+  final int? progress;
 
   const RoadMapModel({
     this.id,
@@ -31,6 +32,7 @@ class RoadMapModel {
     this.currentStep,
     this.completed,
     this.users = 0,
+    this.progress = 0,
   });
 
   factory RoadMapModel.fromJson(Map<String, dynamic> json) => RoadMapModel(
@@ -46,5 +48,6 @@ class RoadMapModel {
         currentStep: json['current_step'],
         completed: json['completed'],
         users: json['users'] ?? 0,
+        progress: json['progress'] ?? 0,
       );
 }

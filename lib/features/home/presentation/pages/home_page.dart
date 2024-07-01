@@ -19,7 +19,6 @@ import 'package:hitbitz/features/home/domain/usecases/get_roadmaps_usecase.dart'
 import 'package:hitbitz/features/home/presentation/cubit/home_cubit.dart';
 import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
 import 'package:hitbitz/features/home/presentation/widgets/recent_road_maps.dart';
-import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
 import 'package:hitbitz/features/roadmap/presentation/widgets/road_map_card.dart';
 
@@ -38,7 +37,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _homeCubit = di<HomeCubit>()..getCategories(const GetCategoriesParams());
+    _homeCubit = di<HomeCubit>()
+      ..getCategories(const GetCategoriesParams())
+      ..getHomeRoadMap();
     di<RoadmapCubit>().getRoadMaps(const GetRoadMapsParams());
   }
 
@@ -49,7 +50,9 @@ class _HomePageState extends State<HomePage> {
         value: _homeCubit,
         child: RefreshIndicator.adaptive(
           onRefresh: () async {
-            _homeCubit.getCategories(const GetCategoriesParams());
+            _homeCubit
+              ..getCategories(const GetCategoriesParams())
+              ..getHomeRoadMap();
             di<RoadmapCubit>().getRoadMaps(const GetRoadMapsParams());
           },
           child: ListView(
@@ -59,13 +62,16 @@ class _HomePageState extends State<HomePage> {
               const Gap(10),
               const _SectionTitle(text: AppStrings.whereYouLeft).wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),
-              const RecentRoadmapCard(
-                roadMap: RoadMapModel(
-                  name: 'Flutter',
-                  description: 'Flutter - Mobile Apps Development',
-                  rate: 5,
-                ),
-              ).wrapPadding(AppPadding.pagePaddingHorizontal),
+              BlocBuilder<HomeCubit, HomeState>(
+                builder: (context, state) => switch (state.homeRoadMapStatus) {
+                  CubitStatus.initial => const SizedBox.shrink(),
+                  CubitStatus.loading => const LoadingWidget().center(),
+                  CubitStatus.failure => ErrorButtonWidget(onTap: () => _homeCubit.getHomeRoadMap()),
+                  CubitStatus.success => state.roadMap == null
+                      ? const SizedBox.shrink()
+                      : RecentRoadmapCard(roadMap: state.roadMap!).wrapPadding(AppPadding.pagePaddingHorizontal),
+                },
+              ),
               const Gap(10),
               const _SectionTitle(text: AppStrings.categories).wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),

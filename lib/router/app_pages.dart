@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/features/auth/presentation/pages/login_page.dart';
 import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:hitbitz/features/friends/presentation/pages/friend_requests_page.dart';
+import 'package:hitbitz/features/friends/presentation/pages/friends_page.dart';
 import 'package:hitbitz/features/friends/presentation/pages/profile_page.dart';
 import 'package:hitbitz/features/main/presentation/pages/main_page.dart';
 import 'package:hitbitz/features/notification/presentation/pages/notifications_page.dart';
@@ -80,7 +82,18 @@ class AppPages {
         name: AppRoutes.profile,
         path: AppRoutes.profile,
         builder: (context, state) => ProfilePage(id: state.extra as int),
-        routes: const [],
+        routes: [
+          GoRoute(
+            name: AppRoutes.friendRequests,
+            path: AppRoutes.friendRequests,
+            builder: (context, state) => const FriendRequestsPage(),
+          ),
+          GoRoute(
+            name: AppRoutes.friends,
+            path: AppRoutes.friends,
+            builder: (context, state) => const FriendsPage(),
+          ),
+        ],
       ),
       // GoRoute(
       //   name: AppRoutes.roadmapSearchResults,

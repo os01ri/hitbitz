@@ -31,6 +31,30 @@ class FriendsRepositoryImpl with RepositoryExceptionHandler implements FriendsRe
   }
 
   @override
+  Future<Either<Failure, List<UserModel>>> getFriends({required ParamsMap? params}) {
+    return exceptionHandler<List<UserModel>>(tryCall: () async {
+      final result = await remoteDataSource.getFriends(params: params);
+      return Right(result.data);
+    });
+  }
+
+  @override
+  Future<Either<Failure, List<UserModel>>> getFriendRequests({required ParamsMap? params}) {
+    return exceptionHandler<List<UserModel>>(tryCall: () async {
+      final result = await remoteDataSource.getFriendRequests(params: params);
+      return Right(result.data);
+    });
+  }
+
+  @override
+  Future<Either<Failure, NoResponse>> acceptFriendRequest({required BodyMap body}) {
+    return exceptionHandler<NoResponse>(tryCall: () async {
+      final result = await remoteDataSource.acceptFriendRequest(body: body);
+      return Right(result);
+    });
+  }
+
+  @override
   Future<Either<Failure, NoResponse>> sendFriendRequest({required BodyMap body}) {
     return exceptionHandler<NoResponse>(tryCall: () async {
       final result = await remoteDataSource.sendFriendRequest(body: body);

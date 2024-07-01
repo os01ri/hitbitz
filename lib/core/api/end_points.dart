@@ -6,9 +6,9 @@ class EndPoints {
   ////////////!      General      !////////////
   static const _scheme = 'http';
   // static const _host = '192.168.43.127';
-  // static const _host = '10.0.2.2';
-  static const _host = 'hitbitz.online';
-  // static const _port = 8000;
+  static const _host = '10.0.2.2';
+  // static const _host = 'hitbitz.online';
+  static const _port = 8000;
 
   // static String imageUrl(String path) {
   //   const base = '~/osama-rida/Documents/projects/hitbitz_backend/public/images/temp/1/';
@@ -26,7 +26,7 @@ class EndPoints {
       scheme: _scheme,
       host: _host,
       path: 'api/$path',
-      // port: _port,
+      port: _port,
       queryParameters: params,
     );
     return uri;
@@ -38,10 +38,13 @@ class EndPoints {
   static Uri logIn({ParamsMap params}) => _user(path: 'login', params: params);
   static Uri getUsers({ParamsMap params}) => _user(path: 'users', params: params);
   static Uri showUser({required int id, ParamsMap params}) => _user(path: 'users/$id', params: params);
-  static Uri sendFriendRequest({ParamsMap params}) => _user(path: 'friendRequests', params: params);
+  static Uri friendRequests({ParamsMap params}) => _user(path: 'friendRequests', params: params);
+  static Uri acceptRequest({ParamsMap params}) => _user(path: 'acceptRequest', params: params);
+  static Uri friends({ParamsMap params}) => _user(path: 'friends', params: params);
 
   static Uri getCategories({ParamsMap params}) => _user(path: 'categories', params: params);
 
+  static Uri getHomeRoadmap({ParamsMap params}) => _user(path: 'getHomeRoadmap', params: params);
   static Uri getRoadMaps({ParamsMap params}) => _user(path: 'roadmaps', params: params);
   static Uri showRoadMap({required int id, ParamsMap params}) => _user(path: 'roadmaps/$id', params: params);
   static Uri startRoadMap({required int id, ParamsMap params}) => _user(path: 'roadmaps/$id/start', params: params);

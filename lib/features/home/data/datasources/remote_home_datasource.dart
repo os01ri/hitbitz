@@ -27,4 +27,12 @@ class RemoteHomeDataSource {
       dataConverter: (body) => roadMapsListFromJson(body),
     );
   }
+
+  Future<BaseResponse<RoadMapModel>> getHomeRoadmap({required ParamsMap params}) async {
+    final rowData = await Http.get(uri: EndPoints.getHomeRoadmap(params: params));
+    return BaseResponse.fromJson(
+      json: json.decode(rowData),
+      dataConverter: (body) => RoadMapModel.fromJson(body),
+    );
+  }
 }

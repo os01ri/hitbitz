@@ -87,4 +87,6 @@ class AppStrings {
   static const onBoarding3Title = 'onBoarding3Title';
   static const onBoarding3Body = 'onBoarding3Body';
   static const emptyQuizWarning = 'emptyQuizWarning';
+  static const friendRequests = 'friendRequests';
+  static const friends = 'friends';
 }

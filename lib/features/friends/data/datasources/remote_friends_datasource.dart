@@ -28,8 +28,29 @@ class RemoteFriendsDataSource {
     );
   }
 
+  Future<BaseResponse<List<UserModel>>> getFriends({required ParamsMap params}) async {
+    final rowData = await Http.get(uri: EndPoints.friends(params: params));
+    return BaseResponse.fromJson(
+      json: json.decode(rowData),
+      dataConverter: (body) => usersListFromJson(body),
+    );
+  }
+
+  Future<BaseResponse<List<UserModel>>> getFriendRequests({required ParamsMap params}) async {
+    final rowData = await Http.get(uri: EndPoints.friendRequests(params: params));
+    return BaseResponse.fromJson(
+      json: json.decode(rowData),
+      dataConverter: (body) => usersListFromJson(body),
+    );
+  }
+
+  Future<NoResponse> acceptFriendRequest({required BodyMap body}) async {
+    await Http.postFormData(uri: EndPoints.acceptRequest(), body: body);
+    return NoResponse();
+  }
+
   Future<NoResponse> sendFriendRequest({required BodyMap body}) async {
-    await Http.post(uri: EndPoints.sendFriendRequest(), body: body);
+    await Http.postFormData(uri: EndPoints.friendRequests(), body: body);
     return NoResponse();
   }
 }

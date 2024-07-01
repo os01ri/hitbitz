@@ -53,7 +53,14 @@ class _QuizzesPageState extends State<QuizzesPage> {
                   // onTap: () => context.pushNamed(AppRoutes.quiz),
                   color: getColor(index: index, quizzes: state.quizzes),
                   child: ListTile(
-                    onTap: () => context.pushNamed(AppRoutes.quizIntro, extra: state.quizzes[index].id),
+                    onTap: () {
+                      if (state.quizzes[index].isCompleted == false) {
+                        if (index >= 1 && state.quizzes[index - 1].isCompleted == false) {
+                          return;
+                        }
+                      }
+                      context.pushNamed(AppRoutes.quizIntro, extra: state.quizzes[index].id);
+                    },
                     leading: CardWidget(
                       isCircle: true,
                       color: context.colorScheme.onPrimary,

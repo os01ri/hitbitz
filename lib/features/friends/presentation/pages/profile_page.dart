@@ -40,22 +40,30 @@ class ProfileWidget extends StatefulWidget {
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
+  late final FriendsCubit _cubit;
+
   @override
   void initState() {
     super.initState();
-    di<FriendsCubit>().showUser(ShowUserParams(id: widget.id));
+    _cubit = di<FriendsCubit>()..showUser(ShowUserParams(id: widget.id));
+  }
+
+  @override
+  void dispose() {
+    _cubit.close();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: BlocProvider.value(
-        value: di<FriendsCubit>(),
+        value: _cubit,
         child: BlocBuilder<FriendsCubit, FriendsState>(
           builder: (context, state) => switch (state.showUserStatus) {
             CubitStatus.initial => const SizedBox.shrink(),
             CubitStatus.loading => const LoadingWidget().center(),
-            CubitStatus.failure => ErrorButtonWidget(onTap: () => di<FriendsCubit>().showUser(ShowUserParams(id: widget.id))),
+            CubitStatus.failure => ErrorButtonWidget(onTap: () => _cubit.showUser(ShowUserParams(id: widget.id))),
             CubitStatus.success => Column(
                 // crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

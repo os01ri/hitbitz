@@ -41,7 +41,7 @@ class RecentRoadmapCard extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           TextWidget(
-            '60%',
+            '${roadMap.progress}%',
             style: context.textTheme.bodySmall?.copyWith(
               color: context.colorScheme.onPrimary,
             ),
@@ -49,7 +49,7 @@ class RecentRoadmapCard extends StatelessWidget {
           CircularProgressIndicator(
             backgroundColor: context.colorScheme.onPrimary,
             color: context.colorScheme.primary,
-            value: .6,
+            value: roadMap.progress! * .01,
             strokeWidth: 7,
           ),
         ],

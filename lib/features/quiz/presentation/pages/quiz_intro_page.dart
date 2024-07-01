@@ -99,27 +99,27 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                     ),
                   ),
                   const Divider(),
-                  const Gap(10),
-                  ListTile(
-                    leading: const CircleAvatar(),
-                    title: TextWidget(
-                      'Andrew Tiet',
-                      style: context.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: TextWidget('@andrew_tiet', style: context.textTheme.bodySmall),
-                    trailing: ButtonWidget(
-                      onPressed: () {},
-                      width: 50,
-                      height: 30,
-                      text: 'follow',
-                      isOutlined: true,
-                      borderColor: context.colorScheme.tertiary,
-                      backgroundColor: context.colorScheme.surface,
-                      foregroundColor: context.colorScheme.tertiary,
-                    ),
-                  ),
+                  // const Gap(10),
+                  // ListTile(
+                  //   leading: const CircleAvatar(),
+                  //   title: TextWidget(
+                  //     'Andrew Tiet',
+                  //     style: context.textTheme.titleSmall?.copyWith(
+                  //       fontWeight: FontWeight.bold,
+                  //     ),
+                  //   ),
+                  //   subtitle: TextWidget('@andrew_tiet', style: context.textTheme.bodySmall),
+                  //   trailing: ButtonWidget(
+                  //     onPressed: () {},
+                  //     width: 50,
+                  //     height: 30,
+                  //     text: 'follow',
+                  //     isOutlined: true,
+                  //     borderColor: context.colorScheme.tertiary,
+                  //     backgroundColor: context.colorScheme.surface,
+                  //     foregroundColor: context.colorScheme.tertiary,
+                  //   ),
+                  // ),
                   const Gap(10),
                   TextWidget('Description', style: context.textTheme.titleMedium),
                   TextWidget((state.quiz!.description ?? ('text ' * 50)), maxLines: 500),

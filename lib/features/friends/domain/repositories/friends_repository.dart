@@ -7,5 +7,8 @@ import 'package:hitbitz/features/friends/data/models/user_model.dart';
 abstract class FriendsRepository {
   Future<Either<Failure, List<UserModel>>> getUsers({required ParamsMap params});
   Future<Either<Failure, UserModel>> showUser({required int id, required ParamsMap params});
+  Future<Either<Failure, List<UserModel>>> getFriends({required ParamsMap params});
+  Future<Either<Failure, List<UserModel>>> getFriendRequests({required ParamsMap params});
+  Future<Either<Failure, NoResponse>> acceptFriendRequest({required BodyMap body});
   Future<Either<Failure, NoResponse>> sendFriendRequest({required BodyMap body});
 }

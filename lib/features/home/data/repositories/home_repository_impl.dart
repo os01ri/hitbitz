@@ -4,8 +4,8 @@ import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/error/repository_exception_handler.dart';
 import 'package:hitbitz/features/home/data/datasources/remote_home_datasource.dart';
 import 'package:hitbitz/features/home/data/models/category_model.dart';
-import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/home/domain/repositories/home_repository.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: HomeRepository)
@@ -17,7 +17,7 @@ class HomeRepositoryImpl with RepositoryExceptionHandler implements HomeReposito
   @override
   Future<Either<Failure, List<CategoryModel>>> getCategories({required ParamsMap params}) {
     return exceptionHandler<List<CategoryModel>>(tryCall: () async {
-      final result = await remoteDataSource.getCategories(params:params);
+      final result = await remoteDataSource.getCategories(params: params);
       return Right(result.data);
     });
   }
@@ -26,6 +26,14 @@ class HomeRepositoryImpl with RepositoryExceptionHandler implements HomeReposito
   Future<Either<Failure, List<RoadMapModel>>> getRoadMaps({required ParamsMap params, required BodyMap body}) {
     return exceptionHandler<List<RoadMapModel>>(tryCall: () async {
       final result = await remoteDataSource.getRoadMaps(params: params, body: body);
+      return Right(result.data);
+    });
+  }
+
+  @override
+  Future<Either<Failure, RoadMapModel>> getHomeRoadmap({required ParamsMap params}) {
+    return exceptionHandler<RoadMapModel>(tryCall: () async {
+      final result = await remoteDataSource.getHomeRoadmap(params: params);
       return Right(result.data);
     });
   }
