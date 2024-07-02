@@ -25,7 +25,7 @@ class MultipleSelectQuestion extends StatelessWidget {
           itemBuilder: (context, index) => StatefulBuilder(
             builder: (context, setState) => CheckboxListTile(
               value: question.userAnswersIds.contains(question.answers[index].id),
-              fillColor: const MaterialStatePropertyAll(Colors.transparent),
+              fillColor: const WidgetStatePropertyAll(Colors.transparent),
               checkboxShape: const CircleBorder(
                 eccentricity: 0,
                 side: BorderSide(color: Colors.red, width: 0),
