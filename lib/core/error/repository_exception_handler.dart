@@ -3,8 +3,6 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:hitbitz/core/error/exception.dart';
-import 'package:hitbitz/core/services/shared_preferences_service.dart';
-import 'package:restart_app/restart_app.dart';
 
 import '../extensions/colorful_logging_extension.dart';
 import 'failures.dart';
@@ -19,9 +17,9 @@ mixin RepositoryExceptionHandler {
       return right;
     } on UnauthenticatedException catch (e) {
       log('<< UnauthenticatedException >> '.logRed);
-      await SharedPreferencesService.clearStorage();
-      await Restart.restartApp();
-      return Left(ServerFailure(message: e.message, code: e.statusCode));
+      // await SharedPreferencesService.clearStorage();
+      // await Restart.restartApp();
+      return Left(UnauthenticatedFailure(message: e.message, code: e.statusCode));
     } on ServerException catch (e) {
       log('<< ServerException >> '.logRed);
       return Left(ServerFailure(message: e.message, code: e.statusCode));

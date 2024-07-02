@@ -13,6 +13,7 @@ import 'package:hitbitz/core/config/app_dimensions.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
+import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/num_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
@@ -249,6 +250,36 @@ class _RoadmapPageState extends State<RoadmapPage> {
   }
 
   void _listener(BuildContext context, RoadmapState state) {
+    if (state.roadmapStatus == CubitStatus.failure) {
+      if (state.failure is UnauthenticatedFailure) {
+        // context.pop();
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const TextWidget(AppStrings.createYourAccount),
+            content: const TextWidget(
+              AppStrings.createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp,
+              maxLines: 50,
+            ),
+            actions: [
+              ButtonWidget(
+                onPressed: () => context.goNamed(AppRoutes.signup),
+                backgroundColor: context.colorScheme.primary,
+                foregroundColor: context.colorScheme.onPrimary,
+                width: context.width * .25,
+                text: AppStrings.createAccount,
+              ),
+              ButtonWidget(
+                onPressed: context.pop,
+                width: context.width * .25,
+                text: AppStrings.close,
+              ),
+            ],
+          ),
+        );
+      }
+    }
+
     if (state.saveStatus == CubitStatus.loading) {
       Toaster.showLoading();
     } else if (state.saveStatus == CubitStatus.failure) {

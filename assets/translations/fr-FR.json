@@ -14,6 +14,7 @@
     "EmptyCartException": "Votre panier est vide!",
     "NoVisitEventException": "Vous ne pouvez pas terminer la visite sans terminer au moins un événement, si vous ne pouviez rien faire, veuillez cliquer sur \"annuler la visite\"",
     "NoInternetFailure": "Pas de connexion internet",
+    "": "",
     "ar": "Arabe",
     "en": "Anglais",
     "fr": "Français",
@@ -88,5 +89,12 @@
     "onBoarding2Title": "Commencez votre voyage",
     "onBoarding2Body": "Vous pouvez commencer votre voyage dans le domaine que vous aimez, pas besoin d'avoir peur de vous perdre, nous vous aiderons à atteindre la ligne d'arrivée",
     "onBoarding3Title": "Vous pouvez être n'importe quoi, le monde est entre vos mains",
-    "onBoarding3Body": "En apprenant et en augmentant vos connaissances, vous deviendrez une personne sage et pourrez changer les choses autour de vous et même le monde"
+    "onBoarding3Body": "En apprenant et en augmentant vos connaissances, vous deviendrez une personne sage et pourrez changer les choses autour de vous et même le monde",
+    "emptyQuizWarning": "Aucune question n'a encore été ajoutée à ce quiz, réessayez plus tard",
+    "friendRequests": "Demandes d'ami",
+    "friends": "Amis",
+    "createYourAccount": "Créez votre compte!",
+    "createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp": "Créez votre compte pour profiter des fonctionnalités de notre application",
+    "createAccount": "Créer un Compte",
+    "continueBrowsing": "Continuer la Navigation"
 }

@@ -14,6 +14,7 @@
     "EmptyCartException": "Ihr Warenkorb ist leer!",
     "NoVisitEventException": "Sie können den Besuch nicht abschließen, ohne mindestens ein Ereignis abzuschließen. Wenn Sie nichts tun konnten, klicken Sie bitte auf \"Besuch abbrechen\"",
     "NoInternetFailure": "Keine Internetverbindung",
+    "": "",
     "ar": "Arabisch",
     "en": "Englisch",
     "fr": "Französisch",
@@ -88,5 +89,12 @@
     "onBoarding2Title": "Beginnen Sie Ihre Reise",
     "onBoarding2Body": "Sie können Ihre Reise in dem Feld beginnen, das Sie lieben, Sie brauchen keine Angst zu haben, sich zu verlaufen, wir helfen Ihnen, die Ziellinie zu erreichen",
     "onBoarding3Title": "Sie können alles sein, die Welt liegt in Ihren Händen",
-    "onBoarding3Body": "Durch Lernen und Wissensvermehrung werden Sie eine weise Person und können die Dinge um sich herum und sogar die Welt verändern"
+    "onBoarding3Body": "Durch Lernen und Wissensvermehrung werden Sie eine weise Person und können die Dinge um sich herum und sogar die Welt verändern",
+    "emptyQuizWarning": "Für dieses Quiz wurden noch keine Fragen hinzugefügt, versuchen Sie es später noch einmal",
+    "friendRequests": "Freundschaftsanfragen",
+    "friends": "Freunde",
+    "createYourAccount": "Erstellen Sie Ihr Konto!",
+    "createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp": "Erstellen Sie Ihr Konto, um die Vorteile unserer App nutzen zu können",
+    "createAccount": "Konto Erstellen",
+    "continueBrowsing": "Weiter Stöbern"
 }

@@ -33,33 +33,33 @@ class AppPages {
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     routes: [
-      _welcomingRoutes,
+      GoRoute(
+        path: AppRoutes.splash,
+        name: AppRoutes.splash,
+        builder: (context, state) => const SplashPage(),
+      ),
+      ..._welcomingRoutes,
       _mainRoutes,
     ],
   );
 
-  static final GoRoute _welcomingRoutes = GoRoute(
-    path: AppRoutes.splash,
-    name: AppRoutes.splash,
-    builder: (context, state) => const SplashPage(),
-    routes: [
-      GoRoute(
-        name: AppRoutes.onBoarding,
-        path: AppRoutes.onBoarding,
-        builder: (context, state) => const OnboardingPage(),
-      ),
-      GoRoute(
-        path: AppRoutes.signup,
-        name: AppRoutes.signup,
-        builder: (context, state) => const SignUpPage(),
-      ),
-      GoRoute(
-        name: AppRoutes.login,
-        path: AppRoutes.login,
-        builder: (context, state) => const LoginPage(),
-      ),
-    ],
-  );
+  static final List<GoRoute> _welcomingRoutes = [
+    GoRoute(
+      name: AppRoutes.onBoarding,
+      path: AppRoutes.onBoarding,
+      builder: (context, state) => const OnboardingPage(),
+    ),
+    GoRoute(
+      path: AppRoutes.signup,
+      name: AppRoutes.signup,
+      builder: (context, state) => const SignUpPage(),
+    ),
+    GoRoute(
+      name: AppRoutes.login,
+      path: AppRoutes.login,
+      builder: (context, state) => const LoginPage(),
+    ),
+  ];
 
   static final GoRoute _mainRoutes = GoRoute(
     path: AppRoutes.main,

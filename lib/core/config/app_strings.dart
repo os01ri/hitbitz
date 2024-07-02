@@ -89,4 +89,8 @@ class AppStrings {
   static const emptyQuizWarning = 'emptyQuizWarning';
   static const friendRequests = 'friendRequests';
   static const friends = 'friends';
+  static const createYourAccount = 'createYourAccount';
+  static const createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp = 'createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp';
+  static const createAccount = 'createAccount';
+  static const continueBrowsing = 'continueBrowsing';
 }

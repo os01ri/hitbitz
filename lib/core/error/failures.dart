@@ -16,6 +16,13 @@ class ServerFailure extends Failure {
   }) : super(message: message ?? 'ServerFailure', code: code);
 }
 
+class UnauthenticatedFailure extends Failure {
+  const UnauthenticatedFailure({
+    String? message,
+    int? code,
+  }) : super(message: message ?? 'UnauthenticatedFailure', code: code);
+}
+
 class OperationFailedFailure extends Failure {
   const OperationFailedFailure({
     String? message,

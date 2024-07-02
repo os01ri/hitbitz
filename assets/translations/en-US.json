@@ -14,11 +14,11 @@
     "EmptyCartException": "your cart is empty!",
     "NoVisitEventException": "You can't complete the visit without finishing at least one event, if you couldn't do anything, please click \"cancel visit\"",
     "NoInternetFailure": "No internet connection",
+    "": "",
     "ar": "Arabic",
     "en": "English",
     "fr": "France",
     "de": "Dutch",
-    "": "",
     "logIn": "Log in",
     "registerNow": "The point of your journey together is here, start registering now",
     "fullName": "Full Name",
@@ -92,5 +92,9 @@
     "onBoarding3Body": "By learning & increasing knowledge you will become a wise person and can change things around you and even the world",
     "emptyQuizWarning": "Currently, there are no questions for this quiz, try again later",
     "friendRequests": "Friend Requests",
-    "friends": "Friends"
+    "friends": "Friends",
+    "createYourAccount": "Create Your Account!",
+    "createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp": "Create your account to take advantage of the features of our app",
+    "createAccount": "Create Account",
+    "continueBrowsing": "Continue Browsing"
 }
