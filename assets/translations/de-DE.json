@@ -96,5 +96,11 @@
     "createYourAccount": "Erstellen Sie Ihr Konto!",
     "createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp": "Erstellen Sie Ihr Konto, um die Vorteile unserer App nutzen zu können",
     "createAccount": "Konto Erstellen",
-    "continueBrowsing": "Weiter Stöbern"
+    "continueBrowsing": "Weiter Stöbern",
+    "trueFalse": "Wahr oder Falsch",
+    "multipleSelect": "Mehrfachauswahl",
+    "matching": "Zuordnung",
+    "gapFilling": "Lückentext",
+    "verticalSorting": "Vertikales Sortieren",
+    "horizontalSorting": "Horizontales Sortieren"
 }

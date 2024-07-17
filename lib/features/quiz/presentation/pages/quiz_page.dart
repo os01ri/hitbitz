@@ -196,7 +196,7 @@ class _ProgressBarState extends State<ProgressBar> {
       value: widget.value,
       minHeight: 15,
       borderRadius: BorderRadius.circular(10),
-      color: context.colorScheme.primary,
+      color: context.colorScheme.tertiary,
     ).paddingHorizontal(30);
   }
 }

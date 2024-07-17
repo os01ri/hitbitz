@@ -93,4 +93,10 @@ class AppStrings {
   static const createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp = 'createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp';
   static const createAccount = 'createAccount';
   static const continueBrowsing = 'continueBrowsing';
+  static const trueFalse = 'trueFalse';
+  static const multipleSelect = 'multipleSelect';
+  static const matching = 'matching';
+  static const gapFilling = 'gapFilling';
+  static const verticalSorting = 'verticalSorting';
+  static const horizontalSorting = 'horizontalSorting';
 }

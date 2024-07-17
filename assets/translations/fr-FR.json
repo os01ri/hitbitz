@@ -96,5 +96,11 @@
     "createYourAccount": "Créez votre compte!",
     "createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp": "Créez votre compte pour profiter des fonctionnalités de notre application",
     "createAccount": "Créer un Compte",
-    "continueBrowsing": "Continuer la Navigation"
+    "continueBrowsing": "Continuer la Navigation",
+    "trueFalse": "Vrai ou Faux",
+    "multipleSelect": "Sélection Multiple",
+    "matching": "Appariement",
+    "gapFilling": "Remplissage de Lacunes",
+    "verticalSorting": "Tri Vertical",
+    "horizontalSorting": "Tri Horizontal"
 }

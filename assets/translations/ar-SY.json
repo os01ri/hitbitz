@@ -96,5 +96,11 @@
     "createYourAccount": "أنشئ حسابك!",
     "createYourAccountToTakeAdvantageOfTheFeaturesOfOurApp": "أنشئ حسابك لتتمكن من الاستفادة من مميزات تطبيقنا",
     "createAccount": "إنشاء حساب",
-    "continueBrowsing": "متابعة التصفح"
+    "continueBrowsing": "متابعة التصفح",
+    "trueFalse": "صح أو خطأ",
+    "multipleSelect": "اختيار متعدد",
+    "matching": "مطابقة",
+    "gapFilling": "ملء الفجوات",
+    "verticalSorting": "الترتيب العمودي",
+    "horizontalSorting": "الترتيب الأفقي"
 }

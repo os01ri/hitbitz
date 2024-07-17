@@ -24,46 +24,67 @@ class QuestionPage extends StatelessWidget {
     return QuestionProvider(
       question: question,
       child: Column(
-        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Gap(30),
-          SizedBox(
-            height: context.height * .2,
-            child: ShaderMask(
-              shaderCallback: (Rect rect) => const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.purple, Colors.transparent, Colors.transparent, Colors.purple],
-                stops: [0.0, 0.1, 0.3, 3.0],
-              ).createShader(rect),
-              blendMode: BlendMode.dstOut,
-              child: ListView(
-                children: [
-                  TextWidget(
-                    ' ${question.title!}\n',
-                    maxLines: 100,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.fade,
-                    style: context.textTheme.titleMedium,
-                  ).center(),
-                ],
+          const Gap(12),
+          Container(
+            padding: AppPadding.def.add(const EdgeInsetsDirectional.only(end: 8)),
+            decoration: BoxDecoration(
+              color: context.colorScheme.secondary,
+              borderRadius: const BorderRadiusDirectional.only(
+                topEnd: Radius.circular(20),
+                bottomEnd: Radius.circular(20),
               ),
             ),
+            child: TextWidget(
+              question.type.name,
+              textColor: context.colorScheme.onSecondary,
+              textAlign: TextAlign.start,
+            ),
           ),
-          const Divider(),
-          const Gap(30),
-          switch (question.type) {
-            QuestionType.trueFalse => const TrueFalseQuestion(),
-            QuestionType.multipleSelect => const MultipleSelectQuestion(),
-            QuestionType.matching => const MatchingQuestion(),
-            QuestionType.gapFilling => const GapFillingQuestion(),
-            QuestionType.verticalSorting => const VerticalSortingQuestion(),
-            QuestionType.horizontalSorting => const VerticalSortingQuestion(),
-            _ => const SizedBox.shrink(),
-          },
-          const Gap(30),
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              const Gap(30),
+              SizedBox(
+                height: context.height * .15,
+                child: ShaderMask(
+                  shaderCallback: (Rect rect) => const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.purple, Colors.transparent, Colors.transparent, Colors.purple],
+                    stops: [0.0, 0.1, 0.3, 3.0],
+                  ).createShader(rect),
+                  blendMode: BlendMode.dstOut,
+                  child: ListView(
+                    children: [
+                      TextWidget(
+                        ' ${question.title!}\n',
+                        maxLines: 100,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.fade,
+                        style: context.textTheme.titleMedium,
+                      ).center(),
+                    ],
+                  ),
+                ),
+              ),
+              const Divider(),
+              const Gap(30),
+              switch (question.type) {
+                QuestionType.trueFalse => const TrueFalseQuestion(),
+                QuestionType.multipleSelect => const MultipleSelectQuestion(),
+                QuestionType.matching => const MatchingQuestion(),
+                QuestionType.gapFilling => const GapFillingQuestion(),
+                QuestionType.verticalSorting => const VerticalSortingQuestion(),
+                QuestionType.horizontalSorting => const VerticalSortingQuestion(),
+                _ => const SizedBox.shrink(),
+              },
+              const Gap(30),
+            ],
+          ).wrapPadding(AppPadding.pagePadding).expand(),
         ],
-      ).wrapPadding(AppPadding.pagePadding),
+      ),
     );
   }
 }
