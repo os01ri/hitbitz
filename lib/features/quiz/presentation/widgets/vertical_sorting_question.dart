@@ -7,11 +7,9 @@ import 'package:hitbitz/core/config/app_colors.dart';
 import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
-import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/quiz/data/models/answer_model.dart';
 import 'package:hitbitz/features/quiz/data/models/question_model.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/question_page.dart';
-import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 
 class VerticalSortingQuestion extends StatefulWidget {
   const VerticalSortingQuestion({super.key});
@@ -70,8 +68,6 @@ class _VerticalSortingQuestionState extends State<VerticalSortingQuestion> {
             }
 
             question.isCorrect = isCorrect;
-            Toaster.showIsCorrect(isCorrect);
-            if (isCorrect) QuizProvider.of(context)!.score.value++;
           },
         ),
         const Gap(5),

@@ -27,11 +27,9 @@ class QuizProvider extends InheritedWidget {
     super.key,
     required super.child,
     required this.quiz,
-    required this.score,
   });
 
   final QuizModel quiz;
-  final ValueNotifier<int> score;
 
   static QuizProvider? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<QuizProvider>();
@@ -39,14 +37,24 @@ class QuizProvider extends InheritedWidget {
 
   @override
   bool updateShouldNotify(QuizProvider oldWidget) {
-    return score.value != oldWidget.score.value;
+    return quiz != oldWidget.quiz;
   }
 }
 
-class QuizPage extends StatefulWidget {
-  const QuizPage({super.key, required this.quiz});
-
+class QuizPageArgs {
   final QuizModel quiz;
+  final bool isSolved;
+
+  const QuizPageArgs({
+    required this.quiz,
+    this.isSolved = false,
+  });
+}
+
+class QuizPage extends StatefulWidget {
+  const QuizPage({super.key, required this.args});
+
+  final QuizPageArgs args;
 
   @override
   State<QuizPage> createState() => _QuizPageState();
@@ -54,7 +62,6 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   late final PageController _pageController;
-  late final ValueNotifier<int> score;
   late int index;
 
   @override
@@ -62,13 +69,11 @@ class _QuizPageState extends State<QuizPage> {
     super.initState();
     index = 1;
     _pageController = PageController();
-    score = ValueNotifier(0);
   }
 
   @override
   void dispose() {
     _pageController.dispose();
-    score.dispose();
     super.dispose();
   }
 
@@ -76,78 +81,79 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: di<QuizCubit>(),
-      child: BlocListener<QuizCubit, QuizState>(
-        listener: _listener,
-        child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: TextWidget(widget.quiz.name),
-            leading: TextWidget('$index / ${widget.quiz.questions.length}').center(),
-            actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz))],
-            bottom: ProgressBar(value: index / widget.quiz.questions.length),
-          ),
-          body: QuizProvider(
-            quiz: widget.quiz,
-            score: score,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: TextWidget(widget.args.quiz.name),
+          leading: TextWidget('$index / ${widget.args.quiz.questions.length}').center(),
+          actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz))],
+          bottom: ProgressBar(value: index / widget.args.quiz.questions.length),
+        ),
+        body: QuizProvider(
+          quiz: widget.args.quiz,
+          child: BlocListener<QuizCubit, QuizState>(
+            listener: _listener,
             child: PageView.builder(
               controller: _pageController,
-              itemCount: widget.quiz.questions.length,
+              itemCount: widget.args.quiz.questions.length,
               padEnds: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => QuestionPage(index: index),
             ),
           ),
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: context.colorScheme.surface,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25),
-              ),
-              boxShadow: [customBoxShadow],
+        ),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: context.colorScheme.surface,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
             ),
-            padding: AppPadding.pagePadding,
-            child: Builder(
-              builder: (context) => Row(
-                children: [
-                  ButtonWidget(
-                    onPressed: () {
-                      context.pop();
-                      // if (index <= 1) {
-                      //   context.pop();
-                      //   return;
-                      // }
+            boxShadow: [customBoxShadow],
+          ),
+          padding: AppPadding.pagePadding,
+          child: Builder(
+            builder: (context) => Row(
+              children: [
+                ButtonWidget(
+                  onPressed: () {
+                    context.pop();
+                    // if (index <= 1) {
+                    //   context.pop();
+                    //   return;
+                    // }
 
-                      // index--;
-                      // setState(() => _pageController.goToPreviousPage());
-                    },
-                    isOutlined: true,
-                    borderColor: context.colorScheme.error,
-                    backgroundColor: context.colorScheme.surface,
-                    foregroundColor: context.colorScheme.error,
-                    height: 50,
-                    text: AppStrings.back,
-                  ).expand(),
-                  const Gap(AppDimensions.smallSizedBox),
-                  ButtonWidget(
-                    onPressed: () {
-                      if (widget.quiz.questions[index - 1].isCorrect == null) return;
-                      if (index >= widget.quiz.questions.length) {
-                        final result = score.value / widget.quiz.questions.length * 100;
-                        di<QuizCubit>().completeQuiz(CompleteQuizParams(id: widget.quiz.id, score: result.toInt()));
-                        return;
-                      }
+                    // index--;
+                    // setState(() => _pageController.goToPreviousPage());
+                  },
+                  isOutlined: true,
+                  borderColor: context.colorScheme.error,
+                  backgroundColor: context.colorScheme.surface,
+                  foregroundColor: context.colorScheme.error,
+                  height: 50,
+                  text: AppStrings.back,
+                ).expand(),
+                const Gap(AppDimensions.smallSizedBox),
+                ButtonWidget(
+                  onPressed: () {
+                    if (widget.args.quiz.questions[index - 1].isCorrect == null) return;
+                    if (index >= widget.args.quiz.questions.length) {
+                      di<QuizCubit>().completeQuiz(CompleteQuizParams(
+                        id: widget.args.quiz.id,
+                        score: widget.args.quiz.score.toInt(),
+                      ));
+                      return;
+                    }
 
-                      index++;
-                      setState(() => _pageController.goToNextPage());
-                    },
-                    backgroundColor: context.colorScheme.primary,
-                    foregroundColor: context.colorScheme.onPrimary,
-                    height: 50,
-                    text: AppStrings.next,
-                  ).expand(),
-                ],
-              ),
+                    index++;
+                    setState(() => _pageController.goToNextPage());
+                  },
+                  backgroundColor: context.colorScheme.primary,
+                  foregroundColor: context.colorScheme.onPrimary,
+                  height: 50,
+                  text: AppStrings.next,
+                ).expand(),
+              ],
             ),
           ),
         ),
@@ -163,15 +169,11 @@ class _QuizPageState extends State<QuizPage> {
       Toaster.showError(context: context, message: state.failure!.message);
     } else if (state.completeStatus == CubitStatus.success) {
       Toaster.closeLoading();
-      final result = score.value / widget.quiz.questions.length * 100;
       context.pop();
       context.pop();
       context.pushNamed(
         AppRoutes.quizResult,
-        extra: ResultPageArgs(
-          score: result,
-          hasPassed: result >= widget.quiz.requiredDegree!,
-        ),
+        extra: ResultPageArgs(quiz: QuizProvider.of(context)!.quiz),
       );
     }
   }

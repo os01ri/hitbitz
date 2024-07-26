@@ -76,6 +76,7 @@ class RoadMapCard extends StatelessWidget {
               ).expand(),
             ],
           ),
+          const Gap(8),
           ButtonWidget(
             onPressed: () => context.pushNamed(AppRoutes.roadmap, extra: RoadMapPageArguments(roadMap: roadMap, isStarting: true)),
             text: AppStrings.startJourney,

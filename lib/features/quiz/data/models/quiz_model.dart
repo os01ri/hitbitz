@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hitbitz/features/quiz/data/models/question_model.dart';
 
 List<QuizModel> quizModelFromJson(dynamic decodedJson) => List<QuizModel>.from(decodedJson.map((x) => QuizModel.fromJson(x)));
@@ -23,6 +24,11 @@ class QuizModel {
     this.questions = const [],
   });
 
+  double get score {
+    int correctAnswersCount = questions.fold<int>(0, (value, question) => value + ((question.isCorrect == true) ? 1 : 0));
+    return correctAnswersCount / questions.length * 100;
+  }
+
   factory QuizModel.fromJson(Map<String, dynamic> json) => QuizModel(
         id: json['id'],
         stepId: json['step_id'],
@@ -33,4 +39,30 @@ class QuizModel {
         isCompleted: json['completed'] == null ? false : json['completed'] == 1,
         questions: json['questions'] == null ? [] : List<QuestionModel>.from(json['questions']!.map((x) => QuestionModel.fromJson(x))),
       );
+
+  @override
+  bool operator ==(covariant QuizModel other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.stepId == stepId &&
+        other.name == name &&
+        other.requiredDegree == requiredDegree &&
+        other.degree == degree &&
+        other.description == description &&
+        other.isCompleted == isCompleted &&
+        listEquals(other.questions, questions);
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        stepId.hashCode ^
+        name.hashCode ^
+        requiredDegree.hashCode ^
+        degree.hashCode ^
+        description.hashCode ^
+        isCompleted.hashCode ^
+        questions.hashCode;
+  }
 }

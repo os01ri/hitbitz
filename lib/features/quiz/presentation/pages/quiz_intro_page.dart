@@ -18,6 +18,7 @@ import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class QuizIntroPage extends StatefulWidget {
@@ -168,7 +169,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                               );
                               return;
                             }
-                            context.pushNamed(AppRoutes.quiz, extra: state.quiz);
+                            context.pushNamed(AppRoutes.quiz, extra: QuizPageArgs(quiz: state.quiz!));
                           },
                           width: context.width,
                           height: 50,

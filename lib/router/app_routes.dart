@@ -14,6 +14,7 @@ class AppRoutes {
   static const quizIntro = 'quiz-intro';
   static const quiz = 'quiz';
   static const quizResult = 'quiz-result';
+  static const quizReview = 'quiz-review';
   // static const roadmapSearchResults = 'roadmap-search-results';
   static const search = 'search';
   static const notifications = 'notifications';

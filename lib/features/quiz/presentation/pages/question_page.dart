@@ -10,6 +10,7 @@ import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/gap_filling_question.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/matching_question.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/multiple_select_question.dart';
+import 'package:hitbitz/features/quiz/presentation/widgets/question_type_widget.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/true_false_question.dart';
 import 'package:hitbitz/features/quiz/presentation/widgets/vertical_sorting_question.dart';
 
@@ -27,21 +28,7 @@ class QuestionPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Gap(12),
-          Container(
-            padding: AppPadding.def.add(const EdgeInsetsDirectional.only(end: 8)),
-            decoration: BoxDecoration(
-              color: context.colorScheme.secondary,
-              borderRadius: const BorderRadiusDirectional.only(
-                topEnd: Radius.circular(20),
-                bottomEnd: Radius.circular(20),
-              ),
-            ),
-            child: TextWidget(
-              question.type.name,
-              textColor: context.colorScheme.onSecondary,
-              textAlign: TextAlign.start,
-            ),
-          ),
+          QuestionTypeWidget(questionType: question.type),
           Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -88,6 +75,7 @@ class QuestionPage extends StatelessWidget {
     );
   }
 }
+
 
 class QuestionProvider extends InheritedWidget {
   final QuestionModel question;

@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_colors.dart';
-import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
-import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/question_page.dart';
-import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 
 class MultipleSelectQuestion extends StatelessWidget {
   const MultipleSelectQuestion({super.key});
@@ -37,6 +33,14 @@ class MultipleSelectQuestion extends StatelessWidget {
                   } else {
                     question.userAnswersIds.add(question.answers[index].id);
                   }
+
+                  bool isCorrect = true;
+                  for (var id in question.userAnswersIds) {
+                    final answer = question.answers.firstWhere((answer) => answer.id == id);
+                    isCorrect &= answer.isCorrect;
+                  }
+
+                  question.isCorrect = isCorrect;
                 },
               ),
               title: TextWidget(
@@ -52,26 +56,26 @@ class MultipleSelectQuestion extends StatelessWidget {
           ),
         ).expand(),
         const Gap(5),
-        ButtonWidget(
-          text: AppStrings.done,
-          width: context.width * .3,
-          isOutlined: true,
-          onPressed: () {
-            if (question.isCorrect != null) return;
-            if (question.userAnswersIds.isEmpty) return;
+        // ButtonWidget(
+        //   text: AppStrings.done,
+        //   width: context.width * .3,
+        //   isOutlined: true,
+        //   onPressed: () {
+        //     if (question.isCorrect != null) return;
+        //     if (question.userAnswersIds.isEmpty) return;
 
-            bool isCorrect = true;
-            for (var id in question.userAnswersIds) {
-              final answer = question.answers.firstWhere((answer) => answer.id == id);
-              isCorrect &= answer.isCorrect;
-            }
+        //     bool isCorrect = true;
+        //     for (var id in question.userAnswersIds) {
+        //       final answer = question.answers.firstWhere((answer) => answer.id == id);
+        //       isCorrect &= answer.isCorrect;
+        //     }
 
-            question.isCorrect = isCorrect;
-            Toaster.showIsCorrect(isCorrect);
-            if (isCorrect) QuizProvider.of(context)!.score.value++;
-          },
-        ),
-        const Gap(5),
+        //     question.isCorrect = isCorrect;
+        //     // Toaster.showIsCorrect(isCorrect);
+        //     if (isCorrect) QuizProvider.of(context)!.score.value++;
+        //   },
+        // ),
+        // const Gap(5),
       ],
     ).expand();
   }

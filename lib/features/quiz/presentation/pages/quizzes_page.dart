@@ -50,7 +50,6 @@ class _QuizzesPageState extends State<QuizzesPage> {
                 itemCount: state.quizzes.length,
                 separatorBuilder: (context, index) => const Gap(10),
                 itemBuilder: (context, index) => CardWidget(
-                  // onTap: () => context.pushNamed(AppRoutes.quiz),
                   color: getColor(index: index, quizzes: state.quizzes),
                   child: ListTile(
                     onTap: () {

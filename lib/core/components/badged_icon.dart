@@ -39,7 +39,7 @@ class BadgedIcon extends StatelessWidget {
             dimension: 24,
             child: Container(
               padding: AppPadding.tiny,
-              decoration: ShapeDecoration(color: context.colorScheme.background, shape: const CircleBorder()),
+              decoration: ShapeDecoration(color: context.colorScheme.surface, shape: const CircleBorder()),
               child: Container(
                 decoration: ShapeDecoration(
                   color: badgeColor ?? context.colorScheme.primary,

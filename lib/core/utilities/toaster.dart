@@ -79,7 +79,7 @@ class Toaster {
       enableDrag: true,
       showDragHandle: true,
       useSafeArea: true,
-      backgroundColor: context.colorScheme.background,
+      backgroundColor: context.colorScheme.surface,
       builder: (context) => sheet,
     );
   }

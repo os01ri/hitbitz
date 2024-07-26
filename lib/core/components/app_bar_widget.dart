@@ -27,7 +27,7 @@ class AppBarWidget extends AppBar {
   }) : super(
           // toolbarHeight: 70,
           elevation: 0,
-          backgroundColor: context.colorScheme.background,
+          backgroundColor: context.colorScheme.surface,
           centerTitle: true,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,

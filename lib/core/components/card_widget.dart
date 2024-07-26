@@ -52,32 +52,31 @@ class CardWidget extends StatelessWidget {
       padding: padding,
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
-        color: color ?? context.colorScheme.background,
+        color: color ?? context.colorScheme.surface,
         shape: isCircle
             ? CircleBorder(
                 side: BorderSide(
-                  width: 1,
+                  width: 2,
                   color: isOutlined ? (borderColor ?? context.colorScheme.outline) : Colors.transparent,
                 ),
               )
             : ContinuousRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.cardRad),
                 side: BorderSide(
-                  width: 1,
+                  width: 2,
                   color: isOutlined ? (borderColor ?? context.colorScheme.outline) : Colors.transparent,
                 ),
               ),
-        image:
-            backgroundImagePath != null ? DecorationImage(image: AssetImage(backgroundImagePath!), fit: BoxFit.cover) : null,
+        image: backgroundImagePath != null ? DecorationImage(image: AssetImage(backgroundImagePath!), fit: BoxFit.cover) : null,
         shadows: [if (isShadowed) customBoxShadow],
       ),
       child: TextButton(
         onPressed: onTap,
         style: ButtonStyle(
           alignment: contentAlignment,
-          foregroundColor: MaterialStatePropertyAll(foregroundColor ?? context.colorScheme.onSurfaceVariant),
-          padding: const MaterialStatePropertyAll(AppPadding.zero),
-          shape: MaterialStatePropertyAll(
+          foregroundColor: WidgetStatePropertyAll(foregroundColor ?? context.colorScheme.onSurfaceVariant),
+          padding: const WidgetStatePropertyAll(AppPadding.zero),
+          shape: WidgetStatePropertyAll(
             isCircle
                 ? const CircleBorder()
                 : ContinuousRectangleBorder(borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.cardRad)),

@@ -9,15 +9,16 @@ import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/num_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
+import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class ResultPageArgs {
-  final double score;
-  final bool hasPassed;
+  // final double score;
+  final QuizModel quiz;
 
   const ResultPageArgs({
-    required this.score,
-    required this.hasPassed,
+    // required this.score,
+    required this.quiz,
   });
 }
 
@@ -29,11 +30,13 @@ class ResultPage extends StatelessWidget {
 
   final ResultPageArgs args;
 
+  bool get hasPassed => args.quiz.score >= args.quiz.requiredDegree!;
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvoked: (didPop) {
-        if (args.hasPassed) context.goNamed(AppRoutes.main);
+        if (hasPassed) context.goNamed(AppRoutes.main);
       },
       child: Scaffold(
         backgroundColor: context.colorScheme.primary,
@@ -53,15 +56,15 @@ class ResultPage extends StatelessWidget {
               CardWidget(
                 padding: AppPadding.cardPadding,
                 child: TextWidget(
-                  '% ${args.score.numberFormat()}',
+                  '% ${args.quiz.score.numberFormat()}',
                   style: context.textTheme.displayLarge?.copyWith(
-                    color: args.hasPassed ? Colors.green : Colors.red,
+                    color: hasPassed ? Colors.green : Colors.red,
                   ),
                 ),
               ),
               const Gap(10),
               TextWidget(
-                (args.hasPassed) ? AppStrings.passedQuiz : AppStrings.failedQuiz,
+                (hasPassed) ? AppStrings.passedQuiz : AppStrings.failedQuiz,
                 textAlign: TextAlign.center,
                 maxLines: 4,
                 style: context.textTheme.titleLarge?.copyWith(
@@ -70,11 +73,18 @@ class ResultPage extends StatelessWidget {
               ),
               const Spacer(),
               ButtonWidget(
+                text: 'AppStrings.showAnswers',
+                width: context.width,
+                backgroundColor: context.colorScheme.onPrimary,
+                onPressed: () => context.pushNamed(AppRoutes.quizReview, extra: args.quiz),
+              ),
+              const Gap(10),
+              ButtonWidget(
                 text: AppStrings.close,
                 width: context.width,
                 backgroundColor: context.colorScheme.onPrimary,
                 onPressed: () {
-                  if (args.hasPassed) {
+                  if (hasPassed) {
                     context.goNamed(AppRoutes.main);
                     return;
                   }

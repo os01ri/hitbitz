@@ -11,14 +11,14 @@ ThemeData get lightTheme {
     textTheme: textTheme,
     colorScheme: lightColorScheme,
     fontFamily: 'Cairo',
-    scaffoldBackgroundColor: lightColorScheme.background,
+    scaffoldBackgroundColor: lightColorScheme.surface,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.lightSurfaceContainer,
       ),
     ),
     checkboxTheme: CheckboxThemeData(
-      checkColor: MaterialStatePropertyAll(lightColorScheme.onTertiary),
+      checkColor: WidgetStatePropertyAll(lightColorScheme.onTertiary),
       shape: const CircleBorder(),
       side: const BorderSide(width: .5),
     ),

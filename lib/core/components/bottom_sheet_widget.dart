@@ -29,7 +29,7 @@ class BottomSheetWidget extends StatelessWidget {
           height: height,
           width: context.width,
           decoration: BoxDecoration(
-            color: context.colorScheme.background,
+            color: context.colorScheme.surface,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(24),
               topRight: Radius.circular(24),
