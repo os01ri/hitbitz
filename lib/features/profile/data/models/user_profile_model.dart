@@ -1,0 +1,37 @@
+import 'package:hitbitz/core/data/models/media_model.dart';
+
+class UserProfileModel {
+  final int? id;
+  final String? userName;
+  final String? fullName;
+  final DateTime? birthDate;
+  final String? email;
+  final int? totalRoadmaps;
+  final int? totalFails;
+  final int? totalSuccess;
+  final MediaModel? profileImage;
+
+  UserProfileModel({
+    this.id,
+    this.userName,
+    this.fullName,
+    this.birthDate,
+    this.email,
+    this.totalRoadmaps,
+    this.totalFails,
+    this.totalSuccess,
+    this.profileImage,
+  });
+
+  factory UserProfileModel.fromJson(Map<String, dynamic> json) => UserProfileModel(
+        id: json['id'],
+        userName: json['user_name'],
+        fullName: json['full_name'],
+        birthDate: json['birth_date'] == null ? null : DateTime.parse(json['birth_date']),
+        email: json['email'],
+        totalRoadmaps: json['totalRoadmaps'],
+        totalFails: json['totalFails'],
+        totalSuccess: json['totalSuccess'],
+        profileImage: json['profileImage'] == null ? null : MediaModel.fromJson(json['profileImage']),
+      );
+}
