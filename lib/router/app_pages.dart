@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/features/auth/presentation/pages/login_page.dart';
 import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:hitbitz/features/cv/presentation/pages/send_cv_screen.dart';
 import 'package:hitbitz/features/friends/presentation/pages/friend_requests_page.dart';
 import 'package:hitbitz/features/friends/presentation/pages/friends_page.dart';
 import 'package:hitbitz/features/friends/presentation/pages/profile_page.dart';
@@ -30,7 +31,7 @@ class AppPages {
   static GlobalKey<NavigatorState> get rootNavigatorKey => _rootNavigatorKey;
 
   static final _router = GoRouter(
-    initialLocation: AppRoutes.splash,
+    initialLocation: AppRoutes.sendCv,
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     routes: [
@@ -59,6 +60,11 @@ class AppPages {
       name: AppRoutes.login,
       path: AppRoutes.login,
       builder: (context, state) => const LoginPage(),
+    ),
+    GoRoute(
+      name: AppRoutes.sendCv,
+      path: AppRoutes.sendCv,
+      builder: (context, state) => const SendCvScreen(),
     ),
   ];
 
@@ -105,38 +111,45 @@ class AppPages {
       GoRoute(
         name: AppRoutes.roadmap,
         path: AppRoutes.roadmap,
-        builder: (context, state) => RoadmapPage(args: state.extra as RoadMapPageArguments),
+        builder: (context, state) =>
+            RoadmapPage(args: state.extra as RoadMapPageArguments),
         routes: [
           GoRoute(
             name: AppRoutes.steps,
             path: AppRoutes.steps,
-            builder: (context, state) => StepsPage(args: state.extra as StepsPageArguments),
+            builder: (context, state) =>
+                StepsPage(args: state.extra as StepsPageArguments),
             routes: [
               GoRoute(
                 name: AppRoutes.quizzes,
                 path: AppRoutes.quizzes,
-                builder: (context, state) => QuizzesPage(stepId: state.extra as int),
+                builder: (context, state) =>
+                    QuizzesPage(stepId: state.extra as int),
                 routes: [
                   GoRoute(
                     name: AppRoutes.quizIntro,
                     path: AppRoutes.quizIntro,
-                    builder: (context, state) => QuizIntroPage(id: state.extra as int),
+                    builder: (context, state) =>
+                        QuizIntroPage(id: state.extra as int),
                     routes: [
                       GoRoute(
                         name: AppRoutes.quiz,
                         path: AppRoutes.quiz,
-                        builder: (context, state) => QuizPage(args: state.extra as QuizPageArgs),
+                        builder: (context, state) =>
+                            QuizPage(args: state.extra as QuizPageArgs),
                         routes: const [],
                       ),
                       GoRoute(
                         name: AppRoutes.quizResult,
                         path: AppRoutes.quizResult,
-                        builder: (context, state) => ResultPage(args: state.extra as ResultPageArgs),
+                        builder: (context, state) =>
+                            ResultPage(args: state.extra as ResultPageArgs),
                       ),
                       GoRoute(
                         name: AppRoutes.quizReview,
                         path: AppRoutes.quizReview,
-                        builder: (context, state) => ReviewPage(quiz: state.extra as QuizModel),
+                        builder: (context, state) =>
+                            ReviewPage(quiz: state.extra as QuizModel),
                       ),
                     ],
                   ),
