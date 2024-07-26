@@ -102,5 +102,7 @@
     "matching": "Matching",
     "gapFilling": "Gap Filling",
     "verticalSorting": "Vertical Sorting",
-    "horizontalSorting": "Horizontal Sorting"
+    "horizontalSorting": "Horizontal Sorting",
+    "showAnswers": "Show Answers",
+    "quizReview": "Quiz Review"
 }

@@ -2,9 +2,9 @@ part of 'friends_cubit.dart';
 
 class FriendsState {
   final CubitStatus getUsersStatus;
-  final List<UserModel> users;
+  final List<UserProfileModel> users;
   final CubitStatus showUserStatus;
-  final UserModel? user;
+  final UserProfileModel? user;
   final CubitStatus requestStatus;
 
   const FriendsState({
@@ -17,9 +17,9 @@ class FriendsState {
 
   FriendsState copyWith({
     CubitStatus? getUsersStatus,
-    List<UserModel>? users,
+    List<UserProfileModel>? users,
     CubitStatus? showUserStatus,
-    UserModel? user,
+    UserProfileModel? user,
     CubitStatus? requestStatus,
   }) {
     return FriendsState(

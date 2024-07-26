@@ -1,7 +1,10 @@
 import 'package:hitbitz/core/data/models/media_model.dart';
 
+List<UserProfileModel> usersListFromJson(dynamic decodedJson) =>
+    List<UserProfileModel>.from(decodedJson.map((x) => UserProfileModel.fromJson(x)));
+
 class UserProfileModel {
-  final int? id;
+  final int id;
   final String? userName;
   final String? fullName;
   final DateTime? birthDate;
@@ -12,7 +15,7 @@ class UserProfileModel {
   final MediaModel? profileImage;
 
   UserProfileModel({
-    this.id,
+    required this.id,
     this.userName,
     this.fullName,
     this.birthDate,

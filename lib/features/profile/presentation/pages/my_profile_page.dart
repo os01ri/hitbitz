@@ -1,17 +1,23 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/drop_down_widget.dart';
+import 'package:hitbitz/core/components/error_widget.dart';
+import 'package:hitbitz/core/components/loading_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/config/app_strings.dart';
+import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
+import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/utilities/app_localization.dart';
 import 'package:hitbitz/features/friends/presentation/pages/profile_page.dart';
+import 'package:hitbitz/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class MyProfilePage extends StatefulWidget {
@@ -41,7 +47,17 @@ class _MyProfilePageState extends State<MyProfilePage> {
     return Scaffold(
       body: Column(
         children: [
-          const ProfileWidget(id: 3),
+          BlocProvider.value(
+            value: di<ProfileCubit>()..getProfile(),
+            child: BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (context, state) => switch (state.status) {
+                CubitStatus.initial => const SizedBox.shrink(),
+                CubitStatus.loading => const LoadingWidget().center(),
+                CubitStatus.failure => ErrorButtonWidget(onTap: () => di<ProfileCubit>().getProfile()),
+                CubitStatus.success => Profile(userProfile: state.profile!),
+              },
+            ),
+          ),
           const Gap(30),
           Row(
             children: [

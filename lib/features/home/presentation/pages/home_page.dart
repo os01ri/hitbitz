@@ -60,8 +60,6 @@ class _HomePageState extends State<HomePage> {
             children: [
               const _SearchCard().wrapPadding(AppPadding.pagePaddingHorizontal),
               const Gap(10),
-              const _SectionTitle(text: AppStrings.whereYouLeft).wrapPadding(AppPadding.pagePaddingHorizontal),
-              const Gap(10),
               BlocBuilder<HomeCubit, HomeState>(
                 builder: (context, state) => switch (state.homeRoadMapStatus) {
                   CubitStatus.initial => const SizedBox.shrink(),
@@ -69,7 +67,15 @@ class _HomePageState extends State<HomePage> {
                   CubitStatus.failure => ErrorButtonWidget(onTap: () => _homeCubit.getHomeRoadMap()),
                   CubitStatus.success => state.roadMap == null
                       ? const SizedBox.shrink()
-                      : RecentRoadmapCard(roadMap: state.roadMap!).wrapPadding(AppPadding.pagePaddingHorizontal),
+                      : Column(
+                          children: [
+                            if (state.roadMap?.id != null) ...[
+                              const _SectionTitle(text: AppStrings.whereYouLeft).wrapPadding(AppPadding.pagePaddingHorizontal),
+                              const Gap(10),
+                              RecentRoadmapCard(roadMap: state.roadMap!).wrapPadding(AppPadding.pagePaddingHorizontal),
+                            ],
+                          ],
+                        )
                 },
               ),
               const Gap(10),

@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/usecases/usecase.dart';
-import 'package:hitbitz/features/friends/data/models/user_model.dart';
 import 'package:hitbitz/features/friends/domain/usecases/accept_friend_requests_usecase.dart';
 import 'package:hitbitz/features/friends/domain/usecases/get_friend_requests_usecase.dart';
 import 'package:hitbitz/features/friends/domain/usecases/get_friends_usecase.dart';
 import 'package:hitbitz/features/friends/domain/usecases/get_users_usecase.dart';
 import 'package:hitbitz/features/friends/domain/usecases/send_friend_requests_usecase.dart';
 import 'package:hitbitz/features/friends/domain/usecases/show_user_usecase.dart';
+import 'package:hitbitz/features/profile/data/models/user_profile_model.dart';
 import 'package:injectable/injectable.dart';
 
 part 'friends_state.dart';

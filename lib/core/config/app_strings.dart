@@ -99,4 +99,6 @@ class AppStrings {
   static const gapFilling = 'gapFilling';
   static const verticalSorting = 'verticalSorting';
   static const horizontalSorting = 'horizontalSorting';
+  static const showAnswers = 'showAnswers';
+  static const quizReview = 'quizReview';
 }

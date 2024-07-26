@@ -12,6 +12,7 @@ import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/features/friends/domain/usecases/show_user_usecase.dart';
 import 'package:hitbitz/features/friends/presentation/cubit/friends_cubit.dart';
+import 'package:hitbitz/features/profile/data/models/user_profile_model.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key, required this.id});
@@ -64,43 +65,57 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             CubitStatus.initial => const SizedBox.shrink(),
             CubitStatus.loading => const LoadingWidget().center(),
             CubitStatus.failure => ErrorButtonWidget(onTap: () => _cubit.showUser(ShowUserParams(id: widget.id))),
-            CubitStatus.success => Column(
-                // crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(width: context.width),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(context.width),
-                    child: SizedBox(
-                      width: context.width * .45,
-                      child: ImageWidget(path: state.user!.profileImage?.mediaUrl ?? ''),
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Gap(10),
-                      TextWidget(
-                        state.user!.fullName,
-                        style: context.textTheme.titleLarge,
-                      ),
-                      const Gap(5),
-                      TextWidget('@${state.user!.userName}'),
-                      TextWidget(state.user!.email),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.calendar_month),
-                          TextWidget(state.user!.birthDate?.formatDate()),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            CubitStatus.success => Profile(userProfile: state.user!),
           },
         ),
       ),
+    );
+  }
+}
+
+class Profile extends StatelessWidget {
+  const Profile({
+    super.key,
+    required this.userProfile,
+  });
+
+  final UserProfileModel userProfile;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      // crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SizedBox(width: context.width),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(context.width),
+          child: SizedBox(
+            width: context.width * .45,
+            child: ImageWidget(path: userProfile.profileImage?.mediaUrl ?? ''),
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Gap(10),
+            TextWidget(
+              userProfile.fullName,
+              style: context.textTheme.titleLarge,
+            ),
+            const Gap(5),
+            TextWidget('@${userProfile.userName}'),
+            TextWidget(userProfile.email),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.calendar_month),
+                TextWidget(userProfile.birthDate?.formatDate()),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

@@ -73,7 +73,7 @@ class ResultPage extends StatelessWidget {
               ),
               const Spacer(),
               ButtonWidget(
-                text: 'AppStrings.showAnswers',
+                text: AppStrings.showAnswers,
                 width: context.width,
                 backgroundColor: context.colorScheme.onPrimary,
                 onPressed: () => context.pushNamed(AppRoutes.quizReview, extra: args.quiz),

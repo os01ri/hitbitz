@@ -23,8 +23,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     final result = await _getProfileUsecase(NoParams());
 
     result.fold(
-      (l) => emit(state.copyWith(status: CubitStatus.success)),
-      (r) => emit(state.copyWith(status: CubitStatus.failure, profile: r)),
+      (l) => emit(state.copyWith(status: CubitStatus.failure)),
+      (r) => emit(state.copyWith(status: CubitStatus.success, profile: r)),
     );
   }
 }

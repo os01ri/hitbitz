@@ -32,7 +32,7 @@ class RemoteHomeDataSource {
     final rowData = await Http.get(uri: EndPoints.getHomeRoadmap(params: params));
     return BaseResponse.fromJson(
       json: json.decode(rowData),
-      dataConverter: (body) => RoadMapModel.fromJson(body),
+      dataConverter: (body) => RoadMapModel.fromJson(body ?? {}),
     );
   }
 }

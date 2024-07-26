@@ -102,5 +102,7 @@
     "matching": "مطابقة",
     "gapFilling": "ملء الفجوات",
     "verticalSorting": "الترتيب العمودي",
-    "horizontalSorting": "الترتيب الأفقي"
+    "horizontalSorting": "الترتيب الأفقي",
+    "showAnswers": "إظهار الإجابات",
+    "quizReview": "مراجعة الاختبار"
 }

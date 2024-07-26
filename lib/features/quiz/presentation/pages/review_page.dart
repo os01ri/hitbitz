@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:hitbitz/core/components/card_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
@@ -17,7 +18,7 @@ class ReviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const TextWidget('AppStrings.quizReview'),
+        title: const TextWidget(AppStrings.quizReview),
       ),
       body: ListView.separated(
         padding: AppPadding.listViewPadding,
