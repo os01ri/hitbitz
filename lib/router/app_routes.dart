@@ -22,4 +22,5 @@ class AppRoutes {
   static const profile = 'profile';
   static const friendRequests = 'friendRequests';
   static const friends = 'friends';
+  static const sendCv = '/sendcv';
 }
