@@ -104,5 +104,9 @@
     "verticalSorting": "Vertical Sorting",
     "horizontalSorting": "Horizontal Sorting",
     "showAnswers": "Show Answers",
-    "quizReview": "Quiz Review"
+    "quizReview": "Quiz Review",
+    "updateProfile": "Update Profile",
+    "pickImage": "Pick Your Profile Picture",
+    "logOut": "Log Out",
+    "select": "Select"
 }

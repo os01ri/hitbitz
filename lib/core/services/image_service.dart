@@ -57,7 +57,7 @@ class _ImageHelper {
   const _ImageHelper._();
 
   static Future<void> _requestPermission() async {
-    const status = Permission.camera;
+    const status = Permission.mediaLibrary;
     if ((await status.isDenied)) {
       _requestPermission();
     }
@@ -70,7 +70,7 @@ class _ImageHelper {
 
     File? image;
 
-    final XFile? xFile = await ImagePicker().pickImage(source: ImageSource.camera);
+    final XFile? xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (xFile != null) {
       final result = await _crop(file: xFile, aspectRatio: aspectRatio);

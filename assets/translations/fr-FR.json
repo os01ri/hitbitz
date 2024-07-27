@@ -102,5 +102,11 @@
     "matching": "Appariement",
     "gapFilling": "Remplissage de Lacunes",
     "verticalSorting": "Tri Vertical",
-    "horizontalSorting": "Tri Horizontal"
+    "horizontalSorting": "Tri Horizontal",
+    "showAnswers": "Afficher les réponses",
+    "quizReview": "Révision du quiz",
+    "updateProfile": "Mettre à jour le profil",
+    "pickImage": "Choisissez votre photo de profil",
+    "logOut": "Se déconnecter",
+    "select": "Sélectionner"
 }

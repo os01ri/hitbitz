@@ -104,5 +104,9 @@
     "verticalSorting": "الترتيب العمودي",
     "horizontalSorting": "الترتيب الأفقي",
     "showAnswers": "إظهار الإجابات",
-    "quizReview": "مراجعة الاختبار"
+    "quizReview": "مراجعة الاختبار",
+    "updateProfile": "تعديل الملف الشخصي",
+    "pickImage": "أضف صورتك الشخصية",
+    "logOut": "تسجيل الخروج",
+    "select": "اختر"
 }

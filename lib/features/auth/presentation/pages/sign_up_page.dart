@@ -185,6 +185,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     textAlign: TextAlign.center,
                     maxLines: 5,
                     children: [
+                      const TextWidget(' '),
                       TextWidget(AppStrings.termsAnConditions, textColor: context.colorScheme.primary),
                       const TextWidget(AppStrings.and),
                       TextWidget(AppStrings.privacyPolicy, textColor: context.colorScheme.primary),
@@ -228,7 +229,7 @@ class _SignUpPageState extends State<SignUpPage> {
       Toaster.showError(context: context, message: state.failure?.message);
     } else if (state.status == CubitStatus.success) {
       Toaster.showSuccess(context: context, message: AppStrings.signedInSuccessfully);
-      Future.delayed(const Duration(milliseconds: 300)).whenComplete(() => context.goNamed(AppRoutes.main));
+      Future.delayed(const Duration(milliseconds: 300)).whenComplete(() => context.goNamed(AppRoutes.updateProfile));
     }
   }
 }

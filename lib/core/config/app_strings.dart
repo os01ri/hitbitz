@@ -101,4 +101,8 @@ class AppStrings {
   static const horizontalSorting = 'horizontalSorting';
   static const showAnswers = 'showAnswers';
   static const quizReview = 'quizReview';
+  static const updateProfile = 'updateProfile';
+  static const pickImage = 'pickImage';
+  static const select = 'select';
+  static const logOut = 'logOut';
 }

@@ -102,5 +102,11 @@
     "matching": "Zuordnung",
     "gapFilling": "Lückentext",
     "verticalSorting": "Vertikales Sortieren",
-    "horizontalSorting": "Horizontales Sortieren"
+    "horizontalSorting": "Horizontales Sortieren",
+    "showAnswers": "Antworten anzeigen",
+    "quizReview": "Quiz Überprüfung",
+    "updateProfile": "Profil aktualisieren",
+    "pickImage": "Wählen Sie Ihr Profilbild",
+    "logOut": "Abmelden",
+    "select": "Auswählen"
 }

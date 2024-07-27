@@ -15,9 +15,10 @@ import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/core/services/shared_preferences_service.dart';
 import 'package:hitbitz/core/utilities/app_localization.dart';
-import 'package:hitbitz/features/friends/presentation/pages/profile_page.dart';
 import 'package:hitbitz/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:hitbitz/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class MyProfilePage extends StatefulWidget {
@@ -50,11 +51,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
           BlocProvider.value(
             value: di<ProfileCubit>()..getProfile(),
             child: BlocBuilder<ProfileCubit, ProfileState>(
-              builder: (context, state) => switch (state.status) {
+              builder: (context, state) => switch (state.getStatus) {
                 CubitStatus.initial => const SizedBox.shrink(),
                 CubitStatus.loading => const LoadingWidget().center(),
                 CubitStatus.failure => ErrorButtonWidget(onTap: () => di<ProfileCubit>().getProfile()),
-                CubitStatus.success => Profile(userProfile: state.profile!),
+                CubitStatus.success => ProfileWidget(userProfile: state.profile!),
               },
             ),
           ),
@@ -98,6 +99,17 @@ class _MyProfilePageState extends State<MyProfilePage> {
                 context.setLocale(value);
               },
             ).center(),
+          ),
+          const Gap(10),
+          ButtonWidget(
+            text: AppStrings.logOut,
+            width: context.width,
+            backgroundColor: context.colorScheme.error,
+            foregroundColor: context.colorScheme.onError,
+            onPressed: () async {
+              await SharedPreferencesService.clearStorage();
+              if (context.mounted) context.goNamed(AppRoutes.splash);
+            },
           ),
         ],
       ).wrapPadding(AppPadding.pagePadding).scrollable(),

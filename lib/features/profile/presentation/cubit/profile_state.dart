@@ -1,24 +1,28 @@
 part of 'profile_cubit.dart';
 
 class ProfileState {
-  final CubitStatus status;
+  final CubitStatus getStatus;
   final UserProfileModel? profile;
+  final CubitStatus updateStatus;
   final Failure? failure;
 
   const ProfileState({
-    this.status = CubitStatus.initial,
+    this.getStatus = CubitStatus.initial,
     this.profile,
+    this.updateStatus = CubitStatus.initial,
     this.failure,
   });
 
   ProfileState copyWith({
-    CubitStatus? status,
+    CubitStatus? getStatus,
     UserProfileModel? profile,
+    CubitStatus? updateStatus,
     Failure? failure,
   }) {
     return ProfileState(
-      status: status ?? this.status,
+      getStatus: getStatus ?? this.getStatus,
       profile: profile ?? this.profile,
+      updateStatus: updateStatus ?? this.updateStatus,
       failure: failure ?? this.failure,
     );
   }

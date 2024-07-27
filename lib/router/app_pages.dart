@@ -8,6 +8,7 @@ import 'package:hitbitz/features/friends/presentation/pages/profile_page.dart';
 import 'package:hitbitz/features/main/presentation/pages/main_page.dart';
 import 'package:hitbitz/features/notification/presentation/pages/notifications_page.dart';
 import 'package:hitbitz/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:hitbitz/features/profile/presentation/pages/update_profile_page.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_intro_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
@@ -67,6 +68,12 @@ class AppPages {
     name: AppRoutes.main,
     builder: (context, state) => const MainPage(),
     routes: [
+      GoRoute(
+        name: AppRoutes.updateProfile,
+        path: AppRoutes.updateProfile,
+        builder: (context, state) => const UpdateProfilePage(),
+        routes: const [],
+      ),
       GoRoute(
         name: AppRoutes.notifications,
         path: AppRoutes.notifications,

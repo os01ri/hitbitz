@@ -172,6 +172,7 @@ class _LoginPageState extends State<LoginPage> {
               textAlign: TextAlign.center,
               maxLines: 5,
               children: [
+                const TextWidget(' '),
                 TextWidget(AppStrings.termsAnConditions, textColor: context.colorScheme.primary),
                 const TextWidget(AppStrings.and),
                 TextWidget(AppStrings.privacyPolicy, textColor: context.colorScheme.primary),
