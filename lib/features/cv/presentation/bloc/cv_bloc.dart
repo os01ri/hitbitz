@@ -30,6 +30,7 @@ class CvBloc extends Bloc<CvEvent, CvState> {
       }, (r) {
         emit(state.copyWith(cvStatus: CubitStatus.success));
       });
+      emit(state.copyWith(cvStatus: CubitStatus.initial));
     });
     on<GetRoadmapsForCV>((event, emit) async {
       emit(state.copyWith(indexRoadmaps: CubitStatus.loading));
@@ -39,6 +40,7 @@ class CvBloc extends Bloc<CvEvent, CvState> {
       }, (r) {
         emit(state.copyWith(indexRoadmaps: CubitStatus.success, roadmaps: r));
       });
+      emit(state.copyWith(cvStatus: CubitStatus.initial));
     });
     on<GetCategoriesForCV>((event, emit) async {
       emit(state.copyWith(indexCategories: CubitStatus.loading));
@@ -46,9 +48,9 @@ class CvBloc extends Bloc<CvEvent, CvState> {
       result.fold((l) {
         emit(state.copyWith(indexCategories: CubitStatus.failure));
       }, (r) {
-        emit(state.copyWith(
-            indexCategories: CubitStatus.success, categories: r));
+        emit(state.copyWith(indexCategories: CubitStatus.success, categories: r));
       });
+      emit(state.copyWith(cvStatus: CubitStatus.initial));
     });
   }
 }

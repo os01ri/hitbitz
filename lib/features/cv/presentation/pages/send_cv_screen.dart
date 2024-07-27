@@ -7,12 +7,12 @@ import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/drop_down_widget.dart';
 import 'package:hitbitz/core/components/text_field_widget.dart';
+import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/utilities/app_validator.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/cv/domain/usecases/send_cv_usecase.dart';
-import 'package:hitbitz/router/app_routes.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/config/cubit_status.dart';
@@ -34,6 +34,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
   final ValueNotifier<bool> categoryOrRoadmap = ValueNotifier(false);
   final ValueNotifier<int?> roadmap = ValueNotifier(null);
   var filePathController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -55,10 +56,10 @@ class _SendCvScreenState extends State<SendCvScreen> {
             Toaster.showLoading();
           } else {
             if (state.cvStatus == CubitStatus.failure) {
-              Toaster.showError(
-                  context: context, message: 'SomeThing Went Wrong');
+              Toaster.showError(context: context, message: 'SomeThing Went Wrong');
             } else if (state.cvStatus == CubitStatus.success) {
-              context.go(AppRoutes.splash);
+              Toaster.showSuccess(context: context, message: 'Form Sent Successfully, Wait for Admins to Review it');
+              context.pop();
             }
             Toaster.closeLoading();
           }
@@ -105,14 +106,10 @@ class _SendCvScreenState extends State<SendCvScreen> {
                             TextFieldWidget(
                               controller: filePathController,
                               enabled: false,
-                              hint: 'Select Cv Png File',
-                              validator: (p0) {
-                                return AppValidator.required(p0);
-                              },
+                              hint: 'Select CV Png File',
+                              validator: AppValidator.required,
                             ).onTap(() async {
-                              ImagePicker()
-                                  .pickImage(source: ImageSource.gallery)
-                                  .then((value) {
+                              ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
                                 if (value != null) {
                                   filePathController.text = value.path;
                                 }
@@ -141,8 +138,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                                 ? BlocBuilder<CvBloc, CvState>(
                                     bloc: di<CvBloc>(),
                                     builder: (context, state) {
-                                      return state.indexRoadmaps ==
-                                              CubitStatus.success
+                                      return state.indexRoadmaps == CubitStatus.success
                                           ? DropDownWidget(
                                               listenableValue: roadmap,
                                               items: state.roadmaps.map((e) {
@@ -155,16 +151,14 @@ class _SendCvScreenState extends State<SendCvScreen> {
                                           : ElevatedButton(
                                               child: const Text('Try Again'),
                                               onPressed: () {
-                                                di<CvBloc>()
-                                                    .add(GetRoadmapsForCV());
+                                                di<CvBloc>().add(GetRoadmapsForCV());
                                               });
                                     },
                                   )
                                 : BlocBuilder<CvBloc, CvState>(
                                     bloc: di<CvBloc>(),
                                     builder: (context, state) {
-                                      return state.indexCategories ==
-                                              CubitStatus.success
+                                      return state.indexCategories == CubitStatus.success
                                           ? DropDownWidget(
                                               listenableValue: category,
                                               items: state.categories.map((e) {
@@ -179,8 +173,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                                           : ElevatedButton(
                                               child: const Text('Try Again'),
                                               onPressed: () {
-                                                di<CvBloc>()
-                                                    .add(GetCategoriesForCV());
+                                                di<CvBloc>().add(GetCategoriesForCV());
                                               });
                                     },
                                   ),
@@ -188,21 +181,21 @@ class _SendCvScreenState extends State<SendCvScreen> {
                             ButtonWidget(
                               width: 1.sw,
                               text: 'Send',
+                              backgroundColor: context.colorScheme.primary,
+                              foregroundColor: context.colorScheme.onPrimary,
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
                                   di<CvBloc>().add(SendCvEvent(
                                       params: SendCvParams(
-                                          email: emailController.text,
-                                          username: usernameController.text,
-                                          fullName: fullNameController.text,
-                                          cv: File(filePathController.text),
-                                          categoryId: category.value,
-                                          roadmapId: roadmap.value)));
+                                    email: emailController.text,
+                                    username: usernameController.text,
+                                    fullName: fullNameController.text,
+                                    cv: File(filePathController.text),
+                                    categoryId: category.value,
+                                    roadmapId: roadmap.value,
+                                  )));
                                 } else {
-                                  Toaster.showWarning(
-                                      context: context,
-                                      warningMessage:
-                                          'Please Check All Required Fields');
+                                  Toaster.showWarning(context: context, warningMessage: 'Please Check All Required Fields');
                                 }
                               },
                             )

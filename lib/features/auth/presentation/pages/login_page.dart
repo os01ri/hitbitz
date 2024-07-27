@@ -161,7 +161,18 @@ class _LoginPageState extends State<LoginPage> {
                     foregroundColor: context.colorScheme.onSurface,
                     backgroundColor: context.colorScheme.surface,
                     text: AppStrings.continueAsGuest,
-                  )
+                  ),
+                  const Gap(20),
+                  const TextWidget('- or -'),
+                  const Gap(20),
+                  TextWidget(
+                    'Apply as a Volunteer',
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      color: context.colorScheme.primary,
+                      decoration: TextDecoration.underline,
+                    ),
+                    onTap: () => context.pushNamed(AppRoutes.sendCv),
+                  ),
                 ],
               ).wrapPadding(AppPadding.pagePadding),
             ),
