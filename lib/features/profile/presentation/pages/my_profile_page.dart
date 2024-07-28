@@ -78,7 +78,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                       fullName: state.profile?.fullName,
                                       birthDate: state.profile?.birthDate,
                                       image: state.profile?.profileImage,
-                                      categoryId: state.profile?.categoryId,
+                                      categoryId: state.profile?.category?.id,
                                     ))
                                 .whenComplete(di<ProfileCubit>().getProfile);
                           },

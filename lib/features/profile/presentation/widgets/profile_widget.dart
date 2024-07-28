@@ -38,6 +38,7 @@ class ProfileWidget extends StatelessWidget {
             const Gap(5),
             TextWidget('@${userProfile.userName}'),
             TextWidget(userProfile.email),
+            if (userProfile.category != null) TextWidget(userProfile.category?.name),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,

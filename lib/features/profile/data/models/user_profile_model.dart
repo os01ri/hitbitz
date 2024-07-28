@@ -1,4 +1,5 @@
 import 'package:hitbitz/core/data/models/media_model.dart';
+import 'package:hitbitz/features/home/data/models/category_model.dart';
 
 List<UserProfileModel> usersListFromJson(dynamic decodedJson) =>
     List<UserProfileModel>.from(decodedJson.map((x) => UserProfileModel.fromJson(x)));
@@ -13,7 +14,7 @@ class UserProfileModel {
   final int? totalFails;
   final int? totalSuccess;
   final MediaModel? profileImage;
-  final int? categoryId;
+  final CategoryModel? category;
 
   UserProfileModel({
     required this.id,
@@ -25,7 +26,7 @@ class UserProfileModel {
     this.totalFails,
     this.totalSuccess,
     this.profileImage,
-    this.categoryId,
+    this.category,
   });
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) => UserProfileModel(
@@ -38,6 +39,6 @@ class UserProfileModel {
         totalFails: json['totalFails'],
         totalSuccess: json['totalSuccess'],
         profileImage: json['profileImage'] == null ? null : MediaModel.fromJson(json['profileImage']),
-        categoryId: json['categoryId'],
+        category: json['category'] == null ? null : CategoryModel.fromJson(json['category']),
       );
 }
