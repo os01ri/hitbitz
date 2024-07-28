@@ -144,7 +144,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                       builder: (context, state) {
                         return state.indexCategories == CubitStatus.success
                             ? DropDownWidget(
-                                label: 'Select Your Preferred Category/Major',
+                                label: AppStrings.selectYourMajor,
                                 listenableValue: _category,
                                 items: state.categories.map((e) {
                                   return DropdownMenuItem(

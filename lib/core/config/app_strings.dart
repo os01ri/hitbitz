@@ -124,4 +124,5 @@ class AppStrings {
   static const correctAnswer = 'correctAnswer';
   static const play = 'play';
   static const matchingComingSoon = 'matchingComingSoon';
+  static const selectYourMajor = 'selectYourMajor';
 }
