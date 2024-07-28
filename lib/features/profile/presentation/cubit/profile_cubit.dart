@@ -31,6 +31,8 @@ class ProfileCubit extends Cubit<ProfileState> {
       (l) => emit(state.copyWith(getStatus: CubitStatus.failure, failure: l)),
       (r) => emit(state.copyWith(getStatus: CubitStatus.success, profile: r)),
     );
+
+    emit(state.copyWith(updateStatus: CubitStatus.initial));
   }
 
   updateProfile(UpdateProfileParams params) async {
@@ -45,5 +47,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(state.copyWith(updateStatus: CubitStatus.success));
       },
     );
+
+    emit(state.copyWith(updateStatus: CubitStatus.initial));
   }
 }

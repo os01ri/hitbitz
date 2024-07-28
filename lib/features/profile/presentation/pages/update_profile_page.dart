@@ -64,10 +64,10 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
     _listenableImage = ValueNotifier(null);
     _fullNameController = TextEditingController(text: widget.args.fullName);
     _birthDateController = TextEditingController(text: widget.args.birthDate?.formatDate());
-    _selectedDate = null;
+    _selectedDate = widget.args.birthDate;
     _cubit = di<ProfileCubit>();
     di<CvBloc>().add(GetCategoriesForCV());
-    _category = ValueNotifier(null);
+    _category = ValueNotifier(widget.args.categoryId);
 
     super.initState();
   }
@@ -156,7 +156,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                                 }).toList(),
                               )
                             : ElevatedButton(
-                                child: const Text('Try Again'),
+                                child: const Text(AppStrings.tryAgain),
                                 onPressed: () {
                                   di<CvBloc>().add(GetCategoriesForCV());
                                 });
@@ -175,6 +175,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                       fullName: _fullNameController.text,
                       birthDate: _selectedDate,
                       profileImage: _imageName,
+                      categoryId: _category.value,
                     ));
                   }
                 },

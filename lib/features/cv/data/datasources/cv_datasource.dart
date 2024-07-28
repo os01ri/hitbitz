@@ -14,21 +14,17 @@ class RemoteCvDatasource {
   Future<BaseResponse<void>> sendCv(
     BodyMap body,
   ) async {
-    final rowData =
-        await Http.postFormData(uri: EndPoints.sendCv(), body: body);
-    return BaseResponse.fromJson(
-        json: jsonDecode(rowData), dataConverter: (d) {});
+    final rowData = await Http.postFormData(uri: EndPoints.sendCv(), body: body);
+    return BaseResponse.fromJson(json: jsonDecode(rowData), dataConverter: (d) {});
   }
 
   Future<BaseResponse<List<RoadMapModel>>> getRoadmaps() async {
     final rowData = await Http.get(uri: EndPoints.getRoadMaps());
-    return BaseResponse.fromJson(
-        json: jsonDecode(rowData), dataConverter: roadMapsListFromJson);
+    return BaseResponse.fromJson(json: jsonDecode(rowData), dataConverter: roadMapsListFromJson);
   }
 
   Future<BaseResponse<List<CategoryModel>>> getCategories() async {
-    final rowData = await Http.get(uri: EndPoints.getCategories());
-    return BaseResponse.fromJson(
-        json: jsonDecode(rowData), dataConverter: categoriesListFromJson);
+    final rowData = await Http.get(uri: EndPoints.getCategories(params: {'filter[type]': '1'}));
+    return BaseResponse.fromJson(json: jsonDecode(rowData), dataConverter: categoriesListFromJson);
   }
 }

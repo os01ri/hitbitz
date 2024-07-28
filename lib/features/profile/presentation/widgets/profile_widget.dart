@@ -38,7 +38,16 @@ class ProfileWidget extends StatelessWidget {
             const Gap(5),
             TextWidget('@${userProfile.userName}'),
             TextWidget(userProfile.email),
-            if (userProfile.category != null) TextWidget(userProfile.category?.name),
+            if (userProfile.category != null)
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.school_outlined),
+                  const Gap(3),
+                  TextWidget(userProfile.category?.name),
+                ],
+              ),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
