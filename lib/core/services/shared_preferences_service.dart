@@ -21,6 +21,21 @@ class SharedPreferencesService {
 
   ////////////!         Token          ////////////
 
+  static bool getRemember() {
+    final value = _sp.getBool(SharedPreferencesKeys.remember);
+    return value ?? false;
+  }
+
+  static Future<bool> setRemember(bool value) async {
+    final isDone = await _sp.setBool(SharedPreferencesKeys.remember, value);
+    if (isDone) {
+      log(value.toString().logGreen, name: 'value saved to storage');
+    } else {
+      log(value.toString().logRed, name: 'value hasn\'t been saved to storage');
+    }
+    return isDone;
+  }
+
   static Future<bool> setToken(String token) async {
     final isDone = await _sp.setString(SharedPreferencesKeys.accessToken, token);
     if (isDone) {
@@ -79,6 +94,7 @@ class SharedPreferencesService {
 class SharedPreferencesKeys {
   const SharedPreferencesKeys._();
 
+  static const String remember = 'remember';
   static const String accessToken = 'accessToken';
   static const String fullName = 'fullName';
 }

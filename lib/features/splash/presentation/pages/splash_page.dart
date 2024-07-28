@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(const Duration(seconds: 2)).whenComplete(() {
       final x = SharedPreferencesService.getToken().toString();
       log(x.logMagenta);
-      if (SharedPreferencesService.isAuth()) {
+      if (SharedPreferencesService.isAuth() && SharedPreferencesService.getRemember()) {
         context.goNamed(AppRoutes.main);
       } else {
         context.goNamed(AppRoutes.onBoarding);
