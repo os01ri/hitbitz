@@ -93,7 +93,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                     label: 'Full Name',
                     hint: 'Lionel Messi',
                     validator: (p0) {
-                      return AppValidator.required(p0);
+                      return AppValidator.name(p0);
                     },
                     controller: fullNameController,
                   ),

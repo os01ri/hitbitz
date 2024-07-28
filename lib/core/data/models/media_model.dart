@@ -14,7 +14,8 @@ class MediaModel {
   factory MediaModel.fromJson(Map<String, dynamic> json) {
     return MediaModel(
       id: json['id'],
-      mediaUrl: json['media_url'],
+      // mediaUrl: json['media_url'],
+      mediaUrl: json['media_url']?.replaceRange(0, 16, 'http://10.0.2.2'),
       hash: json['hash'],
       order: json['order'],
     );

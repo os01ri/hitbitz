@@ -18,6 +18,7 @@ import 'package:hitbitz/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:hitbitz/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:hitbitz/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:hitbitz/features/auth/presentation/widgets/password_text_field.dart';
+import 'package:hitbitz/features/profile/presentation/pages/update_profile_page.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  late DateTime _selectedDate;
+  late DateTime? _selectedDate;
   late final ValueNotifier<bool> _showPasswordListenable;
   late final ValueNotifier<bool> _showPasswordConfirmationListenable;
 
@@ -43,7 +44,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   void initState() {
-    _selectedDate = DateTime.now();
+    _selectedDate = null;
     _showPasswordListenable = ValueNotifier(false);
     _showPasswordConfirmationListenable = ValueNotifier(false);
 
@@ -124,13 +125,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     label: AppStrings.fullName,
                     prefixIcon: const FaIcon(FontAwesomeIcons.userGraduate),
                     controller: _fullNameController,
-                    validator: AppValidator.required,
+                    validator: AppValidator.name,
                   ),
                   const Gap(10),
                   AuthTextField(
                     label: AppStrings.email,
                     prefixIcon: const FaIcon(FontAwesomeIcons.envelope),
                     controller: _emailController,
+                    textInputType: TextInputType.emailAddress,
                     validator: AppValidator.email,
                   ),
                   const Gap(10),
@@ -154,9 +156,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     onTap: () async {
                       DateTime? newDate = await showDatePicker(
                         context: context,
-                        initialDate: _selectedDate,
-                        firstDate: DateTime(1980),
-                        lastDate: DateTime(2100),
+                        initialDate: _selectedDate ?? DateTime(2014),
+                        firstDate: DateTime(1950),
+                        lastDate: DateTime(2014),
                       );
 
                       if (newDate == null) return;
@@ -198,13 +200,18 @@ class _SignUpPageState extends State<SignUpPage> {
                     return ButtonWidget(
                       width: context.width,
                       onPressed: () {
+                        if (_selectedDate == null) {
+                          Toaster.showWarning(context: context, warningMessage: 'Please Select a Valid Birth Date');
+                          return;
+                        }
+
                         if (Form.of(context).validate()) {
                           _cubit.signIn(SignInParams(
                             email: _emailController.text,
                             userName: _usernameController.text,
                             password: _passwordController.text,
                             fullName: _fullNameController.text,
-                            birthDate: _selectedDate,
+                            birthDate: _selectedDate!,
                           ));
                         }
                       },
@@ -229,7 +236,13 @@ class _SignUpPageState extends State<SignUpPage> {
       Toaster.showError(context: context, message: state.failure?.message);
     } else if (state.status == CubitStatus.success) {
       Toaster.showSuccess(context: context, message: AppStrings.signedInSuccessfully);
-      Future.delayed(const Duration(milliseconds: 300)).whenComplete(() => context.goNamed(AppRoutes.updateProfile));
+      Future.delayed(const Duration(milliseconds: 300)).whenComplete(() => context.goNamed(
+            AppRoutes.updateProfile,
+            extra: UpdateProfileArgs(
+              fullName: _fullNameController.text,
+              birthDate: _selectedDate,
+            ),
+          ));
     }
   }
 }

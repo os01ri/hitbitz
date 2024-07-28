@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/error/failures.dart';
+import 'package:hitbitz/core/services/shared_preferences_service.dart';
 import 'package:hitbitz/core/usecases/usecase.dart';
 import 'package:hitbitz/features/profile/data/models/user_profile_model.dart';
 import 'package:hitbitz/features/profile/domain/usecases/get_profile_usecase.dart';
@@ -39,7 +40,10 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     result.fold(
       (l) => emit(state.copyWith(updateStatus: CubitStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(updateStatus: CubitStatus.success)),
+      (r) {
+        if (params.fullName != null) SharedPreferencesService.setFullName(params.fullName!);
+        emit(state.copyWith(updateStatus: CubitStatus.success));
+      },
     );
   }
 }

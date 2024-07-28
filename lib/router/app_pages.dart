@@ -77,7 +77,7 @@ class AppPages {
       GoRoute(
         name: AppRoutes.updateProfile,
         path: AppRoutes.updateProfile,
-        builder: (context, state) => const UpdateProfilePage(),
+        builder: (context, state) => UpdateProfilePage(args: state.extra as UpdateProfileArgs),
         routes: const [],
       ),
       GoRoute(

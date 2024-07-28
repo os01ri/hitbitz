@@ -68,6 +68,7 @@ class _HomePageState extends State<HomePage> {
                   CubitStatus.success => state.roadMap == null
                       ? const SizedBox.shrink()
                       : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             if (state.roadMap?.id != null) ...[
                               const _SectionTitle(text: AppStrings.whereYouLeft).wrapPadding(AppPadding.pagePaddingHorizontal),

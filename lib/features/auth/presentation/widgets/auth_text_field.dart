@@ -6,6 +6,7 @@ class AuthTextField extends StatelessWidget {
   const AuthTextField({
     super.key,
     required this.label,
+    this.textInputType = TextInputType.text,
     this.controller,
     this.prefixIcon,
     this.enabled = true,
@@ -13,6 +14,7 @@ class AuthTextField extends StatelessWidget {
   });
 
   final String label;
+  final TextInputType textInputType;
   final TextEditingController? controller;
   final Widget? prefixIcon;
   final bool enabled;
@@ -24,6 +26,7 @@ class AuthTextField extends StatelessWidget {
       child: TextFieldWidget(
         prefixIcon: prefixIcon?.paddingAll(12),
         contentPadding: const EdgeInsets.all(18),
+        keyboardType: TextInputType.emailAddress,
         controller: controller ?? TextEditingController(),
         enabled: enabled,
         label: label,

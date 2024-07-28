@@ -13,6 +13,7 @@ class UserProfileModel {
   final int? totalFails;
   final int? totalSuccess;
   final MediaModel? profileImage;
+  final int? categoryId;
 
   UserProfileModel({
     required this.id,
@@ -24,6 +25,7 @@ class UserProfileModel {
     this.totalFails,
     this.totalSuccess,
     this.profileImage,
+    this.categoryId,
   });
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) => UserProfileModel(
@@ -36,5 +38,6 @@ class UserProfileModel {
         totalFails: json['totalFails'],
         totalSuccess: json['totalSuccess'],
         profileImage: json['profileImage'] == null ? null : MediaModel.fromJson(json['profileImage']),
+        categoryId: json['categoryId'],
       );
 }

@@ -11,19 +11,38 @@ import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
+import 'package:hitbitz/core/data/models/media_model.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
+import 'package:hitbitz/core/extensions/time_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/utilities/app_validator.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/auth/presentation/widgets/auth_text_field.dart';
+import 'package:hitbitz/features/cv/presentation/bloc/cv_bloc.dart';
 import 'package:hitbitz/features/media_service/presentation/widgets/image_setter_form.dart';
 import 'package:hitbitz/features/profile/domain/usecases/update_profile_usecase.dart';
 import 'package:hitbitz/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
+class UpdateProfileArgs {
+  final String? fullName;
+  final DateTime? birthDate;
+  final int? categoryId;
+  final MediaModel? image;
+
+  const UpdateProfileArgs({
+    this.fullName,
+    this.birthDate,
+    this.categoryId,
+    this.image,
+  });
+}
+
 class UpdateProfilePage extends StatefulWidget {
-  const UpdateProfilePage({super.key});
+  final UpdateProfileArgs args;
+
+  const UpdateProfilePage({super.key, required this.args});
 
   @override
   State<UpdateProfilePage> createState() => _UpdateProfilePageState();
@@ -33,8 +52,9 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
   late final ValueNotifier<File?> _listenableImage;
   late final TextEditingController _fullNameController;
   late final TextEditingController _birthDateController;
+  late final ValueNotifier<int?> _category;
 
-  late DateTime _selectedDate;
+  late DateTime? _selectedDate;
   String? _imageName;
 
   late final ProfileCubit _cubit;
@@ -42,10 +62,12 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
   @override
   void initState() {
     _listenableImage = ValueNotifier(null);
-    _fullNameController = TextEditingController();
-    _birthDateController = TextEditingController();
-    _selectedDate = DateTime.now();
+    _fullNameController = TextEditingController(text: widget.args.fullName);
+    _birthDateController = TextEditingController(text: widget.args.birthDate?.formatDate());
+    _selectedDate = null;
     _cubit = di<ProfileCubit>();
+    di<CvBloc>().add(GetCategoriesForCV());
+    _category = ValueNotifier(null);
 
     super.initState();
   }
@@ -55,7 +77,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
     _listenableImage.dispose();
     _fullNameController.dispose();
     _birthDateController.dispose();
-
+    _category.dispose();
     // _cubit.close();
     super.dispose();
   }
@@ -72,38 +94,11 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  // Stack(
-                  //   children: [
-                  // CardWidget(
-                  //   width: context.width * .5,
-                  //   height: context.width * .5,
-                  //   isOutlined: true,
-                  //   borderColor: context.colorScheme.outline,
-                  //   borderRadius: 40,
-                  //   color: context.colorScheme.surface,
-                  //   onTap: () async {
-                  //     final pickedImage = await ImageService.pickImage();
-                  //     if (pickedImage == null) return;
-                  //     _listenableImage.value = pickedImage;
-                  //   },
-                  //   child: ValueListenableBuilder<File?>(
-                  //     valueListenable: _listenableImage,
-                  //     builder: (context, value, child) {
-                  //       return (value == null) ? child! : Image.file(value);
-                  //     },
-                  //     child: const TextWidget(AppStrings.pickImage),
-                  //   ),
-                  // ),
-                  // IconButton(
-                  //   onPressed: () => _listenableImage.value = null,
-                  //   icon: const Icon(Icons.cancel),
-                  // ),
-                  //   ],
-                  // ),
                   SizedBox(
                     child: ImageSetterForm(
                       title: AppStrings.pickImage,
                       cropperRatio: CropperRatio.square,
+                      mediaModelNotifier: ValueNotifier(widget.args.image),
                       onPickingFinished: (p0) => _listenableImage.value = p0,
                       onRemove: () => _listenableImage.value = null,
                       onSuccess: (name) => _imageName = name,
@@ -112,18 +107,19 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                   const Gap(20),
                   AuthTextField(
                     label: AppStrings.fullName,
+                    textInputType: TextInputType.name,
                     prefixIcon: const FaIcon(FontAwesomeIcons.user),
                     controller: _fullNameController,
-                    validator: AppValidator.required,
+                    validator: AppValidator.name,
                   ),
                   const Gap(10),
                   GestureDetector(
                     onTap: () async {
                       DateTime? newDate = await showDatePicker(
                         context: context,
-                        initialDate: _selectedDate,
-                        firstDate: DateTime(1980),
-                        lastDate: DateTime(2100),
+                        initialDate: _selectedDate ?? DateTime(2014),
+                        firstDate: DateTime(1950),
+                        lastDate: DateTime(2014),
                       );
 
                       if (newDate == null) return;
@@ -141,10 +137,31 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                     ),
                   ),
                   const Gap(10),
-                  DropDownWidget(
-                    listenableValue: ValueNotifier(null),
-                    items: const [],
-                    onChanged: (value) {},
+                  BlocProvider.value(
+                    value: di<CvBloc>(),
+                    child: BlocBuilder<CvBloc, CvState>(
+                      bloc: di<CvBloc>(),
+                      builder: (context, state) {
+                        return state.indexCategories == CubitStatus.success
+                            ? DropDownWidget(
+                                label: 'Select Your Preferred Category/Major',
+                                listenableValue: _category,
+                                items: state.categories.map((e) {
+                                  return DropdownMenuItem(
+                                    value: e.id!,
+                                    child: Text(
+                                      e.name!,
+                                    ),
+                                  );
+                                }).toList(),
+                              )
+                            : ElevatedButton(
+                                child: const Text('Try Again'),
+                                onPressed: () {
+                                  di<CvBloc>().add(GetCategoriesForCV());
+                                });
+                      },
+                    ),
                   ),
                 ],
               ).wrapPadding(AppPadding.pagePadding),
@@ -153,11 +170,13 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
               builder: (context) => ButtonWidget(
                 width: context.width,
                 onPressed: () {
-                  _cubit.updateProfile(UpdateProfileParams(
-                    fullName: _fullNameController.text,
-                    birthDate: _selectedDate,
-                    profileImage: _imageName,
-                  ));
+                  if (Form.of(context).validate()) {
+                    _cubit.updateProfile(UpdateProfileParams(
+                      fullName: _fullNameController.text,
+                      birthDate: _selectedDate,
+                      profileImage: _imageName,
+                    ));
+                  }
                 },
                 foregroundColor: context.colorScheme.onPrimary,
                 backgroundColor: context.colorScheme.primary,

@@ -29,9 +29,9 @@ class Toaster {
   }) async {
     closeLoading();
     _showNotification(
-      title: const TextWidget('Error!'),
+      title: TextWidget('Error!', textColor: context.colorScheme.onError),
       subtitle: TextWidget(message, textColor: context.colorScheme.onError, maxLines: 3),
-      leading: Icon(Icons.error_outline_rounded, color: context.colorScheme.error, size: 35),
+      leading: Icon(Icons.error_outline_rounded, color: context.colorScheme.onError, size: 35),
       backgroundColor: context.colorScheme.errorContainer,
     );
 
@@ -44,7 +44,7 @@ class Toaster {
   }) async {
     closeLoading();
     _showNotification(
-      title: const TextWidget('تنبيه!'),
+      title: TextWidget('تنبيه!', textColor: Colors.amber[800]),
       subtitle: TextWidget(warningMessage, maxLines: 3),
       leading: Icon(Icons.warning_amber_rounded, color: Colors.amber[800], size: 35),
       backgroundColor: Colors.amber[200],

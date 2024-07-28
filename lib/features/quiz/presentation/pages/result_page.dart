@@ -51,6 +51,7 @@ class ResultPage extends StatelessWidget {
                 style: context.textTheme.titleLarge?.copyWith(
                   color: context.colorScheme.onPrimary,
                 ),
+                children: const [TextWidget(':')],
               ),
               const Gap(10),
               CardWidget(
@@ -70,6 +71,11 @@ class ResultPage extends StatelessWidget {
                 style: context.textTheme.titleLarge?.copyWith(
                   color: context.colorScheme.onPrimary,
                 ),
+              ),
+              const Gap(10),
+              TextWidget(
+                '${(args.quiz.score / 100 * args.quiz.questions.length).toInt()} / ${args.quiz.questions.length}',
+                style: context.textTheme.titleLarge?.copyWith(color: context.colorScheme.onPrimary),
               ),
               const Spacer(),
               ButtonWidget(
