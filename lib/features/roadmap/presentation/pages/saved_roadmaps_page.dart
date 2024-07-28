@@ -31,7 +31,7 @@ class _SavedRoadmapsPageState extends State<SavedRoadmapsPage> {
               itemCount: state.savedRoadMaps.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisExtent: 260,
+                mainAxisExtent: 220,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
               ),

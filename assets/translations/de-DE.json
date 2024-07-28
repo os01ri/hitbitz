@@ -108,5 +108,19 @@
     "updateProfile": "Profil aktualisieren",
     "pickImage": "Wählen Sie Ihr Profilbild",
     "logOut": "Abmelden",
-    "select": "Auswählen"
+    "select": "Auswählen",
+    "crop": "Zuschneiden",
+    "fieldRequired": "Dieses Feld ist erforderlich",
+    "invalidName": "Ungültiger Name",
+    "passwordRequirements": "8 oder mehr Zeichen, gemischte Ziffern und Buchstaben",
+    "invalidEmail": "Ungültige E-Mail",
+    "alert": "Achtung!",
+    "orDash": "- oder -",
+    "applyAsVolunteer": "Als Freiwilliger bewerben",
+    "selectValidBirthDate": "Bitte wählen Sie ein gültiges Geburtsdatum",
+    "category": "Kategorie",
+    "roadmap": "Fahrplan",
+    "correctAnswer": "Richtige Antwort",
+    "play": "Spielen",
+    "matchingComingSoon": "Zuordnung kommt bald"
 }

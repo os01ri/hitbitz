@@ -105,4 +105,23 @@ class AppStrings {
   static const pickImage = 'pickImage';
   static const select = 'select';
   static const logOut = 'logOut';
+  static const crop = 'crop';
+  static const fieldRequired = 'fieldRequired';
+  static const invalidName = 'invalidName';
+  static const passwordRequirements = 'passwordRequirements';
+  static const invalidEmail = 'invalidEmail';
+  static const alert = 'alert';
+  static const orDash = 'orDash';
+  static const applyAsVolunteer = 'applyAsVolunteer';
+  static const selectValidBirthDate = 'selectValidBirthDate';
+  static const applyForVolunteer = 'applyForVolunteer';
+  static const somethingWentWrong = 'somethingWentWrong';
+  static const formSentSuccessfully = 'formSentSuccessfully';
+  static const selectCVPngFile = 'selectCVPngFile';
+  static const pleaseCheckAllRequiredFields = 'pleaseCheckAllRequiredFields';
+  static const category = 'category';
+  static const roadmap = 'roadmap';
+  static const correctAnswer = 'correctAnswer';
+  static const play = 'play';
+  static const matchingComingSoon = 'matchingComingSoon';
 }

@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/drop_down_widget.dart';
 import 'package:hitbitz/core/components/text_field_widget.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
@@ -46,7 +47,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Apply For Volunteer'),
+        title: const Text(AppStrings.applyForVolunteer),
         centerTitle: true,
       ),
       body: BlocListener<CvBloc, CvState>(
@@ -56,9 +57,9 @@ class _SendCvScreenState extends State<SendCvScreen> {
             Toaster.showLoading();
           } else {
             if (state.cvStatus == CubitStatus.failure) {
-              Toaster.showError(context: context, message: 'SomeThing Went Wrong');
+              Toaster.showError(context: context, message: AppStrings.somethingWentWrong);
             } else if (state.cvStatus == CubitStatus.success) {
-              Toaster.showSuccess(context: context, message: 'Form Sent Successfully, Wait for Admins to Review it');
+              Toaster.showSuccess(context: context, message: AppStrings.formSentSuccessfully);
               context.pop();
             }
             Toaster.closeLoading();
@@ -73,7 +74,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                   50.verticalSpace,
                   TextFieldWidget(
                     controller: emailController,
-                    label: 'E-mail',
+                    label: AppStrings.email,
                     hint: 'youremail@example.com',
                     validator: (value) {
                       return AppValidator.email(value);
@@ -82,7 +83,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                   20.verticalSpace,
                   TextFieldWidget(
                     controller: usernameController,
-                    label: 'User Name',
+                    label: AppStrings.username,
                     hint: 'username1234',
                     validator: (p0) {
                       return AppValidator.required(p0);
@@ -90,8 +91,8 @@ class _SendCvScreenState extends State<SendCvScreen> {
                   ),
                   20.verticalSpace,
                   TextFieldWidget(
-                    label: 'Full Name',
-                    hint: 'Lionel Messi',
+                    label: AppStrings.fullName,
+                    hint: 'Osama Rida',
                     validator: (p0) {
                       return AppValidator.name(p0);
                     },
@@ -106,7 +107,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                             TextFieldWidget(
                               controller: filePathController,
                               enabled: false,
-                              hint: 'Select CV Png File',
+                              hint: AppStrings.selectCVPngFile,
                               validator: AppValidator.required,
                             ).onTap(() async {
                               ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
@@ -117,14 +118,14 @@ class _SendCvScreenState extends State<SendCvScreen> {
                             }),
                             Row(
                               children: [
-                                const Text('Category'),
+                                const Text(AppStrings.category),
                                 Radio.adaptive(
                                     value: false,
                                     groupValue: value,
                                     onChanged: (c) {
                                       categoryOrRoadmap.value = c!;
                                     }),
-                                const Text('Roadmap'),
+                                const Text(AppStrings.roadmap),
                                 Radio.adaptive(
                                     value: true,
                                     groupValue: value,
@@ -149,7 +150,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                                               }).toList(),
                                             )
                                           : ElevatedButton(
-                                              child: const Text('Try Again'),
+                                              child: const Text(AppStrings.tryAgain),
                                               onPressed: () {
                                                 di<CvBloc>().add(GetRoadmapsForCV());
                                               });
@@ -171,7 +172,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                                               }).toList(),
                                             )
                                           : ElevatedButton(
-                                              child: const Text('Try Again'),
+                                              child: const Text(AppStrings.tryAgain),
                                               onPressed: () {
                                                 di<CvBloc>().add(GetCategoriesForCV());
                                               });
@@ -180,7 +181,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                             20.verticalSpace,
                             ButtonWidget(
                               width: 1.sw,
-                              text: 'Send',
+                              text: AppStrings.send,
                               backgroundColor: context.colorScheme.primary,
                               foregroundColor: context.colorScheme.onPrimary,
                               onPressed: () {
@@ -195,7 +196,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                                     roadmapId: roadmap.value,
                                   )));
                                 } else {
-                                  Toaster.showWarning(context: context, warningMessage: 'Please Check All Required Fields');
+                                  Toaster.showWarning(context: context, warningMessage: AppStrings.pleaseCheckAllRequiredFields);
                                 }
                               },
                             )

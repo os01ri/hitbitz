@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
               BlocProvider.value(
                 value: di<RoadmapCubit>(),
                 child: SizedBox(
-                  height: 270,
+                  height: 220,
                   child: BlocBuilder<RoadmapCubit, RoadmapState>(
                     builder: (context, state) => switch (state.roadMapsStatus) {
                       CubitStatus.initial => const SizedBox.shrink(),

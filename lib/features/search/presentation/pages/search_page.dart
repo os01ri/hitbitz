@@ -93,7 +93,7 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
                   itemCount: state.roadMaps.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisExtent: 260,
+                    mainAxisExtent: 220,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),

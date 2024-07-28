@@ -201,7 +201,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       width: context.width,
                       onPressed: () {
                         if (_selectedDate == null) {
-                          Toaster.showWarning(context: context, warningMessage: 'Please Select a Valid Birth Date');
+                          Toaster.showWarning(context: context, warningMessage: AppStrings.selectValidBirthDate);
                           return;
                         }
 

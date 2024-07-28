@@ -76,7 +76,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             TextWidget(state.quiz!.questions.length.toString()),
-                            const TextWidget('Questions'),
+                            const TextWidget(AppStrings.questions),
                           ],
                         ),
                         const VerticalDivider(),
@@ -84,7 +84,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             TextWidget('100'),
-                            TextWidget('Max Grade'),
+                            TextWidget(AppStrings.maxGrade),
                           ],
                         ),
                         const VerticalDivider(),
@@ -92,7 +92,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             TextWidget(state.quiz!.requiredDegree.numberFormat()),
-                            const TextWidget('Pass Grade'),
+                            const TextWidget(AppStrings.passGrade),
                           ],
                         ),
                         const Gap(0),
@@ -122,7 +122,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                   //   ),
                   // ),
                   const Gap(10),
-                  TextWidget('Description', style: context.textTheme.titleMedium),
+                  TextWidget(AppStrings.description, style: context.textTheme.titleMedium),
                   TextWidget((state.quiz!.description ?? ('text ' * 50)), maxLines: 500),
                 ],
               ).wrapPadding(AppPadding.pagePadding).scrollable(),
@@ -149,17 +149,17 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                   CubitStatus.failure => const SizedBox.shrink(),
                   CubitStatus.success => Row(
                       children: [
-                        ButtonWidget(
-                          onPressed: () {},
-                          width: context.width,
-                          height: 50,
-                          text: 'Play With A Friend',
-                          isOutlined: true,
-                          borderColor: context.colorScheme.secondary,
-                          backgroundColor: context.colorScheme.surface,
-                          foregroundColor: context.colorScheme.secondary,
-                        ).expand(),
-                        const Gap(5),
+                        // ButtonWidget(
+                        //   onPressed: () {},
+                        //   width: context.width,
+                        //   height: 50,
+                        //   text: 'Play With A Friend',
+                        //   isOutlined: true,
+                        //   borderColor: context.colorScheme.secondary,
+                        //   backgroundColor: context.colorScheme.surface,
+                        //   foregroundColor: context.colorScheme.secondary,
+                        // ).expand(),
+                        // const Gap(5),
                         ButtonWidget(
                           onPressed: () {
                             if (state.quiz!.questions.isEmpty) {
@@ -173,7 +173,8 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                           },
                           width: context.width,
                           height: 50,
-                          text: 'Play Alone',
+                          text: AppStrings.play,
+                          // text: 'Play Alone',
                           backgroundColor: context.colorScheme.primary,
                           foregroundColor: context.colorScheme.onPrimary,
                         ).expand(),

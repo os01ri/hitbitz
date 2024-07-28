@@ -163,10 +163,10 @@ class _LoginPageState extends State<LoginPage> {
                     text: AppStrings.continueAsGuest,
                   ),
                   const Gap(20),
-                  const TextWidget('- or -'),
+                  const TextWidget(AppStrings.orDash),
                   const Gap(20),
                   TextWidget(
-                    'Apply as a Volunteer',
+                    AppStrings.applyAsVolunteer,
                     style: context.textTheme.bodyMedium?.copyWith(
                       color: context.colorScheme.primary,
                       decoration: TextDecoration.underline,

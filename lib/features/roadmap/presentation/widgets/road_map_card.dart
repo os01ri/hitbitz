@@ -9,7 +9,6 @@ import 'package:hitbitz/core/config/app_dimensions.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
-import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_page.dart';
 import 'package:hitbitz/router/app_routes.dart';
@@ -53,30 +52,30 @@ class RoadMapCard extends StatelessWidget {
             maxLines: 2,
           ),
           const Spacer(),
-          Row(
-            children: [
-              CardWidget(
-                height: AppDimensions.smallButtonHeight,
-                color: context.colorScheme.surfaceContainerHighest,
-                foregroundColor: context.colorScheme.onSurfaceVariant,
-                child: const TextWidget(
-                  '12 ',
-                  children: [TextWidget(AppStrings.levels)],
-                ).fit(BoxFit.scaleDown),
-              ).expand(),
-              const Gap(8),
-              CardWidget(
-                height: AppDimensions.smallButtonHeight,
-                color: context.colorScheme.surfaceContainerHighest,
-                foregroundColor: context.colorScheme.onSurfaceVariant,
-                child: const TextWidget(
-                  '37 ',
-                  children: [TextWidget(AppStrings.steps)],
-                ).fit(BoxFit.scaleDown),
-              ).expand(),
-            ],
-          ),
-          const Gap(8),
+          // Row(
+          //   children: [
+          //     CardWidget(
+          //       height: AppDimensions.smallButtonHeight,
+          //       color: context.colorScheme.surfaceContainerHighest,
+          //       foregroundColor: context.colorScheme.onSurfaceVariant,
+          //       child: TextWidget(
+          //         '${(Random().nextInt(5) + 2).numberFormat()} ',
+          //         children: const [TextWidget(AppStrings.levels)],
+          //       ).fit(BoxFit.scaleDown),
+          //     ).expand(),
+          //     const Gap(8),
+          //     CardWidget(
+          //       height: AppDimensions.smallButtonHeight,
+          //       color: context.colorScheme.surfaceContainerHighest,
+          //       foregroundColor: context.colorScheme.onSurfaceVariant,
+          //       child: TextWidget(
+          //         '${(Random().nextInt(29) + 10).numberFormat()} ',
+          //         children: const [TextWidget(AppStrings.steps)],
+          //       ).fit(BoxFit.scaleDown),
+          //     ).expand(),
+          //   ],
+          // ),
+          // const Gap(8),
           ButtonWidget(
             onPressed: () => context.pushNamed(AppRoutes.roadmap, extra: RoadMapPageArguments(roadMap: roadMap, isStarting: true)),
             text: AppStrings.startJourney,

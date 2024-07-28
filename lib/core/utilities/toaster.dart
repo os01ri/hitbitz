@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:vibration/vibration.dart';
 
@@ -29,7 +30,7 @@ class Toaster {
   }) async {
     closeLoading();
     _showNotification(
-      title: TextWidget('Error!', textColor: context.colorScheme.onError),
+      title: TextWidget(AppStrings.error, textColor: context.colorScheme.onError),
       subtitle: TextWidget(message, textColor: context.colorScheme.onError, maxLines: 3),
       leading: Icon(Icons.error_outline_rounded, color: context.colorScheme.onError, size: 35),
       backgroundColor: context.colorScheme.errorContainer,
@@ -44,7 +45,7 @@ class Toaster {
   }) async {
     closeLoading();
     _showNotification(
-      title: TextWidget('تنبيه!', textColor: Colors.amber[800]),
+      title: TextWidget(AppStrings.alert, textColor: Colors.amber[800]),
       subtitle: TextWidget(warningMessage, maxLines: 3),
       leading: Icon(Icons.warning_amber_rounded, color: Colors.amber[800], size: 35),
       backgroundColor: Colors.amber[200],
@@ -97,19 +98,6 @@ class Toaster {
       backgroundColor: backgroundColor,
       duration: const Duration(seconds: 4),
       margin: AppPadding.notificationPadding,
-    );
-  }
-
-  static showIsCorrect(bool isCorrect) {
-    closeLoading();
-    _showNotification(
-      title: TextWidget(
-        isCorrect ? 'Correct!' : 'Wrong!',
-        maxLines: 1,
-        style: const TextStyle(color: Colors.white),
-      ),
-      leading: const Icon(Icons.check_circle_outline_rounded, color: Colors.white, size: 35),
-      backgroundColor: isCorrect ? Colors.green : Colors.red,
     );
   }
 }

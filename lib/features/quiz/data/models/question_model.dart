@@ -1,4 +1,6 @@
 import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/data/models/media_model.dart';
 import 'package:hitbitz/features/quiz/data/enums/question_type.dart';
 import 'package:hitbitz/features/quiz/data/models/answer_model.dart';
@@ -33,7 +35,7 @@ class QuestionModel {
     }
         .toString();
 
-    return 'Correct Answer: $answer';
+    return '${AppStrings.correctAnswer.tr()}: $answer';
   }
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(

@@ -108,5 +108,19 @@
     "updateProfile": "Mettre à jour le profil",
     "pickImage": "Choisissez votre photo de profil",
     "logOut": "Se déconnecter",
-    "select": "Sélectionner"
+    "select": "Sélectionner",
+    "crop": "Rogner",
+    "fieldRequired": "Ce champ est requis",
+    "invalidName": "Nom invalide",
+    "passwordRequirements": "8 caractères ou plus, chiffres et lettres mélangés",
+    "invalidEmail": "E-mail non valide",
+    "alert": "Alerte!",
+    "orDash": "- ou -",
+    "applyAsVolunteer": "Postuler en tant que bénévole",
+    "selectValidBirthDate": "Veuillez sélectionner une date de naissance valide",
+    "category": "Catégorie",
+    "roadmap": "Feuille de route",
+    "correctAnswer": "Bonne réponse",
+    "play": "Jouer",
+    "matchingComingSoon": "Appariement à venir bientôt"
 }

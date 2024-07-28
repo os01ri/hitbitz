@@ -108,5 +108,19 @@
     "updateProfile": "تعديل الملف الشخصي",
     "pickImage": "أضف صورتك الشخصية",
     "logOut": "تسجيل الخروج",
-    "select": "اختر"
+    "select": "اختر",
+    "crop": "قص",
+    "fieldRequired": "هذا الحقل مطلوب",
+    "invalidName": "اسم غير صالح",
+    "passwordRequirements": "8 أحرف أو أكثر، مزيج من الأرقام والحروف",
+    "invalidEmail": "بريد إلكتروني غير صالح",
+    "alert": "تنبيه!",
+    "orDash": "- أو -",
+    "applyAsVolunteer": "التقديم كمتطوع",
+    "selectValidBirthDate": "الرجاء اختيار تاريخ ميلاد صالح",
+    "category": "فئة",
+    "roadmap": "خارطة الطريق",
+    "correctAnswer": "الإجابة الصحيحة",
+    "play": "لعب",
+    "matchingComingSoon": "المطابقة قادمة قريبًا"
 }
