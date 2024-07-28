@@ -4,11 +4,12 @@ class EndPoints {
   const EndPoints._();
 
   ////////////!      General      !////////////
-  static const _scheme = 'http';
+  static const scheme = 'http';
   // static const _host = '192.168.43.127';
-  static const _host = '10.0.2.2';
+  // static const _host = '10.0.2.2';
+  static const host = '10.42.0.1';
   // static const _host = 'hitbitz.online';
-  static const _port = 8000;
+  static const port = 8001;
 
   // static String imageUrl(String path) {
   //   const base = '~/osama-rida/Documents/projects/hitbitz_backend/public/images/temp/1/';
@@ -23,10 +24,10 @@ class EndPoints {
     ParamsMap params,
   }) {
     final uri = Uri(
-      scheme: _scheme,
-      host: _host,
+      scheme: scheme,
+      host: host,
       path: 'api/$path',
-      port: _port,
+      port: port,
       queryParameters: params,
     );
     return uri;

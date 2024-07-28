@@ -78,13 +78,15 @@ class ResultPage extends StatelessWidget {
                 style: context.textTheme.titleLarge?.copyWith(color: context.colorScheme.onPrimary),
               ),
               const Spacer(),
-              ButtonWidget(
-                text: AppStrings.showAnswers,
-                width: context.width,
-                backgroundColor: context.colorScheme.onPrimary,
-                onPressed: () => context.pushNamed(AppRoutes.quizReview, extra: args.quiz),
-              ),
-              const Gap(10),
+              if (hasPassed) ...[
+                ButtonWidget(
+                  text: AppStrings.showAnswers,
+                  width: context.width,
+                  backgroundColor: context.colorScheme.onPrimary,
+                  onPressed: () => context.pushNamed(AppRoutes.quizReview, extra: args.quiz),
+                ),
+                const Gap(10),
+              ],
               ButtonWidget(
                 text: AppStrings.close,
                 width: context.width,

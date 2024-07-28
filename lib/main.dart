@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -6,17 +8,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitbitz/core/config/app_assets.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/core/services/notification_service.dart';
 import 'package:hitbitz/core/services/shared_preferences_service.dart';
 import 'package:hitbitz/core/theme/light/light_theme.dart';
 import 'package:hitbitz/core/utilities/app_localization.dart';
 import 'package:hitbitz/features/main/presentation/cubit/nav_cubit/navigation_cubit.dart';
 import 'package:hitbitz/router/app_pages.dart';
 
-import 'core/services/notification_service.dart';
-
 void main() async {
   await _initializations();
   runApp(const HitBitzApp());
+  HttpOverrides.global = MyHttpOverrides();
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
 }
 
 Future _initializations() async {
@@ -24,6 +33,7 @@ Future _initializations() async {
 
   await Future.wait([
     NotificationService.init(),
+    // Firebase.initializeApp(),
     EasyLocalization.ensureInitialized(),
     SharedPreferencesService.init(),
     configureDependencies(),

@@ -1,3 +1,5 @@
+import 'package:hitbitz/core/api/end_points.dart';
+
 class MediaModel {
   final int? id;
   final String? mediaUrl;
@@ -15,7 +17,8 @@ class MediaModel {
     return MediaModel(
       id: json['id'],
       // mediaUrl: json['media_url'],
-      mediaUrl: json['media_url']?.replaceRange(0, 16, 'http://10.0.2.2'),
+      // mediaUrl: json['media_url']?.replaceRange(0, 16, 'http://10.42.0.1:8001'),
+      mediaUrl: json['media_url']?.replaceRange(0, 21, '${EndPoints.scheme}://${EndPoints.host}:${EndPoints.port}'),
       hash: json['hash'],
       order: json['order'],
     );

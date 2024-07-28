@@ -12,7 +12,7 @@ class AppValidator {
   static String? name(String? value) {
     if ((value ?? '').isEmpty) return AppStrings.fieldRequired.tr();
     if (value!.length < 2) return AppStrings.invalidName.tr();
-    final hasMatches = RegExp(r'^[A-Za-z\u0600-\u06FF]+$').hasMatch(value);
+    final hasMatches = RegExp(r'^[A-Za-z\u0600-\u06FF]+$').hasMatch(value.split(' ').join());
     if (!hasMatches) return AppStrings.invalidName.tr();
     return null;
   }
