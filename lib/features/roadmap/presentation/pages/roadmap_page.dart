@@ -182,7 +182,7 @@ class _RoadmapPageState extends State<RoadmapPage> {
                                 initiallyExpanded: false,
                                 childrenPadding: AppPadding.innerCardPadding,
                                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                                leading: index <= ((state.roadmap!.currentLevel ?? 1) - 1)
+                                leading: state.roadmap!.isOpen(index)
                                     ? const FaIcon(FontAwesomeIcons.lockOpen, color: Colors.green)
                                     : const FaIcon(FontAwesomeIcons.lock, color: Colors.red),
                                 title: TextWidget(state.roadmap!.levels[index].name),
@@ -215,7 +215,7 @@ class _RoadmapPageState extends State<RoadmapPage> {
                                       '#${i + 1} - ${state.roadmap!.levels[index].requirements[i]}',
                                       maxLines: 10,
                                     ).wrapPadding(const EdgeInsets.all(3)),
-                                  if (state.roadmap!.currentStep != null && index <= state.roadmap!.currentLevel! - 1) ...[
+                                  if (state.roadmap!.isOpen(index)) ...[
                                     const Gap(10),
                                     ButtonWidget(
                                       onPressed: () => context.pushNamed(

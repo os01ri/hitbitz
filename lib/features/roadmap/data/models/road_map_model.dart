@@ -35,6 +35,8 @@ class RoadMapModel {
     this.progress = 0,
   });
 
+  bool isOpen(int index) => (category?.parentId == 4) || (currentStep != null && index <= currentLevel! - 1);
+
   factory RoadMapModel.fromJson(Map<String, dynamic> json) => RoadMapModel(
         id: json['id'],
         media: json['media'] == null ? null : MediaModel.fromJson(json['media']),
