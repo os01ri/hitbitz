@@ -121,7 +121,11 @@
     "category": "فئة",
     "roadmap": "خارطة الطريق",
     "correctAnswer": "الإجابة الصحيحة",
-    "play": "لعب",
+    "play": "بدء",
     "matchingComingSoon": "المطابقة قادمة قريبًا",
-    "selectYourMajor": "اختر تخصصك"
+    "selectYourMajor": "اختر تخصصك",
+    "challengeFriend": "تحدي صديق",
+    "selectFriendToChallenge": "اختر صديقا لتبدأ معه التحدي",
+    "challenges": "التحديات",
+    "accept": "قبول"
 }

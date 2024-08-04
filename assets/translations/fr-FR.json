@@ -121,7 +121,11 @@
     "category": "Catégorie",
     "roadmap": "Feuille de route",
     "correctAnswer": "Bonne réponse",
-    "play": "Jouer",
+    "play": "Commencer",
     "matchingComingSoon": "Appariement à venir bientôt",
-    "selectYourMajor": "Sélectionnez votre spécialité"
+    "selectYourMajor": "Sélectionnez votre spécialité",
+    "challengeFriend": "Défiez un ami",
+    "selectFriendToChallenge": "Sélectionnez un ami pour commencer le défi",
+    "challenges": "Défis",
+    "accept": "Accepter"
 }

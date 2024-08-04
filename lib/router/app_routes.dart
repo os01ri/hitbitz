@@ -6,9 +6,11 @@ class AppRoutes {
   //////!auth!//////
   static const signup = '/signup';
   static const login = '/login';
+  static const sendCv = '/sendcv';
   //////!main!//////
   static const main = '/main';
   static const updateProfile = 'update-profile';
+  static const challenges = 'challenges';
   static const roadmap = 'road-map-details';
   static const steps = 'level-details';
   static const quizzes = 'quizzes';
@@ -22,5 +24,4 @@ class AppRoutes {
   static const profile = 'profile';
   static const friendRequests = 'friendRequests';
   static const friends = 'friends';
-  static const sendCv = '/sendcv';
 }

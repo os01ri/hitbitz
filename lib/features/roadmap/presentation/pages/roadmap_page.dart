@@ -222,7 +222,7 @@ class _RoadmapPageState extends State<RoadmapPage> {
                                         AppRoutes.steps,
                                         extra: StepsPageArguments(
                                           levelId: state.roadmap!.levels[index].id,
-                                          currentStep: state.roadmap!.currentStep! - 1,
+                                          currentStep: (state.roadmap!.currentStep ?? 1) - 1,
                                           hasPassedLevel: index < state.roadmap!.currentLevel! - 1,
                                         ),
                                       ),

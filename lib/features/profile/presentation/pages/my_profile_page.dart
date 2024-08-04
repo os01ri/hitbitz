@@ -99,7 +99,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   prefixIcon: FaIcon(FontAwesomeIcons.users, color: context.colorScheme.onPrimary, size: 16),
                   onPressed: () => context.pushNamed(AppRoutes.friendRequests),
                 ).expand(),
-                const Gap(5),
+                const Gap(10),
                 ButtonWidget(
                   text: AppStrings.friends,
                   backgroundColor: context.colorScheme.primary,
@@ -107,6 +107,28 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   spaceBetween: 10,
                   prefixIcon: FaIcon(FontAwesomeIcons.userGroup, color: context.colorScheme.onPrimary, size: 16),
                   onPressed: () => context.pushNamed(AppRoutes.friends),
+                ).expand(),
+              ],
+            ),
+            const Gap(10),
+            Row(
+              children: [
+                // ButtonWidget(
+                //   text: AppStrings.challenges,
+                //   backgroundColor: context.colorScheme.primary,
+                //   foregroundColor: context.colorScheme.onPrimary,
+                //   spaceBetween: 10,
+                //   prefixIcon: FaIcon(FontAwesomeIcons.users, color: context.colorScheme.onPrimary, size: 16),
+                //   onPressed: () => context.pushNamed(AppRoutes.friendRequests),
+                // ).expand(),
+                // const Gap(5),
+                ButtonWidget(
+                  text: AppStrings.challenges,
+                  backgroundColor: context.colorScheme.primary,
+                  foregroundColor: context.colorScheme.onPrimary,
+                  spaceBetween: 10,
+                  prefixIcon: FaIcon(FontAwesomeIcons.bolt, color: context.colorScheme.onPrimary, size: 16),
+                  onPressed: () => context.pushNamed(AppRoutes.challenges),
                 ).expand(),
               ],
             ),

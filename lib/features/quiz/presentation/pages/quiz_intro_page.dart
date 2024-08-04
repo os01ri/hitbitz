@@ -17,6 +17,8 @@ import 'package:hitbitz/core/extensions/num_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
+import 'package:hitbitz/features/challenge/presentation/widgets/friends_sheet.dart';
+import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/router/app_routes.dart';
@@ -149,28 +151,28 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                   CubitStatus.failure => const SizedBox.shrink(),
                   CubitStatus.success => Row(
                       children: [
-                        // ButtonWidget(
-                        //   onPressed: () {},
-                        //   width: context.width,
-                        //   height: 50,
-                        //   text: 'Play With A Friend',
-                        //   isOutlined: true,
-                        //   borderColor: context.colorScheme.secondary,
-                        //   backgroundColor: context.colorScheme.surface,
-                        //   foregroundColor: context.colorScheme.secondary,
-                        // ).expand(),
-                        // const Gap(5),
                         ButtonWidget(
-                          onPressed: () {
-                            if (state.quiz!.questions.isEmpty) {
-                              Toaster.showWarning(
-                                context: context,
-                                warningMessage: AppStrings.emptyQuizWarning,
-                              );
-                              return;
-                            }
-                            context.pushNamed(AppRoutes.quiz, extra: QuizPageArgs(quiz: state.quiz!));
-                          },
+                          onPressed: () => showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            useSafeArea: true,
+                            backgroundColor: Colors.transparent,
+                            builder: (context) => ChallengeFriendsSheet(
+                              quizId: widget.id,
+                              onFriendSelected: () => _startQuiz(state.quiz!),
+                            ),
+                          ),
+                          width: context.width,
+                          height: 50,
+                          text: AppStrings.challengeFriend,
+                          isOutlined: true,
+                          borderColor: context.colorScheme.secondary,
+                          backgroundColor: context.colorScheme.surface,
+                          foregroundColor: context.colorScheme.secondary,
+                        ).expand(),
+                        const Gap(5),
+                        ButtonWidget(
+                          onPressed: () => _startQuiz(state.quiz!),
                           width: context.width,
                           height: 50,
                           text: AppStrings.play,
@@ -188,5 +190,16 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
         ),
       ),
     );
+  }
+
+  _startQuiz(QuizModel? quiz) {
+    if (quiz!.questions.isEmpty) {
+      Toaster.showWarning(
+        context: context,
+        warningMessage: AppStrings.emptyQuizWarning,
+      );
+      return;
+    }
+    context.pushNamed(AppRoutes.quiz, extra: QuizPageArgs(quiz: quiz));
   }
 }

@@ -126,7 +126,11 @@
     "category": "Category",
     "roadmap": "Roadmap",
     "correctAnswer": "Correct Answer",
-    "play": "Play",
+    "play": "Start",
     "matchingComingSoon": "Matching is Coming Soon",
-    "selectYourMajor": "Select Your Major"
+    "selectYourMajor": "Select Your Major",
+    "challengeFriend": "Challenge A Friend",
+    "selectFriendToChallenge": "Select a friend to start the challenge",
+    "challenges": "Challenges",
+    "accept": "Accept"
 }

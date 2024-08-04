@@ -29,23 +29,45 @@ class UsersList extends StatelessWidget {
       separatorBuilder: (context, index) => const Gap(10),
       itemBuilder: (context, index) => CardWidget(
         isShadowed: true,
-        child: ListTile(
-          onTap: () => context.pushNamed(AppRoutes.profile, extra: users[index].id),
-          leading: ImageWidget(width: 50, path: users[index].profileImage?.mediaUrl ?? ''),
-          title: TextWidget(users[index].fullName),
-          subtitle: TextWidget('@${users[index].userName}'),
-          trailing: onTailingTapped == null
-              ? null
-              : CardWidget(
-                  onTap: () => onTailingTapped?.call(users[index].id),
-                  height: 30,
-                  width: 30,
-                  borderRadius: 20,
-                  color: context.colorScheme.secondary,
-                  child: Icon(trailingIcon, color: context.colorScheme.onSecondary),
-                ),
+        child: FriendTile(
+          user: users[index],
+          onTailingTapped: onTailingTapped,
+          trailingIcon: trailingIcon,
         ),
       ),
+    );
+  }
+}
+
+class FriendTile extends StatelessWidget {
+  const FriendTile({
+    super.key,
+    required this.user,
+    this.trailingIcon,
+    this.onTailingTapped,
+  });
+
+  final UserProfileModel user;
+  final IconData? trailingIcon;
+  final Function(int id)? onTailingTapped;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () => context.pushNamed(AppRoutes.profile, extra: user.id),
+      leading: ImageWidget(width: 50, path: user.profileImage?.mediaUrl ?? ''),
+      title: TextWidget(user.fullName),
+      subtitle: TextWidget('@${user.userName}'),
+      trailing: onTailingTapped == null
+          ? null
+          : CardWidget(
+              onTap: () => onTailingTapped?.call(user.id),
+              height: 30,
+              width: 30,
+              borderRadius: 20,
+              color: context.colorScheme.secondary,
+              child: Icon(trailingIcon, color: context.colorScheme.onSecondary),
+            ),
     );
   }
 }

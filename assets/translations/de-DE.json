@@ -121,7 +121,11 @@
     "category": "Kategorie",
     "roadmap": "Fahrplan",
     "correctAnswer": "Richtige Antwort",
-    "play": "Spielen",
+    "play": "Starten",
     "matchingComingSoon": "Zuordnung kommt bald",
-    "selectYourMajor": "Wählen Sie Ihr Hauptfach"
+    "selectYourMajor": "Wählen Sie Ihr Hauptfach",
+    "challengeFriend": "Fordere einen Freund heraus",
+    "selectFriendToChallenge": "Wähle einen Freund aus, um die Herausforderung zu starten",
+    "challenges": "Herausforderungen",
+    "accept": "Akzeptieren"
 }

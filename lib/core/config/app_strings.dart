@@ -125,4 +125,8 @@ class AppStrings {
   static const play = 'play';
   static const matchingComingSoon = 'matchingComingSoon';
   static const selectYourMajor = 'selectYourMajor';
+  static const challengeFriend = 'challengeFriend';
+  static const selectFriendToChallenge = 'selectFriendToChallenge';
+  static const challenges = 'challenges';
+  static const accept = 'accept';
 }

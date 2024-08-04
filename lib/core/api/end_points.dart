@@ -47,6 +47,9 @@ class EndPoints {
   static Uri acceptRequest({ParamsMap params}) => _user(path: 'acceptRequest', params: params);
   static Uri friends({ParamsMap params}) => _user(path: 'friends', params: params);
 
+  static Uri inviteToChallenge({ParamsMap params}) => _user(path: 'challenge', params: params);
+  static Uri getChallenges({ParamsMap params}) => _user(path: 'challenges', params: params);
+
   static Uri getCategories({ParamsMap params}) => _user(path: 'categories', params: params);
 
   static Uri getHomeRoadmap({ParamsMap params}) => _user(path: 'getHomeRoadmap', params: params);

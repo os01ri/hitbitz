@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/features/auth/presentation/pages/login_page.dart';
 import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:hitbitz/features/challenge/presentation/pages/challenges_page.dart';
 import 'package:hitbitz/features/cv/presentation/pages/send_cv_screen.dart';
 import 'package:hitbitz/features/friends/presentation/pages/friend_requests_page.dart';
 import 'package:hitbitz/features/friends/presentation/pages/friends_page.dart';
@@ -78,6 +79,12 @@ class AppPages {
         name: AppRoutes.updateProfile,
         path: AppRoutes.updateProfile,
         builder: (context, state) => UpdateProfilePage(args: state.extra as UpdateProfileArgs),
+        routes: const [],
+      ),
+      GoRoute(
+        name: AppRoutes.challenges,
+        path: AppRoutes.challenges,
+        builder: (context, state) => const ChallengesPage(),
         routes: const [],
       ),
       GoRoute(
