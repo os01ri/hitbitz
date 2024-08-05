@@ -5,8 +5,8 @@ class EndPoints {
 
   ////////////!      General      !////////////
   static const scheme = 'http';
-  // static const host = '192.168.43.127';
-  static const host = '10.0.2.2';
+  static const host = '192.168.43.127';
+  // static const host = '10.0.2.2';
   // static const host = '10.42.0.1';
   // static const host = 'hitbitz.online';
   static const port = 8000;

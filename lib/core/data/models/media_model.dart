@@ -18,7 +18,7 @@ class MediaModel {
       id: json['id'],
       // mediaUrl: json['media_url'],
       // mediaUrl: json['media_url']?.replaceRange(0, 16, 'http://10.42.0.1:8001'),
-      mediaUrl: json['media_url']?.replaceRange(0, 21, '${EndPoints.scheme}://${EndPoints.host}:${EndPoints.port}'),
+      mediaUrl: json['media_url']?.replaceRange(0, 20, '${EndPoints.scheme}://${EndPoints.host}:${EndPoints.port}'),
       hash: json['hash'],
       order: json['order'],
     );
