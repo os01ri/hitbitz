@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, state) => switch (state.homeRoadMapStatus) {
                   CubitStatus.initial => const SizedBox.shrink(),
                   CubitStatus.loading => const LoadingWidget().center(),
-                  CubitStatus.failure => ErrorButtonWidget(onTap: () => _homeCubit.getHomeRoadMap()),
+                  CubitStatus.failure => const SizedBox.shrink(), // ErrorButtonWidget(onTap: () => _homeCubit.getHomeRoadMap()),
                   CubitStatus.success => state.roadMap == null
                       ? const SizedBox.shrink()
                       : Column(
