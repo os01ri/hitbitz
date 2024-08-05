@@ -9,6 +9,7 @@ import 'package:hitbitz/features/roadmap/data/models/step_model.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/create_custome_quiz_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_saved_roadmaps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_steps_usecase.dart';
+import 'package:hitbitz/features/roadmap/domain/usecases/redeem_certificate_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/roadmap_toggle_bookmark_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/show_roadmap_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/start_roadmap_usecase.dart';
@@ -25,6 +26,7 @@ class RoadmapCubit extends Cubit<RoadmapState> {
   final GetSavedRoadmapsUsecase _getSavedRoadmapsUsecase;
   final GetRoadMapsUsecase _getRoadMapsUsecase;
   final CreateCustomQuizUsecase _createCustomQuizUsecase;
+  final RedeemCertificateUsecase _redeemCertificateUsecase;
 
   RoadmapCubit({
     required ShowRoadMapUsecase showRoadMapUsecase,
@@ -34,6 +36,7 @@ class RoadmapCubit extends Cubit<RoadmapState> {
     required GetSavedRoadmapsUsecase getSavedRoadmapsUsecase,
     required GetRoadMapsUsecase getRoadMapsUsecase,
     required CreateCustomQuizUsecase createCustomQuizUsecase,
+    required RedeemCertificateUsecase redeemCertificateUsecase,
   })  : _showRoadMapUsecase = showRoadMapUsecase,
         _startRoadMapUsecase = startRoadMapUsecase,
         _getStepsUsecase = getStepsUsecase,
@@ -41,6 +44,7 @@ class RoadmapCubit extends Cubit<RoadmapState> {
         _getSavedRoadmapsUsecase = getSavedRoadmapsUsecase,
         _getRoadMapsUsecase = getRoadMapsUsecase,
         _createCustomQuizUsecase = createCustomQuizUsecase,
+        _redeemCertificateUsecase = redeemCertificateUsecase,
         super(const RoadmapState());
 
   showRoadMap(ShowRoadMapParams params) async {
@@ -131,5 +135,16 @@ class RoadmapCubit extends Cubit<RoadmapState> {
     );
 
     emit(state.copyWith(customQuizStatus: CubitStatus.initial));
+  }
+
+  redeemCertificate(int roadmapId) async {
+    emit(state.copyWith(certificateStatus: CubitStatus.loading));
+
+    final result = await _redeemCertificateUsecase(roadmapId);
+
+    result.fold(
+      (l) => emit(state.copyWith(certificateStatus: CubitStatus.failure, failure: l)),
+      (r) => emit(state.copyWith(certificateStatus: CubitStatus.success, certificateUrl: r)),
+    );
   }
 }

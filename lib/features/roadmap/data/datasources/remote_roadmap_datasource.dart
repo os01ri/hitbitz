@@ -58,4 +58,9 @@ class RemoteRoadMapDataSource {
       dataConverter: (body) => questionsListFromJson(body),
     );
   }
+
+  Future<String> redeemCertificate({required ParamsMap params}) async {
+    final rowData = await Http.get(uri: EndPoints.redeemCertificate(params: params));
+    return rowData;
+  }
 }

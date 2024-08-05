@@ -13,4 +13,5 @@ abstract class RoadMapRepository {
   Future<Either<Failure, NoResponse>> roadMapToggleBookmark({required int id});
   Future<Either<Failure, List<RoadMapModel>>> getSavedRoadmaps({required ParamsMap params});
   Future<Either<Failure, List<QuestionModel>>> createCustomQuiz({required ParamsMap params});
+  Future<Either<Failure, String>> redeemCertificate({required ParamsMap params});
 }

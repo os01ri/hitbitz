@@ -63,4 +63,12 @@ class RoadMapRepositoryImpl with RepositoryExceptionHandler implements RoadMapRe
       return Right(result.data);
     });
   }
+
+  @override
+  Future<Either<Failure, String>> redeemCertificate({required ParamsMap? params}) {
+    return exceptionHandler<String>(tryCall: () async {
+      final result = await remoteDataSource.redeemCertificate(params: params);
+      return Right(result);
+    });
+  }
 }
