@@ -135,5 +135,11 @@
     "waitingForOpponent": "En attente de votre adversaire!",
     "please_check_your_password_and_try_again": "Veuillez vérifier votre mot de passe et réessayer",
     "you_cannot_send_a_friend_request_to_yourself": "Vous ne pouvez pas vous envoyer une demande d'ami",
-    "add": "Ajouter"
+    "add": "Ajouter",
+    "forgetPassword": "Mot de passe oublié",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "code": "Code",
+    "newPassword": "Nouveau mot de passe",
+    "codeIncorrect": "Code incorrect",
+    "selectFieldToManage": "Sélectionnez le domaine que vous souhaitez gérer"
 }

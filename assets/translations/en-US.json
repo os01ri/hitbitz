@@ -140,5 +140,11 @@
     "waitingForOpponent": "Waiting For Your Opponent!",
     "please_check_your_password_and_try_again": "Please check your password and try again",
     "you_cannot_send_a_friend_request_to_yourself": "You cannot send a friend request to yourself",
-    "add": "Add"
+    "add": "Add",
+    "forgetPassword": "Forget Password",
+    "resetPassword": "Reset Password",
+    "code": "Code",
+    "newPassword": "New Password",
+    "codeIncorrect": "Code Incorrect",
+    "selectFieldToManage": "Select the field you want to manage"
 }

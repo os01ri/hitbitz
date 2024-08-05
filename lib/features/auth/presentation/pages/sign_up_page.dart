@@ -134,7 +134,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: _emailController,
                     textInputType: TextInputType.emailAddress,
                     validator: AppValidator.email,
-                  ),
+                  ).hero('email_field'),
                   const Gap(10),
                   PasswordTextField(
                     label: AppStrings.password,

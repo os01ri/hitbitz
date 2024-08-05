@@ -3,7 +3,9 @@ import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/services/shared_preferences_service.dart';
 import 'package:hitbitz/features/auth/data/models/user_data_model.dart';
+import 'package:hitbitz/features/auth/domain/usecases/forget_password_usecase.dart';
 import 'package:hitbitz/features/auth/domain/usecases/login_usecase.dart';
+import 'package:hitbitz/features/auth/domain/usecases/reset_password_usecase.dart';
 import 'package:hitbitz/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:injectable/injectable.dart';
 
@@ -13,12 +15,18 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   final LoginUsecase _loginUsecase;
   final SignInUsecase _signInUsecase;
+  final ForgetPasswordUsecase _forgetPasswordUsecase;
+  final ResetPasswordUsecase _resetPasswordUsecase;
 
   AuthCubit({
     required final LoginUsecase loginUsecase,
     required final SignInUsecase signInUsecase,
+    required final ForgetPasswordUsecase forgetPasswordUsecase,
+    required final ResetPasswordUsecase resetPasswordUsecase,
   })  : _loginUsecase = loginUsecase,
         _signInUsecase = signInUsecase,
+        _forgetPasswordUsecase = forgetPasswordUsecase,
+        _resetPasswordUsecase = resetPasswordUsecase,
         super(const AuthState());
 
   login(LoginParams params) async {
@@ -38,6 +46,8 @@ class AuthCubit extends Cubit<AuthState> {
         emit(state.copyWith(status: CubitStatus.success, user: r));
       },
     );
+
+    emit(state.copyWith(status: CubitStatus.initial));
   }
 
   signIn(SignInParams params) async {
@@ -53,5 +63,33 @@ class AuthCubit extends Cubit<AuthState> {
         emit(state.copyWith(status: CubitStatus.success, user: r));
       },
     );
+
+    emit(state.copyWith(status: CubitStatus.initial));
+  }
+
+  forgetPassword(ForgetPasswordParams params) async {
+    emit(state.copyWith(status: CubitStatus.loading));
+
+    final result = await _forgetPasswordUsecase(params);
+
+    result.fold(
+      (l) => emit(state.copyWith(status: CubitStatus.failure, failure: l)),
+      (r) => emit(state.copyWith(status: CubitStatus.success)),
+    );
+
+    emit(state.copyWith(status: CubitStatus.initial));
+  }
+
+  resetPassword(ResetPasswordParams params) async {
+    emit(state.copyWith(status: CubitStatus.loading));
+
+    final result = await _resetPasswordUsecase(params);
+
+    result.fold(
+      (l) => emit(state.copyWith(status: CubitStatus.failure, failure: l)),
+      (r) => emit(state.copyWith(status: CubitStatus.success)),
+    );
+
+    emit(state.copyWith(status: CubitStatus.initial));
   }
 }

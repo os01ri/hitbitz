@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:hitbitz/core/config/type_defs.dart';
+import 'package:hitbitz/core/data/models/no_response_model.dart';
 import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/error/repository_exception_handler.dart';
 import 'package:hitbitz/features/auth/data/datasources/remote_auth_datasource.dart';
@@ -26,6 +27,22 @@ class AuthRepositoryImpl with RepositoryExceptionHandler implements AuthReposito
     return exceptionHandler<UserDataModel>(tryCall: () async {
       final result = await remoteDataSource.signIn(body: body);
       return Right(result.data);
+    });
+  }
+
+  @override
+  Future<Either<Failure, NoResponse>> forgetPassword({required BodyMap body}) {
+    return exceptionHandler<NoResponse>(tryCall: () async {
+      final result = await remoteDataSource.forgetPassword(body: body);
+      return Right(result);
+    });
+  }
+
+  @override
+  Future<Either<Failure, NoResponse>> resetPassword({required BodyMap body}) {
+    return exceptionHandler<NoResponse>(tryCall: () async {
+      final result = await remoteDataSource.resetPassword(body: body);
+      return Right(result);
     });
   }
 }

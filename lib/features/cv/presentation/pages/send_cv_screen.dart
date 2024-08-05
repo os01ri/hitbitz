@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/drop_down_widget.dart';
 import 'package:hitbitz/core/components/text_field_widget.dart';
+import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
@@ -103,6 +104,7 @@ class _SendCvScreenState extends State<SendCvScreen> {
                       valueListenable: categoryOrRoadmap,
                       builder: (context, value, _) {
                         return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextFieldWidget(
                               controller: filePathController,
@@ -116,6 +118,8 @@ class _SendCvScreenState extends State<SendCvScreen> {
                                 }
                               });
                             }),
+                            20.verticalSpace,
+                            const TextWidget(AppStrings.selectFieldToManage),
                             Row(
                               children: [
                                 const Text(AppStrings.category),
@@ -134,7 +138,6 @@ class _SendCvScreenState extends State<SendCvScreen> {
                                     }),
                               ],
                             ),
-                            20.verticalSpace,
                             value
                                 ? BlocBuilder<CvBloc, CvState>(
                                     bloc: di<CvBloc>(),

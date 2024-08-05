@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hitbitz/features/auth/presentation/pages/forget_password_page.dart';
 import 'package:hitbitz/features/auth/presentation/pages/login_page.dart';
+import 'package:hitbitz/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:hitbitz/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:hitbitz/features/challenge/presentation/pages/challenges_page.dart';
 import 'package:hitbitz/features/cv/presentation/pages/send_cv_screen.dart';
@@ -62,6 +64,16 @@ class AppPages {
       name: AppRoutes.login,
       path: AppRoutes.login,
       builder: (context, state) => const LoginPage(),
+    ),
+    GoRoute(
+      name: AppRoutes.forgetPassword,
+      path: AppRoutes.forgetPassword,
+      builder: (context, state) => const ForgetPasswordPage(),
+    ),
+    GoRoute(
+      name: AppRoutes.resetPassword,
+      path: AppRoutes.resetPassword,
+      builder: (context, state) => const ResetPasswordPage(),
     ),
     GoRoute(
       name: AppRoutes.sendCv,

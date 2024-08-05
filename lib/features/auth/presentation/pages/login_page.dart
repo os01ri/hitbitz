@@ -79,14 +79,14 @@ class _LoginPageState extends State<LoginPage> {
             child: Form(
               child: Column(
                 children: [
-                  const Gap(50),
+                  const Gap(20),
                   TextWidget(
                     AppStrings.welcomeBack,
                     style: context.textTheme.headlineLarge?.copyWith(
                       color: context.colorScheme.primary,
                     ),
                   ),
-                  const Gap(15),
+                  const Gap(10),
                   TextWidget(
                     AppStrings.welcomingPhrase,
                     textAlign: TextAlign.center,
@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: context.colorScheme.onSurface,
                     ),
                   ),
-                  const Gap(40),
+                  const Gap(30),
                   Column(
                     children: [
                       AuthTextField(
@@ -161,6 +161,19 @@ class _LoginPageState extends State<LoginPage> {
                     foregroundColor: context.colorScheme.onSurface,
                     backgroundColor: context.colorScheme.surface,
                     text: AppStrings.continueAsGuest,
+                  ),
+                  const Gap(5),
+                  SizedBox(
+                    width: context.width,
+                    child: TextWidget(
+                      AppStrings.forgetPassword,
+                      textAlign: TextAlign.end,
+                      style: context.textTheme.bodyMedium?.copyWith(
+                        color: context.colorScheme.primary,
+                      ),
+                      children: const [TextWidget('?')],
+                      onTap: () => context.pushNamed(AppRoutes.forgetPassword),
+                    ),
                   ),
                   const Gap(20),
                   const TextWidget(AppStrings.orDash),

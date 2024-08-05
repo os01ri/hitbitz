@@ -135,5 +135,11 @@
     "waitingForOpponent": "Warten auf Ihren Gegner!",
     "please_check_your_password_and_try_again": "Bitte überprüfen Sie Ihr Passwort und versuchen Sie es erneut",
     "you_cannot_send_a_friend_request_to_yourself": "Sie können sich selbst keine Freundschaftsanfrage senden",
-    "add": "Hinzufügen"
+    "add": "Hinzufügen",
+    "forgetPassword": "Passwort vergessen",
+    "resetPassword": "Passwort zurücksetzen",
+    "code": "Code",
+    "newPassword": "Neues Passwort",
+    "codeIncorrect": "Code falsch",
+    "selectFieldToManage": "Wählen Sie das Feld, das Sie verwalten möchten"
 }

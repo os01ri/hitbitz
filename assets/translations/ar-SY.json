@@ -135,5 +135,11 @@
     "waitingForOpponent": "في انتظار خصمك!",
     "please_check_your_password_and_try_again": "يرجى التحقق من كلمة المرور الخاصة بك والمحاولة مرة أخرى",
     "you_cannot_send_a_friend_request_to_yourself": "لا يمكنك إرسال طلب صداقة إلى نفسك",
-    "add": "إضافة"
+    "add": "إضافة",
+    "forgetPassword": "نسيت كلمة المرور",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "code": "رمز",
+    "newPassword": "كلمة المرور الجديدة",
+    "codeIncorrect": "رمز غير صحيح",
+    "selectFieldToManage": "اختر المجال الذي ترغب في استلامه"
 }

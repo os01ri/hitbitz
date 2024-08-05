@@ -4,6 +4,7 @@ import 'package:hitbitz/core/api/end_points.dart';
 import 'package:hitbitz/core/api/http.dart';
 import 'package:hitbitz/core/config/type_defs.dart';
 import 'package:hitbitz/core/data/models/base_response.dart';
+import 'package:hitbitz/core/data/models/no_response_model.dart';
 import 'package:hitbitz/features/auth/data/models/user_data_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -25,5 +26,15 @@ class RemoteAuthDataSource {
       json: json.decode(rowData),
       dataConverter: (body) => UserDataModel.fromJson(body),
     );
+  }
+
+  Future<NoResponse> forgetPassword({required BodyMap body}) async {
+    await Http.post(uri: EndPoints.forgetPassword(), body: body);
+    return NoResponse();
+  }
+
+  Future<NoResponse> resetPassword({required BodyMap body}) async {
+    await Http.post(uri: EndPoints.resetPassword(), body: body);
+    return NoResponse();
   }
 }

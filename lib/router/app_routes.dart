@@ -6,6 +6,8 @@ class AppRoutes {
   //////!auth!//////
   static const signup = '/signup';
   static const login = '/login';
+  static const resetPassword = '/reset-password';
+  static const forgetPassword = '/forget-password';
   static const sendCv = '/sendcv';
   //////!main!//////
   static const main = '/main';

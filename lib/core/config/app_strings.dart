@@ -134,4 +134,10 @@ class AppStrings {
   static const loser = 'loser';
   static const waitingForOpponent = 'waitingForOpponent';
   static const add = 'add';
+  static const forgetPassword = 'forgetPassword';
+  static const resetPassword = 'resetPassword';
+  static const code = 'code';
+  static const newPassword = 'newPassword';
+  static const codeIncorrect = 'codeIncorrect';
+  static const selectFieldToManage = 'selectFieldToManage';
 }
