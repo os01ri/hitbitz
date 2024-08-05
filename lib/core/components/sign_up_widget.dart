@@ -24,7 +24,11 @@ class SignUpWidget extends StatelessWidget {
           size: 48,
         ),
         const Gap(15),
-        const TextWidget('signUpToUnlockFeature'),
+        const TextWidget(
+          'signUpToUnlockFeature',
+          maxLines: 10,
+          textAlign: TextAlign.center,
+        ),
         const Gap(15),
         ButtonWidget(
           text: AppStrings.signUp,
