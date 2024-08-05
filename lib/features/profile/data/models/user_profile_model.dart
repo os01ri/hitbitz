@@ -1,5 +1,6 @@
 import 'package:hitbitz/core/data/models/media_model.dart';
 import 'package:hitbitz/features/home/data/models/category_model.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 
 List<UserProfileModel> usersListFromJson(dynamic decodedJson) =>
     List<UserProfileModel>.from(decodedJson.map((x) => UserProfileModel.fromJson(x)));
@@ -15,6 +16,7 @@ class UserProfileModel {
   final int? totalSuccess;
   final MediaModel? profileImage;
   final CategoryModel? category;
+  final List<RoadMapModel> roadmaps;
 
   UserProfileModel({
     required this.id,
@@ -27,6 +29,7 @@ class UserProfileModel {
     this.totalSuccess,
     this.profileImage,
     this.category,
+    this.roadmaps = const [],
   });
 
   factory UserProfileModel.fromJson(Map<String, dynamic> json) => UserProfileModel(
@@ -40,5 +43,6 @@ class UserProfileModel {
         totalSuccess: json['totalSuccess'],
         profileImage: json['profileImage'] == null ? null : MediaModel.fromJson(json['profileImage']),
         category: json['category'] == null ? null : CategoryModel.fromJson(json['category']),
+        roadmaps: json['roadmaps'] == null ? [] : List<RoadMapModel>.from(json['roadmaps']!.map((x) => RoadMapModel.fromJson(x))),
       );
 }

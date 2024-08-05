@@ -146,5 +146,9 @@
     "code": "Code",
     "newPassword": "New Password",
     "codeIncorrect": "Code Incorrect",
-    "selectFieldToManage": "Select the field you want to manage"
+    "selectFieldToManage": "Select the field you want to manage",
+    "statistics": "Statistics",
+    "failed": "Failed",
+    "passed": "Passed",
+    "testStatistics": "َQizzez Statistics"
 }

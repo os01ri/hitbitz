@@ -12,6 +12,9 @@ import 'package:hitbitz/features/friends/presentation/pages/profile_page.dart';
 import 'package:hitbitz/features/main/presentation/pages/main_page.dart';
 import 'package:hitbitz/features/notification/presentation/pages/notifications_page.dart';
 import 'package:hitbitz/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:hitbitz/features/profile/data/models/my_roadmaps_page.dart';
+import 'package:hitbitz/features/profile/data/models/user_profile_model.dart';
+import 'package:hitbitz/features/profile/presentation/pages/statistics_page.dart';
 import 'package:hitbitz/features/profile/presentation/pages/update_profile_page.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_intro_page.dart';
@@ -19,6 +22,7 @@ import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quizzes_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/result_page.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/review_page.dart';
+import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/roadmap_page.dart';
 import 'package:hitbitz/features/roadmap/presentation/pages/steps_page.dart';
 import 'package:hitbitz/features/search/presentation/pages/search_page.dart';
@@ -97,6 +101,18 @@ class AppPages {
         name: AppRoutes.challenges,
         path: AppRoutes.challenges,
         builder: (context, state) => ChallengesPage(currentUserIdl: state.extra as int),
+        routes: const [],
+      ),
+      GoRoute(
+        name: AppRoutes.statistics,
+        path: AppRoutes.statistics,
+        builder: (context, state) => StatisticsPage(profile: state.extra as UserProfileModel),
+        routes: const [],
+      ),
+      GoRoute(
+        name: AppRoutes.myRoadmaps,
+        path: AppRoutes.myRoadmaps,
+        builder: (context, state) => MyRoadmapsPage(roadmaps: state.extra as List<RoadMapModel>),
         routes: const [],
       ),
       GoRoute(

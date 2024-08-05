@@ -141,5 +141,9 @@
     "code": "Code",
     "newPassword": "Nouveau mot de passe",
     "codeIncorrect": "Code incorrect",
-    "selectFieldToManage": "Sélectionnez le domaine que vous souhaitez gérer"
+    "selectFieldToManage": "Sélectionnez le domaine que vous souhaitez gérer",
+    "statistics": "Statistiques",
+    "failed": "Échoué",
+    "passed": "Réussi",
+    "testStatistics": "Statistiques des tests"
 }

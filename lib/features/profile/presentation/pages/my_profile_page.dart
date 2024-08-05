@@ -110,15 +110,15 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     const Gap(10),
                     Row(
                       children: [
-                        // ButtonWidget(
-                        //   text: AppStrings.challenges,
-                        //   backgroundColor: context.colorScheme.primary,
-                        //   foregroundColor: context.colorScheme.onPrimary,
-                        //   spaceBetween: 10,
-                        //   prefixIcon: FaIcon(FontAwesomeIcons.users, color: context.colorScheme.onPrimary, size: 16),
-                        //   onPressed: () => context.pushNamed(AppRoutes.friendRequests),
-                        // ).expand(),
-                        // const Gap(5),
+                        ButtonWidget(
+                          text: AppStrings.roadmaps,
+                          backgroundColor: context.colorScheme.primary,
+                          foregroundColor: context.colorScheme.onPrimary,
+                          spaceBetween: 10,
+                          prefixIcon: FaIcon(FontAwesomeIcons.road, color: context.colorScheme.onPrimary, size: 16),
+                          onPressed: () => context.pushNamed(AppRoutes.myRoadmaps, extra: state.profile!.roadmaps),
+                        ).expand(),
+                        const Gap(10),
                         ButtonWidget(
                           text: AppStrings.challenges,
                           backgroundColor: context.colorScheme.primary,
@@ -126,6 +126,19 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           spaceBetween: 10,
                           prefixIcon: FaIcon(FontAwesomeIcons.bolt, color: context.colorScheme.onPrimary, size: 16),
                           onPressed: () => context.pushNamed(AppRoutes.challenges, extra: state.profile!.id),
+                        ).expand(),
+                      ],
+                    ),
+                    const Gap(10),
+                    Row(
+                      children: [
+                        ButtonWidget(
+                          text: AppStrings.statistics,
+                          backgroundColor: context.colorScheme.primary,
+                          foregroundColor: context.colorScheme.onPrimary,
+                          spaceBetween: 10,
+                          prefixIcon: FaIcon(FontAwesomeIcons.chartSimple, color: context.colorScheme.onPrimary, size: 16),
+                          onPressed: () => context.pushNamed(AppRoutes.statistics, extra: state.profile),
                         ).expand(),
                       ],
                     ),

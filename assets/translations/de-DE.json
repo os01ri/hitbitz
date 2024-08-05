@@ -141,5 +141,9 @@
     "code": "Code",
     "newPassword": "Neues Passwort",
     "codeIncorrect": "Code falsch",
-    "selectFieldToManage": "Wählen Sie das Feld, das Sie verwalten möchten"
+    "selectFieldToManage": "Wählen Sie das Feld, das Sie verwalten möchten",
+    "statistics": "Statistiken",
+    "failed": "Nicht bestanden",
+    "passed": "Bestanden",
+    "testStatistics": "Teststatistiken"
 }

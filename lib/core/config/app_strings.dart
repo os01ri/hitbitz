@@ -140,4 +140,5 @@ class AppStrings {
   static const newPassword = 'newPassword';
   static const codeIncorrect = 'codeIncorrect';
   static const selectFieldToManage = 'selectFieldToManage';
+  static const statistics = 'statistics';
 }

@@ -141,5 +141,9 @@
     "code": "رمز",
     "newPassword": "كلمة المرور الجديدة",
     "codeIncorrect": "رمز غير صحيح",
-    "selectFieldToManage": "اختر المجال الذي ترغب في استلامه"
+    "selectFieldToManage": "اختر المجال الذي ترغب في استلامه",
+    "statistics": "إحصائيات",
+    "failed": "غير مجتاز",
+    "passed": "مجتاز",
+    "testStatistics": "إحصائيات الاختبارات"
 }
