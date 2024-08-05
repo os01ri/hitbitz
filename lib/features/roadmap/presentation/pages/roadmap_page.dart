@@ -55,7 +55,8 @@ class _RoadmapPageState extends State<RoadmapPage> {
     super.initState();
     _cubit = di<RoadmapCubit>();
     if (widget.args.isStarting) {
-      _cubit.startRoadMap(ShowRoadMapParams(roadmapId: widget.args.roadMap.id!));
+      _cubit
+          .startRoadMap(ShowRoadMapParams(roadmapId: widget.args.roadMap.id!));
     } else {
       _cubit.showRoadMap(ShowRoadMapParams(roadmapId: widget.args.roadMap.id!));
     }
@@ -79,7 +80,9 @@ class _RoadmapPageState extends State<RoadmapPage> {
             title: const TextWidget(AppStrings.roadmapDetails),
             actions: [
               IconButton(
-                onPressed: () => _cubit.roadMapToggleBookmark(RoadMapToggleBookmarkParams(roadmapId: widget.args.roadMap.id!)),
+                onPressed: () => _cubit.roadMapToggleBookmark(
+                    RoadMapToggleBookmarkParams(
+                        roadmapId: widget.args.roadMap.id!)),
                 icon: Icon(
                   Icons.bookmark_add_outlined,
                   color: context.colorScheme.onSurface,
@@ -118,14 +121,16 @@ class _RoadmapPageState extends State<RoadmapPage> {
                   builder: (context, state) => switch (state.roadmapStatus) {
                     CubitStatus.initial => const SizedBox.shrink(),
                     CubitStatus.loading => const LoadingWidget().center(),
-                    CubitStatus.failure =>
-                      ErrorButtonWidget(onTap: () => _cubit.showRoadMap(ShowRoadMapParams(roadmapId: widget.args.roadMap.id!))).center(),
+                    CubitStatus.failure => ErrorButtonWidget(
+                        onTap: () => _cubit.showRoadMap(ShowRoadMapParams(
+                            roadmapId: widget.args.roadMap.id!))).center(),
                     CubitStatus.success => CustomScrollView(
                         // crossAxisAlignment: CrossAxisAlignment.stretch,
                         slivers: [
                           SliverToBoxAdapter(
                             child: TextWidget(
-                              state.roadmap!.name, // 'Flutter - Mobile App Development',
+                              state.roadmap!
+                                  .name, // 'Flutter - Mobile App Development',
                               maxLines: 3,
                               style: context.textTheme.headlineSmall,
                             ),
@@ -137,23 +142,28 @@ class _RoadmapPageState extends State<RoadmapPage> {
                               children: [
                                 Row(
                                   children: [
-                                    const FaIcon(FontAwesomeIcons.userGroup, size: 16),
+                                    const FaIcon(FontAwesomeIcons.userGroup,
+                                        size: 16),
                                     const Gap(3),
-                                    TextWidget(state.roadmap!.users.numberFormat()),
+                                    TextWidget(
+                                        state.roadmap!.users.numberFormat()),
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    const FaIcon(FontAwesomeIcons.clock, size: 16),
+                                    const FaIcon(FontAwesomeIcons.clock,
+                                        size: 16),
                                     const Gap(3),
                                     TextWidget('${state.roadmap!.duration} h'),
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    const FaIcon(FontAwesomeIcons.star, size: 16),
+                                    const FaIcon(FontAwesomeIcons.star,
+                                        size: 16),
                                     const Gap(3),
-                                    TextWidget(state.roadmap!.rate.numberFormat()),
+                                    TextWidget(
+                                        state.roadmap!.rate.numberFormat()),
                                   ],
                                 ),
                               ],
@@ -169,14 +179,33 @@ class _RoadmapPageState extends State<RoadmapPage> {
                           ),
                           const SliverToBoxAdapter(child: Gap(10)),
                           SliverToBoxAdapter(
-                            child: ButtonWidget(
-                              text: AppStrings.takeFullQuiz,
-                              width: context.width,
-                              backgroundColor: context.colorScheme.primary,
-                              foregroundColor: context.colorScheme.onPrimary,
-                              onPressed: () {
-                                _cubit.createCustomQuiz(CreateCustomQuizParams(roadmapId: state.roadmap?.id));
-                              },
+                            child: AnimatedCrossFade(
+                              duration: Durations.long4,
+                              //Check progress
+                              crossFadeState: state.roadmap?.progress == 100
+                                  ? CrossFadeState.showSecond
+                                  : CrossFadeState.showFirst,
+                              secondChild: ButtonWidget(
+                                text: 'Redeem Certificate',
+                                width: context.width,
+                                backgroundColor: context.colorScheme.primary,
+                                foregroundColor: context.colorScheme.onPrimary,
+                                onPressed: () {
+                                  _cubit.redeemCertificate(
+                                      state.roadmap?.id ?? 10);
+                                },
+                              ),
+                              firstChild: ButtonWidget(
+                                text: AppStrings.takeFullQuiz,
+                                width: context.width,
+                                backgroundColor: context.colorScheme.primary,
+                                foregroundColor: context.colorScheme.onPrimary,
+                                onPressed: () {
+                                  _cubit.createCustomQuiz(
+                                      CreateCustomQuizParams(
+                                          roadmapId: state.roadmap?.id));
+                                },
+                              ),
                             ),
                           ),
                           const SliverToBoxAdapter(child: Gap(20)),
@@ -195,19 +224,25 @@ class _RoadmapPageState extends State<RoadmapPage> {
                               child: ExpansionTile(
                                 initiallyExpanded: false,
                                 childrenPadding: AppPadding.innerCardPadding,
-                                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                                expandedCrossAxisAlignment:
+                                    CrossAxisAlignment.start,
                                 leading: state.roadmap!.isOpen(index)
-                                    ? const FaIcon(FontAwesomeIcons.lockOpen, color: Colors.green)
-                                    : const FaIcon(FontAwesomeIcons.lock, color: Colors.red),
-                                title: TextWidget(state.roadmap!.levels[index].name),
+                                    ? const FaIcon(FontAwesomeIcons.lockOpen,
+                                        color: Colors.green)
+                                    : const FaIcon(FontAwesomeIcons.lock,
+                                        color: Colors.red),
+                                title: TextWidget(
+                                    state.roadmap!.levels[index].name),
                                 subtitle: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Row(
                                       children: [
-                                        const FaIcon(FontAwesomeIcons.clock, size: 16),
+                                        const FaIcon(FontAwesomeIcons.clock,
+                                            size: 16),
                                         const Gap(3),
-                                        TextWidget('${state.roadmap!.levels[index].id} h'),
+                                        TextWidget(
+                                            '${state.roadmap!.levels[index].id} h'),
                                       ],
                                     ),
                                     const Spacer(flex: 2),
@@ -224,7 +259,11 @@ class _RoadmapPageState extends State<RoadmapPage> {
                                     style: context.textTheme.titleMedium,
                                   ),
                                   const Gap(10),
-                                  for (int i = 0; i < state.roadmap!.levels[index].requirements.length; i++)
+                                  for (int i = 0;
+                                      i <
+                                          state.roadmap!.levels[index]
+                                              .requirements.length;
+                                      i++)
                                     TextWidget(
                                       '#${i + 1} - ${state.roadmap!.levels[index].requirements[i]}',
                                       maxLines: 10,
@@ -235,14 +274,21 @@ class _RoadmapPageState extends State<RoadmapPage> {
                                       onPressed: () => context.pushNamed(
                                         AppRoutes.steps,
                                         extra: StepsPageArguments(
-                                          levelId: state.roadmap!.levels[index].id,
-                                          currentStep: (state.roadmap!.currentStep ?? 1) - 1,
-                                          hasPassedLevel: index < state.roadmap!.currentLevel! - 1,
+                                          levelId:
+                                              state.roadmap!.levels[index].id,
+                                          currentStep:
+                                              (state.roadmap!.currentStep ??
+                                                      1) -
+                                                  1,
+                                          hasPassedLevel: index <
+                                              state.roadmap!.currentLevel! - 1,
                                         ),
                                       ),
                                       width: context.width,
-                                      backgroundColor: context.colorScheme.primary,
-                                      foregroundColor: context.colorScheme.onPrimary,
+                                      backgroundColor:
+                                          context.colorScheme.primary,
+                                      foregroundColor:
+                                          context.colorScheme.onPrimary,
                                       text: AppStrings.start,
                                     ),
                                   ],
@@ -292,6 +338,29 @@ class _RoadmapPageState extends State<RoadmapPage> {
           ),
         );
       }
+    }
+    if (state.certificateStatus == CubitStatus.loading) {
+      Toaster.showLoading();
+    } else if (state.certificateStatus == CubitStatus.failure) {
+      Toaster.closeLoading();
+      Toaster.showError(context: context, message: state.failure?.message);
+    } else if (state.certificateStatus == CubitStatus.success) {
+      Toaster.closeLoading();
+      showGeneralDialog(
+        context: context,
+        pageBuilder: (context, animation, secondaryAnimation) => Scaffold(
+            appBar: AppBar(title: const Text('Certificate Show')),
+            body: Center(
+                child: Container(
+                    clipBehavior: Clip.hardEdge,
+                    padding: const EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: const Color(0xff010101),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Image.network(state.certificateUrl!)))),
+      );
     }
 
     if (state.saveStatus == CubitStatus.loading) {

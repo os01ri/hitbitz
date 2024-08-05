@@ -53,8 +53,10 @@ class RoadmapCubit extends Cubit<RoadmapState> {
     final result = await _showRoadMapUsecase(params);
 
     result.fold(
-      (l) => emit(state.copyWith(roadmapStatus: CubitStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(roadmapStatus: CubitStatus.success, roadmap: r)),
+      (l) =>
+          emit(state.copyWith(roadmapStatus: CubitStatus.failure, failure: l)),
+      (r) =>
+          emit(state.copyWith(roadmapStatus: CubitStatus.success, roadmap: r)),
     );
   }
 
@@ -64,8 +66,10 @@ class RoadmapCubit extends Cubit<RoadmapState> {
     final result = await _startRoadMapUsecase(params);
 
     result.fold(
-      (l) => emit(state.copyWith(roadmapStatus: CubitStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(roadmapStatus: CubitStatus.success, roadmap: r)),
+      (l) =>
+          emit(state.copyWith(roadmapStatus: CubitStatus.failure, failure: l)),
+      (r) =>
+          emit(state.copyWith(roadmapStatus: CubitStatus.success, roadmap: r)),
     );
   }
 
@@ -100,7 +104,8 @@ class RoadmapCubit extends Cubit<RoadmapState> {
 
     result.fold(
       (l) => emit(state.copyWith(saveStatus: CubitStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(saveStatus: CubitStatus.success, savedRoadMaps: r)),
+      (r) => emit(
+          state.copyWith(saveStatus: CubitStatus.success, savedRoadMaps: r)),
     );
 
     emit(state.copyWith(saveStatus: CubitStatus.initial));
@@ -112,8 +117,10 @@ class RoadmapCubit extends Cubit<RoadmapState> {
     final result = await _getRoadMapsUsecase(params);
 
     result.fold(
-      (l) => emit(state.copyWith(roadMapsStatus: CubitStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(roadMapsStatus: CubitStatus.success, roadMaps: r)),
+      (l) =>
+          emit(state.copyWith(roadMapsStatus: CubitStatus.failure, failure: l)),
+      (r) => emit(
+          state.copyWith(roadMapsStatus: CubitStatus.success, roadMaps: r)),
     );
   }
 
@@ -123,7 +130,8 @@ class RoadmapCubit extends Cubit<RoadmapState> {
     final result = await _createCustomQuizUsecase(params);
 
     result.fold(
-      (l) => emit(state.copyWith(customQuizStatus: CubitStatus.failure, failure: l)),
+      (l) => emit(
+          state.copyWith(customQuizStatus: CubitStatus.failure, failure: l)),
       (r) => emit(state.copyWith(
         customQuizStatus: CubitStatus.success,
         customQuiz: QuizModel(
@@ -143,8 +151,11 @@ class RoadmapCubit extends Cubit<RoadmapState> {
     final result = await _redeemCertificateUsecase(roadmapId);
 
     result.fold(
-      (l) => emit(state.copyWith(certificateStatus: CubitStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(certificateStatus: CubitStatus.success, certificateUrl: r)),
+      (l) => emit(
+          state.copyWith(certificateStatus: CubitStatus.failure, failure: l)),
+      (r) => emit(state.copyWith(
+          certificateStatus: CubitStatus.success,
+          certificateUrl: r.data!.image!)),
     );
   }
 }

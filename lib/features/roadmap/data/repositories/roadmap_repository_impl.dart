@@ -10,14 +10,19 @@ import 'package:hitbitz/features/roadmap/data/models/step_model.dart';
 import 'package:hitbitz/features/roadmap/domain/repositories/roadmap_repository.dart';
 import 'package:injectable/injectable.dart';
 
+import '../models/certif_model.dart';
+
 @LazySingleton(as: RoadMapRepository)
-class RoadMapRepositoryImpl with RepositoryExceptionHandler implements RoadMapRepository {
+class RoadMapRepositoryImpl
+    with RepositoryExceptionHandler
+    implements RoadMapRepository {
   final RemoteRoadMapDataSource remoteDataSource;
 
   const RoadMapRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, RoadMapModel>> showRoadMap({required int id, required ParamsMap params}) {
+  Future<Either<Failure, RoadMapModel>> showRoadMap(
+      {required int id, required ParamsMap params}) {
     return exceptionHandler<RoadMapModel>(tryCall: () async {
       final result = await remoteDataSource.showRoadMap(id: id, params: params);
       return Right(result.data);
@@ -25,15 +30,18 @@ class RoadMapRepositoryImpl with RepositoryExceptionHandler implements RoadMapRe
   }
 
   @override
-  Future<Either<Failure, RoadMapModel>> startRoadMap({required int id, required ParamsMap params}) {
+  Future<Either<Failure, RoadMapModel>> startRoadMap(
+      {required int id, required ParamsMap params}) {
     return exceptionHandler<RoadMapModel>(tryCall: () async {
-      final result = await remoteDataSource.startRoadMap(id: id, params: params);
+      final result =
+          await remoteDataSource.startRoadMap(id: id, params: params);
       return Right(result.data);
     });
   }
 
   @override
-  Future<Either<Failure, List<StepModel>>> getSteps({required ParamsMap? params}) {
+  Future<Either<Failure, List<StepModel>>> getSteps(
+      {required ParamsMap? params}) {
     return exceptionHandler<List<StepModel>>(tryCall: () async {
       final result = await remoteDataSource.getSteps(params: params);
       return Right(result.data);
@@ -49,7 +57,8 @@ class RoadMapRepositoryImpl with RepositoryExceptionHandler implements RoadMapRe
   }
 
   @override
-  Future<Either<Failure, List<RoadMapModel>>> getSavedRoadmaps({required ParamsMap params}) {
+  Future<Either<Failure, List<RoadMapModel>>> getSavedRoadmaps(
+      {required ParamsMap params}) {
     return exceptionHandler<List<RoadMapModel>>(tryCall: () async {
       final result = await remoteDataSource.getSavedRoadmaps(params: params);
       return Right(result.data);
@@ -57,7 +66,8 @@ class RoadMapRepositoryImpl with RepositoryExceptionHandler implements RoadMapRe
   }
 
   @override
-  Future<Either<Failure, List<QuestionModel>>> createCustomQuiz({required ParamsMap? params}) {
+  Future<Either<Failure, List<QuestionModel>>> createCustomQuiz(
+      {required ParamsMap? params}) {
     return exceptionHandler<List<QuestionModel>>(tryCall: () async {
       final result = await remoteDataSource.createCustomQuiz(params: params);
       return Right(result.data);
@@ -65,8 +75,9 @@ class RoadMapRepositoryImpl with RepositoryExceptionHandler implements RoadMapRe
   }
 
   @override
-  Future<Either<Failure, String>> redeemCertificate({required ParamsMap? params}) {
-    return exceptionHandler<String>(tryCall: () async {
+  Future<Either<Failure, RedeemCertificateModel>> redeemCertificate(
+      {required ParamsMap? params}) {
+    return exceptionHandler<RedeemCertificateModel>(tryCall: () async {
       final result = await remoteDataSource.redeemCertificate(params: params);
       return Right(result);
     });
