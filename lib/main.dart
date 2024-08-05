@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitbitz/core/config/app_assets.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
-import 'package:hitbitz/core/services/notification_service.dart';
 import 'package:hitbitz/core/services/shared_preferences_service.dart';
 import 'package:hitbitz/core/theme/light/light_theme.dart';
 import 'package:hitbitz/core/utilities/app_localization.dart';
@@ -33,7 +32,7 @@ Future _initializations() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Future.wait([
-    NotificationService.init(),
+    // NotificationService.init(),
     Firebase.initializeApp(),
     EasyLocalization.ensureInitialized(),
     SharedPreferencesService.init(),

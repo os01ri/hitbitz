@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hitbitz/core/components/error_widget.dart';
 import 'package:hitbitz/core/components/loading_widget.dart';
+import 'package:hitbitz/core/components/sign_up_widget.dart';
 import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
@@ -43,7 +43,7 @@ class _UsersPageState extends State<UsersPage> {
           return switch (state.getUsersStatus) {
             CubitStatus.initial => const SizedBox.shrink(),
             CubitStatus.loading => const LoadingWidget().center(),
-            CubitStatus.failure => ErrorButtonWidget(onTap: _cubit.getUsers).center(),
+            CubitStatus.failure => const SignUpWidget(), //ErrorButtonWidget(onTap: _cubit.getUsers).center(),
             CubitStatus.success => RefreshIndicator(
                 onRefresh: () async => _cubit.getUsers(),
                 child: UsersList(

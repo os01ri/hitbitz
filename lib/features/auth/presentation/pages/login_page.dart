@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
+import 'package:hitbitz/core/components/drop_down_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/config/app_strings.dart';
@@ -11,6 +13,7 @@ import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/core/utilities/app_localization.dart';
 import 'package:hitbitz/core/utilities/app_validator.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/auth/domain/usecases/login_usecase.dart';
@@ -32,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   late final TextEditingController _usernameController;
   late final TextEditingController _passwordController;
   late final AuthCubit _cubit;
+  late final ValueNotifier<Locale> _lang;
 
   @override
   void initState() {
@@ -45,7 +49,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _lang = ValueNotifier(context.locale);
+  }
+
+  @override
   void dispose() {
+    _lang.dispose();
     _showPasswordListenable.dispose();
     _rememberMeListenable.dispose();
     _usernameController.dispose();
@@ -79,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Form(
               child: Column(
                 children: [
-                  const Gap(20),
+                  // const Gap(20),
                   TextWidget(
                     AppStrings.welcomeBack,
                     style: context.textTheme.headlineLarge?.copyWith(
@@ -175,9 +186,9 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () => context.pushNamed(AppRoutes.forgetPassword),
                     ),
                   ),
-                  const Gap(20),
+                  const Gap(5),
                   const TextWidget(AppStrings.orDash),
-                  const Gap(20),
+                  const Gap(5),
                   TextWidget(
                     AppStrings.applyAsVolunteer,
                     style: context.textTheme.bodyMedium?.copyWith(
@@ -185,6 +196,26 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: TextDecoration.underline,
                     ),
                     onTap: () => context.pushNamed(AppRoutes.sendCv),
+                  ),
+                  const Gap(15),
+                  SizedBox(
+                    // height: AppDimensions.buttonHeight,
+                    width: context.width * .3,
+                    child: DropDownWidget<Locale>(
+                      // label: 'اللغة',
+                      listenableValue: _lang,
+                      items: AppLocalization.supportedLocales
+                          .map((e) => DropdownMenuItem<Locale>(
+                                value: e,
+                                child: TextWidget(e.languageCode),
+                              ))
+                          .toList(),
+                      onChanged: (value) {
+                        if (value == null) return;
+                        context.setLocale(value);
+                        context.goNamed(AppRoutes.splash);
+                      },
+                    ).center(),
                   ),
                 ],
               ).wrapPadding(AppPadding.pagePadding),

@@ -145,5 +145,7 @@
     "statistics": "Statistiken",
     "failed": "Nicht bestanden",
     "passed": "Bestanden",
-    "testStatistics": "Teststatistiken"
+    "testStatistics": "Teststatistiken",
+    "?": "?",
+    "signUpToUnlockFeature": "Sie müssen sich anmelden, um diese Funktion freizuschalten"
 }

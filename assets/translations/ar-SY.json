@@ -145,5 +145,7 @@
     "statistics": "إحصائيات",
     "failed": "غير مجتاز",
     "passed": "مجتاز",
-    "testStatistics": "إحصائيات الاختبارات"
+    "testStatistics": "إحصائيات الاختبارات",
+    "?": "؟",
+    "signUpToUnlockFeature": "يجب عليك التسجيل لفتح هذه الميزة"
 }

@@ -6,8 +6,8 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/drop_down_widget.dart';
-import 'package:hitbitz/core/components/error_widget.dart';
 import 'package:hitbitz/core/components/loading_widget.dart';
+import 'package:hitbitz/core/components/sign_up_widget.dart';
 import 'package:hitbitz/core/components/text_widget.dart';
 import 'package:hitbitz/core/config/app_padding.dart';
 import 'package:hitbitz/core/config/app_strings.dart';
@@ -57,7 +57,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
             builder: (context, state) => switch (state.getStatus) {
               CubitStatus.initial => const SizedBox.shrink(),
               CubitStatus.loading => const LoadingWidget().center(),
-              CubitStatus.failure => ErrorButtonWidget(onTap: () => di<ProfileCubit>().getProfile()),
+              CubitStatus.failure => const SignUpWidget(), // ErrorButtonWidget(onTap: () => di<ProfileCubit>().getProfile()),
               CubitStatus.success => ListView(
                   children: [
                     Column(
