@@ -18,7 +18,7 @@ import 'package:hitbitz/features/challenge/presentation/cubit/challenge_cubit.da
 
 class ChallengeFriendsSheet extends StatelessWidget {
   final int quizId;
-  final VoidCallback? onFriendSelected;
+  final void Function(int)? onFriendSelected;
 
   const ChallengeFriendsSheet({
     super.key,
@@ -97,7 +97,7 @@ class ChallengeFriendsSheet extends StatelessWidget {
     } else if (state.inviteStatus == CubitStatus.success) {
       Toaster.closeLoading();
       context.pop();
-      onFriendSelected?.call();
+      onFriendSelected?.call(state.challenge!.id);
     }
   }
 }

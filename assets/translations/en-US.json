@@ -132,5 +132,13 @@
     "challengeFriend": "Challenge A Friend",
     "selectFriendToChallenge": "Select a friend to start the challenge",
     "challenges": "Challenges",
-    "accept": "Accept"
+    "accept": "Accept",
+    "you_sent_before": "You have already sent a request to this person",
+    "takeFullQuiz": "Take a Full Quiz!",
+    "winner": "Winner!",
+    "loser": "Loser!",
+    "waitingForOpponent": "Waiting For Your Opponent!",
+    "please_check_your_password_and_try_again": "Please check your password and try again",
+    "you_cannot_send_a_friend_request_to_yourself": "You cannot send a friend request to yourself",
+    "add": "Add"
 }

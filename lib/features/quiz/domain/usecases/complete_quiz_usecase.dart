@@ -21,11 +21,19 @@ class CompleteQuizUsecase implements UseCase<NoResponse, CompleteQuizParams> {
 class CompleteQuizParams implements UseCaseParams {
   final int id;
   final int score;
+  final int? challengeId;
 
-  const CompleteQuizParams({required this.id, required this.score});
+  const CompleteQuizParams({
+    required this.id,
+    required this.score,
+    this.challengeId,
+  });
 
   @override
-  BodyMap getBody() => {'score': score};
+  BodyMap getBody() => {
+        'score': score,
+        'challengeId': challengeId,
+      };
 
   @override
   ParamsMap? getParams() {

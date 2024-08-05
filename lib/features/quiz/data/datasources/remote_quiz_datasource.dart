@@ -6,6 +6,7 @@ import 'package:hitbitz/core/config/type_defs.dart';
 import 'package:hitbitz/core/data/models/base_response.dart';
 import 'package:hitbitz/core/data/models/no_response_model.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
+import 'package:hitbitz/features/quiz/domain/usecases/complete_custom_quiz_usecase.dart';
 import 'package:hitbitz/features/quiz/domain/usecases/complete_quiz_usecase.dart';
 import 'package:injectable/injectable.dart';
 
@@ -31,6 +32,11 @@ class RemoteQuizDataSource {
 
   Future<NoResponse> completeQuiz({required CompleteQuizParams params}) async {
     await Http.post(uri: EndPoints.completeQuiz(id: params.id), body: params.getBody());
+    return NoResponse();
+  }
+
+  Future<NoResponse> completeCustomQuiz({required CompleteCustomQuizParams params}) async {
+    await Http.post(uri: EndPoints.completeCustomQuiz(params: params.getParams()));
     return NoResponse();
   }
 }

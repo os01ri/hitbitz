@@ -6,6 +6,7 @@ import 'package:hitbitz/core/error/repository_exception_handler.dart';
 import 'package:hitbitz/features/quiz/data/datasources/remote_quiz_datasource.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/features/quiz/domain/repositories/quiz_repository.dart';
+import 'package:hitbitz/features/quiz/domain/usecases/complete_custom_quiz_usecase.dart';
 import 'package:hitbitz/features/quiz/domain/usecases/complete_quiz_usecase.dart';
 import 'package:injectable/injectable.dart';
 
@@ -35,6 +36,14 @@ class QuizRepositoryImpl with RepositoryExceptionHandler implements QuizReposito
   Future<Either<Failure, NoResponse>> completeQuiz({required CompleteQuizParams params}) {
     return exceptionHandler<NoResponse>(tryCall: () async {
       final result = await remoteDataSource.completeQuiz(params: params);
+      return Right(result);
+    });
+  }
+
+  @override
+  Future<Either<Failure, NoResponse>> completeCustomQuiz({required CompleteCustomQuizParams params}) {
+    return exceptionHandler<NoResponse>(tryCall: () async {
+      final result = await remoteDataSource.completeCustomQuiz(params: params);
       return Right(result);
     });
   }

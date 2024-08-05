@@ -127,5 +127,13 @@
     "challengeFriend": "Défiez un ami",
     "selectFriendToChallenge": "Sélectionnez un ami pour commencer le défi",
     "challenges": "Défis",
-    "accept": "Accepter"
+    "accept": "Accepter",
+    "you_sent_before": "Vous avez déjà envoyé une demande à cette personne",
+    "takeFullQuiz": "Faites un quiz complet!",
+    "winner": "Gagnant!",
+    "loser": "Perdant!",
+    "waitingForOpponent": "En attente de votre adversaire!",
+    "please_check_your_password_and_try_again": "Veuillez vérifier votre mot de passe et réessayer",
+    "you_cannot_send_a_friend_request_to_yourself": "Vous ne pouvez pas vous envoyer une demande d'ami",
+    "add": "Ajouter"
 }

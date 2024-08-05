@@ -16,6 +16,7 @@ import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
+import 'package:hitbitz/features/quiz/domain/usecases/complete_custom_quiz_usecase.dart';
 import 'package:hitbitz/features/quiz/domain/usecases/complete_quiz_usecase.dart';
 import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/question_page.dart';
@@ -44,10 +45,18 @@ class QuizProvider extends InheritedWidget {
 class QuizPageArgs {
   final QuizModel quiz;
   final bool isSolved;
+  final int? challengeId;
+  final int? roadmapId;
+  final int? levelId;
+  final int? stepId;
 
   const QuizPageArgs({
     required this.quiz,
     this.isSolved = false,
+    this.challengeId,
+    this.roadmapId,
+    this.levelId,
+    this.stepId,
   });
 }
 
@@ -138,10 +147,20 @@ class _QuizPageState extends State<QuizPage> {
                   onPressed: () {
                     if (widget.args.quiz.questions[index - 1].isCorrect == null) return;
                     if (index >= widget.args.quiz.questions.length) {
-                      di<QuizCubit>().completeQuiz(CompleteQuizParams(
-                        id: widget.args.quiz.id,
-                        score: widget.args.quiz.score.toInt(),
-                      ));
+                      if (widget.args.quiz.id == -1) {
+                        di<QuizCubit>().completeCustomQuiz(CompleteCustomQuizParams(
+                          score: widget.args.quiz.score.toInt(),
+                          roadmapId: widget.args.roadmapId,
+                          levelId: widget.args.levelId,
+                          stepId: widget.args.stepId,
+                        ));
+                      } else {
+                        di<QuizCubit>().completeQuiz(CompleteQuizParams(
+                          id: widget.args.quiz.id,
+                          score: widget.args.quiz.score.toInt(),
+                          challengeId: widget.args.challengeId,
+                        ));
+                      }
                       return;
                     }
 
@@ -166,7 +185,7 @@ class _QuizPageState extends State<QuizPage> {
       Toaster.showLoading();
     } else if (state.completeStatus == CubitStatus.failure) {
       Toaster.closeLoading();
-      Toaster.showError(context: context, message: state.failure!.message);
+      Toaster.showError(context: context, message: state.failure?.message);
     } else if (state.completeStatus == CubitStatus.success) {
       Toaster.closeLoading();
       context.pop();

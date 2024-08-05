@@ -5,6 +5,7 @@ class ChallengeState {
   final List<ChallengeModel> challenges;
   final CubitStatus inviteStatus;
   final CubitStatus getFriendsStatus;
+  final ChallengeModel? challenge;
   final List<UserProfileModel> friends;
   final Failure? failure;
 
@@ -14,6 +15,7 @@ class ChallengeState {
     this.inviteStatus = CubitStatus.initial,
     this.getFriendsStatus = CubitStatus.initial,
     this.friends = const [],
+    this.challenge,
     this.failure,
   });
 
@@ -22,6 +24,7 @@ class ChallengeState {
     List<ChallengeModel>? challenges,
     CubitStatus? inviteStatus,
     CubitStatus? getFriendsStatus,
+    ChallengeModel? challenge,
     List<UserProfileModel>? friends,
     Failure? failure,
   }) {
@@ -30,6 +33,7 @@ class ChallengeState {
       challenges: challenges ?? this.challenges,
       inviteStatus: inviteStatus ?? this.inviteStatus,
       getFriendsStatus: getFriendsStatus ?? this.getFriendsStatus,
+      challenge: challenge ?? this.challenge,
       friends: friends ?? this.friends,
       failure: failure ?? this.failure,
     );

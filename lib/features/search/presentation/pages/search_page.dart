@@ -7,6 +7,7 @@ import 'package:hitbitz/features/home/domain/usecases/get_categories_usecase.dar
 import 'package:hitbitz/features/home/domain/usecases/get_roadmaps_usecase.dart';
 import 'package:hitbitz/features/home/presentation/cubit/home_cubit.dart';
 import 'package:hitbitz/features/home/presentation/widgets/category_card.dart';
+import 'package:hitbitz/features/roadmap/domain/usecases/create_custome_quiz_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_saved_roadmaps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_steps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/roadmap_toggle_bookmark_usecase.dart';
@@ -37,6 +38,7 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
     super.initState();
     _roadmapsCubit = RoadmapCubit(
       // getLevelsUsecase: di<GetLevelsUsecase>(),
+      createCustomQuizUsecase: di<CreateCustomQuizUsecase>(),
       showRoadMapUsecase: di<ShowRoadMapUsecase>(),
       startRoadMapUsecase: di<StartRoadMapUsecase>(),
       getStepsUsecase: di<GetStepsUsecase>(),

@@ -129,4 +129,9 @@ class AppStrings {
   static const selectFriendToChallenge = 'selectFriendToChallenge';
   static const challenges = 'challenges';
   static const accept = 'accept';
+  static const takeFullQuiz = 'takeFullQuiz';
+  static const winner = 'winner';
+  static const loser = 'loser';
+  static const waitingForOpponent = 'waitingForOpponent';
+  static const add = 'add';
 }

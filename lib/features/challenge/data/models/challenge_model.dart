@@ -9,12 +9,14 @@ class ChallengeModel {
   final UserProfileModel? host;
   final UserProfileModel? guest;
   final QuizModel? quiz;
+  final bool? isWinner;
 
   ChallengeModel({
     required this.id,
     this.host,
     this.guest,
     this.quiz,
+    this.isWinner,
   });
 
   factory ChallengeModel.fromJson(Map<String, dynamic> json) => ChallengeModel(
@@ -22,5 +24,6 @@ class ChallengeModel {
         host: json['host'] == null ? null : UserProfileModel.fromJson(json['host']),
         guest: json['guest'] == null ? null : UserProfileModel.fromJson(json['guest']),
         quiz: json['quiz'] == null ? null : QuizModel.fromJson(json['quiz']),
+        isWinner: json['is_winner'],
       );
 }

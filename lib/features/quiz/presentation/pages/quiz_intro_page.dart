@@ -23,10 +23,22 @@ import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
-class QuizIntroPage extends StatefulWidget {
-  const QuizIntroPage({super.key, required this.id});
-
+class QuizIntroPageArguments {
   final int id;
+  final int? challengeId;
+  final bool? isCompleted;
+
+  const QuizIntroPageArguments({
+    required this.id,
+    this.challengeId,
+    this.isCompleted,
+  });
+}
+
+class QuizIntroPage extends StatefulWidget {
+  const QuizIntroPage({super.key, required this.args});
+
+  final QuizIntroPageArguments args;
 
   @override
   State<QuizIntroPage> createState() => _QuizIntroPageState();
@@ -36,7 +48,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
   @override
   void initState() {
     super.initState();
-    di<QuizCubit>().showQuiz(widget.id);
+    di<QuizCubit>().showQuiz(widget.args.id);
   }
 
   @override
@@ -56,7 +68,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
           builder: (context, state) => switch (state.showStatus) {
             CubitStatus.initial => const SizedBox.shrink(),
             CubitStatus.loading => const LoadingWidget().center(),
-            CubitStatus.failure => ErrorButtonWidget(onTap: () => di<QuizCubit>().showQuiz(widget.id)),
+            CubitStatus.failure => ErrorButtonWidget(onTap: () => di<QuizCubit>().showQuiz(widget.args.id)),
             CubitStatus.success => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -151,32 +163,33 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                   CubitStatus.failure => const SizedBox.shrink(),
                   CubitStatus.success => Row(
                       children: [
-                        ButtonWidget(
-                          onPressed: () => showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            useSafeArea: true,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) => ChallengeFriendsSheet(
-                              quizId: widget.id,
-                              onFriendSelected: () => _startQuiz(state.quiz!),
+                        if (widget.args.challengeId == null && widget.args.isCompleted != true) ...[
+                          ButtonWidget(
+                            onPressed: () => showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              useSafeArea: true,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) => ChallengeFriendsSheet(
+                                quizId: widget.args.id,
+                                onFriendSelected: (challengeId) => _startQuiz(quiz: state.quiz!, challengeId: challengeId),
+                              ),
                             ),
-                          ),
-                          width: context.width,
-                          height: 50,
-                          text: AppStrings.challengeFriend,
-                          isOutlined: true,
-                          borderColor: context.colorScheme.secondary,
-                          backgroundColor: context.colorScheme.surface,
-                          foregroundColor: context.colorScheme.secondary,
-                        ).expand(),
+                            width: context.width,
+                            height: 50,
+                            text: AppStrings.challengeFriend,
+                            isOutlined: true,
+                            borderColor: context.colorScheme.secondary,
+                            backgroundColor: context.colorScheme.surface,
+                            foregroundColor: context.colorScheme.secondary,
+                          ).expand(),
+                        ],
                         const Gap(5),
                         ButtonWidget(
-                          onPressed: () => _startQuiz(state.quiz!),
+                          onPressed: () => _startQuiz(quiz: state.quiz!, challengeId: widget.args.challengeId),
                           width: context.width,
                           height: 50,
                           text: AppStrings.play,
-                          // text: 'Play Alone',
                           backgroundColor: context.colorScheme.primary,
                           foregroundColor: context.colorScheme.onPrimary,
                         ).expand(),
@@ -192,7 +205,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
     );
   }
 
-  _startQuiz(QuizModel? quiz) {
+  _startQuiz({required QuizModel? quiz, int? challengeId}) {
     if (quiz!.questions.isEmpty) {
       Toaster.showWarning(
         context: context,
@@ -200,6 +213,11 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
       );
       return;
     }
-    context.pushNamed(AppRoutes.quiz, extra: QuizPageArgs(quiz: quiz));
+
+    context.pushNamed(AppRoutes.quiz,
+        extra: QuizPageArgs(
+          quiz: quiz,
+          challengeId: challengeId,
+        ));
   }
 }

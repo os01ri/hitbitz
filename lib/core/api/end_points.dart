@@ -64,7 +64,9 @@ class EndPoints {
 
   static Uri getQuizzes({ParamsMap params}) => _user(path: 'quizzes', params: params);
   static Uri showQuiz({required int id}) => _user(path: 'quizzes/$id');
+  static Uri createCustomQuiz({ParamsMap params}) => _user(path: 'quizzes/createCustomQuiz', params: params);
   static Uri completeQuiz({required int id}) => _user(path: 'quizzes/$id/complete');
+  static Uri completeCustomQuiz({ParamsMap params}) => _user(path: 'quizzes/completeCustomQuiz', params: params);
 
   static Uri makeSuggestion({ParamsMap params}) => _user(path: 'makeSuggestion', params: params);
   static Uri sendCv() => _mainUri(path: 'admin/cvs');

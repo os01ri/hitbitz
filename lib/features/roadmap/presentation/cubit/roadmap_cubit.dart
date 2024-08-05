@@ -3,8 +3,10 @@ import 'package:hitbitz/core/config/cubit_status.dart';
 import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/usecases/usecase.dart';
 import 'package:hitbitz/features/home/domain/usecases/get_roadmaps_usecase.dart';
+import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/data/models/step_model.dart';
+import 'package:hitbitz/features/roadmap/domain/usecases/create_custome_quiz_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_saved_roadmaps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/get_steps_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/roadmap_toggle_bookmark_usecase.dart';
@@ -22,6 +24,7 @@ class RoadmapCubit extends Cubit<RoadmapState> {
   final RoadMapToggleBookmarkUsecase _roadMapToggleBookmarkUsecase;
   final GetSavedRoadmapsUsecase _getSavedRoadmapsUsecase;
   final GetRoadMapsUsecase _getRoadMapsUsecase;
+  final CreateCustomQuizUsecase _createCustomQuizUsecase;
 
   RoadmapCubit({
     required ShowRoadMapUsecase showRoadMapUsecase,
@@ -30,12 +33,14 @@ class RoadmapCubit extends Cubit<RoadmapState> {
     required RoadMapToggleBookmarkUsecase roadMapToggleBookmarkUsecase,
     required GetSavedRoadmapsUsecase getSavedRoadmapsUsecase,
     required GetRoadMapsUsecase getRoadMapsUsecase,
+    required CreateCustomQuizUsecase createCustomQuizUsecase,
   })  : _showRoadMapUsecase = showRoadMapUsecase,
         _startRoadMapUsecase = startRoadMapUsecase,
         _getStepsUsecase = getStepsUsecase,
         _roadMapToggleBookmarkUsecase = roadMapToggleBookmarkUsecase,
         _getSavedRoadmapsUsecase = getSavedRoadmapsUsecase,
         _getRoadMapsUsecase = getRoadMapsUsecase,
+        _createCustomQuizUsecase = createCustomQuizUsecase,
         super(const RoadmapState());
 
   showRoadMap(ShowRoadMapParams params) async {
@@ -106,5 +111,25 @@ class RoadmapCubit extends Cubit<RoadmapState> {
       (l) => emit(state.copyWith(roadMapsStatus: CubitStatus.failure, failure: l)),
       (r) => emit(state.copyWith(roadMapsStatus: CubitStatus.success, roadMaps: r)),
     );
+  }
+
+  createCustomQuiz(CreateCustomQuizParams params) async {
+    emit(state.copyWith(customQuizStatus: CubitStatus.loading));
+
+    final result = await _createCustomQuizUsecase(params);
+
+    result.fold(
+      (l) => emit(state.copyWith(customQuizStatus: CubitStatus.failure, failure: l)),
+      (r) => emit(state.copyWith(
+        customQuizStatus: CubitStatus.success,
+        customQuiz: QuizModel(
+          id: -1,
+          questions: r,
+          requiredDegree: 60,
+        ),
+      )),
+    );
+
+    emit(state.copyWith(customQuizStatus: CubitStatus.initial));
   }
 }

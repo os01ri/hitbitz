@@ -30,7 +30,7 @@ class ResultPage extends StatelessWidget {
 
   final ResultPageArgs args;
 
-  bool get hasPassed => args.quiz.score >= args.quiz.requiredDegree!;
+  bool get hasPassed => args.quiz.score >= (args.quiz.requiredDegree ?? 60);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class ResultPage extends StatelessWidget {
               ),
               const Gap(10),
               TextWidget(
-                '${(args.quiz.score / 100 * args.quiz.questions.length).toInt()} / ${args.quiz.questions.length}',
+                '${args.quiz.questions.fold(0, (sum, question) => sum + (question.isCorrect == true ? 1 : 0))} / ${args.quiz.questions.length}',
                 style: context.textTheme.titleLarge?.copyWith(color: context.colorScheme.onPrimary),
               ),
               const Spacer(),

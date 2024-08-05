@@ -84,7 +84,7 @@ class AppPages {
       GoRoute(
         name: AppRoutes.challenges,
         path: AppRoutes.challenges,
-        builder: (context, state) => const ChallengesPage(),
+        builder: (context, state) => ChallengesPage(currentUserIdl: state.extra as int),
         routes: const [],
       ),
       GoRoute(
@@ -140,7 +140,7 @@ class AppPages {
                   GoRoute(
                     name: AppRoutes.quizIntro,
                     path: AppRoutes.quizIntro,
-                    builder: (context, state) => QuizIntroPage(id: state.extra as int),
+                    builder: (context, state) => QuizIntroPage(args: state.extra as QuizIntroPageArguments),
                     routes: [
                       GoRoute(
                         name: AppRoutes.quiz,

@@ -5,6 +5,7 @@ import 'package:hitbitz/core/api/http.dart';
 import 'package:hitbitz/core/config/type_defs.dart';
 import 'package:hitbitz/core/data/models/base_response.dart';
 import 'package:hitbitz/core/data/models/no_response_model.dart';
+import 'package:hitbitz/features/quiz/data/models/question_model.dart';
 import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
 import 'package:hitbitz/features/roadmap/data/models/step_model.dart';
 import 'package:injectable/injectable.dart';
@@ -47,6 +48,14 @@ class RemoteRoadMapDataSource {
     return BaseResponse.fromJson(
       json: json.decode(rowData),
       dataConverter: (body) => roadMapsListFromJson(body),
+    );
+  }
+
+  Future<BaseResponse<List<QuestionModel>>> createCustomQuiz({required ParamsMap params}) async {
+    final rowData = await Http.get(uri: EndPoints.createCustomQuiz(params: params));
+    return BaseResponse.fromJson(
+      json: json.decode(rowData),
+      dataConverter: (body) => questionsListFromJson(body),
     );
   }
 }

@@ -19,7 +19,9 @@ import 'package:hitbitz/core/extensions/num_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/core/utilities/toaster.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/quiz_page.dart';
 import 'package:hitbitz/features/roadmap/data/models/road_map_model.dart';
+import 'package:hitbitz/features/roadmap/domain/usecases/create_custome_quiz_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/roadmap_toggle_bookmark_usecase.dart';
 import 'package:hitbitz/features/roadmap/domain/usecases/show_roadmap_usecase.dart';
 import 'package:hitbitz/features/roadmap/presentation/cubit/roadmap_cubit.dart';
@@ -165,6 +167,18 @@ class _RoadmapPageState extends State<RoadmapPage> {
                               maxLines: 50,
                             ),
                           ),
+                          const SliverToBoxAdapter(child: Gap(10)),
+                          SliverToBoxAdapter(
+                            child: ButtonWidget(
+                              text: AppStrings.takeFullQuiz,
+                              width: context.width,
+                              backgroundColor: context.colorScheme.primary,
+                              foregroundColor: context.colorScheme.onPrimary,
+                              onPressed: () {
+                                _cubit.createCustomQuiz(CreateCustomQuizParams(roadmapId: state.roadmap?.id));
+                              },
+                            ),
+                          ),
                           const SliverToBoxAdapter(child: Gap(20)),
                           SliverToBoxAdapter(
                             child: TextWidget(
@@ -284,10 +298,26 @@ class _RoadmapPageState extends State<RoadmapPage> {
       Toaster.showLoading();
     } else if (state.saveStatus == CubitStatus.failure) {
       Toaster.closeLoading();
-      Toaster.showError(context: context, message: 'error');
+      Toaster.showError(context: context, message: state.failure!.message);
     } else if (state.saveStatus == CubitStatus.success) {
       Toaster.closeLoading();
-      Toaster.showSuccess(context: context, message: 'success');
+      Toaster.showSuccess(context: context, message: AppStrings.success);
+    }
+
+    if (state.customQuizStatus == CubitStatus.loading) {
+      Toaster.showLoading();
+    } else if (state.customQuizStatus == CubitStatus.failure) {
+      Toaster.closeLoading();
+      Toaster.showError(context: context, message: state.failure?.message);
+    } else if (state.customQuizStatus == CubitStatus.success) {
+      Toaster.closeLoading();
+      context.pushNamed(
+        AppRoutes.quiz,
+        extra: QuizPageArgs(
+          quiz: state.customQuiz!,
+          roadmapId: state.roadmap!.id,
+        ),
+      );
     }
   }
 }

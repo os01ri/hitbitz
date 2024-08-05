@@ -127,5 +127,13 @@
     "challengeFriend": "Fordere einen Freund heraus",
     "selectFriendToChallenge": "Wähle einen Freund aus, um die Herausforderung zu starten",
     "challenges": "Herausforderungen",
-    "accept": "Akzeptieren"
+    "accept": "Akzeptieren",
+    "you_sent_before": "Sie haben dieser Person bereits eine Anfrage gesendet",
+    "takeFullQuiz": "Machen Sie ein vollständiges Quiz!",
+    "winner": "Gewinner!",
+    "loser": "Verlierer!",
+    "waitingForOpponent": "Warten auf Ihren Gegner!",
+    "please_check_your_password_and_try_again": "Bitte überprüfen Sie Ihr Passwort und versuchen Sie es erneut",
+    "you_cannot_send_a_friend_request_to_yourself": "Sie können sich selbst keine Freundschaftsanfrage senden",
+    "add": "Hinzufügen"
 }

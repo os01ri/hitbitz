@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitbitz/core/components/button_widget.dart';
@@ -13,10 +14,13 @@ import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/features/challenge/presentation/cubit/challenge_cubit.dart';
 import 'package:hitbitz/features/friends/presentation/widgets/users_list.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/quiz_intro_page.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class ChallengesPage extends StatefulWidget {
-  const ChallengesPage({super.key});
+  const ChallengesPage({super.key, required this.currentUserIdl});
+
+  final int currentUserIdl;
 
   @override
   State<ChallengesPage> createState() => _ChallengesPageState();
@@ -54,7 +58,9 @@ class _ChallengesPageState extends State<ChallengesPage> {
                     itemBuilder: (context, index) {
                       return ExpansionTile(
                         title: FriendTile(
-                          user: state.challenges[index].host!,
+                          user: widget.currentUserIdl == state.challenges[index].host!.id
+                              ? state.challenges[index].guest!
+                              : state.challenges[index].host!,
                           // trailingIcon: FontAwesomeIcons.check,
                           // onTailingTapped: (id) {},
                         ),
@@ -63,16 +69,73 @@ class _ChallengesPageState extends State<ChallengesPage> {
                         children: [
                           TextWidget(state.challenges[index].quiz?.name),
                           TextWidget(state.challenges[index].quiz?.description, maxLines: 5),
-                          const Gap(5),
-                          ButtonWidget(
-                            width: context.width,
-                            foregroundColor: context.colorScheme.onPrimary,
-                            backgroundColor: context.colorScheme.primary,
-                            text: AppStrings.accept,
-                            onPressed: () {
-                              context.pushNamed(AppRoutes.quizIntro, extra: state.challenges[index].quiz?.id);
-                            },
-                          ),
+                          const Gap(8),
+                          if (state.challenges[index].isWinner == true)
+                            SizedBox(
+                              width: context.width,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.trophy, size: 20, color: Colors.green),
+                                  const Gap(8),
+                                  TextWidget(
+                                    AppStrings.winner,
+                                    style: context.textTheme.titleMedium?.copyWith(color: Colors.green),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            )
+                          else if (state.challenges[index].isWinner == false)
+                            SizedBox(
+                              width: context.width,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.circleExclamation, size: 20, color: Colors.red),
+                                  const Gap(8),
+                                  TextWidget(
+                                    AppStrings.loser,
+                                    style: context.textTheme.titleMedium?.copyWith(color: Colors.red),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            )
+                          else if (widget.currentUserIdl == state.challenges[index].host!.id)
+                            SizedBox(
+                              width: context.width,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.clock, size: 20, color: Colors.blue),
+                                  const Gap(8),
+                                  TextWidget(
+                                    AppStrings.waitingForOpponent,
+                                    style: context.textTheme.titleMedium?.copyWith(color: Colors.blue),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            )
+                          else
+                            ButtonWidget(
+                              width: context.width,
+                              foregroundColor: context.colorScheme.onPrimary,
+                              backgroundColor: context.colorScheme.primary,
+                              text: AppStrings.accept,
+                              onPressed: () {
+                                context
+                                    .pushNamed(
+                                      AppRoutes.quizIntro,
+                                      extra: QuizIntroPageArguments(
+                                        id: state.challenges[index].quiz!.id,
+                                        challengeId: state.challenges[index].id,
+                                      ),
+                                    )
+                                    .whenComplete(() => _cubit.getChallenges());
+                              },
+                            ),
                         ],
                       );
                     },

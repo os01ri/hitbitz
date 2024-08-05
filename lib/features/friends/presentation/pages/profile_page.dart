@@ -1,25 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:hitbitz/core/components/button_widget.dart';
 import 'package:hitbitz/core/components/error_widget.dart';
 import 'package:hitbitz/core/components/loading_widget.dart';
+import 'package:hitbitz/core/config/app_padding.dart';
+import 'package:hitbitz/core/config/app_strings.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
+import 'package:hitbitz/core/extensions/context_extension.dart';
 import 'package:hitbitz/core/extensions/widget_extensions.dart';
 import 'package:hitbitz/core/services/di/di_container.dart';
+import 'package:hitbitz/core/utilities/toaster.dart';
+import 'package:hitbitz/features/friends/domain/usecases/send_friend_requests_usecase.dart';
 import 'package:hitbitz/features/friends/domain/usecases/show_user_usecase.dart';
 import 'package:hitbitz/features/friends/presentation/cubit/friends_cubit.dart';
 import 'package:hitbitz/features/profile/presentation/widgets/profile_widget.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key, required this.id});
 
   final int id;
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  late final FriendsCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = di<FriendsCubit>()..getUsers();
+  }
+
+  @override
+  void dispose() {
+    _cubit.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: FriendProfileWidget(id: id),
+      body: BlocProvider.value(
+        value: _cubit,
+        child: BlocListener<FriendsCubit, FriendsState>(
+          listener: _listener,
+          child: Column(
+            children: [
+              FriendProfileWidget(id: widget.id),
+              const Gap(10),
+              ButtonWidget(
+                text: AppStrings.add,
+                backgroundColor: context.colorScheme.primary,
+                foregroundColor: context.colorScheme.onPrimary,
+                width: context.width,
+                onPressed: () => _cubit.sendFriendRequest(FriendRequestParams(id: widget.id)),
+              ),
+            ],
+          ),
+        ).wrapPadding(AppPadding.pagePadding),
+      ),
     );
+  }
+
+  _listener(BuildContext context, FriendsState state) {
+    if (state.requestStatus == CubitStatus.loading) {
+      Toaster.showLoading();
+    } else if (state.requestStatus == CubitStatus.failure) {
+      Toaster.closeLoading();
+      Toaster.showError(context: context, message: state.failure?.message);
+    } else if (state.requestStatus == CubitStatus.success) {
+      Toaster.closeLoading();
+      Toaster.showSuccess(context: context, message: AppStrings.success);
+    }
   }
 }
 

@@ -5,6 +5,9 @@ import 'package:hitbitz/core/data/models/media_model.dart';
 import 'package:hitbitz/features/quiz/data/enums/question_type.dart';
 import 'package:hitbitz/features/quiz/data/models/answer_model.dart';
 
+List<QuestionModel> questionsListFromJson(dynamic decodedJson) =>
+    List<QuestionModel>.from(decodedJson.map((x) => QuestionModel.fromJson(x)));
+
 class QuestionModel {
   final int id;
   final QuestionType type;

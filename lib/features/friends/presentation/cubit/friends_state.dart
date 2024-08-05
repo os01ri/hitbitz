@@ -6,6 +6,7 @@ class FriendsState {
   final CubitStatus showUserStatus;
   final UserProfileModel? user;
   final CubitStatus requestStatus;
+  final Failure? failure;
 
   const FriendsState({
     this.getUsersStatus = CubitStatus.initial,
@@ -13,6 +14,7 @@ class FriendsState {
     this.showUserStatus = CubitStatus.initial,
     this.user,
     this.requestStatus = CubitStatus.initial,
+    this.failure,
   });
 
   FriendsState copyWith({
@@ -21,6 +23,7 @@ class FriendsState {
     CubitStatus? showUserStatus,
     UserProfileModel? user,
     CubitStatus? requestStatus,
+    Failure? failure,
   }) {
     return FriendsState(
       getUsersStatus: getUsersStatus ?? this.getUsersStatus,
@@ -28,6 +31,7 @@ class FriendsState {
       showUserStatus: showUserStatus ?? this.showUserStatus,
       user: user ?? this.user,
       requestStatus: requestStatus ?? this.requestStatus,
+      failure: failure ?? this.failure,
     );
   }
 }

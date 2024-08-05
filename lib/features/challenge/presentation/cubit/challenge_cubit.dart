@@ -57,7 +57,7 @@ class ChallengeCubit extends Cubit<ChallengeState> {
 
     result.fold(
       (l) => emit(state.copyWith(inviteStatus: CubitStatus.failure, failure: l)),
-      (r) => emit(state.copyWith(inviteStatus: CubitStatus.success)),
+      (r) => emit(state.copyWith(inviteStatus: CubitStatus.success, challenge: r)),
     );
 
     emit(state.copyWith(inviteStatus: CubitStatus.initial));

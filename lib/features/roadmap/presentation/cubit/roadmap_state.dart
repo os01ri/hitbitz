@@ -9,6 +9,8 @@ class RoadmapState {
   final RoadMapModel? roadmap;
   final CubitStatus stepsStatus;
   final List<StepModel> steps;
+  final CubitStatus customQuizStatus;
+  final QuizModel? customQuiz;
   final Failure? failure;
 
   const RoadmapState({
@@ -20,6 +22,8 @@ class RoadmapState {
     this.roadmap,
     this.stepsStatus = CubitStatus.initial,
     this.steps = const [],
+    this.customQuizStatus = CubitStatus.initial,
+    this.customQuiz,
     this.failure,
   });
 
@@ -32,6 +36,8 @@ class RoadmapState {
     RoadMapModel? roadmap,
     CubitStatus? stepsStatus,
     List<StepModel>? steps,
+    CubitStatus? customQuizStatus,
+    QuizModel? customQuiz,
     Failure? failure,
   }) {
     return RoadmapState(
@@ -43,6 +49,8 @@ class RoadmapState {
       roadmap: roadmap ?? this.roadmap,
       stepsStatus: stepsStatus ?? this.stepsStatus,
       steps: steps ?? this.steps,
+      customQuizStatus: customQuizStatus ?? this.customQuizStatus,
+      customQuiz: customQuiz ?? this.customQuiz,
       failure: failure ?? this.failure,
     );
   }

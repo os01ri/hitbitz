@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hitbitz/core/config/cubit_status.dart';
+import 'package:hitbitz/core/error/failures.dart';
 import 'package:hitbitz/core/usecases/usecase.dart';
 import 'package:hitbitz/features/friends/domain/usecases/accept_friend_requests_usecase.dart';
 import 'package:hitbitz/features/friends/domain/usecases/get_friend_requests_usecase.dart';
@@ -42,7 +43,7 @@ class FriendsCubit extends Cubit<FriendsState> {
     final result = await _getUsersUsecase(NoParams());
 
     result.fold(
-      (l) => emit(state.copyWith(getUsersStatus: CubitStatus.failure)),
+      (l) => emit(state.copyWith(getUsersStatus: CubitStatus.failure, failure: l)),
       (r) => emit(state.copyWith(getUsersStatus: CubitStatus.success, users: r)),
     );
   }
@@ -53,7 +54,7 @@ class FriendsCubit extends Cubit<FriendsState> {
     final result = await _showUserUsecase(params);
 
     result.fold(
-      (l) => emit(state.copyWith(showUserStatus: CubitStatus.failure)),
+      (l) => emit(state.copyWith(showUserStatus: CubitStatus.failure, failure: l)),
       (r) => emit(state.copyWith(showUserStatus: CubitStatus.success, user: r)),
     );
   }
@@ -64,7 +65,7 @@ class FriendsCubit extends Cubit<FriendsState> {
     final result = await _getFriendsUsecase(NoParams());
 
     result.fold(
-      (l) => emit(state.copyWith(getUsersStatus: CubitStatus.failure)),
+      (l) => emit(state.copyWith(getUsersStatus: CubitStatus.failure, failure: l)),
       (r) => emit(state.copyWith(getUsersStatus: CubitStatus.success, users: r)),
     );
   }
@@ -75,7 +76,7 @@ class FriendsCubit extends Cubit<FriendsState> {
     final result = await _getFriendRequestUsecase(NoParams());
 
     result.fold(
-      (l) => emit(state.copyWith(getUsersStatus: CubitStatus.failure)),
+      (l) => emit(state.copyWith(getUsersStatus: CubitStatus.failure, failure: l)),
       (r) => emit(state.copyWith(getUsersStatus: CubitStatus.success, users: r)),
     );
   }
@@ -86,7 +87,7 @@ class FriendsCubit extends Cubit<FriendsState> {
     final result = await _sendFriendRequestUsecase(params);
 
     result.fold(
-      (l) => emit(state.copyWith(requestStatus: CubitStatus.failure)),
+      (l) => emit(state.copyWith(requestStatus: CubitStatus.failure, failure: l)),
       (r) => emit(state.copyWith(requestStatus: CubitStatus.success)),
     );
 
@@ -99,7 +100,7 @@ class FriendsCubit extends Cubit<FriendsState> {
     final result = await _acceptFriendRequestUsecase(params);
 
     result.fold(
-      (l) => emit(state.copyWith(requestStatus: CubitStatus.failure)),
+      (l) => emit(state.copyWith(requestStatus: CubitStatus.failure, failure: l)),
       (r) => emit(state.copyWith(requestStatus: CubitStatus.success)),
     );
 

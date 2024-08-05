@@ -69,7 +69,7 @@ class _FriendRequestsPageState extends State<FriendRequestsPage> {
       Toaster.showLoading();
     } else if (state.requestStatus == CubitStatus.failure) {
       Toaster.closeLoading();
-      Toaster.showError(context: context, message: AppStrings.error);
+      Toaster.showError(context: context, message: state.failure?.message);
     } else if (state.requestStatus == CubitStatus.success) {
       Toaster.closeLoading();
       Toaster.showSuccess(context: context, message: AppStrings.success);

@@ -16,6 +16,7 @@ import 'package:hitbitz/core/services/di/di_container.dart';
 import 'package:hitbitz/features/quiz/data/models/quiz_model.dart';
 import 'package:hitbitz/features/quiz/domain/usecases/get_quizzes_usecase.dart';
 import 'package:hitbitz/features/quiz/presentation/cubit/quiz_cubit.dart';
+import 'package:hitbitz/features/quiz/presentation/pages/quiz_intro_page.dart';
 import 'package:hitbitz/router/app_routes.dart';
 
 class QuizzesPage extends StatefulWidget {
@@ -58,7 +59,13 @@ class _QuizzesPageState extends State<QuizzesPage> {
                           return;
                         }
                       }
-                      context.pushNamed(AppRoutes.quizIntro, extra: state.quizzes[index].id);
+                      context.pushNamed(
+                        AppRoutes.quizIntro,
+                        extra: QuizIntroPageArguments(
+                          id: state.quizzes[index].id,
+                          isCompleted: state.quizzes[index].isCompleted,
+                        ),
+                      );
                     },
                     leading: CardWidget(
                       isCircle: true,
