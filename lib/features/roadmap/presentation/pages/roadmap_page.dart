@@ -186,7 +186,7 @@ class _RoadmapPageState extends State<RoadmapPage> {
                                   ? CrossFadeState.showSecond
                                   : CrossFadeState.showFirst,
                               secondChild: ButtonWidget(
-                                text: 'Redeem Certificate',
+                                text: 'claimCertificate',
                                 width: context.width,
                                 backgroundColor: context.colorScheme.primary,
                                 foregroundColor: context.colorScheme.onPrimary,
@@ -349,7 +349,7 @@ class _RoadmapPageState extends State<RoadmapPage> {
       showGeneralDialog(
         context: context,
         pageBuilder: (context, animation, secondaryAnimation) => Scaffold(
-            appBar: AppBar(title: const Text('Certificate Show')),
+            appBar: AppBar(title: const TextWidget('certificateShow')),
             body: Center(
                 child: Container(
                     clipBehavior: Clip.hardEdge,

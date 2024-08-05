@@ -147,5 +147,7 @@
     "passed": "Réussi",
     "testStatistics": "Statistiques des tests",
     "?": "?",
-    "signUpToUnlockFeature": "Vous devez vous inscrire pour débloquer cette fonctionnalité"
+    "signUpToUnlockFeature": "Vous devez vous inscrire pour débloquer cette fonctionnalité",
+    "claimCertificate": "Réclamer le certificat",
+    "certificateShow": "Affichage du certificat"
 }

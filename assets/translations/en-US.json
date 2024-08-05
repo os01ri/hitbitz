@@ -152,5 +152,7 @@
     "passed": "Passed",
     "testStatistics": "َQizzez Statistics",
     "?": "?",
-    "signUpToUnlockFeature": "Sie müssen sich anmelden, um diese Funktion freizuschalten"
+    "signUpToUnlockFeature": "Sie müssen sich anmelden, um diese Funktion freizuschalten",
+    "claimCertificate": "Claim Certificate",
+    "certificateShow": "Certificate Show"
 }

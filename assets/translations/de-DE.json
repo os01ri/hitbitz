@@ -147,5 +147,7 @@
     "passed": "Bestanden",
     "testStatistics": "Teststatistiken",
     "?": "?",
-    "signUpToUnlockFeature": "Sie müssen sich anmelden, um diese Funktion freizuschalten"
+    "signUpToUnlockFeature": "Sie müssen sich anmelden, um diese Funktion freizuschalten",
+    "claimCertificate": "Zertifikat beanspruchen",
+    "certificateShow": "Zertifikatsanzeige"
 }

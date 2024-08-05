@@ -147,5 +147,7 @@
     "passed": "مجتاز",
     "testStatistics": "إحصائيات الاختبارات",
     "?": "؟",
-    "signUpToUnlockFeature": "يجب عليك التسجيل لفتح هذه الميزة"
+    "signUpToUnlockFeature": "يجب عليك التسجيل لفتح هذه الميزة",
+    "claimCertificate": "استلام الشهادة",
+    "certificateShow": "عرض الشهادة"
 }
